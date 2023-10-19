@@ -17,6 +17,10 @@ DROP TABLE IF EXISTS Notificacao_Reembolso CASCADE;
 DROP TABLE IF EXISTS Notificacao_Stock CASCADE;
 DROP TABLE IF EXISTS Portes CASCADE;
 DROP TABLE IF EXISTS ProdutoCompra CASCADE;
+DROP TABLE IF EXISTS ProdutoCarrinho CASCADE;
+DROP TABLE IF EXISTS ProdutoCompra CASCADE;
+DROP TABLE IF EXISTS ProdutoCompra CASCADE;
+
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
@@ -65,16 +69,20 @@ Create TABLE Administrador (
 CREATE TABLE Produto (
 	id SERIAL PRIMARY KEY,
   	nome VARCHAR(256) NOT NULL,
+	descricao TEXT NOT NULL,
   	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
+	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
   	stock INTEGER NOT NULL CHECK (stock >= 0),
+	tsvectors TSVECTOR,
   	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
-  	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
+  	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE ?????
 );
 
 CREATE TABLE Comentario (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	texto TEXT NOT NULL,
+        avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
   	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
   	id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE
 );
@@ -107,6 +115,21 @@ CREATE TABLE Notificacao_Stock (
 	id_administrador INTEGER REFERENCES Administrador (ID) ON UPDATE CASCADE
 );
 
+CREATE TABLE Notificacao_Encomenda (
+	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
+  	id_grupo_de_encomenda INTEGER REFERENCES Grupo_Encomendas (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE Notificacao_Carrinho (
+	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
+  	id_produto_carrinho INTEGER REFERENCES ProdutoCarrinho (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE Notificacao_Wishlist (
+	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
+  	id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
+);
+
 CREATE TABLE Portes (
 	id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
   	id_transporte INTEGER REFERENCES Transporte (id) ON UPDATE CASCADE,
@@ -121,4 +144,19 @@ CREATE TABLE ProdutoCompra (
   	id_reembolso INTEGER REFERENCES Reembolso (id) ON UPDATE CASCADE
 );
 
+CREATE TABLE ProdutoCarrinho (
+	id INTEGER PRIMARY KEY,
+  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
+	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
+);
 
+CREATE TABLE ProdutoWishlist (
+	id INTEGER PRIMARY KEY,
+  	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
+	id INTEGER PRIMARY KEY
+);
