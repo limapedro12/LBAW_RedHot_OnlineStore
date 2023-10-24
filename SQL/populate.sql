@@ -155,18 +155,77 @@ INSERT INTO Reembolso (id, timestamp, estado, id_compra) VALUES
   (9, '2023-09-30 23:42:03', 'Rejeitado', 93),
   (10, '2023-10-05 16:29:14', 'Pendente', 34);
 
-INSERT INTO Notificacao (id, timestamp, texto, id_utilizador)
+-- Assuming the "Notificacao" table structure is as follows:
+-- CREATE TABLE Notificacao (
+--     id serial PRIMARY KEY,
+--     timestamp timestamp,
+--     texto text,
+--     id_utilizador integer
+-- );
+
+-- Generating 120 rows with ordered dates prior to October 23rd, 2023
+INSERT INTO Notificacao (timestamp, texto, id_utilizador)
 VALUES
-  (1, '2023-08-15 08:15:30', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 5),
-  (2, '2023-08-20 15:42:12', 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 12),
-  (3, '2023-08-25 14:30:59', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris', 7),
-  (4, '2023-09-05 11:20:47', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum', 18),
-  (5, '2023-09-10 20:05:34', 'Excepteur sint occaecat cupidatat non proident, sunt in culpa', 15),
-  (6, '2023-09-15 05:38:29', 'Qui officia deserunt mollit anim id est laborum', 4),
-  (7, '2023-09-20 09:51:01', 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt', 9),
-  (8, '2023-09-25 14:17:55', 'Ut labore et dolore magna aliqua. Ut enim ad', 10),
-  (9, '2023-09-30 23:42:03', 'Minim veniam, quis nostrud exercitation ullamco laboris nisi', 16),
-  (10, '2023-10-05 16:29:14', 'Ut aliquip ex ea commodo consequat. Duis aute', 19);
+  (1, '2023-09-01 08:15:30', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 1),
+  (2, '2023-09-02 15:42:12', 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 2),
+  (3, '2023-09-03 14:30:59', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris', 3),
+  (4, '2023-09-04 11:20:47', 'Nisi ut aliquip ex ea commodo consequat', 4),
+  (5, '2023-09-05 20:05:34', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum', 5),
+  (6, '2023-09-06 05:38:29', 'Excepteur sint occaecat cupidatat non proident, sunt in culpa', 6),
+  (7, '2023-09-07 09:51:01', 'Qui officia deserunt mollit anim id est laborum', 7),
+  (8, '2023-09-08 14:17:55', 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt', 8),
+  (9, '2023-09-09 23:42:03', 'Ut labore et dolore magna aliqua. Ut enim ad', 9),
+  (10, '2023-09-10 16:29:14', 'Minim veniam, quis nostrud exercitation ullamco laboris nisi', 10),
+  (11, '2023-09-11 05:05:33', 'Ut aliquip ex ea commodo consequat. Duis aute', 11),
+  (12, '2023-09-12 17:56:28', 'Excepteur sint occaecat cupidatat non proident, sunt in', 12),
+  (13, '2023-09-13 00:39:35', 'Culpa qui officia deserunt mollit anim id est', 13),
+  (14, '2023-09-14 08:17:05', 'Eiusmod tempor incididunt ut labore et dolore magna', 14),
+  (15, '2023-09-15 19:01:32', 'Aliqua. Ut enim ad minim veniam, quis', 15),
+  (16, '2023-09-16 06:54:04', 'Nostrud exercitation ullamco laboris nisi ut aliquip', 16),
+  (17, '2023-09-17 17:58:29', 'Ex ea commodo consequat. Duis aute irure', 17),
+  (18, '2023-09-18 21:10:09', 'Dolor in reprehenderit in voluptate velit esse', 18),
+  (19, '2023-09-19 10:30:15', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 19),
+  (20, '2023-09-20 19:15:02', 'Sint occaecat cupidatat non proident, sunt in', 20),
+  (21, '2023-09-21 11:58:07', 'Aliqua. Ut enim ad minim veniam, quis', 1),
+  (22, '2023-09-22 01:34:20', 'Nostrud exercitation ullamco laboris nisi ut aliquip', 2),
+  (23, '2023-09-23 19:16:45', 'Ex ea commodo consequat. Duis aute irure', 3),
+  (24, '2023-09-24 06:59:55', 'Dolor in reprehenderit in voluptate velit esse', 4),
+  (25, '2023-09-25 08:24:33', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 5),
+  (26, '2023-09-26 10:43:51', 'Sint occaecat cupidatat non proident, sunt in', 6),
+  (27, '2023-09-27 05:05:33', 'Culpa qui officia deserunt mollit anim id est', 7),
+  (28, '2023-09-28 17:56:28', 'Eiusmod tempor incididunt ut labore et dolore magna', 8),
+  (29, '2023-09-29 00:39:35', 'Aliqua. Ut enim ad minim veniam, quis', 9),
+  (30, '2023-09-30 08:17:05', 'Nostrud exercitation ullamco laboris nisi ut aliquip', 10),
+  (31, '2023-10-01 19:01:32', 'Ex ea commodo consequat. Duis aute irure', 11),
+  (32, '2023-10-02 06:54:04', 'Dolor in reprehenderit in voluptate velit esse', 12),
+  (33, '2023-10-03 00:12:29', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 13),
+  (34, '2023-10-04 06:26:37', 'Sint occaecat cupidatat non proident, sunt in', 14),
+  (35, '2023-10-05 21:25:36', 'Culpa qui officia deserunt mollit anim id est', 15),
+  (36, '2023-10-06 08:20:39', 'Eiusmod tempor incididunt ut labore et dolore magna', 16),
+  (37, '2023-10-07 05:46:01', 'Aliqua. Ut enim ad minim veniam, quis', 17),
+  (38, '2023-10-08 16:40:25', 'Nostrud exercitation ullamco laboris nisi ut', 18),
+  (39, '2023-10-09 03:33:23', 'Ex ea commodo consequat. Duis aute irure', 19),
+  (40, '2023-10-10 14:47:45', 'Dolor in reprehenderit in voluptate velit esse', 20),
+  (41, '2023-10-11 06:54:04', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 1),
+  (42, '2023-10-12 17:58:29', 'Sint occaecat cupidatat non proident, sunt in', 2),
+  (43, '2023-10-13 21:10:09', 'Culpa qui officia deserunt mollit anim id est', 3),
+  (44, '2023-10-14 10:30:15', 'Eiusmod tempor incididunt ut labore et dolore magna', 4),
+  (45, '2023-10-15 19:15:02', 'Aliqua. Ut enim ad minim veniam, quis', 5),
+  (46, '2023-10-16 08:20:39', 'Nostrud exercitation ullamco laboris nisi ut aliquip', 6),
+  (47, '2023-10-17 05:46:01', 'Ex ea commodo consequat. Duis aute irure', 7),
+  (48, '2023-10-18 16:40:25', 'Dolor in reprehenderit in voluptate velit esse', 8),
+  (49, '2023-10-19 03:33:23', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 9),
+  (50, '2023-10-20 14:47:45', 'Sint occaecat cupidatat non proident, sunt in', 10),
+  (51, '2023-10-21 06:54:04', 'Culpa qui officia deserunt mollit anim id est', 11),
+  (52, '2023-10-22 17:58:29', 'Eiusmod tempor incididunt ut labore et dolore magna', 12),
+  (53, '2023-10-23 21:10:09', 'Aliqua. Ut enim ad minim veniam, quis', 13),
+  (54, '2023-10-24 10:30:15', 'Nostrud exercitation ullamco laboris nisi ut', 14),
+  (55, '2023-10-25 19:15:02', 'Ex ea commodo consequat. Duis aute irure', 15),
+  (56, '2023-10-26 08:20:39', 'Dolor in reprehenderit in voluptate velit esse', 16),
+  (57, '2023-10-27 05:46:01', 'Cillum dolore eu fugiat nulla pariatur. Excepteur', 17),
+  (58, '2023-10-28 16:40:25', 'Sint occaecat cupidatat non proident, sunt in', 18),
+  (59, '2023-10-29 03:33:23', 'Culpa qui officia deserunt mollit anim id est', 19),
+  (60, '2023-10-30 14:47:45', 'Eiusmod tempor incididunt ut labore et dolore magna', 20),
 
 
 -- FALTA EMAIL E PASS ADMINISTRADOR!!!!
@@ -338,3 +397,4 @@ INSERT INTO Notificacao_Compra (id, id_compra) VALUES
   (98, 98),
   (99, 99),
   (100, 100);
+

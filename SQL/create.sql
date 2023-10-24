@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS Notificacao CASCADE;
 DROP TABLE IF EXISTS Comentario CASCADE;
 DROP TABLE IF EXISTS Produto CASCADE;
 DROP TABLE IF EXISTS Administrador CASCADE;
-DROP TABLE IF EXISTS Grupo_Encomendas CASCADE;
 DROP TABLE IF EXISTS Notificacao_Compra CASCADE;
 DROP TABLE IF EXISTS Notificacao_Devolucao CASCADE;
 DROP TABLE IF EXISTS Notificacao_Reembolso CASCADE;
@@ -31,7 +30,9 @@ CREATE TABLE Compra (
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	total FLOAT NOT NULL CHECK (total >= 0),
         descricao TEXT,
-  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE
+  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
+    estado VARCHAR(256) NOT NULL,
+	id_administrador INTEGER REFERENCES Administrador (id)
 );
 
 CREATE TABLE Transporte (
@@ -104,11 +105,6 @@ CREATE TABLE Notificacao_Stock (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
   	id_stock INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_administrador INTEGER REFERENCES Administrador (ID) ON UPDATE CASCADE
-);
-
-CREATE TABLE Notificacao_Encomenda (
-	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_grupo_de_encomenda INTEGER REFERENCES Grupo_Encomendas (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Portes (
