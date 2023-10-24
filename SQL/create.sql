@@ -16,13 +16,26 @@ DROP TABLE IF EXISTS Notificacao_Devolucao CASCADE;
 DROP TABLE IF EXISTS Notificacao_Reembolso CASCADE;
 DROP TABLE IF EXISTS Notificacao_Stock CASCADE;
 DROP TABLE IF EXISTS Portes CASCADE;
+DROP TABLE IF EXISTS Preco CASCADE;
+DROP TABLE IF EXISTS ProdutoCarrinho CASCADE;
 DROP TABLE IF EXISTS ProdutoCompra CASCADE;
+DROP TABLE IF EXISTS ProdutoWishlist CASCADE;
+DROP TABLE IF EXISTS UtilizadorNaoAutenticadoComProdutosNoCarrinho CASCADE;
+DROP TABLE IF EXISTS Notificacao_Carrinho CASCADE;
+DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
   	nome VARCHAR(256) NOT NULL,
   	email VARCHAR(256) UNIQUE NOT NULL,
 	password VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE Administrador (
+    id SERIAL PRIMARY KEY,
+      nome VARCHAR(256) NOT NULL,
+      email VARCHAR(256) UNIQUE NOT NULL,
+    password VARCHAR(256) NOT NULL
 );
 
 CREATE TABLE Compra (
@@ -60,11 +73,6 @@ CREATE TABLE Notificacao (
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	texto VARCHAR(256) NOT NULL,
         id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
-);
-
-Create TABLE Administrador (
-	id SERIAL PRIMARY KEY,
-  	nome VARCHAR(256) NOT NULL
 );
 
 CREATE TABLE Produto (
