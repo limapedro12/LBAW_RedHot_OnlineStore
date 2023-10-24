@@ -445,3 +445,27 @@ INSERT INTO Notificacao_Compra (id, id_compra) VALUES
   (98, 98),
   (99, 99),
   (100, 100);
+
+INSERT INTO Notificacao_Devolucao (id, id_devolucao) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3),
+  (4, 4),
+  (5, 5),
+  (6, 6),
+  (7, 7),
+  (8, 8),
+  (9, 9),
+  (10, 10);
+
+INSERT INTO Notificacao_Reembolso (id, id_reembolso) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3),
+  (4, 4),
+  (5, 5),
+  (6, 6),
+  (7, 7),
+  (8, 8),
+  (9, 9),
+  (10, 10);
