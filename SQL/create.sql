@@ -250,7 +250,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER decrement_stock_trigger
-AFTER INSERT ON ProdutoCompra
+AFTER INSERT ON Preco
 FOR EACH ROW
 EXECUTE FUNCTION decrement_stock();
 
