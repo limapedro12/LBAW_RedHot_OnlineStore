@@ -223,3 +223,88 @@ CREATE TRIGGER utilizador_search_update
  EXECUTE PROCEDURE utilizador_search_update();
 -- Finalmente, cria um índice to tipo GIST para os ts_vectors de Utilizador
 CREATE INDEX utilizador_search_idx ON Utilizador USING GIST (tsvectors);
+
+CREATE OR REPLACE FUNCTION check_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.quantidade > (SELECT stock FROM Produto WHERE id = NEW.id_produto) THEN
+        RAISE EXCEPTION 'Insufficient stock for product';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_stock_trigger
+AFTER INSERT ON ProdutoCarrinho
+FOR EACH ROW
+EXECUTE FUNCTION check_stock();
+
+CREATE OR REPLACE FUNCTION decrement_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Produto
+    SET stock = stock - NEW.quantidade
+    WHERE id = NEW.id_produto;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER decrement_stock_trigger
+AFTER INSERT ON ProdutoCompra
+FOR EACH ROW
+EXECUTE FUNCTION decrement_stock();
+
+CREATE OR REPLACE FUNCTION calculate_total_price()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Compra
+    SET total = (SELECT SUM(preco) FROM Portes WHERE id_compra = NEW.id_compra)
+    WHERE id = NEW.id_compra;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER calculate_total_price_trigger
+AFTER INSERT ON Portes
+FOR EACH ROW
+EXECUTE FUNCTION calculate_total_price();
+
+CREATE OR REPLACE FUNCTION update_order_status_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.estado = 'Enviada' AND (
+        SELECT COUNT(*) FROM ProdutoCompra WHERE id_compra = NEW.id_compra
+    ) = (
+        SELECT COUNT(*) FROM Devolucao WHERE id_compra = NEW.id_compra
+    ) THEN
+        UPDATE Grupo_Encomendas
+        SET estado = 'Entregue'
+        WHERE id = NEW.id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_order_status
+AFTER UPDATE ON Devolucao
+FOR EACH ROW
+EXECUTE FUNCTION update_order_status_trigger();
+
+CREATE OR REPLACE FUNCTION update_product_rating_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Produto
+    SET avaliacao_media = (
+        SELECT AVG(avaliacao)
+        FROM Comentario
+        WHERE id_produto = NEW.id_produto
+    )
+    WHERE id = NEW.id_produto;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_product_rating
+AFTER INSERT OR UPDATE ON Comentario
+FOR EACH ROW
+EXECUTE FUNCTION update_product_rating_trigger();
