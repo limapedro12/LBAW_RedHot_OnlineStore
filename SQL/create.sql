@@ -30,6 +30,7 @@ CREATE TABLE Compra (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	total FLOAT NOT NULL CHECK (total >= 0),
+        descricao TEXT,
   	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
 );
 
@@ -56,7 +57,8 @@ CREATE TABLE Reembolso (
 CREATE TABLE Notificacao (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	texto VARCHAR(256) NOT NULL
+  	texto VARCHAR(256) NOT NULL,
+        id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
 );
 
 Create TABLE Administrador (
@@ -71,7 +73,6 @@ CREATE TABLE Produto (
   	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
 	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
   	stock INTEGER NOT NULL CHECK (stock >= 0),
-	tsvectors TSVECTOR,
   	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
 );
 
