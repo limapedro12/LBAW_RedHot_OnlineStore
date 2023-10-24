@@ -44,7 +44,7 @@ CREATE TABLE Devolucao (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	estado VARCHAR(256),
-        id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
+    id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
 );
 
 CREATE TABLE Reembolso (
@@ -80,16 +80,9 @@ CREATE TABLE Comentario (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	texto TEXT NOT NULL,
-        avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
+    avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
   	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
   	id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE
-);
-
-CREATE TABLE Grupo_Encomendas (
-	id SERIAL PRIMARY KEY,
-  	estado VARCHAR(256) NOT NULL,
-  	id_compra INTEGER NOT NULL REFERENCES Compra (id) ON UPDATE CASCADE,
-  	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Compra (
