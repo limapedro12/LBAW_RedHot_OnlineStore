@@ -31,13 +31,13 @@ CREATE TABLE Compra (
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	total FLOAT NOT NULL CHECK (total >= 0),
         descricao TEXT,
-  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Transporte (
 	id SERIAL PRIMARY KEY,
   	tipo VARCHAR(256) NOT NULL,
-  	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
+  	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0)
 );
 
 CREATE TABLE Devolucao (
@@ -58,7 +58,7 @@ CREATE TABLE Notificacao (
 	id SERIAL PRIMARY KEY,
   	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   	texto VARCHAR(256) NOT NULL,
-        id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+        id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
 );
 
 Create TABLE Administrador (
@@ -73,7 +73,7 @@ CREATE TABLE Produto (
   	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
 	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
   	stock INTEGER NOT NULL CHECK (stock >= 0),
-  	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
+  	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Comentario (
@@ -118,34 +118,16 @@ CREATE TABLE Notificacao_Encomenda (
   	id_grupo_de_encomenda INTEGER REFERENCES Grupo_Encomendas (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE Notificacao_Carrinho (
-	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_produto_carrinho INTEGER REFERENCES ProdutoCarrinho (id) ON UPDATE CASCADE
-);
-
-CREATE TABLE Notificacao_Wishlist (
-	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
-);
-
 CREATE TABLE Portes (
-	id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
+	id_compra INTEGER NOT NULL UNIQUE REFERENCES Compra (ID) ON UPDATE CASCADE,
   	id_transporte INTEGER REFERENCES Transporte (id) ON UPDATE CASCADE,
-        id_compra INTEGER NOT NULL UNIQUE REFERENCES Compra (ID) ON UPDATE CASCADE,
  	preco FLOAT NOT NULL CHECK (preco >= 0)
 );
 
 CREATE TABLE Preco (
   	preco FLOAT NOT NULL CHECK (preco >= 0),
 	id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
-);
-
-CREATE TABLE ProdutoCarrinho (
-	id INTEGER PRIMARY KEY,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
-	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
-	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
+  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE ProdutoWishlist (
@@ -156,4 +138,21 @@ CREATE TABLE ProdutoWishlist (
 
 CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
 	id INTEGER PRIMARY KEY
+);
+
+CREATE TABLE ProdutoCarrinho (
+	id INTEGER PRIMARY KEY,
+  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE Notificacao_Carrinho (
+	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
+  	id_produto_carrinho INTEGER REFERENCES ProdutoCarrinho (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE Notificacao_Wishlist (
+	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
+  	id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
 );
