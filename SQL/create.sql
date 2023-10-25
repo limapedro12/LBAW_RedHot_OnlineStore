@@ -289,22 +289,3 @@ CREATE TRIGGER update_order_status
 AFTER UPDATE ON Devolucao
 FOR EACH ROW
 EXECUTE FUNCTION update_order_status_trigger();
-
-CREATE OR REPLACE FUNCTION update_product_rating_trigger()
-RETURNS TRIGGER AS $$
-BEGIN
-    UPDATE Produto
-    SET avaliacao_media = (
-        SELECT AVG(avaliacao)
-        FROM Comentario
-        WHERE id_produto = NEW.id_produto
-    )
-    WHERE id = NEW.id_produto;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER update_product_rating
-AFTER INSERT OR UPDATE ON Comentario
-FOR EACH ROW
-EXECUTE FUNCTION update_product_rating_trigger();
