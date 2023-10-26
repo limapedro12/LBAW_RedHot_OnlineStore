@@ -1,0 +1,6 @@
+openapi: 3.0.0
+
+info:
+ version: '1.0'
+ title: 'LBAW RedHot Web API'
+ description: 'Web Resources Specification (A7) for RedHot'
