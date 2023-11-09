@@ -6,8 +6,8 @@ info:
  description: 'Web Resources Specification (A7) for RedHot'
 
 servers:
- url: http://lbaw.fe.up.pt
- description: Production server
+- url: http://lbaw.fe.up.pt
+  description: Production server
 
 externalDocs:
  description: Find more info here.
@@ -123,8 +123,8 @@ paths:
                  type: string
                  format: binary
              required:
-                  - email
-                  - password
+               - email
+               - password
 
      responses:
        '302':
@@ -159,3 +159,5 @@ paths:
      responses:
        '200':
          description: 'Ok. Show User Profile UI'
+ 
+
