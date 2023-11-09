@@ -57,17 +57,17 @@ paths:
 
      responses:
        '302':
-         description: 'Redireciona depois de processar as credenciais de login.'
+         description: 'Redireciona, depois de processar as credenciais de login.'
          headers:
            Location:
              schema:
                type: string
              examples:
                302Success:
-                 description: 'Autenticado com sucesso. Redireciona o utilizador para o seu perfil.'
+                 description: 'Autenticado com sucesso. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
                302Error:
-                 description: 'Autenticação falhada. Redireciona para o formulário de login.'
+                 description: 'Autenticação falhada. Redireciona, para o formulário de login.'
                  value: '/login'
 
  /logout:
@@ -80,14 +80,14 @@ paths:
        - 'M01: Autenticação e Perfil'
      responses:
        '302':
-         description: 'Redireciona depois de processar o logout.'
+         description: 'Redireciona, depois de processar o logout.'
          headers:
            Location:
              schema:
                type: string
              examples:
                302Success:
-                 description: 'Logout com sucesso. Redireciona para o formulário de login.'
+                 description: 'Logout com sucesso. Redireciona, para o formulário de login.'
                  value: '/login'
 
  /register:
@@ -128,18 +128,18 @@ paths:
 
      responses:
        '302':
-         description: 'Redireciona depois de processar a informação do novo utilizador'
+         description: 'Redireciona, depois de processar a informação do novo utilizador'
          headers:
            Location:
              schema:
                type: string
              examples:
                302Success:
-                 description: 'Autenticado com sucesso. Redireciona o utilizador para o seu perfil.'
+                 description: 'Autenticado com sucesso. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
                302Failure:
-                 description: 'Autenticação falhada. Redireciona para o formulário de login.'
-                 value: '/login'
+                 description: 'Autenticação falhada. Redireciona, para o formulário de registo.'
+                 value: '/register'
 
  /users/{id}:
    get:
@@ -162,7 +162,7 @@ paths:
  /users/{id}/edit:
    get:
      operationId: R107
-     summary: 'R106: Formulário para editar o meu perfil individual'
+     summary: 'R107: Formulário para editar o meu perfil individual'
      description: 'Editar o meu perfil individual. Acesso: USR, ADM'
      tags:
        - 'M01: Autenticação e Perfil'
@@ -176,11 +176,11 @@ paths:
 
      responses:
        '200':
-         description: 'Ok. Mostrar a interface do Perfil de Utilizador'
+         description: 'Ok. Mostrar a interface de Edição do Perfil de Utilizador'
 
    post:
-     operationId: R105
-     summary: 'R105: Ação de Editar o Perfil'
+     operationId: R108
+     summary: 'R108: Ação de Editar o Perfil'
      description: 'Processa a submissão do formulário de edição de perfil. Acesso: USR, ADM'
      tags:
        - 'M01: Autenticação e Perfil'
@@ -202,23 +202,23 @@ paths:
 
      responses:
        '302':
-         description: 'Redireciona depois de processar a informação do novo utilizador'
+         description: 'Redireciona, depois de processar a informação do novo utilizador'
          headers:
            Location:
              schema:
                type: string
              examples:
                302Success:
-                 description: 'Perfil alterado com sucesso. Redireciona o utilizador para o seu perfil.'
+                 description: 'Perfil alterado com sucesso. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
                302Failure:
-                 description: 'Alteração de Perfil falhada. Redireciona o utilizador para o seu perfil.'
+                 description: 'Alteração de Perfil falhada. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
  
  /users/{id}/delete_account:
    get:
-     operationId: R108
-     summary: 'R106: Eliminar a minha conta'
+     operationId: R109
+     summary: 'R109: Eliminar a minha conta'
      description: 'Eliminar a minha conta. Acesso: USR, ADM'
      tags:
        - 'M01: Autenticação e Perfil'
@@ -232,12 +232,12 @@ paths:
 
      responses:
        '200':
-         description: 'Ok. Mostrar a interface do Perfil de Utilizador'
+         description: 'Ok. Mostrar a interface de Eliminação da Conta'
 
    post:
-     operationId: R105
-     summary: 'R105: Ação de Editar o Perfil'
-     description: 'Processa a submissão do formulário de edição de perfil. Acesso: USR, ADM'
+     operationId: R110
+     summary: 'R110: Ação de Eliminar a Conta'
+     description: 'Processa a submissão do formulário de eliminar conta. Acesso: USR, ADM'
      tags:
        - 'M01: Autenticação e Perfil'
 
@@ -258,17 +258,17 @@ paths:
 
      responses:
        '302':
-         description: 'Redireciona depois de processar a informação do novo utilizador'
+         description: 'Redireciona, depois de processar o pedido'
          headers:
            Location:
              schema:
                type: string
              examples:
                302Success:
-                 description: 'Perfil alterado com sucesso. Redireciona o utilizador para o seu perfil.'
-                 value: '/users/{id}'
+                 description: 'Conta eliminada com sucesso. Redireciona, o utilizador para a Pagina Inicial.'
+                 value: '/'
                302Failure:
-                 description: 'Alteração de Perfil falhada. Redireciona o utilizador para o seu perfil.'
+                 description: 'Eliminação da Conta falhada. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
 
 
