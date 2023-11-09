@@ -159,8 +159,7 @@ paths:
      responses:
        '200':
          description: 'Ok. Mostrar a interface para editar o perfil de utilizador'
- 
-/users/{id}/edit:
+ /users/{id}/edit:
    get:
      operationId: R107
      summary: 'R106: Formulário para editar o meu perfil individual'
@@ -215,8 +214,8 @@ paths:
                302Failure:
                  description: 'Alteração de Perfil falhada. Redireciona o utilizador para o seu perfil.'
                  value: '/users/{id}'
-
-/users/{id}/delete_account:
+ 
+ /users/{id}/delete_account:
    get:
      operationId: R108
      summary: 'R106: Eliminar a minha conta'
