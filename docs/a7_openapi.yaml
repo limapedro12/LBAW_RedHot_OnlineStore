@@ -192,13 +192,21 @@ paths:
            schema:
              type: object
              properties:
-               name:
+               userId:
+                 type: integer
+               password:
                  type: string
-               email:
+               newName:
                  type: string
+               newEmail:
+                 type: string
+
              required:
-               - name
-               - email
+               - userId
+               - password
+               - newName
+               - newEmail
+
 
      responses:
        '302':
@@ -248,12 +256,12 @@ paths:
            schema:
              type: object
              properties:
-               email:
-                 type: string
+               userId:
+                 type: integer
                password:
                  type: string
              required:
-               - email
+               - userId
                - password
 
      responses:
@@ -265,10 +273,62 @@ paths:
                type: string
              examples:
                302Success:
-                 description: 'Conta eliminada com sucesso. Redireciona, o utilizador para a Pagina Inicial.'
+                 description: 'Conta eliminada com sucesso. Redireciona, o utilizador para a Página Inicial.'
                  value: '/'
                302Failure:
                  description: 'Eliminação da Conta falhada. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
 
+ /users/{id}/ban:
+   get:
+     operationId: R111
+     summary: 'R111: Banir um utilizador'
+     description: 'Banir um utilizador. Acesso: ADM'
+     tags:
+       - 'M01: Autenticação e Perfil'
 
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Mostrar a interface de Banir Utilizador'
+   post:
+     operationId: R112
+     summary: 'R112: Ação de Banir um Utilizador'
+     description: 'Processa a submissão do formulário de banir utilizador. Acesso: ADM'
+     tags:
+       - 'M01: Autenticação e Perfil'
+
+     requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+              required:
+                - userId
+
+     responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Utilizador banido com sucesso. Redireciona, o admininstrador para o perfil do utilizador banido.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Banimento do Utilizador falhado. Redireciona, o admininstrador para o perfil do utilizador banido.'
+                  value: '/users/{id}'
+        
+     
