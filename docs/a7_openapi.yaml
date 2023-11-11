@@ -311,27 +311,10 @@ paths:
                  value: '/users/{id}'
 
  /users/{id}/ban:
-   get:
-     operationId: R111
-     summary: 'R111: Banir um utilizador'
-     description: 'Banir um utilizador. Acesso: ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
-
-     responses:
-       '200':
-         description: 'Ok. Mostrar a interface de Banir Utilizador'
    post:
-     operationId: R112
-     summary: 'R112: Ação de Banir um Utilizador'
-     description: 'Processa a submissão do formulário de banir utilizador. Acesso: ADM'
+     operationId: R111
+     summary: 'R111: Ação de Banir um Utilizador'
+     description: 'Bane um utilizador. Acesso: ADM'
      tags:
        - 'M01: Autenticação e Perfil'
        
@@ -369,6 +352,48 @@ paths:
                   description: 'Banimento do Utilizador falhado. Redireciona, o admininstrador para o perfil do utilizador banido.'
                   value: '/users/{id}'
         
+ /users/{id}/unban:
+   post:
+     operationId: R112
+     summary: 'R112: Ação de Remover o Banimento um Utilizador'
+     description: 'Remove o banimento de um utilizador. Acesso: ADM'
+     tags:
+       - 'M01: Autenticação e Perfil'
+       
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+              required:
+                - userId
+
+     responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Remoção do banimento do Utilizador com sucesso. Redireciona, o admininstrador para o perfil do utilizador em questão.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
+                  value: '/users/{id}'
+
  /faqs:
    get:
      operationId: R701
