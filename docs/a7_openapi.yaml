@@ -135,10 +135,10 @@ paths:
                type: string
              examples:
                302Success:
-                 description: 'Autenticado com sucesso. Redireciona, o utilizador para o seu perfil.'
+                 description: 'Resgistado com sucesso. Redireciona, o utilizador para o seu perfil.'
                  value: '/users/{id}'
                302Failure:
-                 description: 'Autenticação falhada. Redireciona, para o formulário de registo.'
+                 description: 'Resgisto falhado. Redireciona, para o formulário de registo.'
                  value: '/register'
 
  /users/{id}:
@@ -157,8 +157,25 @@ paths:
          required: true
 
      responses:
-       '200':
-         description: 'Ok. Mostrar a interface para editar o perfil de utilizador'
+        '200':
+          description: 'Objeto JSON com os dados do utilizador'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                example:
+                  id: 1012
+                  name: Fernando Mendes
+                  email: fernadomendes@gmail.com
+
+
  /users/{id}/edit:
    get:
      operationId: R107
@@ -331,4 +348,84 @@ paths:
                   description: 'Banimento do Utilizador falhado. Redireciona, o admininstrador para o perfil do utilizador banido.'
                   value: '/users/{id}'
         
-     
+ /faqs:
+   get:
+     operationId: R701
+     summary: 'R701: Ver todas as FAQs'
+     description: 'Mostrar todas as FAQs. Acesso: PUB'
+     tags:
+       - 'M07: Páginas estáticas'
+
+     responses:
+       '200':
+         description: 'Objeto JSON com todas as FAQs'
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 type: object
+                 properties:
+                   id:
+                     type: string
+                   question:
+                     type: string
+                   answer:
+                     type: string
+               example:
+                 - id: 1
+                   question: What is RedHot?
+                   answer: RedHot is a web application that allows users to buy all kinds of scpivcy related products.
+                 - id: 7
+                   question: How can I contact RedHot?
+                   answer: You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).
+
+ /add_faq:
+   get:
+      operationId: R702
+      summary: 'R702: Formulário para adicionar uma FAQ'
+      description: 'Adicionar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
+
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de Adicionar uma FAQ'
+
+   post:
+     operationId: R703
+     summary: 'R703: Ação de Adicionar uma FAQ'
+     description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
+     tags:
+       - 'M07: Páginas estáticas'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+                question:
+                  type: string
+                answer:
+                  type: string
+             required:
+                - question
+                - answer
+
+     responses:
+       '302':
+         description: 'Redireciona, depois de processar a informação da nova FAQ'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+               302Failure:
+                 description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+      
