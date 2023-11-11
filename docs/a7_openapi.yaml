@@ -172,8 +172,8 @@ paths:
                     type: string
                 example:
                   id: 1012
-                  name: Fernando Mendes
-                  email: fernadomendes@gmail.com
+                  name: 'Fernando Mendes'
+                  email: 'fernadomendes@gmail.com'
 
 
  /users/{id}/edit:
@@ -373,13 +373,13 @@ paths:
                   type: string
                 answer:
                   type: string
-            example:
-              - id: 1
-                question: What is RedHot?
-                answer: RedHot is a web application that allows users to buy all kinds of scpivcy related products.
-              - id: 7
-                question: How can I contact RedHot?
-                answer: You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).
+          example:
+            - id: 1
+              question: 'What is RedHot?'
+              answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.''
+            - id: 7
+              question: 'How can I contact RedHot?'
+              answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
 
  /add_faq:
    get:
