@@ -574,6 +574,61 @@ paths:
                   description: 'Falha no cancelamento da encomenda.'
                   value: '/chart'
 
+  /products/add_product:
+    get:
+      operationId: R307
+      summary: 'R307: Página de adição de produto ao catálogo'
+      description: 'Fornece a interface de preenchimento de detalhes de produto a adicionar ao catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
+    
+    post:
+      operationId: R308
+      summary: 'R308: Ação de adição de novo produto ao catálogo'
+      description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                price:
+                  type: number
+                discount:
+                  type: number
+                stock:
+                  type: integer
+              required:
+                - description
+                - price
+                - discount
+                - stock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de adição de prodito.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto adicionado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao adicionar produto.'
+                  value: '/products'
+
   /products/{id}/add_to_wishlist:
     post:
       operationId: R401
