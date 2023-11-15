@@ -664,7 +664,7 @@ paths:
   /chart/checkout:
     get:
       operationId: R303
-      summary: 'R302: Formulário de checkout do carrinho atual'
+      summary: 'R303: Formulário de checkout do carrinho atual'
       description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -675,7 +675,7 @@ paths:
     
     post:
       operationId: R304
-      summary: 'R303: Ação de Checkout'
+      summary: 'R304: Ação de Checkout'
       description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -733,3 +733,29 @@ paths:
                 302Failure:
                   description: 'Falha no checkout.'
                   value: '/chart'
+  
+  /users/{userId}/orders/{orderId}:
+    get:
+      operationId: R305
+      summary: 'R305: Estado e Detalhes da Encomenda'
+      description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: userID
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página com os detalhes da encomenda pretendida.'
+
+  
