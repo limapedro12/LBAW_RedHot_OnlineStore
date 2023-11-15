@@ -829,7 +829,7 @@ paths:
     post:
       operationId: R502
       summary: 'R502: Adicionar uma avaliação a um produto'
-      description: 'Adicionar uma avaliação a um produto. Acesso: PUB'
+      description: 'Adicionar uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
 
@@ -882,3 +882,50 @@ paths:
                   description: 'Falha ao adicionar avaliação'
                   value: /products/{id}/reviews
               
+      
+  /products/{id}/reviews/{id_review}/edit_review:
+    get:
+      operationId: R503
+      summary: 'R503: Editar uma avaliação a um produto'
+      description: 'Editar uma avaliação a um produto. Acesso: USR'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+                rating:
+                  type: float
+                comment:
+                  type: string
+              required:
+                - rating
+                - comment
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de editar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação editada com sucesso'
+                  value: /products/{id}/reviews/{id_review}
+                302Failure:
+                  description: 'Falha ao editar avaliação'
+                  value: /products/{id}/reviews/{id_review} 
