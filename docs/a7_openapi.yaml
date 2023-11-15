@@ -758,4 +758,127 @@ paths:
         '200':
           description: 'OK. Mostrar a página com os detalhes da encomenda pretendida.'
 
-  
+  /products/{id}/reviews:
+    get:
+      operationId: R501
+      summary: 'R501: Ver as avaliações feitas a um produto'
+      description: 'Mostrar as avaliações feitas a um produto. Acesso: PUB'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    description: 'Avaliações feitas ao produto'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        rating:
+                          type: number
+                        comment:
+                          type: string
+                        date:
+                          type: string
+                        user:
+                          type: object
+                          description: 'Utilizador que fez a avaliação'
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            email:
+                              type: string
+                example:
+                  reviews:
+                    - id: 68
+                      rating: 2.5
+                      comment: 'Muito bom'
+                      date: '2020-12-12'
+                      user:
+                        id: 1012
+                        name: 'Fernando Mendes'
+                        email: 'fernadomendes@gmail.com'
+                    - id: 224
+                      rating: 5
+                      comment: 'Bom'
+                      date: '2020-12-12'
+                      user:
+                        id: 167
+                        name: 'Maria'
+                        email: 'mariaxd@gmail.com'
+
+
+  /products/{id}/reviews/add_review:
+    post:
+      operationId: R502
+      summary: 'R502: Adicionar uma avaliação a um produto'
+      description: 'Adicionar uma avaliação a um produto. Acesso: PUB'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+        - in: query
+          name: rating
+          schema:
+            type: number
+          required: true
+
+        - in: query
+          name: comment
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: number
+                comment:
+                  type: string
+              required:
+                - rating
+                - comment
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação adicionada com sucesso'
+                  value: /products/{id}/reviews
+                302Failure:
+                  description: 'Falha ao adicionar avaliação'
+                  value: /products/{id}/reviews
+              
