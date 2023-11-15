@@ -23,140 +23,139 @@ tags:
  - name: 'M07: Páginas estáticas'
 
 paths:
- /login:
-   get:
-     operationId: R101
-     summary: 'R101: Formulário de Login'
-     description: 'Fornecer um formulário de login. Acesso: PUB'
-     tags:
-       - 'M01: Autenticação e Perfil'
-     responses:
-       '200':
-         description: 'Ok. Mostrar a interface de login'
-   post:
-     operationId: R102
-     summary: 'R102: Ação de Login'
-     description: 'Processa a submissão do formulário de login. Acesso: PUB'
-     tags:
-       - 'M01: Autenticação e Perfil'
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Formulário de Login'
+      description: 'Fornecer um formulário de login. Acesso: PUB'
+      tags:
+        - 'M01: Autenticação e Perfil'
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de login'
+    post:
+      operationId: R102
+      summary: 'R102: Ação de Login'
+      description: 'Processa a submissão do formulário de login. Acesso: PUB'
+      tags:
+        - 'M01: Autenticação e Perfil'
 
-     requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-               email:         
-                 type: string
-               password:   
-                 type: string
-             required:
-               - email
-               - password
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:         
+                  type: string
+                password:   
+                  type: string
+              required:
+                - email
+                - password
 
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar as credenciais de login.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Autenticado com sucesso. Redireciona, o utilizador para o seu perfil.'
-                 value: '/users/{id}'
-               302Error:
-                 description: 'Autenticação falhada. Redireciona, para o formulário de login.'
-                 value: '/login'
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar as credenciais de login.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Autenticado com sucesso. Redireciona, o utilizador para o seu perfil.'
+                  value: '/users/{id}'
+                302Error:
+                  description: 'Autenticação falhada. Redireciona, para o formulário de login.'
+                  value: '/login'
 
- /logout:
+  /logout:
+    post:
+      operationId: R103
+      summary: 'R103: Ação de Logout'
+      description: 'Remove a sessão do utilizador atual. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o logout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Logout com sucesso. Redireciona, para o formulário de login.'
+                  value: '/login'
 
-   post:
-     operationId: R103
-     summary: 'R103: Ação de Logout'
-     description: 'Remove a sessão do utilizador atual. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar o logout.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Logout com sucesso. Redireciona, para o formulário de login.'
-                 value: '/login'
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104: Formulário de Registo'
+      description: 'Fornece ao novo utilizador um formulário de registo. Acesso: PUB'
+      tags:
+        - 'M01: Autenticação e Perfil'
+      responses:
+        '200':
+          description: 'Ok. Mostra a interface do Sign-Up'
 
- /register:
-   get:
-     operationId: R104
-     summary: 'R104: Formulário de Registo'
-     description: 'Fornece ao novo utilizador um formulário de registo. Acesso: PUB'
-     tags:
-       - 'M01: Autenticação e Perfil'
-     responses:
-       '200':
-         description: 'Ok. Mostra a interface do Sign-Up'
+    post:
+      operationId: R105
+      summary: 'R105: Ação de Registo'
+      description: 'Processa a submissão do formulário de registo. Acesso: PUB'
+      tags:
+        - 'M01: Autenticação e Perfil'
 
-   post:
-     operationId: R105
-     summary: 'R105: Ação de Registo'
-     description: 'Processa a submissão do formulário de registo. Acesso: PUB'
-     tags:
-       - 'M01: Autenticação e Perfil'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:   
+                  type: string
+              required:
+                - name
+                - email
+                - password
 
-     requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-               name:
-                 type: string
-               email:
-                 type: string
-               password:   
-                 type: string
-             required:
-               - name
-               - email
-               - password
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar a informação do novo utilizador'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Resgistado com sucesso. Redireciona, o utilizador para o seu perfil.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Resgisto falhado. Redireciona, para o formulário de registo.'
+                  value: '/register'
 
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar a informação do novo utilizador'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Resgistado com sucesso. Redireciona, o utilizador para o seu perfil.'
-                 value: '/users/{id}'
-               302Failure:
-                 description: 'Resgisto falhado. Redireciona, para o formulário de registo.'
-                 value: '/register'
+  /users/{id}:
+    get:
+      operationId: R106
+      summary: 'R106: Ver o meu perfil individual'
+      description: 'Mostrar o meu perfil individual de utilizador. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
 
- /users/{id}:
-   get:
-     operationId: R106
-     summary: 'R106: Ver o meu perfil individual'
-     description: 'Mostrar o meu perfil individual de utilizador. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
-
-     responses:
+      responses:
         '200':
           description: 'Objeto JSON com os dados do utilizador'
           content:
@@ -176,154 +175,152 @@ paths:
                   email: 'fernadomendes@gmail.com'
 
 
- /users/{id}/edit:
-   get:
-     operationId: R107
-     summary: 'R107: Formulário para editar o meu perfil individual'
-     description: 'Editar o meu perfil individual. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
+  /users/{id}/edit:
+    get:
+      operationId: R107
+      summary: 'R107: Formulário para editar o meu perfil individual'
+      description: 'Editar o meu perfil individual. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
 
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     responses:
-       '200':
-         description: 'Ok. Mostrar a interface de Edição do Perfil de Utilizador'
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de Edição do Perfil de Utilizador'
 
-   post:
-     operationId: R108
-     summary: 'R108: Ação de Editar o Perfil'
-     description: 'Processa a submissão do formulário de edição de perfil. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-       
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+    post:
+      operationId: R108
+      summary: 'R108: Ação de Editar o Perfil'
+      description: 'Processa a submissão do formulário de edição de perfil. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-               userId:
-                 type: integer
-               password:
-                 type: string
-               newName:
-                 type: string
-               newEmail:
-                 type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                password:
+                  type: string
+                newName:
+                  type: string
+                newEmail:
+                  type: string
+              required:
+                - userId
+                - password
 
-             required:
-               - userId
-               - password
-
-
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar a informação do novo utilizador'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Perfil alterado com sucesso. Redireciona, o utilizador para o seu perfil.'
-                 value: '/users/{id}'
-               302Failure:
-                 description: 'Alteração de Perfil falhada. Redireciona, o utilizador para o seu perfil.'
-                 value: '/users/{id}'
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar a informação do novo utilizador'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Perfil alterado com sucesso. Redireciona, o utilizador para o seu perfil.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Alteração de Perfil falhada. Redireciona, o utilizador para o seu perfil.'
+                  value: '/users/{id}'
  
- /users/{id}/delete_account:
-   get:
-     operationId: R109
-     summary: 'R109: Eliminar a minha conta'
-     description: 'Eliminar a minha conta. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
+  /users/{id}/delete_account:
+    get:
+      operationId: R109
+      summary: 'R109: Eliminar a minha conta'
+      description: 'Eliminar a minha conta. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
 
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     responses:
-       '200':
-         description: 'Ok. Mostrar a interface de Eliminação da Conta'
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de Eliminação da Conta'
 
-   post:
-     operationId: R110
-     summary: 'R110: Ação de Eliminar a Conta'
-     description: 'Processa a submissão do formulário de eliminar conta. Acesso: USR, ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-       
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+    post:
+      operationId: R110
+      summary: 'R110: Ação de Eliminar a Conta'
+      description: 'Processa a submissão do formulário de eliminar conta. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-               userId:
-                 type: integer
-               password:
-                 type: string
-             required:
-               - userId
-               - password
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                password:
+                  type: string
+              required:
+                - userId
+                - password
 
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar o pedido'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Conta eliminada com sucesso. Redireciona, o utilizador para a Página Inicial.'
-                 value: '/'
-               302Failure:
-                 description: 'Eliminação da Conta falhada. Redireciona, o utilizador para o seu perfil.'
-                 value: '/users/{id}'
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Conta eliminada com sucesso. Redireciona, o utilizador para a Página Inicial.'
+                  value: '/'
+                302Failure:
+                  description: 'Eliminação da Conta falhada. Redireciona, o utilizador para o seu perfil.'
+                  value: '/users/{id}'
 
- /users/{id}/ban:
-   post:
-     operationId: R111
-     summary: 'R111: Ação de Banir um Utilizador'
-     description: 'Bane um utilizador. Acesso: ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-       
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+  /users/{id}/ban:
+    post:
+      operationId: R111
+      summary: 'R111: Ação de Banir um Utilizador'
+      description: 'Bane um utilizador. Acesso: ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     requestBody:
+      requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
@@ -335,7 +332,7 @@ paths:
               required:
                 - userId
 
-     responses:
+      responses:
         '302':
           description: 'Redireciona, depois de processar o pedido'
           headers:
@@ -350,22 +347,22 @@ paths:
                   description: 'Banimento do Utilizador falhado. Redireciona, o admininstrador para o perfil do utilizador banido.'
                   value: '/users/{id}'
         
- /users/{id}/unban:
-   post:
-     operationId: R112
-     summary: 'R112: Ação de Remover o Banimento um Utilizador'
-     description: 'Remove o banimento de um utilizador. Acesso: ADM'
-     tags:
-       - 'M01: Autenticação e Perfil'
-       
-     parameters:
-       - in: path
-         name: id
-         schema:
-           type: integer
-         required: true
+  /users/{id}/unban:
+    post:
+      operationId: R112
+      summary: 'R112: Ação de Remover o Banimento um Utilizador'
+      description: 'Remove o banimento de um utilizador. Acesso: ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
 
-     requestBody:
+      requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
@@ -377,7 +374,7 @@ paths:
               required:
                 - userId
 
-     responses:
+      responses:
         '302':
           description: 'Redireciona, depois de processar o pedido'
           headers:
@@ -392,41 +389,40 @@ paths:
                   description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
                   value: '/users/{id}'
 
- /faqs:
-   get:
-     operationId: R701
-     summary: 'R701: Ver todas as FAQs'
-     description: 'Mostrar todas as FAQs. Acesso: PUB'
-     tags:
-       - 'M07: Páginas estáticas'
-
+  /faqs:
+    get:
+      operationId: R701
+      summary: 'R701: Ver todas as FAQs'
+      description: 'Mostrar todas as FAQs. Acesso: PUB'
+      tags:
+        - 'M07: Páginas estáticas'
        
-     responses:
-      '200':
-        description: 'Objeto JSON com todas as FAQs'
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  question:
-                    type: string
-                  answer:
-                    type: string
-            example:
-              - id: 1
-                question: 'What is RedHot?'
-                answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
-              - id: 7
-                question: 'How can I contact RedHot?'
-                answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
+      responses:
+        '200':
+          description: 'Objeto JSON com todas as FAQs'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    question:
+                      type: string
+                    answer:
+                      type: string
+              example:
+                - id: 1
+                  question: 'What is RedHot?'
+                  answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+                - id: 7
+                  question: 'How can I contact RedHot?'
+                  answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
 
- /add_faq:
-   get:
+  /add_faq:
+    get:
       operationId: R702
       summary: 'R702: Formulário para adicionar uma FAQ'
       description: 'Adicionar uma FAQ. Acesso: ADM'
@@ -437,80 +433,79 @@ paths:
         '200':
           description: 'Ok. Mostrar a interface de Adicionar uma FAQ'
 
-   post:
-     operationId: R703
-     summary: 'R703: Ação de Adicionar uma FAQ'
-     description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
-     tags:
-       - 'M07: Páginas estáticas'
+    post:
+      operationId: R703
+      summary: 'R703: Ação de Adicionar uma FAQ'
+      description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
 
-     requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-                question:
-                  type: string
-                answer:
-                  type: string
-             required:
-                - question
-                - answer
-
-     responses:
-       '302':
-         description: 'Redireciona, depois de processar a informação da nova FAQ'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-               302Failure:
-                 description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-
- /faqs/{id}:
-  get:
-    operationId: R704
-    summary: 'R704: Ver uma FAQ'
-    description: 'Mostrar uma FAQ. Acesso: PUB'
-    tags:
-      - 'M07: Páginas estáticas'
-
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
+      requestBody:
         required: true
-
-    responses:
-      '200':
-        description: 'Objeto JSON com a FAQ'
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
-                id:
-                  type: string
                 question:
                   type: string
                 answer:
                   type: string
-            example:
-              id: 1
-              question: 'What is RedHot?'
-              answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+              required:
+                - question
+                - answer
 
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar a informação da nova FAQ'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
+                  value: '/faqs'
+                302Failure:
+                  description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
+                  value: '/faqs'
 
- /faqs/{id}/edit:
-   get:
+  /faqs/{id}:
+    get:
+      operationId: R704
+      summary: 'R704: Ver uma FAQ'
+      description: 'Mostrar uma FAQ. Acesso: PUB'
+      tags:
+        - 'M07: Páginas estáticas'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Objeto JSON com a FAQ'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  question:
+                    type: string
+                  answer:
+                    type: string
+              example:
+                id: 1
+                question: 'What is RedHot?'
+                answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+
+  /faqs/{id}/edit:
+    get:
       operationId: R705
       summary: 'R705: Formulário para editar uma FAQ'
       description: 'Editar uma FAQ. Acesso: ADM'
@@ -528,7 +523,7 @@ paths:
         '200':
           description: 'Ok. Mostrar a interface de Edição da FAQ'
 
-   post:
+    post:
       operationId: R706
       summary: 'R706: Ação de Editar uma FAQ'
       description: 'Processa a submissão do formulário de editar uma FAQ. Acesso: ADM'
@@ -570,8 +565,8 @@ paths:
                  description: 'Edição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
                  value: '/faqs'
 
- /faqs/{id}/delete:
-   post:
+  /faqs/{id}/delete:
+    post:
       operationId: R707
       summary: 'R707: Ação de Eliminar uma FAQ'
       description: 'Eliminar uma FAQ. Acesso: ADM'
@@ -653,3 +648,5 @@ paths:
                 302Failure:
                   description: 'Falha ao adicionar produto.'
                   value: '/faqs'
+  
+  
