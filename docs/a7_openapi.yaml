@@ -10,7 +10,7 @@ servers:
 - description: Production server
 
 externalDocs:
- description: Find more info here.
+ description: Visite a nossa wiki
  url: https://git.fe.up.pt/lbaw/lbaw2324/lbaw2352/-/wikis/home
 
 tags:
@@ -612,4 +612,44 @@ paths:
                  description: 'Eliminação da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
                  value: '/faqs'
   
-
+  /products/{id}/add_to_chart:
+    post:
+      operationId: R301
+      summary: 'R301: Adicionar um produto ao carrinho da sessão atual'
+      description: 'Adicionar uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+                - quantity
+      
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de adição.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto adicionado ao carrinho com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao adicionar produto.'
+                  value: '/faqs'
