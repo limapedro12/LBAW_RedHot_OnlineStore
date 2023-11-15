@@ -717,7 +717,6 @@ paths:
                 - doorNo
                 - city
                 - country
-                
 
       responses:
         '302':
@@ -757,6 +756,41 @@ paths:
       responses:
         '200':
           description: 'OK. Mostrar a página com os detalhes da encomenda pretendida.'
+
+  /users/{userId}/orders/{orderId}/cancel:
+    post:
+      operationId: R306
+      summary: 'R306: Cancelamento de Encomenda'
+      description: 'Cancelamento de uma Encomenda. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: userID
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de cancelamento.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Encomenda cancelada com sucesso.'
+                  value: '/index'
+                302Failure:
+                  description: 'Falha no cancelamento da encomenda.'
+                  value: '/chart'
 
   /products/{id}/reviews:
     get:
