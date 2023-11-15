@@ -630,9 +630,27 @@ paths:
                   value: '/products'
   
   /products/{id}/change_stock:
-    post:
+    get:
       operationId: R309
-      summary: 'R309: Ação de alteração de stock de produto'
+      summary: 'R309: Página de alteração de stock de produto'
+      description: 'Fornece a interface de definição do stock de um produto para um novo valor. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de alteração de stock de um produto.'
+    
+    post:
+      operationId: R310
+      summary: 'R310: Ação de alteração de stock de produto'
       description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -669,6 +687,36 @@ paths:
                   value: '/products/{id}'
                 302Failure:
                   description: 'Falha ao alterar stock.'
+                  value: '/products/{id}'
+  
+  /products/{id}/delete:
+    post:
+      operationId: R311
+      summary: 'R311: Ação de eliminação de produto'
+      description: 'Processa um pedido de remoção de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de eliminação.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto eliminado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao eliminar produto.'
                   value: '/products/{id}'
 
   /products/{id}/add_to_wishlist:
