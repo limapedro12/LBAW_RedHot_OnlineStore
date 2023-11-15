@@ -946,6 +946,7 @@ paths:
                 comment:
                   type: string
               required:
+                - productId
                 - rating
                 - comment
 
@@ -963,3 +964,47 @@ paths:
                 302Failure:
                   description: 'Falha ao editar avaliação'
                   value: /products/{id}/reviews/{id_review} 
+
+
+  /products/{id}/reviews/{id_review}/delete_review:
+    post:
+      operationId: R504
+      summary: 'R504: Apagar uma avaliação a um produto'
+      description: 'Apagar uma avaliação a um produto. Acesso: USR, ADM'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de apagar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação apagada com sucesso'
+                  value: /products/{id}/reviews
+                302Failure:
+                  description: 'Falha ao apagar avaliação'
+                  value: /products/{id}/reviews/{id_review}                
+
