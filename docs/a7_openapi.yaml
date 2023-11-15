@@ -649,4 +649,87 @@ paths:
                   description: 'Falha ao adicionar produto.'
                   value: '/faqs'
   
-  
+  /chart:
+    get:
+      operationId: R302
+      summary: 'R302: Revisão do carrinho de compras'
+      description: 'Apresenta um sumário dos produtos existentes no carrinho de compras associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de revisão do carrinho.'
+
+  /chart/checkout:
+    get:
+      operationId: R303
+      summary: 'R302: Formulário de checkout do carrinho atual'
+      description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de preenchimento de informação necessária para proceder ao checkout de um carrinho de compras.'
+    
+    post:
+      operationId: R304
+      summary: 'R303: Ação de Checkout'
+      description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                cardNo:
+                  type: integer
+                cardHolder:
+                  type: string
+                cardExpiryMonth:
+                  type: integer
+                cardExpiryYear:
+                  type: integer
+                cardCVV:
+                  type: integer
+                street:
+                  type: string
+                doorNo:
+                  type: integer
+                city:
+                  type: string
+                country:
+                  type: string
+                deliveryObs:
+                  type: string
+              required:
+                - cardNo
+                - cardHolder
+                - cardExpiryMonth
+                - cardExpiryYear
+                - cardCVV
+                - street
+                - doorNo
+                - city
+                - country
+                
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de checkout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Checkout efetuado com successo.'
+                  value: '/index'
+                302Failure:
+                  description: 'Falha no checkout.'
+                  value: '/chart'
