@@ -392,7 +392,7 @@ paths:
   /products/{id}/add_to_chart:
     post:
       operationId: R301
-      summary: 'R301: Adicionar um produto ao carrinho da sessão atual'
+      summary: 'R301: Ação de adição de um produto ao carrinho da sessão atual'
       description: 'Adicionar uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -542,7 +542,7 @@ paths:
   /users/{userId}/orders/{orderId}/cancel:
     post:
       operationId: R306
-      summary: 'R306: Cancelamento de Encomenda'
+      summary: 'R306: Ação de Cancelamento de Encomenda'
       description: 'Cancelamento de uma Encomenda. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -616,7 +616,7 @@ paths:
 
       responses:
         '302':
-          description: 'Redireciona, depois de processar o pedido de adição de prodito.'
+          description: 'Redireciona, depois de processar o pedido de adição de produto.'
           headers:
             Location:
               schema:
@@ -628,6 +628,48 @@ paths:
                 302Failure:
                   description: 'Falha ao adicionar produto.'
                   value: '/products'
+  
+  /products/{id}/change_stock:
+    post:
+      operationId: R309
+      summary: 'R309: Ação de alteração de stock de produto'
+      description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                newStock:
+                  type: integer
+              required:
+                - newStock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de alteração de stock.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Stock alterado com sucesso.'
+                  value: '/products/{id}'
+                302Failure:
+                  description: 'Falha ao alterar stock.'
+                  value: '/products/{id}'
 
   /products/{id}/add_to_wishlist:
     post:
