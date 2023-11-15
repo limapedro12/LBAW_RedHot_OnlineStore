@@ -1008,3 +1008,88 @@ paths:
                   description: 'Falha ao apagar avaliação'
                   value: /products/{id}/reviews/{id_review}                
 
+
+  /products/{id}/reviews/{id_review}/delete_comment:
+    post:
+      operationId: R505
+      summary: 'R505: Apagar um comentário numa avaliação'
+      description: 'Apagar um comentário ofensivo/inapropriado numa avaliação. Acesso: ADM'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de apagar o comentário, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Comentário apagado com sucesso'
+                  value: /products/{id}/reviews/{id_review}
+                302Failure:
+                  description: 'Falha ao apagar comentário'
+                  value: /products/{id}/reviews/{id_review}              
+
+
+  /products/{id}/add_to_wishlist:
+    post:
+      operationId: R401
+      summary: 'R401: Adicionar um produto à wishlist'
+      description: 'Adicionar um produto à wishlist. Acesso: USR'
+      tags:
+        - 'M04: Wishlist'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar o produto à wishlist, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto adicionado à wishlist com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao adicionar produto à wishlist'
+                  value: /products/{id}
