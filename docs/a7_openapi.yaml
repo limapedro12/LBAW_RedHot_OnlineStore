@@ -389,224 +389,6 @@ paths:
                   description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
                   value: '/users/{id}'
 
-  /faqs:
-    get:
-      operationId: R701
-      summary: 'R701: Ver todas as FAQs'
-      description: 'Mostrar todas as FAQs. Acesso: PUB'
-      tags:
-        - 'M07: Páginas estáticas'
-       
-      responses:
-        '200':
-          description: 'Objeto JSON com todas as FAQs'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    question:
-                      type: string
-                    answer:
-                      type: string
-              example:
-                - id: 1
-                  question: 'What is RedHot?'
-                  answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
-                - id: 7
-                  question: 'How can I contact RedHot?'
-                  answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
-
-  /add_faq:
-    get:
-      operationId: R702
-      summary: 'R702: Formulário para adicionar uma FAQ'
-      description: 'Adicionar uma FAQ. Acesso: ADM'
-      tags:
-        - 'M07: Páginas estáticas'
-
-      responses:
-        '200':
-          description: 'Ok. Mostrar a interface de Adicionar uma FAQ'
-
-    post:
-      operationId: R703
-      summary: 'R703: Ação de Adicionar uma FAQ'
-      description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
-      tags:
-        - 'M07: Páginas estáticas'
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                answer:
-                  type: string
-              required:
-                - question
-                - answer
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar a informação da nova FAQ'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                  value: '/faqs'
-                302Failure:
-                  description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                  value: '/faqs'
-
-  /faqs/{id}:
-    get:
-      operationId: R704
-      summary: 'R704: Ver uma FAQ'
-      description: 'Mostrar uma FAQ. Acesso: PUB'
-      tags:
-        - 'M07: Páginas estáticas'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Objeto JSON com a FAQ'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  question:
-                    type: string
-                  answer:
-                    type: string
-              example:
-                id: 1
-                question: 'What is RedHot?'
-                answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
-
-  /faqs/{id}/edit:
-    get:
-      operationId: R705
-      summary: 'R705: Formulário para editar uma FAQ'
-      description: 'Editar uma FAQ. Acesso: ADM'
-      tags:
-        - 'M07: Páginas estáticas'
-  
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-  
-      responses:
-        '200':
-          description: 'Ok. Mostrar a interface de Edição da FAQ'
-
-    post:
-      operationId: R706
-      summary: 'R706: Ação de Editar uma FAQ'
-      description: 'Processa a submissão do formulário de editar uma FAQ. Acesso: ADM'
-
-      tags:
-        - 'M07: Páginas estáticas'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-                question:
-                  type: string
-                answer:
-                  type: string
-
-      responses:
-        '302':
-         description: 'Redireciona, depois de processar a informação da edição'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'FAQ editada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-               302Failure:
-                 description: 'Edição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-
-  /faqs/{id}/delete:
-    post:
-      operationId: R707
-      summary: 'R707: Ação de Eliminar uma FAQ'
-      description: 'Eliminar uma FAQ. Acesso: ADM'
-      tags:
-        - 'M07: Páginas estáticas'
-        
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-                faqId:
-                  type: integer
-             required:
-                - faqId
-
-      responses:
-        '302':
-         description: 'Redireciona, depois de processar a informação da eliminação'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'FAQ eliminada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-               302Failure:
-                 description: 'Eliminação da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-  
   /products/{id}/add_to_chart:
     post:
       operationId: R301
@@ -791,6 +573,48 @@ paths:
                 302Failure:
                   description: 'Falha no cancelamento da encomenda.'
                   value: '/chart'
+
+  /products/{id}/add_to_wishlist:
+    post:
+      operationId: R401
+      summary: 'R401: Adicionar um produto à wishlist'
+      description: 'Adicionar um produto à wishlist. Acesso: USR'
+      tags:
+        - 'M04: Wishlist'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar o produto à wishlist, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto adicionado à wishlist com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao adicionar produto à wishlist'
+                  value: /products/{id}
 
   /products/{id}/reviews:
     get:
@@ -1049,16 +873,149 @@ paths:
                   value: /products/{id}/reviews/{id_review}
                 302Failure:
                   description: 'Falha ao apagar comentário'
-                  value: /products/{id}/reviews/{id_review}              
+                  value: /products/{id}/reviews/{id_review}
 
-
-  /products/{id}/add_to_wishlist:
-    post:
-      operationId: R401
-      summary: 'R401: Adicionar um produto à wishlist'
-      description: 'Adicionar um produto à wishlist. Acesso: USR'
+  /faqs:
+    get:
+      operationId: R701
+      summary: 'R701: Ver todas as FAQs'
+      description: 'Mostrar todas as FAQs. Acesso: PUB'
       tags:
-        - 'M04: Wishlist'
+        - 'M07: Páginas estáticas'
+       
+      responses:
+        '200':
+          description: 'Objeto JSON com todas as FAQs'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    question:
+                      type: string
+                    answer:
+                      type: string
+              example:
+                - id: 1
+                  question: 'What is RedHot?'
+                  answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+                - id: 7
+                  question: 'How can I contact RedHot?'
+                  answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
+
+  /add_faq:
+    get:
+      operationId: R702
+      summary: 'R702: Formulário para adicionar uma FAQ'
+      description: 'Adicionar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
+
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de Adicionar uma FAQ'
+
+    post:
+      operationId: R703
+      summary: 'R703: Ação de Adicionar uma FAQ'
+      description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                answer:
+                  type: string
+              required:
+                - question
+                - answer
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar a informação da nova FAQ'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
+                  value: '/faqs'
+                302Failure:
+                  description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
+                  value: '/faqs'
+
+  /faqs/{id}:
+    get:
+      operationId: R704
+      summary: 'R704: Ver uma FAQ'
+      description: 'Mostrar uma FAQ. Acesso: PUB'
+      tags:
+        - 'M07: Páginas estáticas'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Objeto JSON com a FAQ'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  question:
+                    type: string
+                  answer:
+                    type: string
+              example:
+                id: 1
+                question: 'What is RedHot?'
+                answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+
+  /faqs/{id}/edit:
+    get:
+      operationId: R705
+      summary: 'R705: Formulário para editar uma FAQ'
+      description: 'Editar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
+  
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+  
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de Edição da FAQ'
+
+    post:
+      operationId: R706
+      summary: 'R706: Ação de Editar uma FAQ'
+      description: 'Processa a submissão do formulário de editar uma FAQ. Acesso: ADM'
+
+      tags:
+        - 'M07: Páginas estáticas'
 
       parameters:
         - in: path
@@ -1070,26 +1027,69 @@ paths:
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-              required:
-                - productId
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+                question:
+                  type: string
+                answer:
+                  type: string
 
       responses:
         '302':
-          description: 'Redireciona, depois de adicionar o produto à wishlist, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Produto adicionado à wishlist com sucesso'
-                  value: /products/{id}
-                302Failure:
-                  description: 'Falha ao adicionar produto à wishlist'
-                  value: /products/{id}
+         description: 'Redireciona, depois de processar a informação da edição'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'FAQ editada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+               302Failure:
+                 description: 'Edição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+
+  /faqs/{id}/delete:
+    post:
+      operationId: R707
+      summary: 'R707: Ação de Eliminar uma FAQ'
+      description: 'Eliminar uma FAQ. Acesso: ADM'
+      tags:
+        - 'M07: Páginas estáticas'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+                faqId:
+                  type: integer
+             required:
+                - faqId
+
+      responses:
+        '302':
+         description: 'Redireciona, depois de processar a informação da eliminação'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'FAQ eliminada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+               302Failure:
+                 description: 'Eliminação da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
+                 value: '/faqs'
+
