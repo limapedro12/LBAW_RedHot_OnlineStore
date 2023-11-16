@@ -389,6 +389,652 @@ paths:
                   description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
                   value: '/users/{id}'
 
+  /products/{id}/add_to_chart:
+    post:
+      operationId: R301
+      summary: 'R301: Ação de adição de um produto ao carrinho da sessão atual'
+      description: 'Adicionar uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+                - quantity
+      
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de adição.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto adicionado ao carrinho com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao adicionar produto.'
+                  value: '/faqs'
+  
+  /chart:
+    get:
+      operationId: R302
+      summary: 'R302: Revisão do carrinho de compras'
+      description: 'Apresenta um sumário dos produtos existentes no carrinho de compras associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de revisão do carrinho.'
+
+  /chart/checkout:
+    get:
+      operationId: R303
+      summary: 'R303: Formulário de checkout do carrinho atual'
+      description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de preenchimento de informação necessária para proceder ao checkout de um carrinho de compras.'
+    
+    post:
+      operationId: R304
+      summary: 'R304: Ação de Checkout'
+      description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                cardNo:
+                  type: integer
+                cardHolder:
+                  type: string
+                cardExpiryMonth:
+                  type: integer
+                cardExpiryYear:
+                  type: integer
+                cardCVV:
+                  type: integer
+                street:
+                  type: string
+                doorNo:
+                  type: integer
+                city:
+                  type: string
+                country:
+                  type: string
+                deliveryObs:
+                  type: string
+              required:
+                - cardNo
+                - cardHolder
+                - cardExpiryMonth
+                - cardExpiryYear
+                - cardCVV
+                - street
+                - doorNo
+                - city
+                - country
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de checkout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Checkout efetuado com successo.'
+                  value: '/index'
+                302Failure:
+                  description: 'Falha no checkout.'
+                  value: '/chart'
+  
+  /users/{userId}/orders/{orderId}:
+    get:
+      operationId: R305
+      summary: 'R305: Estado e Detalhes da Encomenda'
+      description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página com os detalhes da encomenda pretendida.'
+
+  /users/{userId}/orders/{orderId}/cancel:
+    post:
+      operationId: R306
+      summary: 'R306: Ação de Cancelamento de Encomenda'
+      description: 'Cancelamento de uma Encomenda. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de cancelamento.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Encomenda cancelada com sucesso.'
+                  value: '/index'
+                302Failure:
+                  description: 'Falha no cancelamento da encomenda.'
+                  value: '/chart'
+
+  /products/add_product:
+    get:
+      operationId: R307
+      summary: 'R307: Página de adição de produto ao catálogo'
+      description: 'Fornece a interface de preenchimento de detalhes de produto a adicionar ao catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
+    
+    post:
+      operationId: R308
+      summary: 'R308: Ação de adição de novo produto ao catálogo'
+      description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                price:
+                  type: number
+                discount:
+                  type: number
+                stock:
+                  type: integer
+              required:
+                - description
+                - price
+                - discount
+                - stock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de adição de produto.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto adicionado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao adicionar produto.'
+                  value: '/products'
+  
+  /products/{id}/change_stock:
+    get:
+      operationId: R309
+      summary: 'R309: Página de alteração de stock de produto'
+      description: 'Fornece a interface de definição do stock de um produto para um novo valor. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de alteração de stock de um produto.'
+    
+    post:
+      operationId: R310
+      summary: 'R310: Ação de alteração de stock de produto'
+      description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                newStock:
+                  type: integer
+              required:
+                - newStock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de alteração de stock.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Stock alterado com sucesso.'
+                  value: '/products/{id}'
+                302Failure:
+                  description: 'Falha ao alterar stock.'
+                  value: '/products/{id}'
+  
+  /products/{id}/delete:
+    post:
+      operationId: R311
+      summary: 'R311: Ação de eliminação de produto'
+      description: 'Processa um pedido de remoção de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de eliminação.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto eliminado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao eliminar produto.'
+                  value: '/products/{id}'
+
+  /products/{id}/add_to_wishlist:
+    post:
+      operationId: R401
+      summary: 'R401: Adicionar um produto à wishlist'
+      description: 'Adicionar um produto à wishlist. Acesso: USR'
+      tags:
+        - 'M04: Wishlist'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar o produto à wishlist, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto adicionado à wishlist com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao adicionar produto à wishlist'
+                  value: /products/{id}
+
+  /products/{id}/reviews:
+    get:
+      operationId: R501
+      summary: 'R501: Ver as avaliações feitas a um produto'
+      description: 'Mostrar as avaliações feitas a um produto. Acesso: PUB'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    description: 'Avaliações feitas ao produto'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        rating:
+                          type: number
+                        comment:
+                          type: string
+                        date:
+                          type: string
+                        user:
+                          type: object
+                          description: 'Utilizador que fez a avaliação'
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            email:
+                              type: string
+                example:
+                  reviews:
+                    - id: 68
+                      rating: 2.5
+                      comment: 'Muito bom'
+                      date: '2020-12-12'
+                      user:
+                        id: 1012
+                        name: 'Fernando Mendes'
+                        email: 'fernadomendes@gmail.com'
+                    - id: 224
+                      rating: 5
+                      comment: 'Bom'
+                      date: '2020-12-12'
+                      user:
+                        id: 167
+                        name: 'Maria'
+                        email: 'mariaxd@gmail.com'
+
+
+  /products/{id}/reviews/add_review:
+    post:
+      operationId: R502
+      summary: 'R502: Adicionar uma avaliação a um produto'
+      description: 'Adicionar uma avaliação a um produto. Acesso: USR'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+        - in: query
+          name: rating
+          schema:
+            type: number
+          required: true
+
+        - in: query
+          name: comment
+          schema:
+            type: string
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: number
+                comment:
+                  type: string
+              required:
+                - rating
+                - comment
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação adicionada com sucesso'
+                  value: /products/{id}/reviews
+                302Failure:
+                  description: 'Falha ao adicionar avaliação'
+                  value: /products/{id}/reviews
+              
+      
+  /products/{id}/reviews/{id_review}/edit_review:
+    post:
+      operationId: R503
+      summary: 'R503: Editar uma avaliação a um produto'
+      description: 'Editar uma avaliação a um produto. Acesso: USR'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+                rating:
+                  type: number
+                comment:
+                  type: string
+              required:
+                - productId
+                - rating
+                - comment
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de editar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação editada com sucesso'
+                  value: /products/{id}/reviews/{id_review}
+                302Failure:
+                  description: 'Falha ao editar avaliação'
+                  value: /products/{id}/reviews/{id_review} 
+
+
+  /products/{id}/reviews/{id_review}/delete_review:
+    post:
+      operationId: R504
+      summary: 'R504: Apagar uma avaliação a um produto'
+      description: 'Apagar uma avaliação a um produto. Acesso: USR, ADM'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de apagar a avaliação, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Avaliação apagada com sucesso'
+                  value: /products/{id}/reviews
+                302Failure:
+                  description: 'Falha ao apagar avaliação'
+                  value: /products/{id}/reviews/{id_review}                
+
+
+  /products/{id}/reviews/{id_review}/delete_comment:
+    post:
+      operationId: R505
+      summary: 'R505: Apagar um comentário numa avaliação'
+      description: 'Apagar um comentário ofensivo/inapropriado numa avaliação. Acesso: ADM'
+      tags:
+        - 'M05: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de apagar o comentário, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Comentário apagado com sucesso'
+                  value: /products/{id}/reviews/{id_review}
+                302Failure:
+                  description: 'Falha ao apagar comentário'
+                  value: /products/{id}/reviews/{id_review}
+
   /faqs:
     get:
       operationId: R701
@@ -606,360 +1252,4 @@ paths:
                302Failure:
                  description: 'Eliminação da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
                  value: '/faqs'
-  
-  /products/{id}/add_to_chart:
-    post:
-      operationId: R301
-      summary: 'R301: Adicionar um produto ao carrinho da sessão atual'
-      description: 'Adicionar uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-      
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                quantity:
-                  type: integer
-              required:
-                - quantity
-      
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de adição.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Produto adicionado ao carrinho com sucesso.'
-                  value: '/products'
-                302Failure:
-                  description: 'Falha ao adicionar produto.'
-                  value: '/faqs'
-  
-  /chart:
-    get:
-      operationId: R302
-      summary: 'R302: Revisão do carrinho de compras'
-      description: 'Apresenta um sumário dos produtos existentes no carrinho de compras associado à sessão iniciada. Acesso: USR'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página de revisão do carrinho.'
 
-  /chart/checkout:
-    get:
-      operationId: R303
-      summary: 'R303: Formulário de checkout do carrinho atual'
-      description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página de preenchimento de informação necessária para proceder ao checkout de um carrinho de compras.'
-    
-    post:
-      operationId: R304
-      summary: 'R304: Ação de Checkout'
-      description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                cardNo:
-                  type: integer
-                cardHolder:
-                  type: string
-                cardExpiryMonth:
-                  type: integer
-                cardExpiryYear:
-                  type: integer
-                cardCVV:
-                  type: integer
-                street:
-                  type: string
-                doorNo:
-                  type: integer
-                city:
-                  type: string
-                country:
-                  type: string
-                deliveryObs:
-                  type: string
-              required:
-                - cardNo
-                - cardHolder
-                - cardExpiryMonth
-                - cardExpiryYear
-                - cardCVV
-                - street
-                - doorNo
-                - city
-                - country
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de checkout.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Checkout efetuado com successo.'
-                  value: '/index'
-                302Failure:
-                  description: 'Falha no checkout.'
-                  value: '/chart'
-  
-  /users/{userId}/orders/{orderId}:
-    get:
-      operationId: R305
-      summary: 'R305: Estado e Detalhes da Encomenda'
-      description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: userID
-          schema:
-            type: integer
-          required: true
-        - in: path
-          name: orderId
-          schema:
-            type: integer
-          required: true
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página com os detalhes da encomenda pretendida.'
-
-  /users/{userId}/orders/{orderId}/cancel:
-    post:
-      operationId: R306
-      summary: 'R306: Cancelamento de Encomenda'
-      description: 'Cancelamento de uma Encomenda. Acesso: USR'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: userID
-          schema:
-            type: integer
-          required: true
-        - in: path
-          name: orderId
-          schema:
-            type: integer
-          required: true
-      
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de cancelamento.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Encomenda cancelada com sucesso.'
-                  value: '/index'
-                302Failure:
-                  description: 'Falha no cancelamento da encomenda.'
-                  value: '/chart'
-
-  /products/{id}/reviews:
-    get:
-      operationId: R501
-      summary: 'R501: Ver as avaliações feitas a um produto'
-      description: 'Mostrar as avaliações feitas a um produto. Acesso: PUB'
-      tags:
-        - 'M05: Comentários e Avaliações'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  reviews:
-                    type: array
-                    description: 'Avaliações feitas ao produto'
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        rating:
-                          type: number
-                        comment:
-                          type: string
-                        date:
-                          type: string
-                        user:
-                          type: object
-                          description: 'Utilizador que fez a avaliação'
-                          properties:
-                            id:
-                              type: integer
-                            name:
-                              type: string
-                            email:
-                              type: string
-                example:
-                  reviews:
-                    - id: 68
-                      rating: 2.5
-                      comment: 'Muito bom'
-                      date: '2020-12-12'
-                      user:
-                        id: 1012
-                        name: 'Fernando Mendes'
-                        email: 'fernadomendes@gmail.com'
-                    - id: 224
-                      rating: 5
-                      comment: 'Bom'
-                      date: '2020-12-12'
-                      user:
-                        id: 167
-                        name: 'Maria'
-                        email: 'mariaxd@gmail.com'
-
-
-  /products/{id}/reviews/add_review:
-    post:
-      operationId: R502
-      summary: 'R502: Adicionar uma avaliação a um produto'
-      description: 'Adicionar uma avaliação a um produto. Acesso: USR'
-      tags:
-        - 'M05: Comentários e Avaliações'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-        - in: query
-          name: rating
-          schema:
-            type: number
-          required: true
-
-        - in: query
-          name: comment
-          schema:
-            type: string
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                rating:
-                  type: number
-                comment:
-                  type: string
-              required:
-                - rating
-                - comment
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de adicionar a avaliação, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Avaliação adicionada com sucesso'
-                  value: /products/{id}/reviews
-                302Failure:
-                  description: 'Falha ao adicionar avaliação'
-                  value: /products/{id}/reviews
-              
-      
-  /products/{id}/reviews/{id_review}/edit_review:
-    get:
-      operationId: R503
-      summary: 'R503: Editar uma avaliação a um produto'
-      description: 'Editar uma avaliação a um produto. Acesso: USR'
-      tags:
-        - 'M05: Comentários e Avaliações'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-                rating:
-                  type: float
-                comment:
-                  type: string
-              required:
-                - rating
-                - comment
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de editar a avaliação, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Avaliação editada com sucesso'
-                  value: /products/{id}/reviews/{id_review}
-                302Failure:
-                  description: 'Falha ao editar avaliação'
-                  value: /products/{id}/reviews/{id_review} 
