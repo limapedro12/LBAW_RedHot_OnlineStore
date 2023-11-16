@@ -525,7 +525,7 @@ paths:
       
       parameters:
         - in: path
-          name: userID
+          name: userId
           schema:
             type: integer
           required: true
@@ -549,7 +549,7 @@ paths:
       
       parameters:
         - in: path
-          name: userID
+          name: userId
           schema:
             type: integer
           required: true
@@ -887,7 +887,7 @@ paths:
               
       
   /products/{id}/reviews/{id_review}/edit_review:
-    get:
+    post:
       operationId: R503
       summary: 'R503: Editar uma avaliação a um produto'
       description: 'Editar uma avaliação a um produto. Acesso: USR'
@@ -897,6 +897,11 @@ paths:
       parameters:
         - in: path
           name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
           schema:
             type: integer
           required: true
@@ -911,7 +916,7 @@ paths:
                 productId:
                   type: integer
                 rating:
-                  type: float
+                  type: number
                 comment:
                   type: string
               required:
@@ -946,6 +951,11 @@ paths:
       parameters:
         - in: path
           name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
           schema:
             type: integer
           required: true
@@ -989,6 +999,11 @@ paths:
       parameters:
         - in: path
           name: id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id_review
           schema:
             type: integer
           required: true
