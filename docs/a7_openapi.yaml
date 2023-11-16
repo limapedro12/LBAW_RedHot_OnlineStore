@@ -140,7 +140,8 @@ paths:
                   description: 'Resgisto falhado. Redireciona, para o formulário de registo.'
                   value: '/register'
 
-  /users/{id}:
+
+  /users/{id}/API:
     get:
       operationId: R106
       summary: 'R106: Ver o meu perfil individual'
@@ -174,11 +175,30 @@ paths:
                   name: 'Fernando Mendes'
                   email: 'fernadomendes@gmail.com'
 
+  /users/{id}:
+    get:
+      operationId: R107
+      summary: 'R107: Ver o meu perfil individual'
+      description: 'Mostrar o meu perfil individual de utilizador. Acesso: USR, ADM'
+      tags:
+        - 'M01: Autenticação e Perfil'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostra a página de perfil de utilizador'
+
 
   /users/{id}/edit:
     get:
-      operationId: R107
-      summary: 'R107: Formulário para editar o meu perfil individual'
+      operationId: R108
+      summary: 'R108: Formulário para editar o meu perfil individual'
       description: 'Editar o meu perfil individual. Acesso: USR, ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -195,8 +215,8 @@ paths:
           description: 'Ok. Mostrar a interface de Edição do Perfil de Utilizador'
 
     post:
-      operationId: R108
-      summary: 'R108: Ação de Editar o Perfil'
+      operationId: R109
+      summary: 'R109: Ação de Editar o Perfil'
       description: 'Processa a submissão do formulário de edição de perfil. Acesso: USR, ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -244,8 +264,8 @@ paths:
  
   /users/{id}/delete_account:
     get:
-      operationId: R109
-      summary: 'R109: Eliminar a minha conta'
+      operationId: R110
+      summary: 'R110: Eliminar a minha conta'
       description: 'Eliminar a minha conta. Acesso: USR, ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -262,8 +282,8 @@ paths:
           description: 'Ok. Mostrar a interface de Eliminação da Conta'
 
     post:
-      operationId: R110
-      summary: 'R110: Ação de Eliminar a Conta'
+      operationId: R111
+      summary: 'R111: Ação de Eliminar a Conta'
       description: 'Processa a submissão do formulário de eliminar conta. Acesso: USR, ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -307,8 +327,8 @@ paths:
 
   /users/{id}/ban:
     post:
-      operationId: R111
-      summary: 'R111: Ação de Banir um Utilizador'
+      operationId: R112
+      summary: 'R112: Ação de Banir um Utilizador'
       description: 'Bane um utilizador. Acesso: ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -349,8 +369,8 @@ paths:
         
   /users/{id}/unban:
     post:
-      operationId: R112
-      summary: 'R112: Ação de Remover o Banimento um Utilizador'
+      operationId: R113
+      summary: 'R113: Ação de Remover o Banimento um Utilizador'
       description: 'Remove o banimento de um utilizador. Acesso: ADM'
       tags:
         - 'M01: Autenticação e Perfil'
@@ -389,11 +409,362 @@ paths:
                   description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
                   value: '/users/{id}'
 
+
+  /products/{id}/API:
+    get:
+      operationId: R201
+      summary: 'R201: Visualizar os detalhes do produto'
+      description: 'Mudar para a pagina de informação mais detalhada do produto.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com a informação e imagens do produto.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                  discount:
+                    type: number
+                  stock:
+                    type: integer
+                  ratting:
+                    type: number
+                  images:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        url:
+                          type: string
+                example:
+                  id: 17
+                  name: 'Piri-Piri'
+                  description: 'Molho de Piri-Piri'
+                  price: 2.99
+                  discount: 0.0
+                  stock: 10
+                  images:
+                    - id: 1
+                      url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 2
+                      url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/{id}:
+    get:
+      operationId: R202
+      summary: 'R202: Visualizar os detalhes do produto'
+      description: 'Retorna a pagina de informação mais detalhada do produto.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página de detalhes do produto.'
+
+  /products/API:
+    get:
+      operationId: R203
+      summary: 'R203: Visualizar todos os produtos'
+      description: 'Retorna um JSON com todos os produtos.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products:
+    get:
+      operationId: R204
+      summary: 'R204: Visualizar todos os produtos'
+      description: 'Retorna a pagina com todos os produtos.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos.'
+  
+  /products/search/{stringToSearch}/API:
+    get:
+      operationId: R205
+      summary: 'R205: Visualizar todos os produtos que contenham a string da pesquisa'
+      description: 'Retorna um JSON com todos os produtos que contenham a string da pesquisa.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos que contenham a string da pesquisa.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/search/{stringToSearch}:
+    get:
+      operationId: R206
+      summary: 'R206: Visualizar todos os produtos que contenham a string da pesquisa'
+      description: 'Retorna a pagina com todos os produtos que contenham a string da pesquisa.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos que contenham a string da pesquisa.'
+
+  /products/filter/{filter}/API:
+    get:
+      operationId: R207
+      summary: 'R207: Visualizar todos os produtos que contenham o filtro'
+      description: 'Retorna um JSON com todos os produtos que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos que contenham o filtro.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/filter/{filter}:
+    get:
+      operationId: R208
+      summary: 'R208: Visualizar todos os produtos que contenham o filtro'
+      description: 'Retorna a pagina com todos os produtos que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos que contenham o filtro.'
+
+
   /products/{id}/add_to_chart:
     post:
       operationId: R301
       summary: 'R301: Ação de adição de um produto ao carrinho da sessão atual'
-      description: 'Adicionar uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
+      description: 'Ação de adição uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
       
@@ -431,10 +802,49 @@ paths:
                   description: 'Falha ao adicionar produto.'
                   value: '/faqs'
   
-  /chart:
+  /chart/API:
     get:
       operationId: R302
       summary: 'R302: Revisão do carrinho de compras'
+      description: 'Apresenta um sumário dos produtos existentes no carrinho de compras associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      responses:
+        '200':
+          description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    description: 'Avaliações feitas ao produto'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                example:
+                  reviews:
+                    - id: 1112
+                      name: 'Sriracha'
+                      discount: 0.1
+                    - id: 4545
+                      name: 'Molho Mexicano Extra Picante'
+                      discount: 0
+
+  /chart:
+    get:
+      operationId: R303
+      summary: 'R303: Revisão do carrinho de compras'
       description: 'Apresenta um sumário dos produtos existentes no carrinho de compras associado à sessão iniciada. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -445,8 +855,8 @@ paths:
 
   /chart/checkout:
     get:
-      operationId: R303
-      summary: 'R303: Formulário de checkout do carrinho atual'
+      operationId: R304
+      summary: 'R304: Formulário de checkout do carrinho atual'
       description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -456,8 +866,8 @@ paths:
           description: 'OK. Mostrar a página de preenchimento de informação necessária para proceder ao checkout de um carrinho de compras.'
     
     post:
-      operationId: R304
-      summary: 'R304: Ação de Checkout'
+      operationId: R305
+      summary: 'R305: Ação de Checkout'
       description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -515,10 +925,49 @@ paths:
                   description: 'Falha no checkout.'
                   value: '/chart'
   
+  /users/{userId}/orders/{orderId}/API:
+    get:
+      operationId: R306
+      summary: 'R306: Estado e Detalhes da Encomenda'
+      description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      status:
+                        type: string
+                example:
+                  id: 5656
+                  status: 'Entrege'
+
   /users/{userId}/orders/{orderId}:
     get:
-      operationId: R305
-      summary: 'R305: Estado e Detalhes da Encomenda'
+      operationId: R307
+      summary: 'R307: Estado e Detalhes da Encomenda'
       description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -541,8 +990,8 @@ paths:
 
   /users/{userId}/orders/{orderId}/cancel:
     post:
-      operationId: R306
-      summary: 'R306: Ação de Cancelamento de Encomenda'
+      operationId: R308
+      summary: 'R308: Ação de Cancelamento de Encomenda'
       description: 'Cancelamento de uma Encomenda. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
@@ -576,8 +1025,8 @@ paths:
 
   /products/add_product:
     get:
-      operationId: R307
-      summary: 'R307: Página de adição de produto ao catálogo'
+      operationId: R309
+      summary: 'R309: Página de adição de produto ao catálogo'
       description: 'Fornece a interface de preenchimento de detalhes de produto a adicionar ao catálogo. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -587,8 +1036,8 @@ paths:
           description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
     
     post:
-      operationId: R308
-      summary: 'R308: Ação de adição de novo produto ao catálogo'
+      operationId: R310
+      summary: 'R310: Ação de adição de novo produto ao catálogo'
       description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -631,8 +1080,8 @@ paths:
   
   /products/{id}/change_stock:
     get:
-      operationId: R309
-      summary: 'R309: Página de alteração de stock de produto'
+      operationId: R311
+      summary: 'R311: Página de alteração de stock de produto'
       description: 'Fornece a interface de definição do stock de um produto para um novo valor. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -649,8 +1098,8 @@ paths:
           description: 'OK. Mostrar a página de alteração de stock de um produto.'
     
     post:
-      operationId: R310
-      summary: 'R310: Ação de alteração de stock de produto'
+      operationId: R312
+      summary: 'R312: Ação de alteração de stock de produto'
       description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -691,8 +1140,8 @@ paths:
   
   /products/{id}/delete:
     post:
-      operationId: R311
-      summary: 'R311: Ação de eliminação de produto'
+      operationId: R313
+      summary: 'R313: Ação de eliminação de produto'
       description: 'Processa um pedido de remoção de um produto do catálogo. Acesso: ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -722,8 +1171,8 @@ paths:
   /products/{id}/add_to_wishlist:
     post:
       operationId: R401
-      summary: 'R401: Adicionar um produto à wishlist'
-      description: 'Adicionar um produto à wishlist. Acesso: USR'
+      summary: 'R401: Ação de adição um produto à wishlist'
+      description: 'Ação de adição um produto à wishlist. Acesso: USR'
       tags:
         - 'M04: Wishlist'
 
@@ -761,7 +1210,7 @@ paths:
                   description: 'Falha ao adicionar produto à wishlist'
                   value: /products/{id}
 
-  /products/{id}/reviews:
+  /products/{id}/reviews/API:
     get:
       operationId: R501
       summary: 'R501: Ver as avaliações feitas a um produto'
@@ -775,6 +1224,8 @@ paths:
           schema:
             type: integer
           required: true
+
+
 
       responses:
         '200':
@@ -831,8 +1282,8 @@ paths:
   /products/{id}/reviews/add_review:
     post:
       operationId: R502
-      summary: 'R502: Adicionar uma avaliação a um produto'
-      description: 'Adicionar uma avaliação a um produto. Acesso: USR'
+      summary: 'R502: Ação de adição uma avaliação a um produto'
+      description: 'Ação de adição uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
 
@@ -1035,7 +1486,7 @@ paths:
                   description: 'Falha ao apagar comentário'
                   value: /products/{id}/reviews/{id_review}
 
-  /faqs:
+  /faqs/API:
     get:
       operationId: R701
       summary: 'R701: Ver todas as FAQs'
@@ -1067,21 +1518,33 @@ paths:
                   question: 'How can I contact RedHot?'
                   answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
 
-  /add_faq:
+  /faqs:
     get:
       operationId: R702
-      summary: 'R702: Formulário para adicionar uma FAQ'
-      description: 'Adicionar uma FAQ. Acesso: ADM'
+      summary: 'R702: Ver todas as FAQs'
+      description: 'Mostrar todas as FAQs. Acesso: PUB'
+      tags:
+        - 'M07: Páginas estáticas'
+       
+      responses:
+        '200':
+          description: 'Mostrar a página de FAQs'
+
+  /add_faq:
+    get:
+      operationId: R703
+      summary: 'R703: Formulário para adicionar uma FAQ'
+      description: 'Ação de adição uma FAQ. Acesso: ADM'
       tags:
         - 'M07: Páginas estáticas'
 
       responses:
         '200':
-          description: 'Ok. Mostrar a interface de Adicionar uma FAQ'
+          description: 'Ok. Mostrar a interface de adicionar uma FAQ'
 
     post:
-      operationId: R703
-      summary: 'R703: Ação de Adicionar uma FAQ'
+      operationId: R704
+      summary: 'R704: Ação de adicição uma FAQ'
       description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
       tags:
         - 'M07: Páginas estáticas'
@@ -1116,10 +1579,10 @@ paths:
                   description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
                   value: '/faqs'
 
-  /faqs/{id}:
+  /faqs/{id}/API:
     get:
-      operationId: R704
-      summary: 'R704: Ver uma FAQ'
+      operationId: R705
+      summary: 'R705: Ver uma FAQ'
       description: 'Mostrar uma FAQ. Acesso: PUB'
       tags:
         - 'M07: Páginas estáticas'
@@ -1152,8 +1615,8 @@ paths:
 
   /faqs/{id}/edit:
     get:
-      operationId: R705
-      summary: 'R705: Formulário para editar uma FAQ'
+      operationId: R706
+      summary: 'R706: Formulário para editar uma FAQ'
       description: 'Editar uma FAQ. Acesso: ADM'
       tags:
         - 'M07: Páginas estáticas'
@@ -1170,8 +1633,8 @@ paths:
           description: 'Ok. Mostrar a interface de Edição da FAQ'
 
     post:
-      operationId: R706
-      summary: 'R706: Ação de Editar uma FAQ'
+      operationId: R707
+      summary: 'R707: Ação de Editar uma FAQ'
       description: 'Processa a submissão do formulário de editar uma FAQ. Acesso: ADM'
 
       tags:
@@ -1213,8 +1676,8 @@ paths:
 
   /faqs/{id}/delete:
     post:
-      operationId: R707
-      summary: 'R707: Ação de Eliminar uma FAQ'
+      operationId: R708
+      summary: 'R708: Ação de Eliminar uma FAQ'
       description: 'Eliminar uma FAQ. Acesso: ADM'
       tags:
         - 'M07: Páginas estáticas'
