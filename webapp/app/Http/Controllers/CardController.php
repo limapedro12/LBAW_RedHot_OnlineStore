@@ -24,7 +24,8 @@ class CardController extends Controller
 
         // Use the pages.card template to display the card.
         return view('pages.card', [
-            'card' => $card
+            'card' => $card,
+            'dunas' => 'auimbaue'
         ]);
     }
 

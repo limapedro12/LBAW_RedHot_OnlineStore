@@ -6,4 +6,5 @@
     <section id="cards">
         @include('partials.card', ['card' => $card])
     </section>
+    <p> {{ $dunas }} </p>
 @endsection
