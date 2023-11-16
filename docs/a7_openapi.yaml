@@ -140,6 +140,7 @@ paths:
                   description: 'Resgisto falhado. Redireciona, para o formulário de registo.'
                   value: '/register'
 
+
   /users/{id}/API:
     get:
       operationId: R106
@@ -407,6 +408,357 @@ paths:
                 302Failure:
                   description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
                   value: '/users/{id}'
+
+
+  /products/{id}/API:
+    get:
+      operationId: R201
+      summary: 'R201: Visualizar os detalhes do produto'
+      description: 'Mudar para a pagina de informação mais detalhada do produto.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com a informação e imagens do produto.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                  discount:
+                    type: number
+                  stock:
+                    type: integer
+                  ratting:
+                    type: number
+                  images:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        url:
+                          type: string
+                example:
+                  id: 17
+                  name: 'Piri-Piri'
+                  description: 'Molho de Piri-Piri'
+                  price: 2.99
+                  discount: 0.0
+                  stock: 10
+                  images:
+                    - id: 1
+                      url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 2
+                      url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/{id}:
+    get:
+      operationId: R202
+      summary: 'R202: Visualizar os detalhes do produto'
+      description: 'Retorna a pagina de informação mais detalhada do produto.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página de detalhes do produto.'
+
+  /products/API:
+    get:
+      operationId: R203
+      summary: 'R203: Visualizar todos os produtos'
+      description: 'Retorna um JSON com todos os produtos.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products:
+    get:
+      operationId: R204
+      summary: 'R204: Visualizar todos os produtos'
+      description: 'Retorna a pagina com todos os produtos.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos.'
+  
+  /products/search/{stringToSearch}/API:
+    get:
+      operationId: R205
+      summary: 'R205: Visualizar todos os produtos que contenham a string da pesquisa'
+      description: 'Retorna um JSON com todos os produtos que contenham a string da pesquisa.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos que contenham a string da pesquisa.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/search/{stringToSearch}:
+    get:
+      operationId: R206
+      summary: 'R206: Visualizar todos os produtos que contenham a string da pesquisa'
+      description: 'Retorna a pagina com todos os produtos que contenham a string da pesquisa.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos que contenham a string da pesquisa.'
+
+  /products/filter/{filter}/API:
+    get:
+      operationId: R207
+      summary: 'R207: Visualizar todos os produtos que contenham o filtro'
+      description: 'Retorna um JSON com todos os produtos que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos que contenham o filtro.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/filter/{filter}:
+    get:
+      operationId: R208
+      summary: 'R208: Visualizar todos os produtos que contenham o filtro'
+      description: 'Retorna a pagina com todos os produtos que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos que contenham o filtro.'
+
 
   /products/{id}/add_to_chart:
     post:
@@ -872,6 +1224,8 @@ paths:
           schema:
             type: integer
           required: true
+
+
 
       responses:
         '200':
