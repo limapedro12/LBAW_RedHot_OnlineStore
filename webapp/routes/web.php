@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ItemController;
 
@@ -21,6 +22,10 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // Home
 Route::redirect('/', '/login');
+
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products', 'list')->name('products');
+});
 
 // Cards
 Route::controller(CardController::class)->group(function () {
