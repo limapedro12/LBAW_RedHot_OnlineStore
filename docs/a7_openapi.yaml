@@ -1495,7 +1495,7 @@ paths:
       summary: 'R601: Ver uma estatística'
       description: 'Mostrar uma estatística. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       parameters:
         - in: path
@@ -1532,7 +1532,7 @@ paths:
       summary: 'R602: Ver uma estatística'
       description: 'Mostrar uma estatística. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       parameters:
         - in: path
@@ -1551,7 +1551,7 @@ paths:
       summary: 'R603: Ver todas as estatísticas'
       description: 'Mostrar todas as estatísticas. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       responses:
         '200':
@@ -1591,7 +1591,7 @@ paths:
       summary: 'R604: Ver todas as estatísticas'
       description: 'Mostrar todas as estatísticas. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       responses:
         '200':
@@ -1603,7 +1603,7 @@ paths:
       summary: 'R605: Ver todos os produtos em destaque'
       description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       responses:
         '200':
@@ -1672,7 +1672,7 @@ paths:
       summary: 'R606: Ver todos os produtos em destaque'
       description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       responses:
         '200':
@@ -1685,7 +1685,7 @@ paths:
       summary: 'R607: Adicionar um produto aos produtos em destaque'
       description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       parameters:
         - in: path
@@ -1727,7 +1727,7 @@ paths:
       summary: 'R608: Remover um produto dos produtos em destaque'
       description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       parameters:
         - in: path
@@ -1769,7 +1769,7 @@ paths:
       summary: 'R609: Editar um produto dos produtos em destaque'
       description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
       tags:
-        - 'M06: Página de Administrador'
+        - 'M06: Páginas de Administrador'
 
       parameters:
         - in: path
