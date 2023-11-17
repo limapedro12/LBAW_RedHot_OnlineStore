@@ -19,7 +19,7 @@ tags:
  - name: 'M03: Compras e Carrinho'
  - name: 'M04: Wishlist'
  - name: 'M05: Comentários e Avaliações'
- - name: 'M06: Páginas de administrador'
+ - name: 'M06: Páginas de Administrador'
  - name: 'M07: Páginas estáticas'
 
 paths:
