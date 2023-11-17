@@ -15,7 +15,7 @@ class ProductsController extends Controller {
     {
         return view('pages.products', [
             'produto' => Product::find($id),
-            'discountFunction' => 'discountFunction' => function($price, $discount){
+            'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
             }
         ]);
