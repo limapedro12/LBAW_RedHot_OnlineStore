@@ -1486,6 +1486,328 @@ paths:
                   description: 'Falha ao apagar comentário'
                   value: /products/{id}/reviews/{id_review}
 
+
+  
+
+  /admin/consultar_estatistica/{id}/API:
+    get:
+      operationId: R601
+      summary: 'R601: Ver uma estatística'
+      description: 'Mostrar uma estatística. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Objeto JSON com a estatística'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  value:
+                    type: number
+              example:
+                id: 1
+                name: 'Número de utilizadores registados'
+                description: 'Número de utilizadores registados no site'
+                value: 1000
+
+  /admin/consultar_estatistica/{id}:
+    get:
+      operationId: R602
+      summary: 'R602: Ver uma estatística'
+      description: 'Mostrar uma estatística. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página de uma estatística'
+
+  /admin/consultar_estatisticas/API:
+    get:
+      operationId: R603
+      summary: 'R603: Ver todas as estatísticas'
+      description: 'Mostrar todas as estatísticas. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todas as estatísticas'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statistics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        value:
+                          type: number
+              example:
+                statistics:
+                  - id: 1
+                    name: 'Número de utilizadores registados'
+                    description: 'Número de utilizadores registados no site'
+                    value: 1000
+                  - id: 2
+                    name: 'Número de produtos vendidos'
+                    description: 'Número de produtos vendidos no site'
+                    value: 1000
+      
+  /admin/consultar_estatisticas:
+    get:
+      operationId: R604
+      summary: 'R604: Ver todas as estatísticas'
+      description: 'Mostrar todas as estatísticas. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todas as estatísticas'
+
+  /admin/gerir_produtos_em_destaque/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todos os produtos em destaque'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+              example:
+                products:
+                  - id: 17
+                    name: 'Piri-Piri'
+                    description: 'Molho de Piri-Piri'
+                    price: 2.99
+                    discount: 0.0
+                    stock: 10
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                  - id: 18
+                    name: 'Piri-Piri com Cannabis'
+                    description: 'Molho de Piri-Piri com Cannabis'
+                    price: 3.99
+                    discount: 0.0
+                    stock: 9
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /admin/gerir_produtos_em_destaque:
+    get:
+      operationId: R606
+      summary: 'R606: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todos os produtos em destaque'
+
+
+  /admin/gerir_produtos_em_destaque/{id}/add:
+    post:
+      operationId: R607
+      summary: 'R607: Adicionar um produto aos produtos em destaque'
+      description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de adicionar o produto aos produtos em destaque, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto adicionado aos produtos em destaque com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao adicionar produto aos produtos em destaque'
+                  value: /products/{id}
+
+  /admin/gerir_produtos_em_destaque/{id}/remove:
+    post:
+      operationId: R608
+      summary: 'R608: Remover um produto dos produtos em destaque'
+      description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+              required:
+                - productId
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de remover o produto dos produtos em destaque, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto removido dos produtos em destaque com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao remover produto dos produtos em destaque'
+                  value: /products/{id}
+
+  /admin/gerir_produtos_em_destaque/{id}/edit:
+    post:
+      operationId: R609
+      summary: 'R609: Editar um produto dos produtos em destaque'
+      description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Página de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: integer
+                newDiscount:
+                  type: number
+              required:
+                - productId
+                - newDiscount
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de editar o produto dos produtos em destaque, para a página do produto'
+          headers:
+            Location:
+              schema:
+                type: string       
+              examples:
+                302Success:
+                  description: 'Produto editado dos produtos em destaque com sucesso'
+                  value: /products/{id}
+                302Failure:
+                  description: 'Falha ao editar produto dos produtos em destaque'
+                  value: /products/{id}
+
   /faqs/API:
     get:
       operationId: R701
