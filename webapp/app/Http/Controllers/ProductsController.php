@@ -11,10 +11,9 @@ use App\Models\Product;
 
 
 class ProductsController extends Controller {
-    public function productsDetails(int $id)
-    {
-        return view('pages.products', [
-            'produto' => Product::find($id),
+    public function productsDetails(int $id){
+        return view('pages.productDetails', [
+            'product' => Product::findorfail($id),
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
             }
