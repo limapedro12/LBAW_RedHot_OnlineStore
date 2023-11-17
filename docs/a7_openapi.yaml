@@ -1967,7 +1967,7 @@ paths:
         '200':
           description: 'Mostrar a página de FAQs'
 
-  /add_faq:
+  /faqs/add:
     get:
       operationId: R703
       summary: 'R703: Formulário para adicionar uma FAQ'
