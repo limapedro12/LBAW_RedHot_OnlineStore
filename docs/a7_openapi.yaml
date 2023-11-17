@@ -1168,10 +1168,22 @@ paths:
                   description: 'Falha ao eliminar produto.'
                   value: '/products/{id}'
 
+
   /products/{id}/add_to_wishlist:
-    post:
+    get:
       operationId: R401
-      summary: 'R401: Ação de adição um produto à wishlist'
+      summary: 'R401: Página de adição de produto à wishlist'
+      description: 'Fornece a interface para adicionar um produto à wishlist. Acesso: USR'
+      tags:
+        - 'M04: Wishlist'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de novo produto à wishlist.'
+    
+    post:
+      operationId: R402
+      summary: 'R402: Ação de adição um produto à wishlist'
       description: 'Ação de adição um produto à wishlist. Acesso: USR'
       tags:
         - 'M04: Wishlist'
@@ -1209,6 +1221,7 @@ paths:
                 302Failure:
                   description: 'Falha ao adicionar produto à wishlist'
                   value: /products/{id}
+
 
   /products/{id}/reviews/API:
     get:
