@@ -1175,6 +1175,13 @@ paths:
       description: 'Fornece a interface para adicionar um produto à wishlist. Acesso: USR'
       tags:
         - 'M04: Wishlist'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       
       responses:
         '200':
@@ -1296,6 +1303,13 @@ paths:
       description: 'Fornece a interface de preenchimento de uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       
       responses:
         '200':
@@ -1365,6 +1379,19 @@ paths:
       description: 'Fornece a interface de edição de uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
+        
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          
+        - in: path
+          name: id_review
+          schema:
+            type: integer
+          required: true
       
       responses:
         '200':
