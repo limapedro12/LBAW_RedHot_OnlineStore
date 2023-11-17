@@ -1679,7 +1679,27 @@ paths:
           description: 'Mostrar a página de todos os produtos em destaque'
 
 
+  
+
   /admin/gerir_produtos_em_destaque/{id}/add:
+    get:
+      operationId: R607
+      summary: 'R607: Adicionar um produto aos produtos em destaque'
+      description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de adicionar um produto aos produtos em destaque'
+
     post:
       operationId: R607
       summary: 'R607: Adicionar um produto aos produtos em destaque'
@@ -1722,6 +1742,24 @@ paths:
                   value: /products/{id}
 
   /admin/gerir_produtos_em_destaque/{id}/remove:
+    get:
+      operationId: R608
+      summary: 'R608: Remover um produto dos produtos em destaque'
+      description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de remover um produto dos produtos em destaque'
+
     post:
       operationId: R608
       summary: 'R608: Remover um produto dos produtos em destaque'
@@ -1764,6 +1802,24 @@ paths:
                   value: /products/{id}
 
   /admin/gerir_produtos_em_destaque/{id}/edit:
+    get:
+      operationId: R609
+      summary: 'R609: Editar um produto dos produtos em destaque'
+      description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Mostrar a interface de editar um produto dos produtos em destaque'
+
     post:
       operationId: R609
       summary: 'R609: Editar um produto dos produtos em destaque'
