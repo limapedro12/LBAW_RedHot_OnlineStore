@@ -1238,8 +1238,6 @@ paths:
             type: integer
           required: true
 
-
-
       responses:
         '200':
           description: 'Objeto JSON com as diferentes avaliaçoes feitas ao produto'
@@ -1293,9 +1291,20 @@ paths:
 
 
   /products/{id}/reviews/add_review:
-    post:
+    get:
       operationId: R502
-      summary: 'R502: Ação de adição uma avaliação a um produto'
+      summary: 'R502: Página de adição de uma avaliação a um produto'
+      description: 'Fornece a interface de preenchimento de uma avaliação a um produto. Acesso: USR'
+      tags:
+        - 'M05: Comentários e Avaliações'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de uma avaliação a um produto.'
+
+    post:
+      operationId: R503
+      summary: 'R503: Ação de adição uma avaliação a um produto'
       description: 'Ação de adição uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
@@ -1351,9 +1360,20 @@ paths:
               
       
   /products/{id}/reviews/{id_review}/edit_review:
+    get:
+      operationId: R504
+      summary: 'R504: Página de edição de uma avaliação a um produto'
+      description: 'Fornece a interface de edição de uma avaliação a um produto. Acesso: USR'
+      tags:
+        - 'M05: Comentários e Avaliações'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de edição de uma avaliação a um produto.'
+
     post:
-      operationId: R503
-      summary: 'R503: Editar uma avaliação a um produto'
+      operationId: R505
+      summary: 'R505: Editar uma avaliação a um produto'
       description: 'Editar uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M05: Comentários e Avaliações'
@@ -1406,8 +1426,8 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_review:
     post:
-      operationId: R504
-      summary: 'R504: Apagar uma avaliação a um produto'
+      operationId: R506
+      summary: 'R506: Apagar uma avaliação a um produto'
       description: 'Apagar uma avaliação a um produto. Acesso: USR, ADM'
       tags:
         - 'M05: Comentários e Avaliações'
@@ -1454,8 +1474,8 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_comment:
     post:
-      operationId: R505
-      summary: 'R505: Apagar um comentário numa avaliação'
+      operationId: R507
+      summary: 'R507: Apagar um comentário numa avaliação'
       description: 'Apagar um comentário ofensivo/inapropriado numa avaliação. Acesso: ADM'
       tags:
         - 'M05: Comentários e Avaliações'
