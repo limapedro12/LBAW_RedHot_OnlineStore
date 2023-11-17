@@ -19,11 +19,7 @@
             @endif
         </section>
         <section class='comments'>
-            @foreach ($product->getComments() as $comment)
-                <section class='comment'>
-                    <h6> {{ $comment->user->name }} </h6>
-                    <p> {{ $comment->content }} </p>
-                </section>
+            To be continued...
         </section>
         
     </body>

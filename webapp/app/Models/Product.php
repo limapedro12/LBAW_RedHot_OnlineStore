@@ -23,8 +23,4 @@ class Product extends Model
         'stock',
         'id_administrador'
     ];
-
-    public function getComments(){
-        return Comment::where('id_produto', $this->id)->get();
-    }
 }
