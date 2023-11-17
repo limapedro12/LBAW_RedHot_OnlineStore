@@ -243,6 +243,8 @@ paths:
                   type: string
               required:
                 - password
+                - newName
+                - newEmail
 
       responses:
         '302':
