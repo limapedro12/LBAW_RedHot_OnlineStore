@@ -24,7 +24,10 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::redirect('/', '/login');
 
 Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products', 'list')->name('products');
+    Route::get('/products', 'listProducts')->name('products');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/{id}', 'productsDetails')->name('products');
 });
 
 // Cards

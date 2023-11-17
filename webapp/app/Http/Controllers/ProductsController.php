@@ -9,12 +9,24 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 
+
 class ProductsController extends Controller {
-    public function list()
+    public function productsDetails(int $id)
     {
-        
         return view('pages.products', [
-            'produtos' => Product::all()
+            'produto' => Product::find($id),
+            'discountFunction' => 'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
+    }
+
+    public function listProducts(){
+        return view('pages.products', [
+            'products' => Product::all(),
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
         ]);
     }
 }

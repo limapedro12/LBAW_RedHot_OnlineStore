@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Comment;
 
 class Product extends Model
 {
@@ -22,4 +23,8 @@ class Product extends Model
         'stock',
         'id_administrador'
     ];
+
+    public function getComments(){
+        return Comment::where('id_produto', $this->id)->get();
+    }
 }
