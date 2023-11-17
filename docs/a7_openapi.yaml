@@ -235,8 +235,6 @@ paths:
             schema:
               type: object
               properties:
-                userId:
-                  type: integer
                 password:
                   type: string
                 newName:
@@ -244,7 +242,6 @@ paths:
                 newEmail:
                   type: string
               required:
-                - userId
                 - password
 
       responses:
