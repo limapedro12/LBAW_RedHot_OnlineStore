@@ -1734,8 +1734,8 @@ paths:
           description: 'Ok. Mostrar a interface de adicionar um produto aos produtos em destaque'
 
     post:
-      operationId: R607
-      summary: 'R607: Adicionar um produto aos produtos em destaque'
+      operationId: R608
+      summary: 'R608: Adicionar um produto aos produtos em destaque'
       description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
@@ -1776,8 +1776,8 @@ paths:
 
   /admin/gerir_produtos_em_destaque/{id}/remove:
     get:
-      operationId: R608
-      summary: 'R608: Remover um produto dos produtos em destaque'
+      operationId: R609
+      summary: 'R609: Remover um produto dos produtos em destaque'
       description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
@@ -1794,8 +1794,8 @@ paths:
           description: 'Ok. Mostrar a interface de remover um produto dos produtos em destaque'
 
     post:
-      operationId: R608
-      summary: 'R608: Remover um produto dos produtos em destaque'
+      operationId: R610
+      summary: 'R610: Remover um produto dos produtos em destaque'
       description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
@@ -1836,8 +1836,8 @@ paths:
 
   /admin/gerir_produtos_em_destaque/{id}/edit:
     get:
-      operationId: R609
-      summary: 'R609: Editar um produto dos produtos em destaque'
+      operationId: R611
+      summary: 'R611: Editar um produto dos produtos em destaque'
       description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
@@ -1854,8 +1854,8 @@ paths:
           description: 'Ok. Mostrar a interface de editar um produto dos produtos em destaque'
 
     post:
-      operationId: R609
-      summary: 'R609: Editar um produto dos produtos em destaque'
+      operationId: R612
+      summary: 'R612: Editar um produto dos produtos em destaque'
       description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
