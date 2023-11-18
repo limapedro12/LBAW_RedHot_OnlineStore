@@ -1,9 +1,19 @@
 <html>
+    <head>
+        <title>Lista de Produtos</title>
     <body>
         <h1>Lista de Produtos</h1>
+        @include('partials.searchAndFilterForms', ['searchedString' => '', 
+                                                   'filterPriceMax' => '', 
+                                                   'filterPriceMin' => '', 
+                                                   'filterDiscount' => false, 
+                                                   'filterDiscountMax' => '', 
+                                                   'filterDiscountMin' => '', 
+                                                   'filterStockMax' => '', 
+                                                   'filterStockMin' => ''])
         @foreach ($products as $product) 
             <section class="productListItem">
-                <h4> {{ $product->nome }} </h4> 
+                <h4> <a href = "/products/{{ $product->id }}"> {{ $product->nome }} </a> </h4> 
                 <p> 
                     @if($product->desconto > 0)
                         <span style = "text-decoration: line-through;">
