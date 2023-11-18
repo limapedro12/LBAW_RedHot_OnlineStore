@@ -1,19 +1,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Reviews</title>
 </head>
 
 <body>
     <h1>Reviews for product {{$id}} </h1>
     
-    <div id="reviews">
+    <section id="reviews">
         @foreach($reviews as $review)
-            <p> ReviewID: {{$review->id}} / User: {{$review->id_utilizador}} -> Rating: {{$review->avaliacao}} / Comment: {{$review->texto}} / {{$review->timestamp}}</p> 
+
+        <article class="review">
+            <p> {{$review->id_utilizador}} -> Rating: {{$review->avaliacao}} / Comment: {{$review->texto}} / {{$review->timestamp}}</p>
+        </article>
 
             @if(Auth::check())
                 @if($review->id_utilizador == Auth::user()->id)               
-                    <form method="POST" action="{{ route('editReview', ['id' => $review->id]) }}">
+                    <form method="POST" action="{{ route('editReview', ['id' => $review->id]) }}" class="editReviewForm">
                         @csrf
                         <input type="submit" value="Edit Review">
                     </form>
@@ -26,13 +30,13 @@
             @endif
 
         @endforeach
-    </div>
+    </section>
 
     <br>
 
     <!-- Form to add a new review to a product -->
     @if(Auth::check())
-        <form method="POST" action="{{ route('addReview', ['id' => $id]) }}" id="reviewForm">
+        <form method="POST" action="{{ route('addReview', ['id' => $id]) }}" class="addReviewForm" reviewId="{{ $id }}">
             @csrf 
 
             <label for="rating">Rating:</label><br>
@@ -51,9 +55,11 @@
         </form>
     @endif
 
+    <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
+
     <script>
         // Set the current timestamp in the 'Y-m-d H:i:s' format when the form is submitted
-        document.getElementById('reviewForm').addEventListener('submit', function () {
+        document.querySelector('form.addReviewForm').addEventListener('submit', function () {
             const currentTimestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
             document.getElementById('timestamp').value = currentTimestamp;
         });
