@@ -31,11 +31,13 @@ class ProductsController extends Controller {
     }
 
     public function searchProducts(string $stringToSearch){
+        $searchTemperature = 0.5;
         $searchedProducts = DB::table('produto')
-                            ->selectRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?))", [$stringToSearch])
+                            ->whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
                             ->get();
 
         return view('pages.productsSearch', [
+            'searchedString' => $stringToSearch,
             'products' => $searchedProducts,
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);

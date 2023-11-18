@@ -1,6 +1,14 @@
 <html>
+    <head>
+        <title>Lista de Produtos</title>
+        <script src="{{ asset('js/search.js') }}" defer></script>
     <body>
         <h1>Lista de Produtos</h1>
+        <form class="search">
+            <label for="searchedString">Pesquisa:</label>
+            <input type="text" name="searchedString" id="searchedString">
+            <input type="submit" value="Pesquisar">
+        </form>
         @foreach ($products as $product) 
             <section class="productListItem">
                 <h4> {{ $product->nome }} </h4> 
