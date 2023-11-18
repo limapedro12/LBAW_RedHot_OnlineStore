@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +5,41 @@
 </head>
 
 <body>
-    <h1>Reviews for product {{$product_id}} </h1>
+    <h1>Reviews for product {{$id}} </h1>
     
-    @foreach($reviews as $review)
-        <p> Rating: {{$review->avaliacao}} </p> 
-        <p> Comment: {{$review->texto}} </p>
-    @endforeach
+    <div id="reviews">
+        @foreach($reviews as $review)
+            <p> {{$review->id_utilizador}} -> Rating: {{$review->avaliacao}} / Comment: {{$review->texto}} / {{$review->timestamp}}</p> 
+        @endforeach
+    </div>
+
+    <br>
+
+    <!-- Form to add a new review to a product -->
+    <form method="POST" action="{{ route('addReview', ['id' => $id]) }}" id="reviewForm">
+        @csrf 
+
+        <label for="rating">Rating:</label><br>
+            <input type="radio" id="1" name="rating" value="1"> <label for="">1</label><br>
+            <input type="radio" id="2" name="rating" value="2"> <label for="">2</label><br>
+            <input type="radio" id="3" name="rating" value="3" checked> <label for="">3</label><br>
+            <input type="radio" id="4" name="rating" value="4"> <label for="">4</label><br>
+            <input type="radio" id="5" name="rating" value="5"> <label for="">5</label><br>
+
+        <label for="comment">Comment:</label><br>
+        <input type="text" id="comment" name="comment" required><br>
+    
+        <input type="hidden" id="timestamp" name="timestamp">
+
+        <input type="submit" value="Add Review">
+    </form>
+
+    <script>
+        // Set the current timestamp in the 'Y-m-d H:i:s' format when the form is submitted
+        document.getElementById('reviewForm').addEventListener('submit', function () {
+            const currentTimestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
+            document.getElementById('timestamp').value = currentTimestamp;
+        });
+    </script>
+
 </body>
-</html>

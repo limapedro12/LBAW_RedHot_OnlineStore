@@ -12,6 +12,23 @@ use App\Models\Review;
 class ReviewsController extends Controller
 {
     /**
+     * Shows all reviews for a product.
+     */
+    public function listReviews(string $id)
+    {
+
+        // Get all reviews.
+        $reviews = Review::where('id_produto', $id)->get();
+
+        // Use the pages.reviews template to display all reviews.
+        return view('pages.reviews', [
+            'reviews' => $reviews,
+            'id' => $id
+        ]);
+    }
+
+
+    /**
      * Show the review for a given id.
      */
     public function reviewDetails(string $id): View
@@ -25,19 +42,38 @@ class ReviewsController extends Controller
         ]);
     }
 
+
     /**
-     * Shows all reviews for a product.
+     * Creates a new review.
      */
-    public function listReviews(string $id)
+    public function addReview(Request $request, $id)
     {
+        // Create a blank new review.
+        $review = new Review();
 
-        // Get all reviews.
-        $reviews = Review::where('id_produto', $id)->get();
+        // Set review details.
+        $review->timestamp = $request->input('timestamp');
+        $review->texto = $request->input('comment');
+        $review->avaliacao = $request->input('rating');
+        $review->id_utilizador = Auth::user()->id;
+        $review->id_produto = $id;
 
-        // Use the pages.reviews template to display all reviews.
-        return view('pages.reviews', [
-            'reviews' => $reviews,
-            'product_id' => $id
-        ]);
+        // Save the review and return it as JSON.
+        $review->save();
+        return response()->json($review);
+    }
+
+
+    /**
+     * Delete a review.
+     */
+    public function deleteReview(Request $request, $id)
+    {
+        // Find the review.
+        $review = Review::find($id);
+
+        // Delete the review and return it as JSON.
+        $review->delete();
+        return response()->json($review);
     }
 }
