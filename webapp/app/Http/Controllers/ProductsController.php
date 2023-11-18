@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -32,13 +31,21 @@ class ProductsController extends Controller {
 
     public function searchProducts(string $stringToSearch){
         $searchTemperature = 0.5;
-        $searchedProducts = DB::table('produto')
-                            ->whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
-                            ->get();
-
+        $searchedProducts = Product::searchProducts($stringToSearch);
         return view('pages.productsSearch', [
             'searchedString' => $stringToSearch,
             'products' => $searchedProducts,
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
+    }
+
+    public function filterProducts(string $filter){
+        $filteredProducts = Product::filterProducts($filter);
+        return view('pages.productsFilter', [
+            'filter' => Product::filterToDisplay($filter),
+            'products' => $filteredProducts,
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
             }

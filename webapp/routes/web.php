@@ -32,6 +32,9 @@ Route::controller(ProductsController::class)->group(function () {
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
 });
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
+});
 
 // Cards
 Route::controller(CardController::class)->group(function () {
