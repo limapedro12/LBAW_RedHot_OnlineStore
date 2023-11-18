@@ -26,17 +26,18 @@ class ReviewsController extends Controller
     }
 
     /**
-     * Shows all reviews.
+     * Shows all reviews for a product.
      */
-    public function listReviews()
+    public function listReviews(string $id)
     {
 
         // Get all reviews.
-        $reviews = Review::all();
+        $reviews = Review::where('id_produto', $id)->get();
 
         // Use the pages.reviews template to display all reviews.
         return view('pages.reviews', [
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'product_id' => $id
         ]);
     }
 }

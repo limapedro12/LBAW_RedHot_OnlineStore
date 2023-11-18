@@ -7,10 +7,11 @@
 </head>
 
 <body>
-    <h1>Reviews</h1>
+    <h1>Reviews for product {{$product_id}} </h1>
     
-    @foreach ($reviews as $review) 
-        <p>{{$review->avaliacao}} - {{$review->texto}} </p> 
+    @foreach($reviews as $review)
+        <p> Rating: {{$review->avaliacao}} </p> 
+        <p> Comment: {{$review->texto}} </p>
     @endforeach
 </body>
 </html>

@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
+// Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-// Added to define Eloquent relationships.
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
@@ -24,13 +22,5 @@ class Review extends Model
         'id_utilizador',
         'id_produto'
     ];
-
-    /**
-     * Get the user that owns the card.
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
 
 }

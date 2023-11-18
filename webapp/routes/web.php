@@ -63,6 +63,6 @@ Route::controller(RegisterController::class)->group(function () {
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {
-    Route::get('/reviews', 'listReviews')->name('reviews');
     Route::get('/reviews/{id}', 'reviewDetails');
+    Route::get('/{product_id}/reviews', 'listReviews');
 });
