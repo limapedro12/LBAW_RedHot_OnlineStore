@@ -36,12 +36,10 @@
                     </a>
                 
                     <nav class="navbar">
-                        <form action="#" method="post" class="logout">
-                            <a href="{{ url('/admin') }}">Dashboard</a>
-                            <a href="{{ url('/adminNotifications') }}">Notificações</a>
-                            <a href="{{ url('/adminProfile') }}">Admin</a>
-                            <input type="submit" value="Logout">
-                        </form>
+                        <a href="{{ url('/products') }}">Catálogo</a>
+                        <a href="{{ url('/carrinho') }}">Carrinho</a>
+                        <a href="{{ url('/register') }}">Registar</a>
+                        <a href="{{ url('/login') }}">Login</a>
                     </nav>
                 
                     <div id="menu-bars" class="fas fa-bars"></div>
@@ -64,10 +62,10 @@
                   <div class="box">
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
-                        <a href="{{ url('/admin') }}"> <i class="fas fa-angle-right"></i> Dashboard</a>
-                        <a href="{{ url('/adminNotifications') }}"> <i class="fas fa-angle-right"></i> Notificações</a>
-                        <a href="{{ url('/adminProfile') }}"> <i class="fas fa-angle-right"></i> Admin</a>
-                        <a href="#"> <i class="fas fa-angle-right"></i> Logout</a>
+                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
+                        <a href="{{ url('/carrinho') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
+                        <a href="{{ url('/registar') }}"> <i class="fas fa-angle-right"></i> Registar</a>
+                        <a href="{{ url('/login') }}"> <i class="fas fa-angle-right"></i> Login</a>
                   </div>
         
                   <div class="box">

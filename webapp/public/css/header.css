@@ -2,7 +2,6 @@
 
 
 /* Standardize Pages */
-
 :root {
     --main-color: #aa3c2c;
     --black: #333333;
@@ -47,6 +46,14 @@ html::-webkit-scrollbar-thumb {
 
 section {
     padding: 5rem 10%;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .headerBar {
@@ -103,6 +110,16 @@ section {
 
 }
 
+@media (max-width: 61.875em) {
+
+    html {
+        font-size: 55%;
+    }
+
+    header section {
+        padding: 3rem 2rem;
+    }
+}
 
 @media (max-width: 46.875em) {
 
