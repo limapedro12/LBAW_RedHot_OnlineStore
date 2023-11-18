@@ -1,4 +1,4 @@
-@extends('layouts.userNotLogged')
+@extends('layouts.userNotLoggedHeaderFooter')
 
 @section('content')
 <form method="POST" action="{{ route('login') }}">
