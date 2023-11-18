@@ -121,19 +121,24 @@ class Product extends Model{
         };
     }
 
-    public static function allArray(){
-        $productsCollection = Product::all();
-        $productsArray = array();
-        foreach($productsCollection as $product){
-            array_push($productsArray, $product);
+    public static function collectionToArray($collection){
+        $array = array();
+        foreach($collection as $element){
+            array_push($array, $element);
         }
-        return $productsArray;
+        return $array;
     }
 
     public static function filterProducts(string $filter){
 
-        $filteredProducts = array_filter(Product::allArray(), Product::filterFunctionFactory($filter));
+        $filteredProducts = array_filter(Product::collectionToArray(Product::all()), Product::filterFunctionFactory($filter));
 
+        return $filteredProducts;
+    }
+
+    public static function searchAndFilterProducts(string $stringToSearch, string $filter){
+        $searchedProducts = Product::searchProducts($stringToSearch);
+        $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
         return $filteredProducts;
     }
 }

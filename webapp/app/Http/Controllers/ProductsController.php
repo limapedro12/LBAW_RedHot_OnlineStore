@@ -51,4 +51,16 @@ class ProductsController extends Controller {
             }
         ]);
     }
+
+    public function searchAndFilterProducts(string $stringToSearch, string $filter){
+        $products = Product::searchAndFilterProducts($stringToSearch, $filter);
+        return view('pages.productsSearchAndFilter', [
+            'searchedString' => $stringToSearch,
+            'filter' => Product::filterToDisplay($filter),
+            'products' => $products,
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
+    }
 }
