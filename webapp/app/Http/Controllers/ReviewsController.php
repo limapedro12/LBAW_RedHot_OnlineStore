@@ -31,10 +31,10 @@ class ReviewsController extends Controller
     /**
      * Show the review for a given id.
      */
-    public function reviewDetails(string $id): View
+    public function reviewDetails(int $id)
     {
         // Get the review.
-        $review = Review::findOrFail($id);
+        $review = Review::findorfail($id);
 
         // Use the pages.review template to display the review.
         return view('partials.review', [
@@ -63,6 +63,21 @@ class ReviewsController extends Controller
         return response()->json($review);
     }
 
+    
+    /**
+     * Show the review for a given id.
+     */
+    public function editReview(int $id)
+    {
+        // Get the review.
+        $review = Review::findorfail($id);
+
+        // Use the pages.review template to display the review.
+        return view('partials.review', [
+            'review' => $review
+        ]);
+    }
+
 
     /**
      * Delete a review.
@@ -70,7 +85,7 @@ class ReviewsController extends Controller
     public function deleteReview(Request $request, $id)
     {
         // Find the review.
-        $review = Review::find($id);
+        $review = Review::findorfail($id);
 
         // Delete the review and return it as JSON.
         $review->delete();
