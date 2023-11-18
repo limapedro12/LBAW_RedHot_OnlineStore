@@ -70,6 +70,51 @@ class Product extends Model{
         return $filterToDisplay;
     }
 
+    // This function will take a raw string filter and return an array representing the filter
+    public static function filterToArray(string $filter) {
+        $splitedFilter = explode(";", $filter);
+        $filterArr = ['priceMin' => '',
+                      'priceMax' => '',
+                      'discount' => false,
+                      'discountMin' => '',
+                      'discountMax' => '',
+                      'stockMin' => '',
+                      'stockMax' => ''];
+        foreach($splitedFilter as $partOfFilter){
+            $splitedPartOfFilter = explode(":", $partOfFilter);
+            if($splitedPartOfFilter[0] == "preco"){
+                if($splitedPartOfFilter[1] == "min"){
+                    $filterArr['priceMin'] = $splitedPartOfFilter[2];
+                }
+                else if($splitedPartOfFilter[1] == "max"){
+                    $filterArr['priceMax'] = $splitedPartOfFilter[2];
+                }
+            }
+            else if($splitedPartOfFilter[0] == "desconto"){
+                if(sizeof($splitedPartOfFilter) == 1){
+                    $filterArr['discount'] = true;
+                }
+                else if($splitedPartOfFilter[1] == "min"){
+                    $filterArr['discountMin'] = $splitedPartOfFilter[2];
+                }
+                else if($splitedPartOfFilter[1] == "max"){
+                    $filterArr['discountMax'] = $splitedPartOfFilter[2];
+                }
+            }
+            else if($splitedPartOfFilter[0] == "stock"){
+                if($splitedPartOfFilter[1] == "min"){
+                    $filterArr['stockMin'] = $splitedPartOfFilter[2];
+                }
+                else if($splitedPartOfFilter[1] == "max"){
+                    $filterArr['stockMax'] = $splitedPartOfFilter[2];
+                }
+            }
+        }
+        return $filterArr;
+    }
+
+        
+
     public static function filterFunctionFactory(string $filter){
         return function($product) use ($filter){
             $splitedFilter = explode(";", $filter);

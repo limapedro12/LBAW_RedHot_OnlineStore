@@ -2,6 +2,14 @@
     <body>
         <h1>Lista de Produtos</h1>
         <h3> Pesquisa: {{ $searchedString }} </h3>
+        @include('partials.searchAndFilterForms', ['searchedString' => $searchedString, 
+                                                   'filterPriceMax' => '',
+                                                    'filterPriceMin' => '',
+                                                    'filterDiscount' => false,
+                                                    'filterDiscountMax' => '',
+                                                    'filterDiscountMin' => '',
+                                                    'filterStockMax' => '',
+                                                    'filterStockMin' => ''])
         @foreach ($products as $product) 
             <section class="productListItem">
                 <h4> {{ $product->nome }} </h4> 

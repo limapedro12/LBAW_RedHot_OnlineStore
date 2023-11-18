@@ -45,6 +45,7 @@ class ProductsController extends Controller {
         $filteredProducts = Product::filterProducts($filter);
         return view('pages.productsFilter', [
             'filter' => Product::filterToDisplay($filter),
+            'filterArr' => Product::filterToArray($filter),
             'products' => $filteredProducts,
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
@@ -57,6 +58,7 @@ class ProductsController extends Controller {
         return view('pages.productsSearchAndFilter', [
             'searchedString' => $stringToSearch,
             'filter' => Product::filterToDisplay($filter),
+            'filterArr' => Product::filterToArray($filter),
             'products' => $products,
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);

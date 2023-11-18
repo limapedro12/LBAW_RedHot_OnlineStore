@@ -1,36 +1,18 @@
-/*<form class="filter">
-            <label> Filtros: </label>
-            <label>Preco:</label>
-            <input type="text" name="priceFilterMin" id="priceFilterMin">
-            <input type="text" name="priceFilterMax" id="priceFilterMax">
-            <label>Desconto:</label>
-            <input type="checkbox" name="discountFilter" id="discountFilter">
-            <input type="text" name="discountFilterMin" id="discountFilterMin">
-            <input type="text" name="discountFilterMax" id="discountFilterMax">
-            <label>Stock:</label>
-            <input type="text" name="stockFilterMin" id="stockFilterMin">
-            <input type="text" name="stockFilterMax" id="stockFilterMax">
-            <input type="submit" value="Filtrar">
-        </form>*/
-
-// Filter URL style: /products/filter/preco:min:50;preco:max:100;desconto:min:10;desconto:max:20;stock:min:10;stock:max:20
-
-// if dicountFilter is not checked, discountFilterMin and discountFilterMax should desapear and when discountFilter is checked again, they should reapear    
-
-discountFilterMin.style.display = 'none';
-discountFilterMax.style.display = 'none';
-
-document.getElementById('discountFilter').addEventListener('change', function() {
+function displayDiscountFilter() {
     var discountFilterMin = document.getElementById('discountFilterMin');
     var discountFilterMax = document.getElementById('discountFilterMax');
-    if (this.checked) {
-        discountFilterMin.style.display = 'block';
-        discountFilterMax.style.display = 'block';
+    if (document.getElementById('discountFilter').checked) {
+        discountFilterMin.style.display = 'inline-block';
+        discountFilterMax.style.display = 'inline-block';
     } else {
         discountFilterMin.style.display = 'none';
         discountFilterMax.style.display = 'none';
     }
-});
+}
+
+displayDiscountFilter()
+
+document.getElementById('discountFilter').addEventListener('change', displayDiscountFilter);
 
 document.querySelector('.filter').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -63,5 +45,12 @@ document.querySelector('.filter').addEventListener('submit', function(event) {
     if (stockFilterMax != '') {
         filterString += 'stock:max:' + stockFilterMax + ';';
     }
-    window.location.href += '/filter/' + filterString;
+    let url = String(window.location.href.toString())
+    if (url.indexOf('/filter/') > -1) {
+        window.location.href = url.substring(0, url.indexOf('/filter/')) + '/filter/' + filterString
+    } else if (url.slice(-1) == '/') {
+        window.location.href += 'filter/' + filterString;
+    } else {
+        window.location.href += '/filter/' + filterString;
+    }
 })
