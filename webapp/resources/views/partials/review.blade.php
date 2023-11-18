@@ -1,0 +1,1 @@
+<p>{{$review->avaliacao}} - {{$review->texto}} </p> 
