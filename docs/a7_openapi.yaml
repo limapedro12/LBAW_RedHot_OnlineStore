@@ -758,6 +758,110 @@ paths:
         '200':
           description: 'Mostrar a página com todos os produtos que contenham o filtro.'
 
+  /products/search/{stringToSearch}/filter/{filter}/API:
+    get:
+      operationId: R209
+      summary: 'R209: Visualizar todos os produtos resultantes da pesquisa e que contenham o filtro'
+      description: 'Retorna um JSON com todos os produtos resultantes da pesquisa e que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Vai buscar e retorna um JSON com todos os produtos resultantes da pesquisa e que contenham o filtro.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+                example:
+                  products:
+                    - id: 17
+                      name: 'Piri-Piri'
+                      description: 'Molho de Piri-Piri'
+                      price: 2.99
+                      discount: 0.0
+                      stock: 10
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                    - id: 18
+                      name: 'Piri-Piri com Cannabis'
+                      description: 'Molho de Piri-Piri com Cannabis'
+                      price: 3.99
+                      discount: 0.0
+                      stock: 9
+                      images:
+                        - id: 1
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+                        - id: 2
+                          url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /products/search/{stringToSearch}/filter/{filter}:
+    get:
+      operationId: R210
+      summary: 'R210: Visualizar todos os produtos resultantes da pesquisa e que contenham o filtro'
+      description: 'Retorna um JSON com todos os produtos resultantes da pesquisa e que contenham o filtro.'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: stringToSearch
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: filter
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: 'Mostrar a página com todos os produtos resultantes da pesquisa e que contenham o filtro.'
 
   /products/{id}/add_to_chart:
     post:
