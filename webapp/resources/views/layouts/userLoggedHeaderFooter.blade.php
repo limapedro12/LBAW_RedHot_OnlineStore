@@ -39,7 +39,7 @@
                         <form action="#" method="post" class="logout">
                             <a href="{{ url('/products') }}">Catálogo</a>
                             <a href="{{ url('/carrinho') }}">Carrinho</a>
-                            <a href="{{ url('/Prefil') }}">Prefil</a>
+                            <a href="{{ url('/perfil') }}">Perfil</a>
                             <input type="submit" value="Logout">
                         </form>
                     </nav>
@@ -66,7 +66,7 @@
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
                         <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
                         <a href="{{ url('/carrinho') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
-                        <a href="{{ url('/prefil') }}"> <i class="fas fa-angle-right"></i> Prefil</a>
+                        <a href="{{ url('/perfil') }}"> <i class="fas fa-angle-right"></i> Perfil</a>
                         <a href="{{ url('/logout') }}"> <i class="fas fa-angle-right"></i> Logout</a>
                   </div>
         

@@ -69,3 +69,8 @@ Route::controller(RegisterController::class)->group(function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
 });
+
+// PPs
+Route::get('/pps', function () {
+    return view('pages.pps');
+})->name('pps');
