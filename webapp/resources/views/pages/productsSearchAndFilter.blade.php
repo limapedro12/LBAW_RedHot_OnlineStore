@@ -17,7 +17,6 @@
                 @if($product->desconto > 0)
                 <p> Desconto: {{ $product->desconto * 100 }}% </p>
                 @endif
-                <p> Stock: {{ $product->stock }} </p>
                 <br>
             </section>
         @endforeach
