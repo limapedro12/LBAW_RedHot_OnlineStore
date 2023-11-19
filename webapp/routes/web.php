@@ -70,3 +70,20 @@ Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
 });
+
+
+// AdminPage
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin', 'admin')->name('admin');
+});
+
+// PPs
+Route::get('/pps', function () {
+    return view('pages.pps');
+})->name('pps');
+
+// TOUs
+Route::get('/tous', function () {
+    return view('pages.tous');
+})->name('tous');
+
