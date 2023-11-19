@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ItemController;
@@ -29,9 +30,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
 });
 Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-});
-Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
 });
 Route::controller(ProductsController::class)->group(function () {
@@ -40,13 +38,24 @@ Route::controller(ProductsController::class)->group(function () {
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
 });
-
-// Cards
-Route::controller(CardController::class)->group(function () {
-    Route::get('/cards', 'list')->name('cards');
-    Route::get('/cards/{id}', 'show');
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
 });
-
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/add', 'addProductForm')->name('addProductForm');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::post('/products/add', 'addProduct')->name('addProduct');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+});
 
 // API
 Route::controller(CardController::class)->group(function () {
@@ -58,6 +67,15 @@ Route::controller(ItemController::class)->group(function () {
     Route::put('/api/cards/{card_id}', 'create');
     Route::post('/api/item/{id}', 'update');
     Route::delete('/api/item/{id}', 'delete');
+});
+
+// User
+Route::controller(UserController::class)->group(function() {
+    Route::get('/users/{id}', 'showProfileDetails');
+    Route::get('/users/{id}/edit', 'editProfileForm');
+    Route::post('/users/{id}/edit', 'editProfile');
+    Route::get('/users/{id}/delete_account', 'deleteAccountForm');
+    Route::post('/users/{id}/delete_account', 'deleteAccount');
 });
 
 

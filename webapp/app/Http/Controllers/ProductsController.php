@@ -65,4 +65,62 @@ class ProductsController extends Controller {
             }
         ]);
     }
+
+    public function searchAndFilterProductsAPI(string $stringToSearch, string $filter){
+        $products = Product::searchAndFilterProducts($stringToSearch, $filter);
+        return json_encode($products);
+    }
+
+    public function addProductForm(){
+        return view('pages.productsAdd');
+    }
+
+    public function addProduct(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:256',
+            'price' => 'required|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'description' => 'required|string|max:256',
+            'url_image' => 'required|string|max:256',
+        ]);
+
+        $newProduct = Product::create([
+            'nome' => $request->name,
+            'precoatual' => 20,
+            'desconto' => $request->discount,
+            'stock' => $request->stock,
+            'id_administrador' => 1,
+            'descricao' => $request->description,
+            'url_imagem' => $request->url_image,
+        ]);
+
+        return redirect('/products/'.$newProduct->id);
+    }
+
+    public function editProductForm(int $id){
+        return view('pages.productsEdit', [
+            'product' => Product::findorfail($id),
+        ]);
+    }
+
+    public function editProduct(Request $request, int $id){
+        $request->validate([
+            'name' => 'required|string|max:256',
+            'price' => 'required|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'description' => 'required|string|max:256',
+            'url_image' => 'required|string|max:256',
+        ]);
+
+        Product::where('id', '=', $id)->update(array('nome' => $request->name, 
+                                                     'precoatual' => $request->price, 
+                                                     'desconto' => $request->discount, 
+                                                     'stock' => $request->stock, 
+                                                     'descricao' => $request->description, 
+                                                     'url_imagem' => $request->url_image));
+
+        return redirect('/products/'.$id);
+    }
 }

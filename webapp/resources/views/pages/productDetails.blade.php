@@ -1,6 +1,6 @@
 <html>
     <body>
-        <img style="width: 200px;" src="https://www.paladin.pt/sites/www.paladin.pt/files/styles/product/public/sacana_cannabis_75ml.png?itok=80_qspw0" alt="Imagem de exemplo">
+        <img style="height: 200px;" src="{{ $product->url_imagem }}" alt="Imagem do produto">
         <section class="productDetails">
             <h2> {{ $product->nome }} </h2> 
             <p> 

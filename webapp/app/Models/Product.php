@@ -18,10 +18,11 @@ class Product extends Model{
     protected $fillable = [
         'nome',
         'descricao',
-        'precoAtual',
+        'precoatual',
         'desconto',
         'stock',
-        'id_administrador'
+        'id_administrador',
+        'url_imagem',
     ];
 
     public static function searchProducts(string $stringToSearch){
