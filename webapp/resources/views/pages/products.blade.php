@@ -3,14 +3,7 @@
         <title>Lista de Produtos</title>
     <body>
         <h1>Lista de Produtos</h1>
-            @include('partials.searchAndFilterForms', ['searchedString' => '', 
-                                                    'filterPriceMax' => '', 
-                                                    'filterPriceMin' => '', 
-                                                    'filterDiscount' => false, 
-                                                    'filterDiscountMax' => '', 
-                                                    'filterDiscountMin' => '', 
-                                                    'filterStockMax' => '', 
-                                                    'filterStockMin' => ''])
+            @include('partials.searchAndFilterForms')
         <div id='listOfProducts'>
             @foreach ($products as $product) 
                 <section class="productListItem">
