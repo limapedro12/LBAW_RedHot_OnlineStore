@@ -19,10 +19,11 @@
         <!-- Styles -->
         <link href="{{ url('css/header.css') }}" rel="stylesheet">
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
+        <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/header.js') }} defer></script>
-        
+
     </head>
     <body>
         <main>
