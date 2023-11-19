@@ -29,20 +29,20 @@
             <header>
                 <section class="headerBar">
 
-                    <a href="{{ url('/') }}" class="logo">
-                        <img src="{{ asset('sources/logo/logo_lbaw_side.png') }}" alt="RedHot" width="140">
-                    </a>
+                  <a href="{{ url('/') }}" class="logo">
+                      <img src="{{ asset('sources/logo/logo_lbaw_side.png') }}" alt="RedHot" width="140">
+                  </a>
+              
+                  <nav class="navbar">
+                      <a href="{{ url('/products') }}">Catálogo</a>
+                      <a href="{{ url('/carrinho') }}">Carrinho</a>
+                      <a href="{{ url('/register') }}">Registar</a>
+                      <a href="{{ url('/login') }}">Login</a>
+                  </nav>
+              
+                  <div id="menu-bars" class="fas fa-bars"></div>
                 
-                    <nav class="navbar">
-                        <a href="{{ url('/products') }}">Catálogo</a>
-                        <a href="{{ url('/carrinho') }}">Carrinho</a>
-                        <a href="{{ url('/register') }}">Registar</a>
-                        <a href="{{ url('/login') }}">Login</a>
-                    </nav>
-                
-                    <div id="menu-bars" class="fas fa-bars"></div>
-                
-                    </section>
+                </section>
             </header>
 
 

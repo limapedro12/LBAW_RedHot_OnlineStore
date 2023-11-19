@@ -1,5 +1,4 @@
-<html>
-    <body>
+@section('content')
         <h1>Lista de Produtos</h1>
         <h3> Filtros: {{ $filter }} </h3>
         @include('partials.searchAndFilterForms', ['searchedString' => '', 
@@ -27,5 +26,10 @@
                 <br>
             </section>
         @endforeach
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif
