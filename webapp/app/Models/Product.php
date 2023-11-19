@@ -21,7 +21,8 @@ class Product extends Model{
         'precoAtual',
         'desconto',
         'stock',
-        'id_administrador'
+        'id_administrador',
+        'url_imagem',
     ];
 
     public static function searchProducts(string $stringToSearch){
