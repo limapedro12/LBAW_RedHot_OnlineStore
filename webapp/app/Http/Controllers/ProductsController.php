@@ -65,4 +65,31 @@ class ProductsController extends Controller {
             }
         ]);
     }
+
+    public function addProductForm(){
+        return view('pages.productsAdd');
+    }
+
+    public function addProduct(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:256',
+            'price' => 'required|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'description' => 'required|string|max:256',
+            'url_image' => 'required|string|max:256',
+        ]);
+
+        $newProduct = Product::create([
+            'nome' => $request->name,
+            'precoatual' => 20,
+            'desconto' => $request->discount,
+            'stock' => $request->stock,
+            'id_administrador' => 1,
+            'descricao' => $request->description,
+            'url_imagem' => $request->url_image,
+        ]);
+
+        return redirect('/products/'.$newProduct->id);
+    }
 }

@@ -28,9 +28,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
 });
 Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-});
-Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
 });
 Route::controller(ProductsController::class)->group(function () {
@@ -38,6 +35,15 @@ Route::controller(ProductsController::class)->group(function () {
 });
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/add', 'addProductForm')->name('addProductForm');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::post('/products/add', 'addProduct')->name('addProduct');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
 });
 
 // API
