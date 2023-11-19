@@ -1,12 +1,11 @@
-<script src="{{ asset('js/search.js') }}" defer></script>
-<form class="search">
+<script src="{{ asset('js/searchAndFilter.js') }}" defer></script>
+<form id="searchAndFilter">
+    <!-- Search -->
     <label for="searchedString">Pesquisa:</label>
     <input type="text" name="searchedString" id="searchedString" value='{{ $searchedString }}'>
-    <input type="submit" value="Pesquisar">
-</form>
+    <br>
 
-<script src="{{ asset('js/filter.js') }}" defer></script>
-<form class="filter">
+    <!-- Filter -->
     <label> Filtros: </label>
     <label>Preco:</label>
     <input type="text" name="priceFilterMin" id="priceFilterMin" placeholder="Min" value='{{ $filterPriceMin }}'>
@@ -22,5 +21,5 @@
     <label>Stock:</label>
     <input type="text" name="stockFilterMin" id="stockFilterMin" placeholder="Min" value='{{ $filterStockMin }}'>
     <input type="text" name="stockFilterMax" id="stockFilterMax" placeholder="Max" value='{{ $filterStockMax }}'>
-    <input type="submit" value="Filtrar">
+    <input type="submit" value="Pesquisar">
 </form>

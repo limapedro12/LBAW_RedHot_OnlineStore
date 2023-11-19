@@ -66,6 +66,11 @@ class ProductsController extends Controller {
         ]);
     }
 
+    public function searchAndFilterProductsAPI(string $stringToSearch, string $filter){
+        $products = Product::searchAndFilterProducts($stringToSearch, $filter);
+        return json_encode($products);
+    }
+
     public function addProductForm(){
         return view('pages.productsAdd');
     }

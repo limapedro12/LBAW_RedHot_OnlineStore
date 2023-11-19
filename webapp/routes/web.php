@@ -37,6 +37,9 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
 });
 Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
+});
+Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/add', 'addProductForm')->name('addProductForm');
 });
 Route::controller(ProductsController::class)->group(function () {
