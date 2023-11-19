@@ -1169,10 +1169,30 @@ paths:
       responses:
         '200':
           description: 'OK. Mostrar a página de revisão do carrinho.'
+  
+  /cart/remove_product:
+    post:
+      operationId: R304
+      summary: 'R304: Ação de remoção de produto do carrinho'
+      description: 'Remove produto adicionado ao carrinho de compras associado à sessão iniciada. Acesso: USR'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productID:
+                  type: integer
+              required:
+                - productId
 
   /cart/checkout:
     get:
-      operationId: R304
+      operationId: R305
       summary: 'R304: Formulário de checkout do carrinho atual'
       description: 'Apresenta o formulário a preencher para proceder ao checkout do carrinho associado à sessão iniciada. Acesso: USR'
       tags:
@@ -1183,7 +1203,7 @@ paths:
           description: 'OK. Mostrar a página de preenchimento de informação necessária para proceder ao checkout de um carrinho de compras.'
     
     post:
-      operationId: R305
+      operationId: R306
       summary: 'R305: Ação de Checkout'
       description: 'Processa o checkout do carrinho de compras associado à sessão iniciada com base nos parâmetros fornecidos. Acesso: USR'
       tags:
@@ -1244,7 +1264,7 @@ paths:
   
   /users/{userId}/orders/{orderId}/API:
     get:
-      operationId: R306
+      operationId: R307
       summary: 'R306: Estado e Detalhes da Encomenda'
       description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
       tags:
@@ -1283,7 +1303,7 @@ paths:
 
   /users/{userId}/orders/{orderId}:
     get:
-      operationId: R307
+      operationId: R308
       summary: 'R307: Estado e Detalhes da Encomenda'
       description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
       tags:
@@ -1307,7 +1327,7 @@ paths:
 
   /users/{userId}/orders/{orderId}/cancel:
     post:
-      operationId: R308
+      operationId: R309
       summary: 'R308: Ação de Cancelamento de Encomenda'
       description: 'Cancelamento de uma Encomenda. Acesso: USR'
       tags:
