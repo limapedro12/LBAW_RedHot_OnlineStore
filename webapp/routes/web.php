@@ -74,3 +74,8 @@ Route::controller(AdminController::class)->group(function () {
 Route::get('/pps', function () {
     return view('pages.pps');
 })->name('pps');
+
+// TOUs
+Route::get('/tous', function () {
+    return view('pages.tous');
+})->name('tous');

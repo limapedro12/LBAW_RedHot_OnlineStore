@@ -1,9 +1,3 @@
-@if(Auth::check())
-    @extends('layouts.userLoggedHeaderFooter')
-@else
-    @extends('layouts.userNotLoggedHeaderFooter')
-@endif
-
 @section('content')
     <div class="container">
         <h1>Politicas de Privacidade</h1>
@@ -12,3 +6,10 @@
         
     </div>
 @endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+    
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif
