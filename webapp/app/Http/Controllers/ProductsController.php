@@ -109,15 +109,13 @@ class ProductsController extends Controller {
             'url_image' => 'required|string|max:256',
         ]);
 
-        $product = Product::findorfail($id);
-        $product->nome = $request->name;
-        $product->precoatual = $request->price;
-        $product->desconto = $request->discount;
-        $product->stock = $request->stock;
-        $product->descricao = $request->description;
-        $product->url_imagem = $request->url_image;
-        $product->save();
+        Product::where('id', '=', $id)->update(array('nome' => $request->name, 
+                                                     'precoatual' => $request->price, 
+                                                     'desconto' => $request->discount, 
+                                                     'stock' => $request->stock, 
+                                                     'descricao' => $request->description, 
+                                                     'url_imagem' => $request->url_image));
 
-        return redirect('/products/'.$product->id);
+        return redirect('/products/'.$id);
     }
 }

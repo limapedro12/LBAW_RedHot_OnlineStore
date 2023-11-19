@@ -13,7 +13,7 @@
         <input type="text" id="name" name="name" required><br><br>
 
         <label for="price">Preco:</label>
-        <input type="number" id="price" name="price" required><br><br>
+        <input type="number" step="0.01" id="price" name="price" required><br><br>
 
         <label for="discount">Desconto:</label>
         <input type="number" step="0.001" id="discount" name="discount" required><br><br>
