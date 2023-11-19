@@ -1,10 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Product</title>
-</head>
-<body>
+@section('content')
     <h1>Edit Product: {{ $product->nome }}</h1>
 
     <form action="/products/{{ $product->id }}/edit" method="POST">
@@ -30,5 +24,6 @@
 
         <input type="submit" value="Save">
     </form>
-</body>
-</html>
+@endsection
+
+@include('layouts.adminHeaderFooter')

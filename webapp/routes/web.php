@@ -107,3 +107,12 @@ Route::get('/tous', function () {
     return view('pages.tous');
 })->name('tous');
 
+// About
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
+// faqs
+Route::get('/faqs', function () {
+    return view('pages.faqs');
+})->name('faqs');

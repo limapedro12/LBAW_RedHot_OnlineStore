@@ -19,6 +19,7 @@
         <!-- Styles -->
         <link href="{{ url('css/header.css') }}" rel="stylesheet">
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
+        <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/header.js') }} defer>
@@ -61,7 +62,7 @@
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
                         <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
-                        <a href="{{ url('/carrinho') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
+                        <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
                         <a href="{{ url('/registar') }}"> <i class="fas fa-angle-right"></i> Registar</a>
                         <a href="{{ url('/login') }}"> <i class="fas fa-angle-right"></i> Login</a>
                   </div>

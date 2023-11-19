@@ -1,9 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Adicionar Novo Produto</title></head>
-<body>
+@section('content')
     <h1>Adicionar Novo Produto</h1>
 
     <form id="addProductForm" method="post" action="{{ route('addProduct') }}">
@@ -29,5 +24,6 @@
 
         <input type="submit" value="Add Product">
     </form>
-</body>
-</html>
+@endsection
+
+@include('layouts.adminHeaderFooter')

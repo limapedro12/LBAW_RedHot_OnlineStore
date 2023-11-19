@@ -1,5 +1,4 @@
-<html>
-    <body>
+@section('content')
         <img style="height: 200px;" src="{{ $product->url_imagem }}" alt="Imagem do produto">
         <section class="productDetails">
             <h2> {{ $product->nome }} </h2> 
@@ -20,6 +19,11 @@
             <h4> Comentários </h4>
             To be continued...
         </section>
-        
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+    
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif
