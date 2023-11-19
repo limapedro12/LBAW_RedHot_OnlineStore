@@ -29,7 +29,20 @@ function addEventListeners() {
       reviewCreator.addEventListener('submit', function (event) {
           sendCreateReviewRequest.call(this, event, ReviewId);
       });
-  }
+    }
+
+    let reviewDeleters = document.querySelectorAll('form.deleteReviewForm');
+    [].forEach.call(reviewDeleters, function(deleter) {
+      deleter.addEventListener('submit', function (event) {
+        if(deleteAlert()) {
+          let ReviewId2 = document.querySelector('form.deleteReviewForm').getAttribute('reviewId');
+          sendDeleteReviewRequest.call(this, event, ReviewId2);
+        }
+        else {
+          event.preventDefault();
+        }
+      });
+    });
   }
   
   function encodeForAjax(data) {
@@ -89,13 +102,19 @@ function addEventListeners() {
   }
 
   function sendCreateReviewRequest(event, id) {
-    console.log(id);
     let rating = this.querySelector('input[name=rating]:checked').value;
     let comment = this.querySelector('input[name=comment]').value;
     let timestamp = this.querySelector('input[name=timestamp]').value;
   
     sendAjaxRequest('post', `/${id}/reviews/add_review`, {rating: rating, comment: comment, timestamp:timestamp}, reviewAddedHandler);
   
+    event.preventDefault();
+  }
+
+  function sendDeleteReviewRequest(event, id) {
+  
+    sendAjaxRequest('post', `/reviews/${id}/delete_review`, null, reviewDeletedHandler);
+
     event.preventDefault();
   }
   
@@ -172,6 +191,17 @@ function addEventListeners() {
     let article = document.querySelector('article.review');
     section.insertBefore(new_review, article);
   }
+
+  function reviewDeletedHandler() {
+    if (this.status != 200) window.location = '/';
+    let review = JSON.parse(this.responseText);
+    let element1 = document.querySelector('article.review[reviewId="' + review.id + '"]');
+    let element2 = document.querySelector('form.deleteReviewForm[reviewId="' + review.id + '"]');
+    let element3 = document.querySelector('form.editReviewForm[reviewId="' + review.id + '"]');
+    element1.remove();
+    element2.remove();
+    element3.remove();
+  }
   
 
   function createCard(card) {
@@ -222,6 +252,20 @@ function addEventListeners() {
     new_item.querySelector('a.delete').addEventListener('click', sendDeleteItemRequest);
   
     return new_item;
+  }
+
+  function deleteAlert() {
+    let text = "Tem a certeza que pretende eliminar a review?\n";
+    if (confirm(text) == true) {
+      text = "Review eliminada com sucesso!";
+      document.querySelector(".alertMessage").innerHTML = text;
+      return true;
+    } 
+    else {
+      text = "Operação cancelada!";
+      document.querySelector(".alertMessage").innerHTML = text;
+      return false;
+    }
   }
   
   addEventListeners();
