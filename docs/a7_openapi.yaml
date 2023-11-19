@@ -863,13 +863,227 @@ paths:
         '200':
           description: 'Mostrar a página com todos os produtos resultantes da pesquisa e que contenham o filtro.'
 
-  /products/{id}/add_to_chart:
+  /products/add:
+    get:
+      operationId: R211
+      summary: 'R211: Página de adição de produto ao catálogo'
+      description: 'Fornece a interface de preenchimento de detalhes de produto a adicionar ao catálogo. Acesso: ADM'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
+    
+    post:
+      operationId: R212
+      summary: 'R212: Ação de adição de novo produto ao catálogo'
+      description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                price:
+                  type: number
+                discount:
+                  type: number
+                stock:
+                  type: integer
+              required:
+                - description
+                - price
+                - discount
+                - stock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de adição de produto.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto adicionado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao adicionar produto.'
+                  value: '/products'
+  
+  /products/{id}/edit:
+    get:
+      operationId: R213
+      summary: 'R213: Página de edição de produto ao catálogo'
+      description: 'Fornece a interface de preenchimento de detalhes para editar um produto. Acesso: ADM'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
+    
+    post:
+      operationId: R214
+      summary: 'R214: Ação de edição de determinado produto ao catálogo'
+      description: 'Processa um pedido de edição de um determinado produto ao catálogo de produtos disponíveis. Acesso: ADM'
+      tags:
+        - 'M02: Produtos e Catálogo'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                price:
+                  type: number
+                discount:
+                  type: number
+                stock:
+                  type: integer
+              required:
+                - description
+                - price
+                - discount
+                - stock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de edição de produto.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto editado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao editar produto.'
+                  value: '/products'
+
+  /products/{id}/change_stock:
+    get:
+      operationId: R215
+      summary: 'R215: Página de alteração de stock de produto'
+      description: 'Fornece a interface de definição do stock de um produto para um novo valor. Acesso: ADM'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página de alteração de stock de um produto.'
+    
+    post:
+      operationId: R216
+      summary: 'R216: Ação de alteração de stock de produto'
+      description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                newStock:
+                  type: integer
+              required:
+                - newStock
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de alteração de stock.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Stock alterado com sucesso.'
+                  value: '/products/{id}'
+                302Failure:
+                  description: 'Falha ao alterar stock.'
+                  value: '/products/{id}'
+  
+  /products/{id}/delete:
+    post:
+      operationId: R217
+      summary: 'R217: Ação de eliminação de produto'
+      description: 'Processa um pedido de remoção de um produto do catálogo. Acesso: ADM'
+      tags:
+        - 'M02: Produtos e Catálogo'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '302':
+          description: 'Redireciona, depois de processar o pedido de eliminação.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Produto eliminado com sucesso.'
+                  value: '/products'
+                302Failure:
+                  description: 'Falha ao eliminar produto.'
+                  value: '/products/{id}'
+
+  /products/{id}/add_to_cart:
     post:
       operationId: R301
       summary: 'R301: Ação de adição de um produto ao carrinho da sessão atual'
       description: 'Ação de adição uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
       tags:
-        - 'M03: Compras e Carrinho'
+        - 'M02: Produtos e Catálogo'
       
       parameters:
         - in: path
@@ -905,7 +1119,7 @@ paths:
                   description: 'Falha ao adicionar produto.'
                   value: '/faqs'
   
-  /chart/API:
+  /cart/API:
     get:
       operationId: R302
       summary: 'R302: Revisão do carrinho de compras'
@@ -944,7 +1158,7 @@ paths:
                       name: 'Molho Mexicano Extra Picante'
                       discount: 0
 
-  /chart:
+  /cart:
     get:
       operationId: R303
       summary: 'R303: Revisão do carrinho de compras'
@@ -956,7 +1170,7 @@ paths:
         '200':
           description: 'OK. Mostrar a página de revisão do carrinho.'
 
-  /chart/checkout:
+  /cart/checkout:
     get:
       operationId: R304
       summary: 'R304: Formulário de checkout do carrinho atual'
@@ -1026,7 +1240,7 @@ paths:
                   value: '/index'
                 302Failure:
                   description: 'Falha no checkout.'
-                  value: '/chart'
+                  value: '/cart'
   
   /users/{userId}/orders/{orderId}/API:
     get:
@@ -1124,152 +1338,7 @@ paths:
                   value: '/index'
                 302Failure:
                   description: 'Falha no cancelamento da encomenda.'
-                  value: '/chart'
-
-  /products/add_product:
-    get:
-      operationId: R309
-      summary: 'R309: Página de adição de produto ao catálogo'
-      description: 'Fornece a interface de preenchimento de detalhes de produto a adicionar ao catálogo. Acesso: ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página de adição de novo produto ao catálogo.'
-    
-    post:
-      operationId: R310
-      summary: 'R310: Ação de adição de novo produto ao catálogo'
-      description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                price:
-                  type: number
-                discount:
-                  type: number
-                stock:
-                  type: integer
-              required:
-                - description
-                - price
-                - discount
-                - stock
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de adição de produto.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Produto adicionado com sucesso.'
-                  value: '/products'
-                302Failure:
-                  description: 'Falha ao adicionar produto.'
-                  value: '/products'
-  
-  /products/{id}/change_stock:
-    get:
-      operationId: R311
-      summary: 'R311: Página de alteração de stock de produto'
-      description: 'Fornece a interface de definição do stock de um produto para um novo valor. Acesso: ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página de alteração de stock de um produto.'
-    
-    post:
-      operationId: R312
-      summary: 'R312: Ação de alteração de stock de produto'
-      description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-      
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                newStock:
-                  type: integer
-              required:
-                - newStock
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de alteração de stock.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Stock alterado com sucesso.'
-                  value: '/products/{id}'
-                302Failure:
-                  description: 'Falha ao alterar stock.'
-                  value: '/products/{id}'
-  
-  /products/{id}/delete:
-    post:
-      operationId: R313
-      summary: 'R313: Ação de eliminação de produto'
-      description: 'Processa um pedido de remoção de um produto do catálogo. Acesso: ADM'
-      tags:
-        - 'M03: Compras e Carrinho'
-      
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido de eliminação.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Produto eliminado com sucesso.'
-                  value: '/products'
-                302Failure:
-                  description: 'Falha ao eliminar produto.'
-                  value: '/products/{id}'
+                  value: '/cart'
 
 
   /products/{id}/add_to_wishlist:
