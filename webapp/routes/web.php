@@ -43,6 +43,12 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/products/add', 'addProduct')->name('addProduct');
 });
 Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+});
+Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
 });
 

@@ -92,4 +92,32 @@ class ProductsController extends Controller {
 
         return redirect('/products/'.$newProduct->id);
     }
+
+    public function editProductForm(int $id){
+        return view('pages.productsEdit', [
+            'product' => Product::findorfail($id),
+        ]);
+    }
+
+    public function editProduct(Request $request, int $id){
+        $request->validate([
+            'name' => 'required|string|max:256',
+            'price' => 'required|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'description' => 'required|string|max:256',
+            'url_image' => 'required|string|max:256',
+        ]);
+
+        $product = Product::findorfail($id);
+        $product->nome = $request->name;
+        $product->precoatual = $request->price;
+        $product->desconto = $request->discount;
+        $product->stock = $request->stock;
+        $product->descricao = $request->description;
+        $product->url_imagem = $request->url_image;
+        $product->save();
+
+        return redirect('/products/'.$product->id);
+    }
 }
