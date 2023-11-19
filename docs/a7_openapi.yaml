@@ -880,7 +880,7 @@ paths:
       summary: 'R212: Ação de adição de novo produto ao catálogo'
       description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
       tags:
-        - 'M03: Compras e Carrinho'
+        'M02: Produtos e Catálogo'
       
       requestBody:
         required: true
@@ -1011,7 +1011,7 @@ paths:
       summary: 'R216: Ação de alteração de stock de produto'
       description: 'Processa um pedido de alteração do stock de um produto do catálogo. Acesso: ADM'
       tags:
-        - 'M03: Compras e Carrinho'
+        - 'M02: Produtos e Catálogo'
       
       parameters:
         - in: path
@@ -1083,7 +1083,7 @@ paths:
       summary: 'R301: Ação de adição de um produto ao carrinho da sessão atual'
       description: 'Ação de adição uma dada quantidade de um produto pelo seu id ao carrinho associado ao utilizador com sessão iniciada. Acesso: USR'
       tags:
-        - 'M02: Produtos e Catálogo'
+        - 'M03: Compras e Carrinho'
       
       parameters:
         - in: path
@@ -1189,6 +1189,21 @@ paths:
                   type: integer
               required:
                 - productId
+      
+      responses:
+        '302':
+          description: 'Redireciona de volta para a página de revisão do carrinho, depois de processar o pedido'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Eliminado com sucesso. Redireciona para o carrinho.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Falha na eliminação. Redireciona para o carrinho.'
+                  value: '/register'
 
   /cart/checkout:
     get:
