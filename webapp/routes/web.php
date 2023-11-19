@@ -9,8 +9,6 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-use App\Http\Controllers\AdminController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,10 +24,19 @@ use App\Http\Controllers\AdminController;
 Route::redirect('/', '/login');
 
 Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products', 'listProducts')->name('products');
+    Route::get('/products', 'listProducts')->name('productsList');
 });
 Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}', 'productsDetails')->name('products');
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
+});
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
 });
 
 // Cards
@@ -79,3 +86,4 @@ Route::get('/pps', function () {
 Route::get('/tous', function () {
     return view('pages.tous');
 })->name('tous');
+
