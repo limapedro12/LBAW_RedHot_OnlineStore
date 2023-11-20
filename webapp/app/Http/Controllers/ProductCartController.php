@@ -11,27 +11,28 @@ use App\Models\ProductCart;
 
 class ProductCartController extends Controller
 {
-    public function addToCart(Request $request, int $id) {
+    public function addToCart(Request $request, int $id)
+    {
         $product = Product::findOrFail($id);
 
         $request->validate([
-            'quantity' => 'required|integer|min:1'
+            'quantidade' => 'required|integer|min:1'
         ]);
 
-        if ($request->quantity > $product->stock) {
+        if ($request->quantidade > $product->stock) {
             return redirect('/products/'.$id);
         }
 
         if (Auth::check()) {
             $productCart = ProductCart::where('id_produto', '=', $id)->where('id_utilizador', '=', Auth::id())->first();
             if ($productCart) {
-                $productCart->quantidade += $request->quantity;
+                $productCart->quantidade += $request->quantidade;
                 $productCart->save();
             } else {
                 ProductCart::create([
                     'id_produto' => $id,
                     'id_utilizador' => Auth::id(),
-                    'quantidade' => $request->quantity
+                    'quantidade' => $request->quantidade
                 ]);
             }
         } else {
@@ -40,4 +41,29 @@ class ProductCartController extends Controller
 
         return redirect('/products/'.$id);
     }
+
+    public function removeFromCart(Request $request)
+    {
+        ProductCart::where(['id_utilizador' => Auth::id(),'id_produto' => $request->id_produto])->delete();
+        
+        return redirect('/cart');
+    }
+
+    public function showCart() : View
+    {
+        if (Auth::check()) {
+            $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
+            $quantityProductList = [];
+            foreach($productsCart as $productCart) {
+                $quantityProductList[] = [$productCart->quantidade, Product::findOrFail($productCart->id_produto)];
+            }
+            return view('pages.cart', ['list' => $quantityProductList,
+                                      'discountFunction' => function($price, $discount) {
+                                                            return $price * (1 - $discount);}]);
+        } else {
+            // para utilizador não autenticado
+        }
+    }
 }
+
+// agora é calcular o total

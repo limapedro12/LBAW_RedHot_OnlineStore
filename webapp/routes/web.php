@@ -45,6 +45,8 @@ Route::controller(ProductsController::class)->group(function () {
 // Cart and Purchases
 Route::controller(ProductCartController::class)->group(function () {
     Route::post('/products/{id}/add_to_cart', 'addToCart');
+    Route::get('/cart', 'showCart');
+    Route::post('/cart/remove_product', 'removeFromCart');
 });
 
 // User
