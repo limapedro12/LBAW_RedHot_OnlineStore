@@ -8,13 +8,29 @@
                     {{ $product->precoatual }}
                 </span>&nbsp
             @endif
-            {{ $discountFunction($product->precoatual, $product->desconto) }} 
+            {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} 
         </p>
         @if($product->desconto > 0)
             <p> Desconto: {{ $product->desconto * 100 }}% </p>
             <br>
         @endif
     </section>
+        @if (Auth::check() && $product->stock > 0)
+            <form action="/products/{{$product->id}}/add_to_cart" method="POST">
+                @csrf
+                <label for="quantidade"> Quantidade: </label>
+                <input type="number" name="quantidade" id="quantidade" value="1" min="1" max="{{ $product->stock }}">
+                <button type="submit"> Adicionar ao carrinho </button>
+            </form>
+        @endif
+    @if ($product->stock > 0)
+        <form action="/products/{{$product->id}}/add_to_cart" method="POST">
+            @csrf
+            <label for="quantity"> Quantidade: </label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ $product->stock }}">
+            <button type="submit"> Adicionar ao carrinho </button>
+        </form>
+    @endif
 
     <section class='comments'>
         <h4> Comentários </h4>
@@ -23,12 +39,11 @@
             <input type="submit" value="Ver comentarios">
         </form>
     </section>
-@endsection
+
+@endsection        
 
 @if (Auth::check())
     @include('layouts.userLoggedHeaderFooter')
-    
 @elseif (!Auth::check())
     @include('layouts.userNotLoggedHeaderFooter')
-
 @endif
