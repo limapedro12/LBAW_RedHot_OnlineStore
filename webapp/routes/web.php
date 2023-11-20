@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ProductCartController;
+use App\Http\Controllers\PurchaseController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -47,6 +48,10 @@ Route::controller(ProductCartController::class)->group(function () {
     Route::post('/products/{id}/add_to_cart', 'addToCart');
     Route::get('/cart', 'showCart');
     Route::post('/cart/remove_product', 'removeFromCart');
+});
+Route::controller(PurchaseController::class)->group(function () {
+    Route::get('/cart/checkout', 'showCheckoutForm');
+    Route::post('/cart/checkout', 'checkout');
 });
 
 // User
