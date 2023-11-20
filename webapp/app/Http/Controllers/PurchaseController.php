@@ -111,7 +111,7 @@ class PurchaseController extends Controller
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
         $quantPriceProducts = [];
 
-        foreach($productIDs as $productID) {
+        foreach ($productIDs as $productID) {
             $quantity = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->quantidade;
             $price = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->preco;
             $product = Product::findOrFail($productID["id_produto"]);
@@ -123,6 +123,20 @@ class PurchaseController extends Controller
 
     public function cancelOrder(int $userId, int $orderId)
     {
-        // TODO
+        // $this->authorize;
+
+        $purchase = Purchase::findOrFail($orderId);
+        $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
+
+        foreach ($productIDs as $productID) {
+            $quantity = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->quantidade;
+            $product = Product::findOrFail($productID["id_produto"]);
+            $product->incrementStock($quantity);
+        }
+
+        $purchase->estado = 'Cancelada';
+        $purchase->save();
+
+        return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Encomenda cancelada com sucesso.');
     }
 }

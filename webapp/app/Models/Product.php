@@ -192,4 +192,9 @@ class Product extends Model{
         $this->stock -= $quantity;
         $this->save();
     }
+
+    public function incrementStock(int $quantity){
+        $this->stock += $quantity;
+        $this->save();
+    }
 }

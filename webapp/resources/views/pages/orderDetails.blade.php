@@ -23,5 +23,11 @@
                 </li>
             @endforeach
         </ul>
+        @if ($purchase->estado == 'Pendente')
+            <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/cancel">
+                @csrf
+                <button type="submit">Cancelar encomenda</button>
+            </form>
+        @endif
     </body>
 </html>
