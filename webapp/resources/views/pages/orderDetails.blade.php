@@ -12,12 +12,12 @@
         </p>
         <h2>Produtos</h2>
         <ul>
-            @foreach($quantProducts as $quantProduct)
+            @foreach($quantPriceProducts as $quantPriceProduct)
                 <li>
-                    <a href="/products/{{$quantProduct[1]->id}}">{{$quantProduct[1]->nome}}</a>
+                    <a href="/products/{{$quantPriceProduct[2]->id}}">{{$quantPriceProduct[2]->nome}}</a>
                     <p>
-                        <span>Quantidade: {{$quantProduct[0]}}</span><br>
-                        <span>Preço: {{$quantProduct[1]->precoatual*(1-$quantProduct[1]->desconto)}}€</span><br>
+                        <span>Quantidade: {{$quantPriceProduct[0]}}</span><br>
+                        <span>Preço unitário: {{$quantPriceProduct[1]}}€</span><br>
                     </p>
                 </li>
             @endforeach

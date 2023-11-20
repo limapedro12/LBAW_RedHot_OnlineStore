@@ -83,6 +83,7 @@ class PurchaseController extends Controller
             $productPurchase->id_produto = $product->id;
             $productPurchase->id_compra = $purchase->id;
             $productPurchase->quantidade = $productCart->quantidade;
+            $productPurchase->preco = round($product->precoatual * (1 - $product->desconto), 2);
             $productPurchase->save();
         }
 
@@ -108,15 +109,16 @@ class PurchaseController extends Controller
 
         $purchase = Purchase::findOrFail($orderId);
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
-        $quantProducts = [];
+        $quantPriceProducts = [];
 
         foreach($productIDs as $productID) {
             $quantity = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->quantidade;
+            $price = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->preco;
             $product = Product::findOrFail($productID["id_produto"]);
-            $quantProducts[] = [$quantity, $product];
+            $quantPriceProducts[] = [$quantity, $price, $product];
         }
 
-        return view('pages.orderDetails', ['purchase' => $purchase, 'quantProducts' => $quantProducts]);
+        return view('pages.orderDetails', ['purchase' => $purchase, 'quantPriceProducts' => $quantPriceProducts]);
     }
 
     public function cancelOrder(int $userId, int $orderId)
