@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
@@ -58,19 +59,44 @@ class UserController extends Controller
 
         $request->validate([
             'nome' => 'required|string|max:256',
-            'email' => 'required|email|max:256|unique:utilizador',
+            'email' => 'required|email|max:256',
         ]);
+
+        if ($request->email != $user->email) {
+            $request->validate([
+                'email' => 'unique:utilizador',
+            ]);
+        }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));
 
         return redirect('/users/'.$id);
     }
 
-    public function destroy(User $user)
+    public function deleteAccountForm(int $id) : View
     {
+        $user = User::findOrFail($id);
 
-        verifyUser($user);
-        $card->delete();
+        $this->authorize('deleteAccount', $user);
+
+        return view('pages.delete_account', [
+            'user' => $user
+        ]);
+    }
+
+    public function deleteAccount(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $this->authorize('deleteAccount', $user);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect('/users/'.$id.'/delete_account');
+        }
+
+        User::where('id', '=', $id)->delete();
+
+        return redirect('/logout');
     }
 }
 
