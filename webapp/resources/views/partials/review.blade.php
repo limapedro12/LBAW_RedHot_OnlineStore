@@ -1,6 +1,6 @@
 @section('content')
 
-    <body>
+    <section>
         <article class="review" reviewId="{{$review->id}}">
             <p> {{$review->id_utilizador}} -> Avaliação: {{$review->avaliacao}} / Comentário: {{$review->texto}} / {{$review->timestamp}} / {{$review->id}}</p>
         </article>
@@ -27,7 +27,7 @@
 
         @endif
 
-    </body>
+    </section>
 
 @endsection
 

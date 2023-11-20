@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <h1>Edit Product: {{ $product->nome }}</h1>
 
     <form action="/products/{{ $product->id }}/edit" method="POST">
@@ -24,6 +25,7 @@
 
         <input type="submit" value="Save">
     </form>
+</section>
 @endsection
 
 @include('layouts.adminHeaderFooter')

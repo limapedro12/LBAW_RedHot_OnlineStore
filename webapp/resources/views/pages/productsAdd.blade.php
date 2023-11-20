@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <h1>Adicionar Novo Produto</h1>
 
     <form id="addProductForm" method="post" action="{{ route('addProduct') }}">
@@ -24,6 +25,7 @@
 
         <input type="submit" value="Add Product">
     </form>
+</section>
 @endsection
 
 @include('layouts.adminHeaderFooter')

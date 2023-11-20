@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <div class="ppTous">
         <div class="ppTous-container">
             <h1>Politicas de Privacidade</h1>
@@ -65,6 +66,7 @@
             <b>ajuda@redhot.pt</b>.</p>
         </div>
     </div>
+</section>
 @endsection
 
 @if (Auth::check())

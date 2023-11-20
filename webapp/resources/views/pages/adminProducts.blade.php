@@ -1,6 +1,7 @@
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
+<div class="adminContent">
     <div class="adminPage">      
         <div class="adminSideBar">
             <div class="adminSearchBarOnSideBar">
@@ -68,4 +69,5 @@
             <p>Admin content goes here</p>
         </div>
     </div>
+</div>
 @endsection

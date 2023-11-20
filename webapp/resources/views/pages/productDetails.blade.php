@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <img style="height: 200px;" src="{{ $product->url_imagem }}" alt="Imagem do produto">
     <section class="productDetails">
         <h2> {{ $product->nome }} </h2> 
@@ -23,6 +24,7 @@
             <input type="submit" value="Ver comentarios">
         </form>
     </section>
+</section>
 @endsection
 
 @if (Auth::check())

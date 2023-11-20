@@ -1,5 +1,5 @@
 @section('content')
-    <body>
+    <section>
         <h1>Comentários do produto {{$product->nome}} </h1>
         
         <section id="reviews">
@@ -61,7 +61,7 @@
             });
         </script>
 
-    </body>
+    </section>
 @endsection
 
 @if (Auth::check())

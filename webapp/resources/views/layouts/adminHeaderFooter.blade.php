@@ -21,6 +21,7 @@
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/admin.css') }}" rel="stylesheet">
+        <link href="{{ url('css/home.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/header.js') }} defer></script>
@@ -47,11 +48,8 @@
                     </section>
             </header>
 
-
-            <section class="adminContent">
-                @yield('content')
-            </section>
-
+            @yield('content')
+            
             <div class="wrapper"> </div>
 
             <footer>

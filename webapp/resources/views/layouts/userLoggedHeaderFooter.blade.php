@@ -20,6 +20,7 @@
         <link href="{{ url('css/header.css') }}" rel="stylesheet">
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
+        <link href="{{ url('css/home.css') }}" rel="stylesheet">
   
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/header.js') }} defer>
@@ -46,10 +47,7 @@
                     </section>
             </header>
 
-
-            <section class="content">
-                @yield('content')
-            </section>
+            @yield('content')
 
             <div class="wrapper"> </div>
 

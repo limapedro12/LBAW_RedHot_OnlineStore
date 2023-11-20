@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <h1>Lista de Produtos</h1>
         @include('partials.searchAndFilterForms')
     <div id='listOfProducts'>
@@ -20,6 +21,7 @@
             </section>
         @endforeach
     </div>
+</section>
 @endsection
 
 @if (Auth::check())

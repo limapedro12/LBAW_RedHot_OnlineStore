@@ -23,7 +23,15 @@ use App\Http\Controllers\AdminController;
 */
 
 // Home
-Route::redirect('/', '/login');
+Route::redirect('/', 'welcome');
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
+
+
+
 
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');

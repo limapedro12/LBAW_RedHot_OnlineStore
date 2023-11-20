@@ -1,6 +1,7 @@
 @extends('layouts.userNotLoggedHeaderFooter')
 
 @section('content')
+<section>
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
 
@@ -34,4 +35,5 @@
         </p>
     @endif
 </form>
+</section>
 @endsection
