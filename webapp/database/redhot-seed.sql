@@ -28,14 +28,16 @@ CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
   	nome VARCHAR(256) NOT NULL,
   	email VARCHAR(256) UNIQUE NOT NULL,
-	password VARCHAR(256) NOT NULL
+	password VARCHAR(256) NOT NULL,
+  remember_token VARCHAR(256)
 );
 
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,
       nome VARCHAR(256) NOT NULL,
       email VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    password VARCHAR(256) NOT NULL,
+    remember_token VARCHAR(256)
 );
 
 CREATE TABLE Compra (
