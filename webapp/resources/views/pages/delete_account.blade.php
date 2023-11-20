@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Eliminar conta | {{$user->nome}} | RedHot</title>
-    </head>
-    <body>
+@section('content')
         <h1>A eliminar conta de {{$user->nome}}</h1>
         <form method="post" action="/users/{{$user->id}}/delete_account">
             @csrf
@@ -11,5 +6,10 @@
             <input type="password" id="password" name="password" required><br><br> 
             <input type="submit" value="Confirmar eliminação">
         </form>
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

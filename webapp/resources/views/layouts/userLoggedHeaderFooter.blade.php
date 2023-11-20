@@ -36,8 +36,8 @@
                 
                     <nav class="navbar">
                         <a href="{{ url('/products') }}">Catálogo</a>
-                        <a href="{{ url('/carrinho') }}">Carrinho</a>
-                        <a href="{{ url('/perfil') }}">Perfil</a>
+                        <a href="{{ url('/cart') }}">Carrinho</a>
+                        <a href="{{ url('/users/'.Auth::id()) }}">Perfil</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </nav>
                 

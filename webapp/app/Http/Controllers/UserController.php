@@ -42,7 +42,7 @@ class UserController extends Controller
 
         verifyUser($user);
 
-        return view('pages.editProfile', [
+        return view('pages.editUser', [
             'user' => $user
         ]);
     }
@@ -53,7 +53,7 @@ class UserController extends Controller
 
         verifyUser($user);
 
-        if ($user->password != Hash::make($request->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return redirect('/users/'.$id.'/edit');
         }
 
@@ -99,4 +99,3 @@ class UserController extends Controller
         return redirect('/logout');
     }
 }
-

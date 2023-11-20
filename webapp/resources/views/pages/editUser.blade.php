@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Editar Perfil | {{$user->nome}} | RedHot</title>
-    </head>
-    <body>
+@section('content')
         <h1>A editar perfil de {{$user->nome}}</h1>
         <form method="post" action="/users/{{$user->id}}/edit">
             @csrf
@@ -15,5 +10,10 @@
             <input type="password" id="password" name="password" required><br><br> 
             <input type="submit" value="Submeter">
         </form>
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif
