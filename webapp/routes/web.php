@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\CardController;
-use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReviewsController;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -58,17 +56,7 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
 });
 
-// API
-Route::controller(CardController::class)->group(function () {
-    Route::put('/api/cards', 'create');
-    Route::delete('/api/cards/{card_id}', 'delete');
-});
 
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/cards/{card_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
-});
 
 // User
 Route::controller(UserController::class)->group(function() {
@@ -125,8 +113,6 @@ Route::get('/adminShipping', function () {
 Route::get('/adminUsers', function () {
     return view('pages.adminUsers');
 })->name('adminUsers');
-
-
 
 
 // PPs

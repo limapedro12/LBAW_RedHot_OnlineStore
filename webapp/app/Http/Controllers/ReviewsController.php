@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Review;
+use App\Models\Product;
 
 class ReviewsController extends Controller
 {
@@ -20,10 +21,14 @@ class ReviewsController extends Controller
         // Get all reviews.
         $reviews = Review::where('id_produto', $id_product)->get();
 
+        // Get the product.
+        $product = Product::findorfail($id_product);
+
         // Use the pages.reviews template to display all reviews.
         return view('pages.reviews', [
             'reviews' => $reviews,
-            'id_product' => $id_product
+            'id_product' => $id_product,
+            'product' => $product
         ]);
     }
 
