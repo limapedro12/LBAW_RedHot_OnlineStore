@@ -19,4 +19,8 @@ class UserPolicy
     public function respectiveUserOrAdmin($logged, User $user) : bool {
         return ($logged->id === $user->id) || (Auth::guard('admin')->user() != null);
     }
+
+    public function editProfile(User $logged, User $user) : bool {
+        return $logged->id === $user->id;
+    }
 }

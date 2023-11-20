@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
@@ -58,8 +59,14 @@ class UserController extends Controller
 
         $request->validate([
             'nome' => 'required|string|max:256',
-            'email' => 'required|email|max:256|unique:utilizador',
+            'email' => 'required|email|max:256',
         ]);
+
+        if ($request->email != $user->email) {
+            $request->validate([
+                'email' => 'unique:utilizador',
+            ]);
+        }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));
 
