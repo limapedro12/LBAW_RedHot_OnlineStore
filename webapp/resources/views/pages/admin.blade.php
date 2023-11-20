@@ -1,6 +1,7 @@
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
+    {{ Auth::guard('admin')->user()->nome }}
     <div class="adminPage">      
         <div class="adminSideBar">
             <div class="adminSearchBarOnSideBar">
