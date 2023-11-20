@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ReviewsController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -147,3 +148,13 @@ Route::get('/about', function () {
 Route::get('/faqs', function () {
     return view('pages.faqs');
 })->name('faqs');
+
+//Reviews
+Route::controller(ReviewsController::class)->group(function () {
+    Route::get('/products/{id_product}/reviews', 'listReviews')->name('reviews');
+});
+Route::controller(ReviewsController::class)->group(function () {
+    Route::post('/products/{id_product}/reviews/add_review', 'addReview')->name('addReview');
+    Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
+    Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
+});
