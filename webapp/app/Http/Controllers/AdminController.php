@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Admin;
 use App\Policies\UserPolicy;
+use App\Policies\AdminPolicy;
 
 function verifyAdmin() : void {
-    if(Auth::user()==null || !(Auth::user()->isAdmin))
+    if(Auth::guard('admin')->user()==null)
         abort(403);
 }
 
