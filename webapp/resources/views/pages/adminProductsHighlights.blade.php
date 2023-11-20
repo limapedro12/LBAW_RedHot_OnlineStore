@@ -1,9 +1,7 @@
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
-    <div class="adminPage">
-        <h1>Admin Dashboard</h1>
-        
+    <div class="adminPage">        
         <div class="adminSideBar">
             <h2>Admin Side Bar</h2>
             <p>Admin side bar goes here</p>
@@ -40,6 +38,7 @@
                 <div class="adminSideBarOption" id="optionNotSelected">
                     <a href="{{ url('/adminUsers') }}">Utilizadores</a>
                 </div>
+            </div>
         </div>
         <div class="adminOptionContent">
             <h2>Admin Content</h2>
