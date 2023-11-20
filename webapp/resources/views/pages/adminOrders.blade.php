@@ -1,43 +1,66 @@
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
-    <div class="adminPage">        
+    <div class="adminPage">      
         <div class="adminSideBar">
-            <h2>Admin Side Bar</h2>
-            <p>Admin side bar goes here</p>
             <div class="adminSearchBarOnSideBar">
                 <form action="#" method="post">
-                    <input type="text" placeholder="Search..">
+                    <input type="text" placeholder="Produto..">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
             <div class="adminSideBarOptions">
-                <div class="adminSideBarOption" id="optionNotSelected">
-                    <a class="adminSideBarOptionSelected" href="{{ url('/admin') }}">Estatísticas</a>
-                </div>
-                <div class="adminSideBarOption" id="optionSelected">
-                    <a href="{{ url('/adminOrders') }}">Encomendas</a>
-                </div>
-                <div class="adminSideBarOption" id="optionNotSelected">
-                    <a href="{{ url('/adminProducts') }}">Produtos <i class="fas fa-angle-down"></i></a>
-                    <!--<div class="adminSideBarOptionSubOptions">
-                        <div class="adminSideBarOptionSubOption" id="subOptionNotSelected">
-                            <a href="{{ url('/adminProductsManage') }}">Gerir</a>
+                <a href="{{ url('/admin') }}">
+                    <div class="adminSideBarOption" id="optionNotSelected">
+                        <p>Estatísticas</p>
+                    </div>
+                </a>
+                
+                <a href="{{ url('/adminOrders') }}">
+                    <div class="adminSideBarOption" id="optionSelected">
+                        <div id="rectangle"></div>
+                        <p>Encomendas</p>
+                    </div>
+                </a>
+
+                <a href="{{ url('/adminProducts') }}">
+                    <div class="adminSideBarOption" id="optionNotSelected">
+                        <p>Produtos</p>
+                        <i class="fas fa-angle-down"></i>
+                    </div>
+                </a>
+            <!--
+                <div class="adminSideBarOptionSubOptions">
+                    <a href="{{ url('/adminProductsManage') }}">
+                        <div class="adminSideBarOptionSubOption" id="optionNotSelected">
+                            <p>Gerir</p>
                         </div>
-                        <div class="adminSideBarOptionSubOption" id="subOptionNotSelected">
-                            <a href="{{ url('/adminProductsHighlights') }}">Destaques</a>
+                    </a>
+
+                    <a href="{{ url('/adminProductsHighlights') }}">
+                        <div class="adminSideBarOptionSubOption" id="optionNotSelected">
+                            <p>Destaques</p>
                         </div>
-                        <div class="adminSideBarOptionSubOption" id="subOptionNotSelected">
-                            <a href="{{ url('/adminProductsDiscounts') }}">Descontos</a>
+                    </a>
+
+                    <a href="{{ url('/adminProductsDiscounts') }}">
+                        <div class="adminSideBarOptionSubOption" id="optionNotSelected">
+                            <p>Descontos</p>
                         </div>
-                    </div>-->
+                    </a>
                 </div>
-                <div class="adminSideBarOption" id="optionNotSelected">
-                    <a href="{{ url('/adminShipping') }}">Entregas</a>
-                </div>
-                <div class="adminSideBarOption" id="optionNotSelected">
-                    <a href="{{ url('/adminUsers') }}">Utilizadores</a>
-                </div>
+            -->
+                <a href="{{ url('/adminShipping') }}">
+                    <div class="adminSideBarOption" id="optionNotSelected">
+                        <p>Entregas</p>
+                    </div>
+                </a>
+
+                <a href="{{ url('/adminUsers') }}">
+                    <div class="adminSideBarOption" id="optionNotSelected">
+                        <p>Utilizadores</p>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="adminOptionContent">
