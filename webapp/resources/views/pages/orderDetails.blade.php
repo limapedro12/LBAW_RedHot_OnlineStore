@@ -8,7 +8,8 @@
         <p>
             <span>Estado: {{$purchase->estado}}</span><br>
             <span>{{$purchase->total}}€</span><br>
-            <span>{{$purchase->timestamp}}</span>
+            <span>{{$purchase->timestamp}}</span><br>
+            <span>Envio: {{$purchase->descricao}}</span>
         </p>
         <h2>Produtos</h2>
         <ul>
