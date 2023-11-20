@@ -28,14 +28,16 @@ CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
   	nome VARCHAR(256) NOT NULL,
   	email VARCHAR(256) UNIQUE NOT NULL,
-	password VARCHAR(256) NOT NULL
+	password VARCHAR(256) NOT NULL,
+  remember_token VARCHAR(256)
 );
 
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,
       nome VARCHAR(256) NOT NULL,
       email VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    password VARCHAR(256) NOT NULL,
+    remember_token VARCHAR(256)
 );
 
 CREATE TABLE Compra (
@@ -320,7 +322,8 @@ INSERT INTO Administrador (nome, email, password) VALUES
   ('Filipa Antunes', 'fisantunes@google.pt', 'AD2155FWA'),
   ('Sofia Pereira', 'pereirasofia@iol.pt', '278WGFBFL1'),
   ('Gustavo Faria', 'gugafaria@hotmail.com', '28RTG2UFIW'),
-  ('Pedro Martins', 'pedromart@yahoo.es', 'HUG317FBU');
+  ('Pedro Martins', 'pedromart@yahoo.es', 'HUG317FBU'),
+  ('admin', 'admin@admin.pt', '$2y$10$R6IeqCxQxMConGFO3OHuq.Um2vxTYB9NKikC6Hky8cmUCln6jl5k6'); -- password: 12345678
 
 INSERT INTO Compra (timestamp, total, descricao, id_utilizador, estado, id_administrador) VALUES
   ('2023-01-15 09:23:54', 99.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 1, 'Enviada', 1),

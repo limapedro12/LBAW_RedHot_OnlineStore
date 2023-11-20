@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $this->authorize('viewProfile', $user);
+        $this->authorize('respectiveUserOrAdmin', $user);
 
         return view('pages.user', [
             'user' => $user
@@ -34,6 +34,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $this->authorize('respectiveUserOrAdmin', $user);
+
         return view('pages.editProfile', [
             'user' => $user
         ]);
@@ -42,6 +44,8 @@ class UserController extends Controller
     public function editProfile(Request $request, int $id)
     {
         $user = User::findOrfail($id);
+
+        $this->authorize('respectiveUserOrAdmin', $user);
 
         if ($user->password != Hash::make($request->password)) {
             return redirect('/users/'.$id.'/edit');
@@ -59,6 +63,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+
+        $this->authorize('respectiveUserOrAdmin', $user); 
         $card->delete();
     }
 }
