@@ -1,17 +1,17 @@
 function productToHTML(product) {
-    var html = '<section class="productListItem">';
-    html += '<h4> <a href = "/products/' + product.id + '"> ' + product.nome + ' </a> </h4>';
-    html += '<p>';
+    var html = `<section class="productListItem">
+                <h4> <a href = "/products/${product.id}">${product.nome}</a> </h4>
+                <p>`
     if (product.desconto > 0) {
-        html += '<span style = "text-decoration: line-through;">' + product.precoatual + '</span>&nbsp';
+        html += `<span style = "text-decoration: line-through;">${product.precoatual}</span>&nbsp`
     }
-    html += discountFunction(product.precoatual, product.desconto);
-    html += '</p>';
+        html += discountFunction(product.precoatual, product.desconto);
+        html += `</p>`;
     if (product.desconto > 0) {
-        html += '<p> Desconto: ' + (product.desconto * 100) + '% </p>';
+        html += `<p> Desconto: ${product.desconto * 100}% </p>`
     }
-    html += '<br>';
-    html += '</section>';
+        html += `<br>
+                 </section>`;
     return html;
 }
 
@@ -83,6 +83,8 @@ document.getElementById('searchAndFilter').addEventListener('submit', function(e
     if(filterString == '')
         filterString = '*'
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
+
+    console.log(url)
 
     //use XMLHttpRequest to send the request to the server
     var xhr = new XMLHttpRequest();
