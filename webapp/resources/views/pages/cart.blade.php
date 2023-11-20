@@ -8,7 +8,7 @@
             @include ('partials.productOnCart', ['quantidade' => $elem[0],
                                                 'product' => $elem[1]])
         @endforeach
-        
+        <p>Total: {{$total}} €</p>
         @if (count($list) > 0)
         <a href="/cart/checkout"><button>Checkout</button></a>
         @endif

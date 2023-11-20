@@ -15,6 +15,14 @@
             <br>
         @endif
     </section>
+        @if (Auth::check() && $product->stock > 0)
+            <form action="/products/{{$product->id}}/add_to_cart" method="POST">
+                @csrf
+                <label for="quantidade"> Quantidade: </label>
+                <input type="number" name="quantidade" id="quantidade" value="1" min="1" max="{{ $product->stock }}">
+                <button type="submit"> Adicionar ao carrinho </button>
+            </form>
+        @endif
     @if ($product->stock > 0)
         <form action="/products/{{$product->id}}/add_to_cart" method="POST">
             @csrf

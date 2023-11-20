@@ -54,16 +54,18 @@ class ProductCartController extends Controller
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
             $quantityProductList = [];
+            $total = 0;
             foreach($productsCart as $productCart) {
-                $quantityProductList[] = [$productCart->quantidade, Product::findOrFail($productCart->id_produto)];
+                $product = Product::findOrFail($productCart->id_produto);
+                $quantityProductList[] = [$productCart->quantidade, $product];
+                $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
             }
             return view('pages.cart', ['list' => $quantityProductList,
                                       'discountFunction' => function($price, $discount) {
-                                                            return $price * (1 - $discount);}]);
+                                                            return $price * (1 - $discount);},
+                                      'total' => round($total, 2)]);
         } else {
             // para utilizador não autenticado
         }
     }
 }
-
-// agora é calcular o total
