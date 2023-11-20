@@ -33,18 +33,18 @@ class PurchaseController extends Controller
 
     public function checkout(Request $request)
     {
-        //$request->validate([
-            //'cardNo' => 'required|integer',
-            //'cardHolder' => 'required|string',
-            //'cardExpiryMonth' => 'required|integer|min:1|max:12',
-            //'cardExpiryYear' => 'required|integer|min:23|max:99',
-            //'cardCVV' => 'required|integer|min:100|max:999',
-            //'street' => 'required|string',
-            //'doorNo' => 'required|string',
-            //'city' => 'required|string',
-            //'country' => 'required|string',
-            //'deliveryObs' => 'nullable|string'
-        //]);
+        $request->validate([
+            'cardNo' => 'required|integer|min:1000000000000000|max:9999999999999999',
+            'cardHolder' => 'required|string',
+            'cardExpiryMonth' => 'required|integer|min:1|max:12',
+            'cardExpiryYear' => 'required|integer|min:23|max:99',
+            'cardCVV' => 'required|integer|min:100|max:999',
+            'street' => 'required|string',
+            'doorNo' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
+            'deliveryObs' => 'nullable|string'
+        ]);
 
         error_log('request validated');
 

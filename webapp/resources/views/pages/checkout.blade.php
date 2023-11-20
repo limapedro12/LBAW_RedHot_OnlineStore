@@ -27,7 +27,7 @@
             Morada de Entrega
             <br>
             <label for="street">Arruamento</label>
-            <input type="text" id="street" name="streer">
+            <input type="text" id="street" name="street">
             <br>
             <label for="doorNo">Nº (e andar, se aplicável)</label>
             <input type="text" id="doorNo" name="doorNo">
