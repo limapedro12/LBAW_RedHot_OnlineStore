@@ -104,7 +104,19 @@ class PurchaseController extends Controller
 
     public function showOrderDetails(int $userId, int $orderId) : View
     {
-        // TODO
+        // $this->authorize;
+
+        $purchase = Purchase::findOrFail($orderId);
+        $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
+        $quantProducts = [];
+
+        foreach($productIDs as $productID) {
+            $quantity = ProductPurchase::where('id_produto', '=', $productID["id_produto"])->where('id_compra', '=', $orderId)->first()->quantidade;
+            $product = Product::findOrFail($productID["id_produto"]);
+            $quantProducts[] = [$quantity, $product];
+        }
+
+        return view('pages.orderDetails', ['purchase' => $purchase, 'quantProducts' => $quantProducts]);
     }
 
     public function cancelOrder(int $userId, int $orderId)
