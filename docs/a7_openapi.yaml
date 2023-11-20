@@ -1277,10 +1277,29 @@ paths:
                   description: 'Falha no checkout.'
                   value: '/cart'
   
-  /users/{userId}/orders/{orderId}/API:
+  /users/{id}/orders:
     get:
       operationId: R307
-      summary: 'R307: Estado e Detalhes da Encomenda'
+      summary: 'R307: Encomendas de utilizador'
+      description: 'Lista de encomendas do utilizador. Acesso: USR/ADM'
+      tags:
+        - 'M03: Compras e Carrinho'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar a página com a lista de encomendas do utilizador.'
+
+  /users/{userId}/orders/{orderId}/API:
+    get:
+      operationId: R308
+      summary: 'R308: Estado e Detalhes da Encomenda'
       description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -1318,8 +1337,8 @@ paths:
 
   /users/{userId}/orders/{orderId}:
     get:
-      operationId: R308
-      summary: 'R308: Estado e Detalhes da Encomenda'
+      operationId: R309
+      summary: 'R309: Estado e Detalhes da Encomenda'
       description: 'Seguimento do estado de uma encomenda. Acesso: USR/ADM'
       tags:
         - 'M03: Compras e Carrinho'
@@ -1342,8 +1361,8 @@ paths:
 
   /users/{userId}/orders/{orderId}/cancel:
     post:
-      operationId: R309
-      summary: 'R309: Ação de Cancelamento de Encomenda'
+      operationId: R310
+      summary: 'R310: Ação de Cancelamento de Encomenda'
       description: 'Cancelamento de uma Encomenda. Acesso: USR'
       tags:
         - 'M03: Compras e Carrinho'
