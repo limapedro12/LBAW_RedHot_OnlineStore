@@ -47,7 +47,7 @@
             </header>
 
 
-            <section id="content">
+            <section class="content">
                 @yield('content')
             </section>
 

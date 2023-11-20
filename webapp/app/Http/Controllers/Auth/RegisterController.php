@@ -34,7 +34,7 @@ class RegisterController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
 
-        User::create([
+        $newUser = User::create([
             'nome' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->password)
@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('/users/'.Auth::id())
+        return redirect('/users/'.$newUser->id)
             ->withSuccess('You have successfully registered & logged in!');
     }
 }

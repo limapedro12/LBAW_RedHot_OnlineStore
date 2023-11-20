@@ -35,12 +35,10 @@
                     </a>
                 
                     <nav class="navbar">
-                        <form action="#" method="post" class="logout">
                             <a href="{{ url('/products') }}">Catálogo</a>
                             <a href="{{ url('/carrinho') }}">Carrinho</a>
                             <a href="{{ url('/perfil') }}">Perfil</a>
-                            <input type="submit" value="Logout">
-                        </form>
+                            <a href="{{ url('/logout') }}">Logout</a>
                     </nav>
                 
                     <div id="menu-bars" class="fas fa-bars"></div>
@@ -49,7 +47,7 @@
             </header>
 
 
-            <section id="content">
+            <section class="content">
                 @yield('content')
             </section>
 
