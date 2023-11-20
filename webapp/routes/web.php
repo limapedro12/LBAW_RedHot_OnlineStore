@@ -63,11 +63,10 @@ Route::controller(RegisterController::class)->group(function () {
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {
-    Route::get('/{id}/reviews', 'listReviews')->name('reviews');
-    Route::get('/reviews/{id}', 'reviewDetails')->name('reviewDetails');
+    Route::get('/products/{id_product}/reviews', 'listReviews')->name('reviews');
 });
 Route::controller(ReviewsController::class)->group(function () {
-    Route::post('/{id}/reviews/add_review', 'addReview')->name('addReview');
-    Route::post('/reviews/{id}/edit_review', 'editReview')->name('editReview');
-    Route::post('/reviews/{id}/delete_review', 'deleteReview')->name('deleteReview');
+    Route::post('/products/{id_product}/reviews/add_review', 'addReview')->name('addReview');
+    Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
+    Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
 });

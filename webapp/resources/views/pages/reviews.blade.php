@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1>Reviews do produto {{$id}} </h1>
+    <h1>Reviews do produto {{$id_product}} </h1>
     
     <section id="reviews">
         @foreach($reviews as $review)
@@ -17,19 +17,14 @@
 
             @if(Auth::check())
                 @if($review->id_utilizador == Auth::user()->id)               
-                    <form method="POST" action="{{ route('editReview', ['id' => $review->id]) }}" class="editReviewForm" reviewId="{{$review->id}}">
+                    <form method="POST" action="{{ route('editReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}" class="editReviewForm" reviewId="{{$review->id}}">
                         @csrf
                         <input type="submit" value="Edit Review">
                     </form>
 
-                    <form method="POST" action="{{ route('deleteReview', ['id' => $review->id]) }}" class="deleteReviewForm" reviewId="{{$review->id}}">
+                    <form method="POST" action="{{ route('deleteReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}" class="deleteReviewForm" reviewId="{{$review->id}}" productId="{{$id_product}}">
                         @csrf
                         <input type="submit" value="Delete Review">
-                    </form>
-                @else
-                    <form action="{{ route('reviewDetails', ['id' => $review->id]) }}">
-                        @csrf
-                        <input type="submit" value="View Review">
                     </form>
                 @endif
             @endif
@@ -43,7 +38,7 @@
 
     <!-- Form to add a new review to a product -->
     @if(Auth::check())
-        <form method="POST" action="{{ route('addReview', ['id' => $id]) }}" class="addReviewForm" reviewId="{{$id}}">
+        <form method="POST" action="{{ route('addReview', ['id_product' => $id_product]) }}" class="addReviewForm" reviewId="{{$id_product}}">
             @csrf 
 
             <label for="rating">Avaliação:</label><br>

@@ -28,6 +28,7 @@ function addEventListeners() {
     if (reviewCreator != null) {
       reviewCreator.addEventListener('submit', function (event) {
           sendCreateReviewRequest.call(this, event, ReviewId);
+          addReviewAlert();
       });
     }
 
@@ -35,8 +36,9 @@ function addEventListeners() {
     [].forEach.call(reviewDeleters, function(deleter) {
       deleter.addEventListener('submit', function (event) {
         if(deleteAlert()) {
-          let ReviewId2 = document.querySelector('form.deleteReviewForm').getAttribute('reviewId');
-          sendDeleteReviewRequest.call(this, event, ReviewId2);
+          let ReviewId = this.getAttribute('reviewId');
+          let ProductId = this.getAttribute('productId');
+          sendDeleteReviewRequest.call(this, event, ProductId, ReviewId);
         }
         else {
           event.preventDefault();
@@ -106,14 +108,14 @@ function addEventListeners() {
     let comment = this.querySelector('input[name=comment]').value;
     let timestamp = this.querySelector('input[name=timestamp]').value;
   
-    sendAjaxRequest('post', `/${id}/reviews/add_review`, {rating: rating, comment: comment, timestamp:timestamp}, reviewAddedHandler);
+    sendAjaxRequest('post', `/products/${id}/reviews/add_review`, {rating: rating, comment: comment, timestamp:timestamp}, reviewAddedHandler);
   
     event.preventDefault();
   }
 
-  function sendDeleteReviewRequest(event, id) {
+  function sendDeleteReviewRequest(event, id, id_review) {
   
-    sendAjaxRequest('post', `/reviews/${id}/delete_review`, null, reviewDeletedHandler);
+    sendAjaxRequest('post', `/products/${id}/reviews/${id_review}/delete_review`, null, reviewDeletedHandler);
 
     event.preventDefault();
   }
@@ -232,10 +234,32 @@ function addEventListeners() {
     let new_review = document.createElement('article');
     new_review.classList.add('review');
     new_review.setAttribute('reviewId', review.id);
-    new_review.innerHTML = `<p> ${review.id_utilizador} -> Rating: ${review.avaliacao} / Comment: ${review.texto} / ${review.timestamp}</p>`;
-  
+
+    // Review content
+    let reviewContent = document.createElement('p');
+    reviewContent.innerHTML = `${review.id_utilizador} -> Rating: ${review.avaliacao} / Comment: ${review.texto} / ${review.timestamp}`;
+    new_review.appendChild(reviewContent);
+
+    // Edit form
+    let editForm = document.createElement('form');
+    editForm.method = 'POST';
+    editForm.action = `/products/${review.id_produto}/reviews/${review.id}/edit_review`; 
+    editForm.classList.add('editReviewForm');
+    editForm.setAttribute('reviewId', review.id);
+    let csrfInputEdit = document.createElement('input');
+    csrfInputEdit.type = 'hidden';
+    csrfInputEdit.name = '_token';
+    csrfInputEdit.value = document.querySelector('meta[name="csrf-token"]').content;
+    let editSubmitButton = document.createElement('input');
+    editSubmitButton.type = 'submit';
+    editSubmitButton.value = 'Edit Review';
+    editForm.appendChild(csrfInputEdit);
+    editForm.appendChild(editSubmitButton);
+    new_review.appendChild(editForm);
+
     return new_review;
-  }
+}
+
 
 
   function createItem(item) {
@@ -266,6 +290,11 @@ function addEventListeners() {
       document.querySelector(".alertMessage").innerHTML = text;
       return false;
     }
+  }
+
+  function addReviewAlert() {
+    let text = "Review adicionada com sucesso!";
+    document.querySelector(".alertMessage").innerHTML = text;
   }
   
   addEventListeners();

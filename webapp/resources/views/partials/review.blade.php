@@ -6,13 +6,13 @@
 </head>
 
 <body>
-    <article class="review">
-        <p> {{$review->id_utilizador}} -> Avaliação: {{$review->avaliacao}} / Comentário: {{$review->texto}} / {{$review->timestamp}}</p>
+    <article class="review" reviewId="{{$review->id}}">
+        <p> {{$review->id_utilizador}} -> Avaliação: {{$review->avaliacao}} / Comentário: {{$review->texto}} / {{$review->timestamp}} / {{$review->id}}</p>
     </article>
 
     @if (Auth::check() && $review->id_utilizador == Auth::user()->id)
 
-        <form method="POST" action="{{ route('editReview', ['id' => $review->id]) }}">
+        <form method="POST" action="{{ route('editReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}">
             @csrf
 
             <label for="rating">Avaliação:</label><br>
@@ -30,11 +30,7 @@
             <input type="submit" value="Edit Review">
         </form>
 
-        <form method="POST" action="{{ route('deleteReview', ['id' => $review->id]) }}" class="deleteReviewForm" reviewId="{{$review->id}}">
-            @csrf
-            <input type="submit" value="Delete Review">
-        </form>
-
     @endif
+
 </body>
 </html>
