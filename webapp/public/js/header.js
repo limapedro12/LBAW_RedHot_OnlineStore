@@ -1,6 +1,7 @@
 // Sou trolha e preciso de ajuda a por isto numa função para não estar a repetir código
 const menu_pop = document.querySelector('#menu-bars');
-const navbar = document.querySelector('.header .navbar');
+const navbar = document.querySelector('.headerBar .navbar');
+
 
 if (menu_pop != null) {
     menu_pop.addEventListener('click', () => {

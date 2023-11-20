@@ -35,10 +35,10 @@
                     </a>
                 
                     <nav class="navbar">
-                            <a href="{{ url('/products') }}">Catálogo</a>
-                            <a href="{{ url('/carrinho') }}">Carrinho</a>
-                            <a href="{{ url('/perfil') }}">Perfil</a>
-                            <a href="{{ url('/logout') }}">Logout</a>
+                        <a href="{{ url('/products') }}">Catálogo</a>
+                        <a href="{{ url('/carrinho') }}">Carrinho</a>
+                        <a href="{{ url('/perfil') }}">Perfil</a>
+                        <a href="{{ url('/logout') }}">Logout</a>
                     </nav>
                 
                     <div id="menu-bars" class="fas fa-bars"></div>

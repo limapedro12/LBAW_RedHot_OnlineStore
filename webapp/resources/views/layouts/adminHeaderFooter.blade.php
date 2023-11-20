@@ -36,12 +36,10 @@
                     </a>
                 
                     <nav class="navbar">
-                        <form action="#" method="post" class="logout">
-                            <a href="{{ url('/admin') }}">Dashboard</a>
-                            <a href="{{ url('/adminNotifications') }}">Notificações</a>
-                            <a href="{{ url('/adminProfile') }}">Admin</a>
-                            <input type="submit" value="Logout">
-                        </form>
+                        <a href="{{ url('/admin') }}">Dashboard</a>
+                        <a href="{{ url('/adminNotifications') }}">Notificações</a>
+                        <a href="{{ url('/adminProfile') }}">Admin</a>
+                        <a href="{{ url('/logout') }}">Logout</a>
                     </nav>
                 
                     <div id="menu-bars" class="fas fa-bars"></div>
