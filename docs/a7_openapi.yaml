@@ -1244,7 +1244,7 @@ paths:
                 street:
                   type: string
                 doorNo:
-                  type: integer
+                  type: string
                 city:
                   type: string
                 country:
