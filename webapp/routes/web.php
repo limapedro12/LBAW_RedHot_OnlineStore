@@ -92,10 +92,41 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 
-// AdminPage
+// AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
 });
+
+Route::get('/adminOrders', function () {
+    return view('pages.adminOrders');
+})->name('adminOrders');
+
+Route::get('/adminProducts', function () {
+    return view('pages.adminProducts');
+})->name('adminProducts');
+
+Route::get('/adminProductsDiscounts', function () {
+    return view('pages.adminProductsDiscounts');
+})->name('adminProductsDiscounts');
+
+Route::get('/adminProductsHighlights', function () {
+    return view('pages.adminProductsHighlights');
+})->name('adminProductsHighlights');
+
+Route::get('/adminProductsManage', function () {
+    return view('pages.adminProductsManage');
+})->name('adminProductsManage');
+
+Route::get('/adminShipping', function () {
+    return view('pages.adminShipping');
+})->name('adminShipping');
+
+Route::get('/adminUsers', function () {
+    return view('pages.adminUsers');
+})->name('adminUsers');
+
+
+
 
 // PPs
 Route::get('/pps', function () {
