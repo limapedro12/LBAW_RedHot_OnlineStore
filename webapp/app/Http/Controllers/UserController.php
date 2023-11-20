@@ -73,11 +73,30 @@ class UserController extends Controller
         return redirect('/users/'.$id);
     }
 
-    public function destroy(User $user)
+    public function deleteAccountForm(int $id) : View
     {
+        $user = User::findOrFail($id);
 
-        verifyUser($user);
-        $card->delete();
+        $this->authorize('deleteAccount', $user);
+
+        return view('pages.delete_account', [
+            'user' => $user
+        ]);
+    }
+
+    public function deleteAccount(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $this->authorize('deleteAccount', $user);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect('/users/'.$id.'/delete_account');
+        }
+
+        User::where('id', '=', $id)->delete();
+
+        return redirect('/logout');
     }
 }
 
