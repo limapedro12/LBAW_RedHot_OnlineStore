@@ -141,11 +141,20 @@ CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
 );
 
 CREATE TABLE ProdutoCarrinho (
-	id INTEGER PRIMARY KEY,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+	id SERIAL PRIMARY KEY,
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  quantidade INTEGER NOT NULL,
 	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
 );
+
+CREATE TABLE ProdutoCompra (
+  id SERIAL PRIMARY KEY,
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+  id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
+  quantidade INTEGER NOT NULL CHECK (quantidade >= 0),
+  preco FLOAT NOT NULL CHECK (preco >= 0)
+)
 
 CREATE TABLE Notificacao_Carrinho (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,

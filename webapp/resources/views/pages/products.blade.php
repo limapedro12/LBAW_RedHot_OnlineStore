@@ -11,7 +11,7 @@
                             {{ $product->precoatual }}
                         </span>&nbsp
                     @endif
-                    {{ $discountFunction($product->precoatual, $product->desconto) }} 
+                    {{ round($discountFunction($product->precoatual, $product->desconto),2) }} €
                 </p>
                 @if($product->desconto > 0)
                 <p> Desconto: {{ $product->desconto * 100 }}% </p>

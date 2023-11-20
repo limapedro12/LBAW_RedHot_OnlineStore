@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\ProductCartController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -23,34 +24,28 @@ use App\Http\Controllers\AdminController;
 */
 
 // Home
-Route::redirect('/', '/login');
+Route::redirect('/', '/products');
 
+// Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
-});
-Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
+    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
+    Route::get('/products/add', 'addProductForm')->name('addProductForm');
+    Route::post('/products/add', 'addProduct')->name('addProduct');
+    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
+    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+    Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
+    Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
 });
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/add', 'addProductForm')->name('addProductForm');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::post('/products/add', 'addProduct')->name('addProduct');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-});
 
-
+// Cart and Purchases
+Route::controller(ProductCartController::class)->group(function () {
+    Route::post('/products/{id}/add_to_cart', 'addToCart');
+});
 
 // User
 Route::controller(UserController::class)->group(function() {
@@ -60,7 +55,6 @@ Route::controller(UserController::class)->group(function() {
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
 });
-
 
 // Authentication
 Route::controller(LoginController::class)->group(function () {
