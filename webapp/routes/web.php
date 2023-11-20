@@ -52,6 +52,9 @@ Route::controller(ProductCartController::class)->group(function () {
 Route::controller(PurchaseController::class)->group(function () {
     Route::get('/cart/checkout', 'showCheckoutForm');
     Route::post('/cart/checkout', 'checkout');
+    Route::get('/users/{id}/orders', 'showOrders');
+    Route::get('/users/{userId}/orders/{orderId}', 'showOrderDetails');
+    Route::post('/users/{userId}/orders/{orderId}/cancel', 'cancelOrder');
 });
 
 // User

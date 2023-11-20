@@ -91,4 +91,24 @@ class PurchaseController extends Controller
 
         return redirect('/')->with('success', 'Encomenda efetuada com sucesso!');
     }
+
+    public function showOrders(int $id) : View
+    {
+        if (Auth::check() && Auth::id() == $id) {
+            $purchases = Purchase::where('id_utilizador', '=', $id)->get();
+            return view('pages.orders', ['purchases' => $purchases, 'userId' => $id]);
+        } else {
+            // para utilizador não autenticado
+        }
+    }
+
+    public function showOrderDetails(int $userId, int $orderId) : View
+    {
+        // TODO
+    }
+
+    public function cancelOrder(int $userId, int $orderId)
+    {
+        // TODO
+    }
 }
