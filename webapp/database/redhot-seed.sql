@@ -320,7 +320,8 @@ INSERT INTO Administrador (nome, email, password) VALUES
   ('Filipa Antunes', 'fisantunes@google.pt', 'AD2155FWA'),
   ('Sofia Pereira', 'pereirasofia@iol.pt', '278WGFBFL1'),
   ('Gustavo Faria', 'gugafaria@hotmail.com', '28RTG2UFIW'),
-  ('Pedro Martins', 'pedromart@yahoo.es', 'HUG317FBU');
+  ('Pedro Martins', 'pedromart@yahoo.es', 'HUG317FBU'),
+  ('Zhang Ming da Varziela', 'wo@wo.cn', '$2y$10$59JCFq4JbhnmoABOiAv0Z.5hSG0S4sQNesyzHF6358KzC1qnGus92'); -- password: chinocanapraia
 
 INSERT INTO Compra (timestamp, total, descricao, id_utilizador, estado, id_administrador) VALUES
   ('2023-01-15 09:23:54', 99.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 1, 'Enviada', 1),
