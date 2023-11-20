@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// Added to define Eloquent relationships.
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,12 +22,4 @@ class Product extends Model
         'stock',
         'id_administrador'
     ];
-
-    /**
-     * Get the reviews for a product.
-     */
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
-    }
 }
