@@ -2098,9 +2098,9 @@ paths:
 
   /adminProductsManage/API:
     get:
-      operationId: R605
-      summary: 'R605: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R613
+      summary: 'R613: Pagina de gestão de produtos'
+      description: 'Pagina de gestão de produtos. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2167,22 +2167,22 @@ paths:
 
   /adminProductsManage:
     get:
-      operationId: R606
-      summary: 'R606: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R614
+      summary: 'R614: Pagina de gestão de produtos'
+      description: 'Pagina de gestão de produtos. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Mostrar a página de todos os produtos em destaque'
+          description: 'Mostrar a pagina de gestão de produtos.'
 
 
   /adminOrders/API:
     get:
-      operationId: R605
-      summary: 'R605: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R615
+      summary: 'R615: Pagina de gestão de encomendas'
+      description: 'Pagina de gestão de encomendas. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2249,9 +2249,9 @@ paths:
 
   /adminOrders:
     get:
-      operationId: R606
-      summary: 'R606: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R616
+      summary: 'R616: Pagina de gestão de encomendas'
+      description: 'Pagina de gestão de encomendas. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2262,9 +2262,9 @@ paths:
 
   /adminShipping/API:
     get:
-      operationId: R605
-      summary: 'R605: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R617
+      summary: 'R617: Pagina de gestão de envios'
+      description: 'Pagina de gestão de envios. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2331,9 +2331,9 @@ paths:
 
   /adminShipping:
     get:
-      operationId: R606
-      summary: 'R606: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R618
+      summary: 'R618: Pagina de gestão de envios'
+      description: 'Pagina de gestão de envios. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2343,9 +2343,9 @@ paths:
 
   /adminUsers/API:
     get:
-      operationId: R605
-      summary: 'R605: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R619
+      summary: 'R619: Pagina de gestão de utilizadores'
+      description: 'Pagina de gestão de utilizadores. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
@@ -2412,9 +2412,9 @@ paths:
 
   /adminUsers:
     get:
-      operationId: R606
-      summary: 'R606: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      operationId: R620
+      summary: 'R620: Pagina de gestão de utilizadores'
+      description: 'Pagina de gestão de utilizadores. Acesso: ADM'
       tags:
         - 'M06: Páginas de Administrador'
 
