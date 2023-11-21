@@ -49,7 +49,7 @@ class ProductCartController extends Controller
         return redirect('/cart');
     }
 
-    public function showCart() : View
+    public function showCart() //: View
     {
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
@@ -66,6 +66,7 @@ class ProductCartController extends Controller
                                       'total' => round($total, 2)]);
         } else {
             // para utilizador não autenticado
+            return redirect('/');
         }
     }
 }

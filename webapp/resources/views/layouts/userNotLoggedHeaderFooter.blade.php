@@ -37,7 +37,6 @@
               
                   <nav class="navbar">
                       <a href="{{ url('/products') }}">Catálogo</a>
-                      <a href="{{ url('/carrinho') }}">Carrinho</a>
                       <a href="{{ url('/register') }}">Registar</a>
                       <a href="{{ url('/login') }}">Login</a>
                   </nav>

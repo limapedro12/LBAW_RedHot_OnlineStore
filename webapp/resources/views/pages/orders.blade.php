@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Minhas Encomendas | RedHot</title>
-    </head>
+@section('content')
     <body>
         <h1>As Minhas Encomendas</h1>
         <ul>
@@ -11,4 +7,10 @@
             @endforeach
         </ul>
     </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

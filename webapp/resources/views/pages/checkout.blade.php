@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Checkout | RedHot</title>
-    </head>
-    <body>
+@section('content')
         <h1>Checkout</h1>
         <p>Total: {{ $total }} €</p>
         <form method=post action="/cart/checkout">
@@ -42,5 +37,10 @@
             <input type="textarea" id="deliveryObs" name="deliveryObs">
             <br><br>
             <button type="submit">Confirmar encomenda</button>
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

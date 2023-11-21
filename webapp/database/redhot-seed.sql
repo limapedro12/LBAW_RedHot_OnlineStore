@@ -26,7 +26,6 @@ DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
-<<<<<<< HEAD
   	nome VARCHAR(256) NOT NULL,
   	email VARCHAR(256) UNIQUE NOT NULL,
 	password VARCHAR(256) NOT NULL,
@@ -39,18 +38,6 @@ CREATE TABLE Administrador (
       email VARCHAR(256) UNIQUE NOT NULL,
     password VARCHAR(256) NOT NULL,
     remember_token VARCHAR(256)
-=======
-  nome VARCHAR(256) NOT NULL,
-  email VARCHAR(256) UNIQUE NOT NULL,
-	password VARCHAR(256) NOT NULL
-);
-
-CREATE TABLE Administrador (
-  id SERIAL PRIMARY KEY,
-  nome VARCHAR(256) NOT NULL,
-  email VARCHAR(256) UNIQUE NOT NULL,
-  password VARCHAR(256) NOT NULL
->>>>>>> dff051a (Making purchases.)
 );
 
 CREATE TABLE Compra (
@@ -157,7 +144,7 @@ CREATE TABLE ProdutoCarrinho (
 	id SERIAL PRIMARY KEY,
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
-  quantidade INTEGER NOT NULL,
+  quantidade INTEGER NOT NULL CHECK (quantidade > 0),
 	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
 );
 
@@ -165,9 +152,9 @@ CREATE TABLE ProdutoCompra (
   id SERIAL PRIMARY KEY,
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
   id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
-  quantidade INTEGER NOT NULL CHECK (quantidade >= 0),
+  quantidade INTEGER NOT NULL CHECK (quantidade > 0),
   preco FLOAT NOT NULL CHECK (preco >= 0)
-)
+);
 
 CREATE TABLE Notificacao_Carrinho (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,

@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Carrinho | RedHot</title>
-    <body>
+@section('content')
         <h1>Carrinho</h1>
         <ul>
             @foreach ($list as $elem)
@@ -14,5 +10,10 @@
         @if (count($list) > 0)
         <a href="/cart/checkout"><button>Checkout</button></a>
         @endif
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

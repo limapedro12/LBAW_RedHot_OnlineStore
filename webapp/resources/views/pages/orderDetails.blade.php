@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Encomenda {{$purchase->id}} | RedHot</title>
-    </head>
-    <body>
+@section('content')
         <h1>Encomenda {{$purchase->id}}</h1>
         <p>
             <span>Estado: {{$purchase->estado}}</span><br>
@@ -29,5 +24,10 @@
                 <button type="submit">Cancelar encomenda</button>
             </form>
         @endif
-    </body>
-</html>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

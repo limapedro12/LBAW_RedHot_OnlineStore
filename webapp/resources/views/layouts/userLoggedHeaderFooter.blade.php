@@ -61,7 +61,7 @@
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
                         <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
                         <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
-                        <a href="{{ url('/perfil') }}"> <i class="fas fa-angle-right"></i> Perfil</a>
+                        <a href="{{ url('/users/'.Auth::id()) }}"> <i class="fas fa-angle-right"></i> Perfil</a>
                         <a href="{{ url('/logout') }}"> <i class="fas fa-angle-right"></i> Logout</a>
                   </div>
         
