@@ -9,12 +9,15 @@
                     {{ $product->precoatual }}
                 </span>&nbsp
             @endif
-            {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} 
+            {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
         </p>
         @if($product->desconto > 0)
             <p> Desconto: {{ $product->desconto * 100 }}% </p>
             <br>
         @endif
+        <p> Categoria: {{ $product->categoria }} </p>
+        <p> Descrição: </p>
+        <p> {{ $product->descricao }} </p>
     </section>
         @if (Auth::check() && $product->stock > 0)
             <form action="/products/{{$product->id}}/add_to_cart" method="POST">

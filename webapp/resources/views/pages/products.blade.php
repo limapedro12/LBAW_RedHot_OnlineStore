@@ -5,6 +5,7 @@
     <div id='listOfProducts'>
         @foreach ($products as $product) 
             <section class="productListItem">
+                <img src="{{ $product->url_imagem }}" alt="{{ $product->nome }}" height = "100">
                 <h4> <a href = "/products/{{ $product->id }}"> {{ $product->nome }} </a> </h4> 
                 <p> 
                     @if($product->desconto > 0)
@@ -17,6 +18,7 @@
                 @if($product->desconto > 0)
                 <p> Desconto: {{ $product->desconto * 100 }}% </p>
                 @endif
+                <p> Categoria: {{ $product->categoria }} </p>
                 <br>
             </section>
         @endforeach

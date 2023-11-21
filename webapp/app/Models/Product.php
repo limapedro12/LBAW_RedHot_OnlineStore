@@ -23,6 +23,7 @@ class Product extends Model{
         'stock',
         'id_administrador',
         'url_imagem',
+        'categoria'
     ];
 
     public static function searchProducts(string $stringToSearch){
@@ -80,7 +81,8 @@ class Product extends Model{
                       'discountMin' => '',
                       'discountMax' => '',
                       'stockMin' => '',
-                      'stockMax' => ''];
+                      'stockMax' => '',
+                      'categoria' => ''];
         foreach($splitedFilter as $partOfFilter){
             $splitedPartOfFilter = explode(":", $partOfFilter);
             if($splitedPartOfFilter[0] == "preco"){
@@ -109,6 +111,9 @@ class Product extends Model{
                 else if($splitedPartOfFilter[1] == "max"){
                     $filterArr['stockMax'] = $splitedPartOfFilter[2];
                 }
+            }
+            else if($splitedPartOfFilter[0] == "categoria"){
+                $filterArr['categoria'] = $splitedPartOfFilter[1];
             }
         }
         return $filterArr;
@@ -160,6 +165,11 @@ class Product extends Model{
                         if($product->stock > $splitedPartOfFilter[2]){
                             return false;
                         }
+                    }
+                }
+                else if($splitedPartOfFilter[0] == "categoria"){
+                    if($product->categoria != $splitedPartOfFilter[1]){
+                        return false;
                     }
                 }
             }

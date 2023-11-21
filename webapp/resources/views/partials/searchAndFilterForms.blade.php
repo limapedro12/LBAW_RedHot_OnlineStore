@@ -17,5 +17,7 @@
     <label>Stock:</label>
     <input type="text" name="stockFilterMin" id="stockFilterMin" placeholder="Min">
     <input type="text" name="stockFilterMax" id="stockFilterMax" placeholder="Max">
+    <label> Categoria: </label>
+    <input type="text" name="category" id="category" placeholder="Categoria">
     <input type="submit" value="Pesquisar">
 </form>

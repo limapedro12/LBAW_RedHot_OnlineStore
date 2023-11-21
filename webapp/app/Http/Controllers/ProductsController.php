@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 
+function verifyAdmin() : void {
+    if(Auth::guard('admin')->user()==null)
+        abort(403);
+}
 
 class ProductsController extends Controller {
     public function productsDetails(int $id){
@@ -51,17 +55,20 @@ class ProductsController extends Controller {
     }
 
     public function addProductForm(){
+        verifyAdmin();
         return view('pages.productsAdd');
     }
 
     public function addProduct(Request $request){
+        verifyAdmin();
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
             'discount' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'url_image' => 'required|string|max:256',
+            'url_image' => 'required|string|max:1024',
+            'category' => 'string|max:256',
         ]);
 
         $newProduct = Product::create([
@@ -72,18 +79,23 @@ class ProductsController extends Controller {
             'id_administrador' => 1,
             'descricao' => $request->description,
             'url_imagem' => $request->url_image,
+            'categoria' => strtolower($request->category),
         ]);
 
         return redirect('/products/'.$newProduct->id);
     }
 
     public function editProductForm(int $id){
+        verifyAdmin();
+
         return view('pages.productsEdit', [
             'product' => Product::findorfail($id),
         ]);
     }
 
     public function editProduct(Request $request, int $id){
+        verifyAdmin();
+        
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
@@ -91,6 +103,7 @@ class ProductsController extends Controller {
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
             'url_image' => 'required|string|max:256',
+            'category' => 'string|max:256',
         ]);
 
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
@@ -98,7 +111,8 @@ class ProductsController extends Controller {
                                                      'desconto' => $request->discount, 
                                                      'stock' => $request->stock, 
                                                      'descricao' => $request->description, 
-                                                     'url_imagem' => $request->url_image));
+                                                     'url_imagem' => $request->url_image,
+                                                     'categoria' => strtolower($request->category)));
 
         return redirect('/products/'.$id);
     }
