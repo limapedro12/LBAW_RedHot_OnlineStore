@@ -2,7 +2,7 @@
 <div class='home'>
     <img src="{{ asset('sources/main/teste-main-3.png') }}" alt="Termos de Uso" class="background">
     <div class='buttonOnHome'>
-        <a href="{{ url('/products') }}"> Sobre Nós</a>
+        <a href="{{ url('/about') }}"> Sobre Nós</a>
     </div>
 </div>
 <div class='mainDestaques'>
