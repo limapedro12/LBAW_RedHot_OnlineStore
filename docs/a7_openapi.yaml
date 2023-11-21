@@ -880,7 +880,7 @@ paths:
       summary: 'R212: Ação de adição de novo produto ao catálogo'
       description: 'Processa um pedido de adição de um produto ao catálogo de produtos disponíveis. Acesso: ADM'
       tags:
-        - 'M02: Produtos e Catálogo'
+        'M02: Produtos e Catálogo'
       
       requestBody:
         required: true
