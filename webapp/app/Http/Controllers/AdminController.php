@@ -11,6 +11,8 @@ use App\Models\Admin;
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
 
+use App\Models\Product;
+
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
         abort(403);
@@ -30,7 +32,12 @@ class AdminController extends Controller{
     
     public function adminProducts(){
         verifyAdmin();
-        return view('pages.adminProducts');
+        return view('pages.adminProductsManage', [
+            'products' => Product::all(),
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
     }
     
     public function adminProductsDiscounts(){
@@ -45,7 +52,12 @@ class AdminController extends Controller{
     
     public function adminProductsManage(){
         verifyAdmin();
-        return view('pages.adminProductsManage');
+        return view('pages.adminProductsManage', [
+            'products' => Product::all(),
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
     }
     
     public function adminShipping(){
