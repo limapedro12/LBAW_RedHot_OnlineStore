@@ -1,19 +1,13 @@
-<html>
-    <head>
-        <title>{{$user->nome}} | RedHot</title>
-    </head>
-    <body>
-        <h1>{{$user->nome}}</h1>
-        <p>{{$user->email}}</p>
-        <form method="post" action="/users/{{$user->id}}/edit">
-        @csrf
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" value="{{$user->nome}}"><br><br>
-        <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" value="{{$user->email}}"><br><br>
-        <label for="email">Password</label>
-        <input type="password" id="password" name="password" required><br><br> 
-        <input type="submit" value="Submeter">
-        </form>
-    </body>
-</html>
+@section('content')
+    <h1>{{$user->nome}}</h1>
+    <p>{{$user->email}}</p>
+    <a href="/users/{{$user->id}}/edit">Editar Perfil...</a>
+    <a href="/users/{{$user->id}}/delete_account">Apagar Conta...</a>
+    <a href="/users/{{$user->id}}/orders">Minhas encomendas</a>
+@endsection
+
+@if (Auth::check())
+    @include('layouts.userLoggedHeaderFooter')
+@elseif (!Auth::check())
+    @include('layouts.userNotLoggedHeaderFooter')
+@endif

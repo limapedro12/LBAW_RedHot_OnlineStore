@@ -17,6 +17,7 @@ class User extends Authenticatable
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
+    public $isAdmin = true;
 
     protected $table = 'utilizador';
 

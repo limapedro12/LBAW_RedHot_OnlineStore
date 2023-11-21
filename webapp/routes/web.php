@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\ProductCartController;
+use App\Http\Controllers\PurchaseController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,32 +35,35 @@ Route::get('/welcome', function () {
 
 
 
+// Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
-});
-Route::controller(ProductsController::class)->group(function () {
+    Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
+    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
+    Route::get('/products/add', 'addProductForm')->name('addProductForm');
+    Route::post('/products/add', 'addProduct')->name('addProduct');
+    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
+    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
+    Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
+    Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
 });
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/add', 'addProductForm')->name('addProductForm');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::post('/products/add', 'addProduct')->name('addProduct');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
-});
-Route::controller(ProductsController::class)->group(function () {
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-});
 
-
+// Cart and Purchases
+Route::controller(ProductCartController::class)->group(function () {
+    Route::post('/products/{id}/add_to_cart', 'addToCart');
+    Route::get('/cart', 'showCart');
+    Route::post('/cart/remove_product', 'removeFromCart');
+});
+Route::controller(PurchaseController::class)->group(function () {
+    Route::get('/cart/checkout', 'showCheckoutForm');
+    Route::post('/cart/checkout', 'checkout');
+    Route::get('/users/{id}/orders', 'showOrders');
+    Route::get('/users/{userId}/orders/{orderId}', 'showOrderDetails');
+    Route::post('/users/{userId}/orders/{orderId}/cancel', 'cancelOrder');
+});
 
 // User
 Route::controller(UserController::class)->group(function() {
@@ -68,7 +73,6 @@ Route::controller(UserController::class)->group(function() {
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
 });
-
 
 // Authentication
 Route::controller(LoginController::class)->group(function () {
@@ -84,38 +88,17 @@ Route::controller(RegisterController::class)->group(function () {
 
 
 // AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
+
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
+    Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
+    Route::get('/adminProducts', 'adminProducts')->name('adminProducts');
+    Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
+    Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
+    Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
+    Route::get('/adminShipping', 'adminShipping')->name('adminShipping');
+    Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
 });
-
-Route::get('/adminOrders', function () {
-    return view('pages.adminOrders');
-})->name('adminOrders');
-
-Route::get('/adminProducts', function () {
-    return view('pages.adminProducts');
-})->name('adminProducts');
-
-Route::get('/adminProductsDiscounts', function () {
-    return view('pages.adminProductsDiscounts');
-})->name('adminProductsDiscounts');
-
-Route::get('/adminProductsHighlights', function () {
-    return view('pages.adminProductsHighlights');
-})->name('adminProductsHighlights');
-
-Route::get('/adminProductsManage', function () {
-    return view('pages.adminProductsManage');
-})->name('adminProductsManage');
-
-Route::get('/adminShipping', function () {
-    return view('pages.adminShipping');
-})->name('adminShipping');
-
-Route::get('/adminUsers', function () {
-    return view('pages.adminUsers');
-})->name('adminUsers');
-
 
 // PPs
 Route::get('/pps', function () {

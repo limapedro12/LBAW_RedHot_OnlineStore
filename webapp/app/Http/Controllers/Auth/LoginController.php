@@ -35,7 +35,8 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
  
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        if (Auth::guard('admin')->attempt($credentials, $request->filled('remember')) ||
+            Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
  
             return redirect()->intended('/products');
@@ -52,9 +53,10 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')
+        return redirect('/products')
             ->withSuccess('You have logged out successfully!');
     } 
 }

@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+
+function verifyUser(User $user) : void {
+    if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
+        abort(403);
+}
 
 class UserController extends Controller
 {
@@ -23,7 +29,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $this->authorize('viewProfile', $user);
+        verifyUser($user);
 
         return view('pages.user', [
             'user' => $user
@@ -34,7 +40,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('pages.editProfile', [
+        verifyUser($user);
+
+        return view('pages.editUser', [
             'user' => $user
         ]);
     }
@@ -43,23 +51,51 @@ class UserController extends Controller
     {
         $user = User::findOrfail($id);
 
-        if ($user->password != Hash::make($request->password)) {
+        verifyUser($user);
+
+        if (!Hash::check($request->password, $user->password)) {
             return redirect('/users/'.$id.'/edit');
         }
 
         $request->validate([
             'nome' => 'required|string|max:256',
-            'email' => 'required|email|max:256|unique:utilizador',
+            'email' => 'required|email|max:256',
         ]);
+
+        if ($request->email != $user->email) {
+            $request->validate([
+                'email' => 'unique:utilizador',
+            ]);
+        }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));
 
         return redirect('/users/'.$id);
     }
 
-    public function destroy(User $user)
+    public function deleteAccountForm(int $id) : View
     {
-        $card->delete();
+        $user = User::findOrFail($id);
+
+        $this->authorize('deleteAccount', $user);
+
+        return view('pages.delete_account', [
+            'user' => $user
+        ]);
+    }
+
+    public function deleteAccount(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $this->authorize('deleteAccount', $user);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect('/users/'.$id.'/delete_account');
+        }
+
+        User::where('id', '=', $id)->delete();
+
+        return redirect('/logout');
     }
 }
-

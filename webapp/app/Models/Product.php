@@ -187,4 +187,14 @@ class Product extends Model{
         $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
         return $filteredProducts;
     }
+
+    public function decrementStock(int $quantity){
+        $this->stock -= $quantity;
+        $this->save();
+    }
+
+    public function incrementStock(int $quantity){
+        $this->stock += $quantity;
+        $this->save();
+    }
 }
