@@ -74,7 +74,7 @@
 
 
 
-@if (Auth::guard('admin'))
+@if (Auth::guard('admin')->check())
 @include('layouts.adminHeaderFooter')
 @elseif (Auth::check())
 @include('layouts.userLoggedHeaderFooter')
