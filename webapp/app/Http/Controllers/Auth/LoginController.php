@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
  
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'As credenciais dadas não correspodem ao nossos registos.',
         ])->onlyInput('email');
     }
 
@@ -70,6 +70,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/welcome')
-            ->withSuccess('You have logged out successfully!');
+            ->withSuccess('Logout efetuado com sucesso!');
     } 
 }

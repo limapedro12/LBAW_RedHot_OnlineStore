@@ -49,6 +49,6 @@ class RegisterController extends Controller
         ]);
 
         return redirect('/login')
-            ->withSuccess('You have successfully registered!');
+            ->withSuccess('Conta criada com sucesso!');
     }
 }
