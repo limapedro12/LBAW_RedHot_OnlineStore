@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{ Auth::guard('admin')->user()->nome }}
+
 
 <div class="adminContent">
     <div class="adminPage">      

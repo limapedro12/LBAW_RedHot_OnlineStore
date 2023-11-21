@@ -34,6 +34,7 @@
             <input type="submit" value="Ver comentarios">
         </form>
     </section>
+</section>
 @endsection        
 
 @if (Auth::check())

@@ -74,10 +74,10 @@
 
 
 
-@if (Auth::check())
-    @include('layouts.userLoggedHeaderFooter')
-    
-@elseif (!Auth::check())
-    @include('layouts.userNotLoggedHeaderFooter')
-
+@if (Auth::guard('admin'))
+@include('layouts.adminHeaderFooter')
+@elseif (Auth::check())
+@include('layouts.userLoggedHeaderFooter')
+@else
+@include('layouts.userNotLoggedHeaderFooter')
 @endif

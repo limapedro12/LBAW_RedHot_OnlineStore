@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
-            return redirect('/products');
+            return redirect('/welcome');
         } else {
             return view('auth.login');
         }
@@ -61,7 +61,7 @@ class LoginController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/products')
+        return redirect('/welcome')
             ->withSuccess('You have logged out successfully!');
     } 
 }
