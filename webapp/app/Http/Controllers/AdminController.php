@@ -8,6 +8,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Admin;
+use App\Models\Purchase;
+
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
 
@@ -25,11 +27,17 @@ class AdminController extends Controller{
     
     public function adminOrders(){
         verifyAdmin();
-        return view('pages.adminOrders');
+
+        $orders = Purchase::all();
+
+        return view('pages.adminOrders', [
+            'orders' => $orders
+        ]);
     }
     
     public function adminProducts(){
         verifyAdmin();
+
         return view('pages.adminProducts');
     }
     
