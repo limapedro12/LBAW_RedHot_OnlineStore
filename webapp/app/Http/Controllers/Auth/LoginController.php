@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+function verifyNotAutenticated() : void {
+    if(Auth::check() || Auth::guard('admin')->check())
+        abort(403);
+}
+
 class LoginController extends Controller
 {
 
@@ -18,6 +23,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        verifyNotAutenticated();
         if (Auth::check()) {
             return redirect('/welcome');
         } else {
@@ -30,6 +36,7 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request): RedirectResponse
     {
+        verifyNotAutenticated();
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -57,6 +64,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        verifyNotAutenticated();
         Auth::logout();
         Auth::guard('admin')->logout();
         $request->session()->invalidate();

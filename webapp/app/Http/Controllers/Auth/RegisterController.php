@@ -12,6 +12,12 @@ use Illuminate\View\View;
 
 use App\Models\User;
 
+
+function verifyNotAutenticated() : void {
+    if(Auth::check() || Auth::guard('admin')->check())
+        abort(403);
+}
+
 class RegisterController extends Controller
 {
     /**
@@ -19,6 +25,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm(): View
     {
+        verifyNotAutenticated();
         return view('auth.register');
     }
 
@@ -28,6 +35,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {   
 
+        verifyNotAutenticated();
         $request->validate([
             'nome' => 'required|string|max:256',
             'email' => 'required|email|max:256|unique:utilizador',
@@ -40,11 +48,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        // $credentials = $request->only('email', 'password');
-        // Auth::attempt($credentials);
-        // $request->session()->regenerate();
-        // return redirect('/users/'.$newUser->id)
-        //     ->withSuccess('You have successfully registered & logged in!');
         return redirect('/login')
             ->withSuccess('You have successfully registered!');
     }
