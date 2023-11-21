@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 
+function verifyAdmin() : void {
+    if(Auth::guard('admin')->user()==null)
+        abort(403);
+}
 
 class ProductsController extends Controller {
     public function productsDetails(int $id){
@@ -51,10 +55,12 @@ class ProductsController extends Controller {
     }
 
     public function addProductForm(){
+        verifyAdmin();
         return view('pages.productsAdd');
     }
 
     public function addProduct(Request $request){
+        verifyAdmin();
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
@@ -80,12 +86,16 @@ class ProductsController extends Controller {
     }
 
     public function editProductForm(int $id){
+        verifyAdmin();
+
         return view('pages.productsEdit', [
             'product' => Product::findorfail($id),
         ]);
     }
 
     public function editProduct(Request $request, int $id){
+        verifyAdmin();
+        
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
