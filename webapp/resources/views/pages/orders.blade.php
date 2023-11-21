@@ -9,8 +9,11 @@
     </body>
 @endsection
 
-@if (Auth::check())
+@if (Auth::guard('admin')->check())
+    @include('layouts.adminHeaderFooter')
+@elseif (Auth::check())
     @include('layouts.userLoggedHeaderFooter')
-@elseif (!Auth::check())
+@else
     @include('layouts.userNotLoggedHeaderFooter')
 @endif
+
