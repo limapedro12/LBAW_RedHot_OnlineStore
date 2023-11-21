@@ -37,6 +37,7 @@
               
                   <nav class="navbar">
                       <a href="{{ url('/products') }}">Catálogo</a>
+                      <!-- <a href="{{ url('/cart') }}">Carrinho</a> -->
                       <a href="{{ url('/register') }}">Registar</a>
                       <a href="{{ url('/login') }}">Login</a>
                   </nav>
@@ -59,7 +60,7 @@
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
                         <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
-                        <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
+                        <!-- <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a> -->
                         <a href="{{ url('/register') }}"> <i class="fas fa-angle-right"></i> Registar</a>
                         <a href="{{ url('/login') }}"> <i class="fas fa-angle-right"></i> Login</a>
                   </div>
