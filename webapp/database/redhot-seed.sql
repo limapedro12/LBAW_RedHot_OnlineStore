@@ -85,7 +85,7 @@ CREATE TABLE Produto (
 	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
   stock INTEGER NOT NULL CHECK (stock >= 0),
   id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
-  url_imagem VARCHAR(256) DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png',
+  url_imagem VARCHAR(1024) DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png',
   categoria VARCHAR(256)
 );
 

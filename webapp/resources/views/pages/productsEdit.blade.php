@@ -23,6 +23,9 @@
         <label for="url_image">Image URL:</label>
         <input type="text" id="url_image" name="url_image" value="{{ $product->url_imagem }}" required><br><br>
 
+        <label for="category">Categoria:</label>
+        <input type="text" id="category" name="category" value="{{ $product->categoria }}"><br><br>
+
         <input type="submit" value="Save">
     </form>
 </section>

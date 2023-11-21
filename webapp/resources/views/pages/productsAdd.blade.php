@@ -23,6 +23,9 @@
         <label for="url_image">Image URL:</label>
         <input type="text" id="url_image" name="url_image" required><br><br>
 
+        <label for="category">Categoria:</label>
+        <input type="text" id="category" name="category"><br><br>
+
         <input type="submit" value="Add Product">
     </form>
 </section>

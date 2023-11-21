@@ -7,7 +7,7 @@ function productToHTML(product) {
         html += `<span style = "text-decoration: line-through;">${product.precoatual}</span>&nbsp`
     }
         html += discountFunction(product.precoatual, product.desconto);
-        html += `</p>`;
+        html += ` €</p>`;
     if (product.desconto > 0) {
         html += `<p> Desconto: ${product.desconto * 100}% </p>`
     }
@@ -57,7 +57,7 @@ document.getElementById('searchAndFilter').addEventListener('submit', function(e
     var discountFilterMax = document.getElementById('discountFilterMax').value;
     var stockFilterMin = document.getElementById('stockFilterMin').value;
     var stockFilterMax = document.getElementById('stockFilterMax').value;
-    var category = document.getElementById('category').value;
+    var category = document.getElementById('category').value.toLowerCase();
     var filterString = '';
     if (priceFilterMin != '') {
         filterString += 'preco:min:' + priceFilterMin + ';';

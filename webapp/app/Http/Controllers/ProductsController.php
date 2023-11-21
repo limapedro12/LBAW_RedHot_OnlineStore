@@ -61,7 +61,8 @@ class ProductsController extends Controller {
             'discount' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'url_image' => 'required|string|max:256',
+            'url_image' => 'required|string|max:1024',
+            'category' => 'string|max:256',
         ]);
 
         $newProduct = Product::create([
@@ -72,6 +73,7 @@ class ProductsController extends Controller {
             'id_administrador' => 1,
             'descricao' => $request->description,
             'url_imagem' => $request->url_image,
+            'categoria' => strtolower($request->category),
         ]);
 
         return redirect('/products/'.$newProduct->id);
@@ -91,6 +93,7 @@ class ProductsController extends Controller {
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
             'url_image' => 'required|string|max:256',
+            'category' => 'string|max:256',
         ]);
 
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
@@ -98,7 +101,8 @@ class ProductsController extends Controller {
                                                      'desconto' => $request->discount, 
                                                      'stock' => $request->stock, 
                                                      'descricao' => $request->description, 
-                                                     'url_imagem' => $request->url_image));
+                                                     'url_imagem' => $request->url_image,
+                                                     'categoria' => strtolower($request->category)));
 
         return redirect('/products/'.$id);
     }
