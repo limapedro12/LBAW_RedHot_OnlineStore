@@ -1775,63 +1775,8 @@ paths:
 
   
 
-  /admin/consultar_estatistica/{id}/API:
-    get:
-      operationId: R601
-      summary: 'R601: Ver uma estatística'
-      description: 'Mostrar uma estatística. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
 
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Objeto JSON com a estatística'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  value:
-                    type: number
-              example:
-                id: 1
-                name: 'Número de utilizadores registados'
-                description: 'Número de utilizadores registados no site'
-                value: 1000
-
-  /admin/consultar_estatistica/{id}:
-    get:
-      operationId: R602
-      summary: 'R602: Ver uma estatística'
-      description: 'Mostrar uma estatística. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Mostrar a página de uma estatística'
-
-  /admin/consultar_estatisticas/API:
+  /admin/API:
     get:
       operationId: R603
       summary: 'R603: Ver todas as estatísticas'
@@ -1871,7 +1816,7 @@ paths:
                     description: 'Número de produtos vendidos no site'
                     value: 1000
       
-  /admin/consultar_estatisticas:
+  /admin:
     get:
       operationId: R604
       summary: 'R604: Ver todas as estatísticas'
@@ -1883,7 +1828,7 @@ paths:
         '200':
           description: 'Mostrar a página de todas as estatísticas'
 
-  /admin/gerir_produtos_em_destaque/API:
+  /adminProductsHighlights/API:
     get:
       operationId: R605
       summary: 'R605: Ver todos os produtos em destaque'
@@ -1952,7 +1897,7 @@ paths:
                       - id: 2
                         url: 'https://i.imgur.com/2s0jY9H.jpg'
 
-  /admin/gerir_produtos_em_destaque:
+  /adminProductsHighlights:
     get:
       operationId: R606
       summary: 'R606: Ver todos os produtos em destaque'
@@ -2149,6 +2094,335 @@ paths:
                 302Failure:
                   description: 'Falha ao editar produto dos produtos em destaque'
                   value: /products/{id}
+
+
+  /adminProductsManage/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todos os produtos em destaque'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+              example:
+                products:
+                  - id: 17
+                    name: 'Piri-Piri'
+                    description: 'Molho de Piri-Piri'
+                    price: 2.99
+                    discount: 0.0
+                    stock: 10
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                  - id: 18
+                    name: 'Piri-Piri com Cannabis'
+                    description: 'Molho de Piri-Piri com Cannabis'
+                    price: 3.99
+                    discount: 0.0
+                    stock: 9
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /adminProductsManage:
+    get:
+      operationId: R606
+      summary: 'R606: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todos os produtos em destaque'
+
+
+  /adminOrders/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todos os produtos em destaque'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+              example:
+                products:
+                  - id: 17
+                    name: 'Piri-Piri'
+                    description: 'Molho de Piri-Piri'
+                    price: 2.99
+                    discount: 0.0
+                    stock: 10
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                  - id: 18
+                    name: 'Piri-Piri com Cannabis'
+                    description: 'Molho de Piri-Piri com Cannabis'
+                    price: 3.99
+                    discount: 0.0
+                    stock: 9
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /adminOrders:
+    get:
+      operationId: R606
+      summary: 'R606: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todos os produtos em destaque'
+
+
+  /adminShipping/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todos os produtos em destaque'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+              example:
+                products:
+                  - id: 17
+                    name: 'Piri-Piri'
+                    description: 'Molho de Piri-Piri'
+                    price: 2.99
+                    discount: 0.0
+                    stock: 10
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                  - id: 18
+                    name: 'Piri-Piri com Cannabis'
+                    description: 'Molho de Piri-Piri com Cannabis'
+                    price: 3.99
+                    discount: 0.0
+                    stock: 9
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /adminShipping:
+    get:
+      operationId: R606
+      summary: 'R606: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todos os produtos em destaque'
+
+  /adminUsers/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Objeto JSON com todos os produtos em destaque'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        discount:
+                          type: number
+                        stock:
+                          type: integer
+                        ratting:
+                          type: number
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              url:
+                                type: string
+              example:
+                products:
+                  - id: 17
+                    name: 'Piri-Piri'
+                    description: 'Molho de Piri-Piri'
+                    price: 2.99
+                    discount: 0.0
+                    stock: 10
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                  - id: 18
+                    name: 'Piri-Piri com Cannabis'
+                    description: 'Molho de Piri-Piri com Cannabis'
+                    price: 3.99
+                    discount: 0.0
+                    stock: 9
+                    images:
+                      - id: 1
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+                      - id: 2
+                        url: 'https://i.imgur.com/2s0jY9H.jpg'
+
+  /adminUsers:
+    get:
+      operationId: R606
+      summary: 'R606: Ver todos os produtos em destaque'
+      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
+      tags:
+        - 'M06: Páginas de Administrador'
+
+      responses:
+        '200':
+          description: 'Mostrar a página de todos os produtos em destaque'
+
+
 
   /faqs/API:
     get:
