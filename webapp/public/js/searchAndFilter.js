@@ -1,5 +1,6 @@
 function productToHTML(product) {
     var html = `<section class="productListItem">
+                <img src = "${product.url_imagem}" alt = "${product.nome}" height = "100">
                 <h4> <a href = "/products/${product.id}">${product.nome}</a> </h4>
                 <p>`
     if (product.desconto > 0) {
@@ -10,7 +11,8 @@ function productToHTML(product) {
     if (product.desconto > 0) {
         html += `<p> Desconto: ${product.desconto * 100}% </p>`
     }
-        html += `<br>
+        html += `<p>Categoria: ${product.categoria}</p>
+                 <br>
                  </section>`;
     return html;
 }
@@ -55,6 +57,7 @@ document.getElementById('searchAndFilter').addEventListener('submit', function(e
     var discountFilterMax = document.getElementById('discountFilterMax').value;
     var stockFilterMin = document.getElementById('stockFilterMin').value;
     var stockFilterMax = document.getElementById('stockFilterMax').value;
+    var category = document.getElementById('category').value;
     var filterString = '';
     if (priceFilterMin != '') {
         filterString += 'preco:min:' + priceFilterMin + ';';
@@ -76,6 +79,9 @@ document.getElementById('searchAndFilter').addEventListener('submit', function(e
     }
     if (stockFilterMax != '') {
         filterString += 'stock:max:' + stockFilterMax + ';';
+    }
+    if (category != '') {
+        filterString += 'categoria:' + category + ';';
     }
 
     if(searchString == '')
