@@ -1,4 +1,5 @@
 @section('content')
+<section>
     <div class="ppTous">
         <div class="ppTous-container">
             <h1>Termos de Uso</h1>
@@ -79,6 +80,7 @@
             </p>
         </div>
     </div>
+</section>
 @endsection
 
 @if (Auth::check())
