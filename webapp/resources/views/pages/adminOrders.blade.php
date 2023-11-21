@@ -65,8 +65,12 @@
             </div>
         </div>
         <div class="adminOptionContent">
-            <h2>Admin Content</h2>
-            <p>Admin content goes here</p>
+            <h2>Encomendas</h2>
+            <ul>
+            @foreach ($orders as $order)
+                @include ('partials.purchase', ['purchase' => $order, 'userId' => $order->id_utilizador])
+            @endforeach
+            </ul>
         </div>
     </div>
 </div>
