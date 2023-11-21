@@ -116,4 +116,11 @@ class ProductsController extends Controller {
 
         return redirect('/products/'.$id);
     }
+
+    function deleteProduct(Request $request, int $id){
+        verifyAdmin();
+        Product::where('id', '=', $id)->delete();
+        return redirect('/products');
+    }
+
 }
