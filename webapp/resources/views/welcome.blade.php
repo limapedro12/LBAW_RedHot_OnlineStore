@@ -11,7 +11,7 @@
     </div>
     <div class='top4SellingProducts'>
         <div class='top4SellingProductsTitle'>
-            <h2>Produtos Mais Vendidos</h2>
+            <h2>Produtos em Destaque</h2>
         </div>
         <div class='top4SellingProductsList'>
             <a href="{{ url('/products/1') }}">
