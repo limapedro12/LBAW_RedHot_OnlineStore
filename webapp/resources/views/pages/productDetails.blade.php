@@ -27,12 +27,20 @@
                 <button type="submit"> Adicionar ao carrinho </button>
             </form>
         @endif
-    <section class='comments'>
+    <section class="comments">
         <h4> Comentários </h4>
         <form method="GET" action="{{ route('reviews', ['id_product' => $product->id]) }}" productId="{{$product->id}}" productName="{{$product->nome}}">
 
             <input type="submit" value="Ver comentarios">
         </form>
+    </section>
+    <section class="delete">
+        @if(Auth::guard('admin')->check())
+            <form method='post' action='/products/{{ $product->id }}/delete'>
+            @csrf
+            <input type="submit" value="O que quiseres">
+            </form>
+        @endif
     </section>
 </section>
 @endsection        

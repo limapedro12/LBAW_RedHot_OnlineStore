@@ -1,0 +1,171 @@
+.login {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    margin: 5rem;
+}
+
+.login .loginLogo {
+    flex: 1 1 41rem;
+    text-align: center;
+}
+
+.login .loginLogo img {
+    width: 57%;
+}
+
+.login .loginInput {
+    flex: 1 1 41rem;
+    text-align: center;
+    border-left: var(--main-color) 5px solid;
+    padding-left: 3rem;
+    align-items: center;
+    padding-bottom: 5rem;
+    padding-top: 5rem;
+}
+
+.login .loginInput h2 {
+    font-size: 3.5rem;
+    color: var(--black);
+}
+
+.login .loginInput .loginContainer {
+    margin: 2rem 0;
+}
+
+.login .loginInput .loginContainer input {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    border: 1px solid var(--light-black);
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.login .loginInput .loginContainer input:focus {
+    border: 1px solid var(--black);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.login .loginInput .loginContainer input::placeholder {
+    color: var(--light-black);
+}
+
+.login .loginInput .loginContainer .inputBox input[data-state="invalid"] {
+    border: 1px solid var(--main-color);
+}
+
+.login .loginInput .loginContainer .inputBox .textDanger {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login .loginInput .loginContainer .loginOptions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login .loginInput .loginContainer .loginOptions .stayLoggedIn {
+    display: flex;
+    align-items: center;
+}
+
+.login .loginInput .loginContainer .loginOptions .stayLoggedIn input {
+    display: none;
+}
+
+.login .loginInput .loginContainer .loginOptions .stayLoggedIn input+label::before {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--light-black);
+    border-radius: 0.4rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    background-color: var(--white);
+    vertical-align: middle;
+}
+
+.login .loginInput .loginContainer .loginOptions .stayLoggedIn input:checked+label::before {
+    background-color: var(--main-color);
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.5rem;
+    vertical-align: middle;
+}
+
+.login .loginInput .loginContainer .loginOptions .stayLoggedIn label {
+    font-size: 1.5rem;
+    color: var(--light-black);
+}
+
+.login .loginInput .loginContainer .loginOptions button {
+    width: 10%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: var(--main-color);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.login .loginInput .loginOptions button:hover {
+    opacity: 0.8;
+}
+
+
+.login .loginInput .loginContainer .loginLinks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.login .loginInput .loginContainer .loginLinks a {
+    font-size: 1.5rem;
+    color: var(--light-black);
+}
+
+.login .loginInput .loginContainer .loginLinks a:hover {
+    color: var(--main-color);
+}
+
+.login .loginInput .loginContainer .loginLinks a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: var(--main-color);
+    display: block;
+    transition: width 0.5s;
+}
+
+.login .loginInput .loginContainer .loginLinks a:hover::after {
+    width: 100%;
+}
+
+#messages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0;
+}
+
+#messages p {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    margin: 0;
+    padding: 0;
+}

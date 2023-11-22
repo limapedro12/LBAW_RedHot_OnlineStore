@@ -87,9 +87,14 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/register', 'register');
 });
 
+// Forget Password
+Route::get('/forgetPassword', function () {
+    return view('auth.forgetPassword');
+})->name('forgetPassword');
+
+
 
 // AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
-
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');

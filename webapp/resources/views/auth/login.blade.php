@@ -1,39 +1,60 @@
 @extends('layouts.userNotLoggedHeaderFooter')
 
 @section('content')
-<section>
-<form method="POST" action="{{ route('login') }}">
-    {{ csrf_field() }}
+<section class ="login">
+    <div class="loginLogo">
+        <img src="{{ asset('sources/logo/logo_lbaw-black.png') }}" alt="logo">
+    </div>
 
-    <label for="email">E-mail</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
-    @if ($errors->has('email'))
-        <span class="error">
-          {{ $errors->first('email') }}
-        </span>
-    @endif
+    <div class="loginInput">
+        <h2 class ="title">Login</h2>
+        <form method="POST" action="{{ route('login') }}" class="loginContainer">
+            {{ csrf_field() }}
 
-    <label for="password" >Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-        <span class="error">
-            {{ $errors->first('password') }}
-        </span>
-    @endif
+            <div class="inputBox">
+                <input id="email" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
+                @if ($errors->has('email'))
+                    <p class="textDanger">
+                    {{ $errors->first('email') }}
+                    </p>
+                @endif
+            </div>
 
-    <label>
-        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-    </label>
+            <div class="inputBox">
+                <input id="password" type="password" name="password" placeholder="Password" required>
+                @if ($errors->has('password'))
+                    <p class="textDanger">
+                        {{ $errors->first('password') }}
+                    </p>
+                @endif
+            </div>
 
-    <button type="submit">
-        Login
-    </button>
-    <a class="button button-outline" href="{{ route('register') }}">Register</a>
-    @if (session('success'))
-        <p class="success">
-            {{ session('success') }}
-        </p>
-    @endif
-</form>
+            <div class="loginOptions">
+                <button type="submit">
+                    <span class="loginBtn">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </button>
+
+                <div class="stayLoggedIn">
+                    <input type="checkbox" id="stayLoggedInCheck" value="true" {{ old('remember') ? 'checked' : '' }}>
+                    <label for="stayLoggedInCheck">Lembrar-me</label>
+                </div>
+            </div>
+
+            <div class="loginLinks">
+                <a href="{{ route('forgetPassword') }}">Esqueceu-se da password?</a>
+                <a href="{{ route('register') }}">Ainda não tem conta?</a>
+            </div>
+            
+            <section id="messages">
+                @if (session('success'))
+                    <p class="success">
+                        {{ session('success') }}
+                    </p>
+                @endif
+            </section>
+        </form>
+    </div>
 </section>
 @endsection
