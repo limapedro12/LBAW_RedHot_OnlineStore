@@ -22,10 +22,7 @@
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/login.css') }}" rel="stylesheet">
-<<<<<<< 90eaf5df54026ac154de2356af22c54c84f611e4
         <link href="{{ url('css/register.css') }}" rel="stylesheet">
-=======
->>>>>>> f71a243e907d238cf63ec821ccc6df60789eb0c5
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer>
