@@ -8,6 +8,10 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Admin;
+use App\Models\Purchase;
+use App\Models\Product;
+use App\Models\ProductPurchase;
+
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
 
@@ -22,12 +26,37 @@ class AdminController extends Controller{
 
     public function admin(){
         verifyAdmin();
-        return view('pages.admin');
+
+        $sales = [];
+        
+        $sales["count"] = Purchase::count();
+        
+        if ($sales["count"] == 0) {
+            $sales["avg"] = 0;
+            $sales["total"] = 0;
+        } else {
+            $sales["total"] = Purchase::sum('total');
+            $sales["avg"] = $sales["total"] / $sales["count"];
+        }
+
+        //$most_sold_id = ProductPurchase::select('id_produto')->groupBy('id_produto')->orderBy('quantidade', 'desc')->first();
+
+        //$most_sold = Product::find($most_sold_id);
+
+        return view('pages.admin', [
+                'sales' => $sales//,
+                //'most_sold' => $most_sold
+        ]);
     }
     
     public function adminOrders(){
         verifyAdmin();
-        return view('pages.adminOrders');
+
+        $orders = Purchase::all();
+
+        return view('pages.adminOrders', [
+            'orders' => $orders
+        ]);
     }
     
     public function adminProducts(){

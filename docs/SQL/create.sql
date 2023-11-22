@@ -28,109 +28,113 @@ CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
   	nome VARCHAR(256) NOT NULL,
   	email VARCHAR(256) UNIQUE NOT NULL,
-	password VARCHAR(256) NOT NULL
+	password VARCHAR(256) NOT NULL,
+  remember_token VARCHAR(256)
 );
 
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,
       nome VARCHAR(256) NOT NULL,
       email VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    password VARCHAR(256) NOT NULL,
+    remember_token VARCHAR(256)
 );
 
 CREATE TABLE Compra (
 	id SERIAL PRIMARY KEY,
-  	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	total FLOAT NOT NULL CHECK (total >= 0),
-        descricao TEXT,
-  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
-    estado VARCHAR(256) NOT NULL,
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
+  total FLOAT NOT NULL CHECK (total >= 0),
+  descricao TEXT,
+  id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  estado VARCHAR(256) NOT NULL,
 	id_administrador INTEGER REFERENCES Administrador (id)
 );
 
 CREATE TABLE Transporte (
 	id SERIAL PRIMARY KEY,
-  	tipo VARCHAR(256) NOT NULL,
-  	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0)
+  tipo VARCHAR(256) NOT NULL,
+  precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0)
 );
 
 CREATE TABLE Devolucao (
 	id SERIAL PRIMARY KEY,
-  	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	estado VARCHAR(256),
-    id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
+  estado VARCHAR(256),
+  id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
 );
 
 CREATE TABLE Reembolso (
 	id SERIAL PRIMARY KEY,
-  	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	estado VARCHAR(256),
-        id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
+  estado VARCHAR(256),
+  id_compra INTEGER NOT NULL REFERENCES Compra (ID) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao (
 	id SERIAL PRIMARY KEY,
-  	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	texto VARCHAR(256) NOT NULL,
-        id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
+  texto VARCHAR(256) NOT NULL,
+  id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Produto (
 	id SERIAL PRIMARY KEY,
-  	nome VARCHAR(256) NOT NULL,
+  nome VARCHAR(256) NOT NULL,
 	descricao TEXT NOT NULL,
-  	precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
+  precoAtual FLOAT NOT NULL CHECK (precoAtual >= 0),
 	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
-  	stock INTEGER NOT NULL CHECK (stock >= 0),
-  	id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+  stock INTEGER NOT NULL CHECK (stock >= 0),
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
+  url_imagem VARCHAR(1024) DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png',
+  categoria VARCHAR(256)
 );
 
 CREATE TABLE Comentario (
 	id SERIAL PRIMARY KEY,
-  	timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
-  	texto TEXT NOT NULL,
-    avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
-  	id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
-  	id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
+  texto TEXT NOT NULL,
+  avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
+  id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Compra (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE
+  id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Devolucao (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_devolucao INTEGER REFERENCES Devolucao (id) ON UPDATE CASCADE
+  id_devolucao INTEGER REFERENCES Devolucao (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Reembolso (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_reembolso INTEGER REFERENCES Reembolso (id) ON UPDATE CASCADE
+  id_reembolso INTEGER REFERENCES Reembolso (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Stock (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_stock INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+  id_stock INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_administrador INTEGER REFERENCES Administrador (ID) ON UPDATE CASCADE
 );
 
 CREATE TABLE Portes (
 	id_compra INTEGER NOT NULL UNIQUE REFERENCES Compra (ID) ON UPDATE CASCADE,
-  	id_transporte INTEGER REFERENCES Transporte (id) ON UPDATE CASCADE,
+  id_transporte INTEGER REFERENCES Transporte (id) ON UPDATE CASCADE,
  	preco FLOAT NOT NULL CHECK (preco >= 0)
 );
 
 CREATE TABLE Preco (
-  	preco FLOAT NOT NULL CHECK (preco >= 0),
+  preco FLOAT NOT NULL CHECK (preco >= 0),
 	id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE ProdutoWishlist (
 	id INTEGER PRIMARY KEY,
-  	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
+  id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
@@ -138,20 +142,29 @@ CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
 );
 
 CREATE TABLE ProdutoCarrinho (
-	id INTEGER PRIMARY KEY,
-  	id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+	id SERIAL PRIMARY KEY,
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  quantidade INTEGER NOT NULL CHECK (quantidade > 0),
 	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE ProdutoCompra (
+  id SERIAL PRIMARY KEY,
+  id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
+  id_compra INTEGER REFERENCES Compra (id) ON UPDATE CASCADE,
+  quantidade INTEGER NOT NULL CHECK (quantidade > 0),
+  preco FLOAT NOT NULL CHECK (preco >= 0)
 );
 
 CREATE TABLE Notificacao_Carrinho (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_produto_carrinho INTEGER REFERENCES ProdutoCarrinho (id) ON UPDATE CASCADE
+  id_produto_carrinho INTEGER REFERENCES ProdutoCarrinho (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notificacao_Wishlist (
 	id INTEGER PRIMARY KEY REFERENCES Notificacao (id) ON UPDATE CASCADE,
-  	id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
+  id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
 );
 
 -- IDX01
@@ -179,7 +192,7 @@ BEGIN
         );
  END IF;
  IF TG_OP = 'UPDATE' THEN
-         IF (NEW.title <> OLD.title OR NEW.obs <> OLD.obs) THEN
+         IF (NEW.nome <> OLD.nome OR NEW.descricao <> OLD.descricao) THEN
            NEW.tsvectors = (
              setweight(to_tsvector('portuguese', NEW.nome), 'A') ||
              setweight(to_tsvector('portuguese', NEW.descricao), 'B')

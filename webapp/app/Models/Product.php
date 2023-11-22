@@ -27,9 +27,10 @@ class Product extends Model{
     ];
 
     public static function searchProducts(string $stringToSearch){
-        $searchTemperature = 0.5;
+        $searchTemperature = 0.1;
         $searchedProducts = DB::table('produto')
                             ->whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
+                            ->orderByRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) DESC", [$stringToSearch])
                             ->get();
 
         return $searchedProducts;

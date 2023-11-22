@@ -23,7 +23,7 @@
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
   
         <!-- Scripts -->
-        <script type="text/javascript" src={{ url('js/header.js') }} defer>
+        <script type="text/javascript" src={{ url('js/app.js') }} defer>
         </script>
     </head>
     <body>

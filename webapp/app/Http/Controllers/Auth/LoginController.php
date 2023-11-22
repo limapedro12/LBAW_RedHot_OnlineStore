@@ -1,5 +1,5 @@
 <?php
- 
+  
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+function verifyNotAutenticated() : void {
+    if(Auth::check() || Auth::guard('admin')->check())
+        abort(403);
+}
+
 class LoginController extends Controller
 {
 
@@ -18,6 +23,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        verifyNotAutenticated();
         if (Auth::check()) {
             return redirect('/welcome');
         } else {
@@ -30,6 +36,7 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request): RedirectResponse
     {
+        verifyNotAutenticated();
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -48,7 +55,7 @@ class LoginController extends Controller
         }
  
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'As credenciais dadas não correspodem ao nossos registos.',
         ])->onlyInput('email');
     }
 
@@ -57,11 +64,12 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        //verifyNotAutenticated();
         Auth::logout();
-        Auth::guard('admin')->logout();
+        //Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/welcome')
-            ->withSuccess('You have logged out successfully!');
+        return redirect('/')
+            ->withSuccess('Logout efetuado com sucesso!');
     } 
 }

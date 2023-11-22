@@ -68,8 +68,10 @@
             </div>
         </div>
         <div class="adminOptionContent">
-            <h2>Admin Content</h2>
-            <p>Admin content goes here</p>
+            <h2>Estatísticas de Vendas</h2>
+            <h3>Total de Vendas: {{ $sales["count"] }}</h3>
+            <h3>Total Faturado: {{ $sales["total"] }}€</h3>
+            <h3>Valor médio por encomenda: {{ $sales["avg"] }}€</h3>
         </div>
     </div>
 </div>
