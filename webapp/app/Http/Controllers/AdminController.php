@@ -15,6 +15,8 @@ use App\Models\ProductPurchase;
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
 
+use App\Models\Product;
+
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
         abort(403);
