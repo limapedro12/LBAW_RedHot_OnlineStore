@@ -65,8 +65,40 @@
             </div>
         </div>
         <div class="adminOptionContent">
-            <h2>Admin Content</h2>
-            <p>Admin content goes here</p>
+
+            <h2>Gestão de Produtos</h2>
+            <iframe src="/products/add" width=500 height=500></iframe>
+
+            <section>
+                <h1>Lista de Produtos</h1>
+                    @include('partials.searchAndFilterForms')
+                <div id='listOfProducts'>
+                    @foreach ($products as $product) 
+                        <section class="productListItem">
+                            <img src="{{ $product->url_imagem }}" alt="{{ $product->nome }}" height = "100">
+                            <h4> <a href = "/products/{{ $product->id }}"> {{ $product->nome }} </a> </h4> 
+                            <p> 
+                                @if($product->desconto > 0)
+                                    <span style = "text-decoration: line-through;">
+                                        {{ $product->precoatual }}
+                                    </span>&nbsp
+                                @endif
+                                {{ round($discountFunction($product->precoatual, $product->desconto),2) }} €
+                            </p>
+                            @if($product->desconto > 0)
+                            <p> Desconto: {{ $product->desconto * 100 }}% </p>
+                            @endif
+                            <p> Categoria: {{ $product->categoria }} </p>
+                            <br>
+
+                            <form method="GET" action="{{ route('editProduct', ['id' => $product->id]) }}">
+                                <input type="submit" value="Editar informações">
+                            </form>
+
+                        </section>
+                    @endforeach
+                </div>
+            </section>
         </div>
     </div>
 </div>

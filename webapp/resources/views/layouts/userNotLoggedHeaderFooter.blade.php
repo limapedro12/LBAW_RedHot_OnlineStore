@@ -21,6 +21,7 @@
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
+        <link href="{{ url('css/login.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer>

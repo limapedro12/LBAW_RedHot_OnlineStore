@@ -20,7 +20,7 @@
         <label for="description">Descrição:</label>
         <textarea id="description" name="description" required></textarea><br><br>
 
-        <label for="url_image">Image URL:</label>
+        <label for="url_image">URL da Imagem:</label>
         <input type="text" id="url_image" name="url_image" required><br><br>
 
         <label for="category">Categoria:</label>
