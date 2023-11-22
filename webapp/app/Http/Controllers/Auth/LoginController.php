@@ -64,12 +64,12 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        verifyNotAutenticated();
+        //verifyNotAutenticated();
         Auth::logout();
-        Auth::guard('admin')->logout();
+        //Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/welcome')
+        return redirect('/')
             ->withSuccess('Logout efetuado com sucesso!');
     } 
 }
