@@ -38,7 +38,7 @@
         @if(Auth::guard('admin')->check())
             <form method='post' action='/products/{{ $product->id }}/delete'>
             @csrf
-            <input type="submit" value="O que quiseres">
+            <input type="submit" value="Delete">
             </form>
         @endif
     </section>

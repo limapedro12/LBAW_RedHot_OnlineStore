@@ -30,5 +30,3 @@
     </form>
 </section>
 @endsection
-
-@include('layouts.adminHeaderFooter')
