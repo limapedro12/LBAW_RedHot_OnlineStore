@@ -3,11 +3,11 @@ openapi: 3.0.0
 info:
  version: '1.0'
  title: 'LBAW RedHot Web API'
- description: 'Web Resources Specification (A7) for RedHot'
+ description: 'Especificação dos Recursos Web (A7) para RedHot'
 
 servers:
 - url: http://lbaw2352.fe.up.pt
-- description: Production server
+- description: Servidor de Produção
 
 externalDocs:
  description: Visite a nossa wiki
@@ -17,10 +17,9 @@ tags:
  - name: 'M01: Autenticação e Perfil'
  - name: 'M02: Produtos e Catálogo'
  - name: 'M03: Compras e Carrinho'
- - name: 'M04: Wishlist'
- - name: 'M05: Comentários e Avaliações'
- - name: 'M06: Páginas de Administrador'
- - name: 'M07: Páginas estáticas'
+ - name: 'M04: Comentários e Avaliações'
+ - name: 'M05: Páginas de Administrador'
+ - name: 'M06: Páginas estáticas'
 
 paths:
   /login:
@@ -1394,75 +1393,13 @@ paths:
                   description: 'Falha no cancelamento da encomenda.'
                   value: '/cart'
 
-
-  /products/{id}/add_to_wishlist:
-    get:
-      operationId: R401
-      summary: 'R401: Página de adição de produto à wishlist'
-      description: 'Fornece a interface para adicionar um produto à wishlist. Acesso: USR'
-      tags:
-        - 'M04: Wishlist'
-        
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-      
-      responses:
-        '200':
-          description: 'OK. Mostrar a página de adição de novo produto à wishlist.'
-    
-    post:
-      operationId: R402
-      summary: 'R402: Ação de adição um produto à wishlist'
-      description: 'Ação de adição um produto à wishlist. Acesso: USR'
-      tags:
-        - 'M04: Wishlist'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-              required:
-                - productId
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de adicionar o produto à wishlist, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Produto adicionado à wishlist com sucesso'
-                  value: /products/{id}
-                302Failure:
-                  description: 'Falha ao adicionar produto à wishlist'
-                  value: /products/{id}
-
-
   /products/{id}/reviews/API:
     get:
-      operationId: R501
-      summary: 'R501: Ver as avaliações feitas a um produto'
+      operationId: R401
+      summary: 'R401: Ver as avaliações feitas a um produto'
       description: 'Mostrar as avaliações feitas a um produto. Acesso: PUB'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
 
       parameters:
         - in: path
@@ -1525,11 +1462,11 @@ paths:
 
   /products/{id}/reviews/add_review:
     get:
-      operationId: R502
-      summary: 'R502: Página de adição de uma avaliação a um produto'
+      operationId: R402
+      summary: 'R402: Página de adição de uma avaliação a um produto'
       description: 'Fornece a interface de preenchimento de uma avaliação a um produto. Acesso: USR'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
         
       parameters:
         - in: path
@@ -1543,11 +1480,11 @@ paths:
           description: 'OK. Mostrar a página de adição de uma avaliação a um produto.'
 
     post:
-      operationId: R503
-      summary: 'R503: Ação de adição uma avaliação a um produto'
+      operationId: R403
+      summary: 'R403: Ação de adição uma avaliação a um produto'
       description: 'Ação de adição uma avaliação a um produto. Acesso: USR'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
 
       parameters:
         - in: path
@@ -1601,11 +1538,11 @@ paths:
       
   /products/{id}/reviews/{id_review}/edit_review:
     get:
-      operationId: R504
-      summary: 'R504: Página de edição de uma avaliação a um produto'
+      operationId: R404
+      summary: 'R404: Página de edição de uma avaliação a um produto'
       description: 'Fornece a interface de edição de uma avaliação a um produto. Acesso: USR'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
         
       parameters:
         - in: path
@@ -1625,11 +1562,11 @@ paths:
           description: 'OK. Mostrar a página de edição de uma avaliação a um produto.'
 
     post:
-      operationId: R505
-      summary: 'R505: Editar uma avaliação a um produto'
+      operationId: R405
+      summary: 'R405: Editar uma avaliação a um produto'
       description: 'Editar uma avaliação a um produto. Acesso: USR'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
 
       parameters:
         - in: path
@@ -1679,11 +1616,11 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_review:
     post:
-      operationId: R506
-      summary: 'R506: Apagar uma avaliação a um produto'
+      operationId: R406
+      summary: 'R406: Apagar uma avaliação a um produto'
       description: 'Apagar uma avaliação a um produto. Acesso: USR, ADM'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
 
       parameters:
         - in: path
@@ -1727,11 +1664,11 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_comment:
     post:
-      operationId: R507
-      summary: 'R507: Apagar um comentário numa avaliação'
+      operationId: R407
+      summary: 'R407: Apagar um comentário numa avaliação'
       description: 'Apagar um comentário ofensivo/inapropriado numa avaliação. Acesso: ADM'
       tags:
-        - 'M05: Comentários e Avaliações'
+        - 'M04: Comentários e Avaliações'
 
       parameters:
         - in: path
@@ -1772,17 +1709,13 @@ paths:
                   description: 'Falha ao apagar comentário'
                   value: /products/{id}/reviews/{id_review}
 
-
-  
-
-
   /admin/API:
     get:
-      operationId: R603
-      summary: 'R603: Ver todas as estatísticas'
-      description: 'Mostrar todas as estatísticas. Acesso: ADM'
+      operationId: R501
+      summary: 'R501: Dashboard de Administrador'
+      description: 'Mostrar um dashboard de administrador com estatísticas da atividade do site. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
@@ -1805,632 +1738,106 @@ paths:
                           type: string
                         value:
                           type: number
-              example:
-                statistics:
-                  - id: 1
-                    name: 'Número de utilizadores registados'
-                    description: 'Número de utilizadores registados no site'
-                    value: 1000
-                  - id: 2
-                    name: 'Número de produtos vendidos'
-                    description: 'Número de produtos vendidos no site'
-                    value: 1000
       
   /admin:
     get:
-      operationId: R604
-      summary: 'R604: Ver todas as estatísticas'
-      description: 'Mostrar todas as estatísticas. Acesso: ADM'
+      operationId: R502
+      summary: 'R502: Dashboard de Administrador'
+      description: 'Mostrar um dashboard de administrador com estatísticas da atividade do site. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Mostrar a página de todas as estatísticas'
-
-  /adminProductsHighlights/API:
-    get:
-      operationId: R605
-      summary: 'R605: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Objeto JSON com todos os produtos em destaque'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  products:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        price:
-                          type: number
-                        discount:
-                          type: number
-                        stock:
-                          type: integer
-                        ratting:
-                          type: number
-                        images:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              url:
-                                type: string
-              example:
-                products:
-                  - id: 17
-                    name: 'Piri-Piri'
-                    description: 'Molho de Piri-Piri'
-                    price: 2.99
-                    discount: 0.0
-                    stock: 10
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                  - id: 18
-                    name: 'Piri-Piri com Cannabis'
-                    description: 'Molho de Piri-Piri com Cannabis'
-                    price: 3.99
-                    discount: 0.0
-                    stock: 9
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-
-  /adminProductsHighlights:
-    get:
-      operationId: R606
-      summary: 'R606: Ver todos os produtos em destaque'
-      description: 'Mostrar todos os produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Mostrar a página de todos os produtos em destaque'
-
-
-  
-
-  /admin/gerir_produtos_em_destaque/{id}/add:
-    get:
-      operationId: R607
-      summary: 'R607: Adicionar um produto aos produtos em destaque'
-      description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Ok. Mostrar a interface de adicionar um produto aos produtos em destaque'
-
-    post:
-      operationId: R608
-      summary: 'R608: Adicionar um produto aos produtos em destaque'
-      description: 'Adicionar um produto aos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-              required:
-                - productId
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de adicionar o produto aos produtos em destaque, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Produto adicionado aos produtos em destaque com sucesso'
-                  value: /products/{id}
-                302Failure:
-                  description: 'Falha ao adicionar produto aos produtos em destaque'
-                  value: /products/{id}
-
-  /admin/gerir_produtos_em_destaque/{id}/remove:
-    get:
-      operationId: R609
-      summary: 'R609: Remover um produto dos produtos em destaque'
-      description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Ok. Mostrar a interface de remover um produto dos produtos em destaque'
-
-    post:
-      operationId: R610
-      summary: 'R610: Remover um produto dos produtos em destaque'
-      description: 'Remover um produto dos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-              required:
-                - productId
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de remover o produto dos produtos em destaque, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Produto removido dos produtos em destaque com sucesso'
-                  value: /products/{id}
-                302Failure:
-                  description: 'Falha ao remover produto dos produtos em destaque'
-                  value: /products/{id}
-
-  /admin/gerir_produtos_em_destaque/{id}/edit:
-    get:
-      operationId: R611
-      summary: 'R611: Editar um produto dos produtos em destaque'
-      description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Ok. Mostrar a interface de editar um produto dos produtos em destaque'
-
-    post:
-      operationId: R612
-      summary: 'R612: Editar um produto dos produtos em destaque'
-      description: 'Editar um produto dos produtos em destaque. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                productId:
-                  type: integer
-                newDiscount:
-                  type: number
-              required:
-                - productId
-                - newDiscount
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de editar o produto dos produtos em destaque, para a página do produto'
-          headers:
-            Location:
-              schema:
-                type: string       
-              examples:
-                302Success:
-                  description: 'Produto editado dos produtos em destaque com sucesso'
-                  value: /products/{id}
-                302Failure:
-                  description: 'Falha ao editar produto dos produtos em destaque'
-                  value: /products/{id}
-
-
-  /adminProductsManage/API:
-    get:
-      operationId: R613
-      summary: 'R613: Pagina de gestão de produtos'
-      description: 'Pagina de gestão de produtos. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Objeto JSON com todos os produtos em destaque'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  products:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        price:
-                          type: number
-                        discount:
-                          type: number
-                        stock:
-                          type: integer
-                        ratting:
-                          type: number
-                        images:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              url:
-                                type: string
-              example:
-                products:
-                  - id: 17
-                    name: 'Piri-Piri'
-                    description: 'Molho de Piri-Piri'
-                    price: 2.99
-                    discount: 0.0
-                    stock: 10
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                  - id: 18
-                    name: 'Piri-Piri com Cannabis'
-                    description: 'Molho de Piri-Piri com Cannabis'
-                    price: 3.99
-                    discount: 0.0
-                    stock: 9
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-
-  /adminProductsManage:
-    get:
-      operationId: R614
-      summary: 'R614: Pagina de gestão de produtos'
-      description: 'Pagina de gestão de produtos. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Mostrar a pagina de gestão de produtos.'
-
+          description: 'Mostrar dashboard de administrador com estatísticas da atividade do site (UI10).'
 
   /adminOrders/API:
     get:
-      operationId: R615
-      summary: 'R615: Pagina de gestão de encomendas'
-      description: 'Pagina de gestão de encomendas. Acesso: ADM'
+      operationId: R503
+      summary: 'R503: Gestão de Encomendas'
+      description: 'Listagem e gestão de encomendas. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Objeto JSON com todos os produtos em destaque'
+          description: 'Objeto JSON com todas as encomendas'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  products:
+                  statistics:
                     type: array
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        price:
+                        value:
                           type: number
-                        discount:
-                          type: number
-                        stock:
-                          type: integer
-                        ratting:
-                          type: number
-                        images:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              url:
-                                type: string
-              example:
-                products:
-                  - id: 17
-                    name: 'Piri-Piri'
-                    description: 'Molho de Piri-Piri'
-                    price: 2.99
-                    discount: 0.0
-                    stock: 10
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                  - id: 18
-                    name: 'Piri-Piri com Cannabis'
-                    description: 'Molho de Piri-Piri com Cannabis'
-                    price: 3.99
-                    discount: 0.0
-                    stock: 9
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-
+      
   /adminOrders:
     get:
-      operationId: R616
-      summary: 'R616: Pagina de gestão de encomendas'
-      description: 'Pagina de gestão de encomendas. Acesso: ADM'
+      operationId: R504
+      summary: 'R504: Gestão de Encomendas'
+      description: 'Listagem e gestão de encomendas. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Mostrar a página de todos os produtos em destaque'
-
-
-  /adminShipping/API:
+          description: 'Mostrar página de gestão de encomendas.'
+  
+  /adminProducts/API:
     get:
-      operationId: R617
-      summary: 'R617: Pagina de gestão de envios'
-      description: 'Pagina de gestão de envios. Acesso: ADM'
+      operationId: R505
+      summary: 'R505: Gestão de Produtos'
+      description: 'Listagem e gestão de produtos. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Objeto JSON com todos os produtos em destaque'
+          description: 'Objeto JSON com todas os produtos'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  products:
+                  statistics:
                     type: array
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
                         price:
                           type: number
                         discount:
                           type: number
                         stock:
-                          type: integer
-                        ratting:
                           type: number
-                        images:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              url:
-                                type: string
-              example:
-                products:
-                  - id: 17
-                    name: 'Piri-Piri'
-                    description: 'Molho de Piri-Piri'
-                    price: 2.99
-                    discount: 0.0
-                    stock: 10
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                  - id: 18
-                    name: 'Piri-Piri com Cannabis'
-                    description: 'Molho de Piri-Piri com Cannabis'
-                    price: 3.99
-                    discount: 0.0
-                    stock: 9
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-
-  /adminShipping:
+      
+  /adminProducts:
     get:
-      operationId: R618
-      summary: 'R618: Pagina de gestão de envios'
-      description: 'Pagina de gestão de envios. Acesso: ADM'
+      operationId: R506
+      summary: 'R506: Gestão de Produtos'
+      description: 'Listagem e gestão de produtos. Acesso: ADM'
       tags:
-        - 'M06: Páginas de Administrador'
+        - 'M05: Páginas de Administrador'
 
       responses:
         '200':
-          description: 'Mostrar a página de todos os produtos em destaque'
-
-  /adminUsers/API:
-    get:
-      operationId: R619
-      summary: 'R619: Pagina de gestão de utilizadores'
-      description: 'Pagina de gestão de utilizadores. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Objeto JSON com todos os produtos em destaque'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  products:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        price:
-                          type: number
-                        discount:
-                          type: number
-                        stock:
-                          type: integer
-                        ratting:
-                          type: number
-                        images:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              url:
-                                type: string
-              example:
-                products:
-                  - id: 17
-                    name: 'Piri-Piri'
-                    description: 'Molho de Piri-Piri'
-                    price: 2.99
-                    discount: 0.0
-                    stock: 10
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                  - id: 18
-                    name: 'Piri-Piri com Cannabis'
-                    description: 'Molho de Piri-Piri com Cannabis'
-                    price: 3.99
-                    discount: 0.0
-                    stock: 9
-                    images:
-                      - id: 1
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-                      - id: 2
-                        url: 'https://i.imgur.com/2s0jY9H.jpg'
-
-  /adminUsers:
-    get:
-      operationId: R620
-      summary: 'R620: Pagina de gestão de utilizadores'
-      description: 'Pagina de gestão de utilizadores. Acesso: ADM'
-      tags:
-        - 'M06: Páginas de Administrador'
-
-      responses:
-        '200':
-          description: 'Mostrar a página de todos os produtos em destaque'
-
-
+          description: 'Mostrar página de gestão de produtos (UI12).'
 
   /faqs/API:
     get:
-      operationId: R701
-      summary: 'R701: Ver todas as FAQs'
+      operationId: R601
+      summary: 'R601: Ver todas as FAQs'
       description: 'Mostrar todas as FAQs. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
+        - 'M06: Páginas estáticas'
        
       responses:
         '200':
@@ -2450,207 +1857,107 @@ paths:
                       type: string
               example:
                 - id: 1
-                  question: 'What is RedHot?'
-                  answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
+                  question: 'O que é RedHot?'
+                  answer: 'RedHot é um webiste de venda de especiarias e molhos picantes.'
                 - id: 7
-                  question: 'How can I contact RedHot?'
-                  answer: 'You can contact us through our email(redhot@spicy.com) or through our phone number(123456789).'
+                  question: 'Como posso contactar a RedHot?'
+                  answer: 'Através do nosso endereço de e-mail (redhot@spicy.com) o do nosso contacto telefónico (123456789).'
 
   /faqs:
     get:
-      operationId: R702
-      summary: 'R702: Ver todas as FAQs'
+      operationId: R602
+      summary: 'R602: Ver todas as FAQs'
       description: 'Mostrar todas as FAQs. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
+        - 'M06: Páginas estáticas'
        
       responses:
         '200':
-          description: 'Mostrar a página de FAQs'
+          description: 'Mostrar a página de FAQs (UI03).'
 
-  /faqs/add:
+  /pps/API:
     get:
-      operationId: R703
-      summary: 'R703: Formulário para adicionar uma FAQ'
-      description: 'Ação de adição uma FAQ. Acesso: ADM'
+      operationId: R603
+      summary: 'R603: Ver as Políticas de Privacidade'
+      description: 'Mostrar as Políticas de Privacidade do site. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
-
+        - 'M06: Páginas estáticas'
+       
       responses:
         '200':
-          description: 'Ok. Mostrar a interface de adicionar uma FAQ'
-
-    post:
-      operationId: R704
-      summary: 'R704: Ação de adicição uma FAQ'
-      description: 'Processa a submissão do formulário de adicionar uma FAQ. Acesso: ADM'
-      tags:
-        - 'M07: Páginas estáticas'
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                answer:
-                  type: string
-              required:
-                - question
-                - answer
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar a informação da nova FAQ'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'FAQ adicionada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                  value: '/faqs'
-                302Failure:
-                  description: 'Adição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                  value: '/faqs'
-
-  /faqs/{id}/API:
-    get:
-      operationId: R705
-      summary: 'R705: Ver uma FAQ'
-      description: 'Mostrar uma FAQ. Acesso: PUB'
-      tags:
-        - 'M07: Páginas estáticas'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Objeto JSON com a FAQ'
+          description: 'Objeto JSON com todas as Políticas de Privacidade'
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  question:
-                    type: string
-                  answer:
-                    type: string
-              example:
-                id: 1
-                question: 'What is RedHot?'
-                answer: 'RedHot is a web application that allows users to buy all kinds of scpivcy related products.'
-
-  /faqs/{id}/edit:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    answer:
+                      type: string
+  
+  /pps:
     get:
-      operationId: R706
-      summary: 'R706: Formulário para editar uma FAQ'
-      description: 'Editar uma FAQ. Acesso: ADM'
+      operationId: R604
+      summary: 'R604: Ver as Políticas de Privacidade'
+      description: 'Mostrar as Políticas de Privacidade do site. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
-  
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-  
+        - 'M06: Páginas estáticas'
+       
       responses:
         '200':
-          description: 'Ok. Mostrar a interface de Edição da FAQ'
-
-    post:
-      operationId: R707
-      summary: 'R707: Ação de Editar uma FAQ'
-      description: 'Processa a submissão do formulário de editar uma FAQ. Acesso: ADM'
-
+          description: 'Mostrar a página de Políticas de Privacidade (UI04).'
+  
+  /tous/API:
+    get:
+      operationId: R605
+      summary: 'R605: Ver os Termos de Utilização'
+      description: 'Mostrar os Termos de Utilização do site. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-                question:
-                  type: string
-                answer:
-                  type: string
-
+        - 'M06: Páginas estáticas'
+       
       responses:
-        '302':
-         description: 'Redireciona, depois de processar a informação da edição'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'FAQ editada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-               302Failure:
-                 description: 'Edição da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-
-  /faqs/{id}/delete:
-    post:
-      operationId: R708
-      summary: 'R708: Ação de Eliminar uma FAQ'
-      description: 'Eliminar uma FAQ. Acesso: ADM'
+        '200':
+          description: 'Objeto JSON com todos Termos de Utilização'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    answer:
+                      type: string
+  
+  /tous:
+    get:
+      operationId: R606
+      summary: 'R606: Ver os Termos de Utilização'
+      description: 'Mostrar os Termos de Utilização do site. Acesso: PUB'
       tags:
-        - 'M07: Páginas estáticas'
-        
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-                faqId:
-                  type: integer
-             required:
-                - faqId
-
+        - 'M06: Páginas estáticas'
+       
       responses:
-        '302':
-         description: 'Redireciona, depois de processar a informação da eliminação'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'FAQ eliminada com sucesso. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
-               302Failure:
-                 description: 'Eliminação da FAQ falhada. Redireciona, o admininstrador para a página de FAQs.'
-                 value: '/faqs'
+        '200':
+          description: 'Mostrar a página de Termos de Utilização (UI05).'
+    
+  /welcome:
+    get:
+      operationId: R607
+      summary: 'R605: Ver a Página Inicial'
+      description: 'Mostrar a Página Inicial do site. Acesso: PUB'
+      tags:
+        - 'M06: Páginas estáticas'
+      
+      responses:
+        '200':
+          description: 'Mostrar a Página Inicial (UI01).'
 
