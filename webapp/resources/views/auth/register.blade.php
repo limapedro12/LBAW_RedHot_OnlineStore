@@ -1,41 +1,68 @@
 @extends('layouts.userNotLoggedHeaderFooter')
 
 @section('content')
-<section>
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
+    <section class="signup">
+        <div class="signupLogo">
+            <img src="{{ asset('sources/logo/logo_lbaw-black.png') }}" alt="logo">
+        </div>
+        <div class="signupInput">
+            <h2 class="title">Registar</h2>
+            <form method="POST" action="{{ route('register') }}" class="signupForm">
+                {{ csrf_field() }}
 
-    <label for="nome">Name</label>
-    <input id="nome" type="text" name="nome" value="{{ old('nome') }}" required autofocus>
-    @if ($errors->has('nome'))
-      <span class="error">
-          {{ $errors->first('nome') }}
-      </span>
-    @endif
+                <div class="inputBox">
+                    <input id="nome" type="text" name="nome" placeholder="Nome" value="{{ old('nome') }}"
+                        required autofocus>
+                    @if ($errors->has('nome'))
+                        <p class="textDanger">
+                            {{ $errors->first('nome') }}
+                        </p>
+                    @endif
+                </div>
 
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
+                <div class="inputBox">
+                    <input id="email" type="email" name="email" placeholder="Email" value="{{ old('email') }}"
+                        required>
+                    @if ($errors->has('email'))
+                        <p class="textDanger">
+                            {{ $errors->first('email') }}
+                        </p>
+                    @endif
+                </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
+                <div class="inputBox">
+                    <input id="password" type="password" name="password" placeholder="Password" required>
+                    @if ($errors->has('password'))
+                        <span class="textDanger">
+                            {{ $errors->first('password') }}
+                        </span>
+                    @endif
+                </div>
 
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
+                <div class="inputBox">
+                    <input id="password-confirm" type="password" name="password_confirmation"
+                        placeholder="Confirmar Password" required>
+                </div>
 
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
-</form>
-</section>
+                <div class="signupOptions">
+                    <button type="submit">
+                        <span class="signupBtn">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </button>
+                    <div class="signupLinks">
+                        <a class="alredySignup" href="{{ route('login') }}">Já tem conta criada?</a>
+                    </div>
+                </div>
+
+                <section id="messages">
+                    @if (session('success'))
+                        <p class="success">
+                            {{ session('success') }}
+                        </p>
+                    @endif
+                </section>
+            </form>
+        </div>
+    </section>
 @endsection
