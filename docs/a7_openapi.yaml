@@ -323,91 +323,6 @@ paths:
                   description: 'Eliminação da Conta falhada. Redireciona, o utilizador para o seu perfil.'
                   value: '/users/{id}'
 
-  /users/{id}/ban:
-    post:
-      operationId: R112
-      summary: 'R112: Ação de Banir um Utilizador'
-      description: 'Bane um utilizador. Acesso: ADM'
-      tags:
-        - 'M01: Autenticação e Perfil'
-        
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-              required:
-                - userId
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Utilizador banido com sucesso. Redireciona, o admininstrador para o perfil do utilizador banido.'
-                  value: '/users/{id}'
-                302Failure:
-                  description: 'Banimento do Utilizador falhado. Redireciona, o admininstrador para o perfil do utilizador banido.'
-                  value: '/users/{id}'
-        
-  /users/{id}/unban:
-    post:
-      operationId: R113
-      summary: 'R113: Ação de Remover o Banimento um Utilizador'
-      description: 'Remove o banimento de um utilizador. Acesso: ADM'
-      tags:
-        - 'M01: Autenticação e Perfil'
-        
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-              required:
-                - userId
-
-      responses:
-        '302':
-          description: 'Redireciona, depois de processar o pedido'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Remoção do banimento do Utilizador com sucesso. Redireciona, o admininstrador para o perfil do utilizador em questão.'
-                  value: '/users/{id}'
-                302Failure:
-                  description: 'Remoção do banimento do Utilizador falhada. Redireciona, o admininstrador para o perfil do utilizador em questão.'
-                  value: '/users/{id}'
-
-
   /products/{id}/API:
     get:
       operationId: R201
@@ -1459,11 +1374,29 @@ paths:
                         name: 'Maria'
                         email: 'mariaxd@gmail.com'
 
+  /products/{id}/reviews:
+    get:
+      operationId: R402
+      summary: 'R402: Ver as avaliações feitas a um produto'
+      description: 'Mostrar as avaliações feitas a um produto. Acesso: PUB'
+      tags:
+        - 'M04: Comentários e Avaliações'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      
+      responses:
+        '200':
+          description: 'OK. Mostrar página de avaliações ao produto.'
 
   /products/{id}/reviews/add_review:
     get:
-      operationId: R402
-      summary: 'R402: Página de adição de uma avaliação a um produto'
+      operationId: R403
+      summary: 'R403: Página de adição de uma avaliação a um produto'
       description: 'Fornece a interface de preenchimento de uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1480,8 +1413,8 @@ paths:
           description: 'OK. Mostrar a página de adição de uma avaliação a um produto.'
 
     post:
-      operationId: R403
-      summary: 'R403: Ação de adição uma avaliação a um produto'
+      operationId: R404
+      summary: 'R404: Ação de adição uma avaliação a um produto'
       description: 'Ação de adição uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1538,8 +1471,8 @@ paths:
       
   /products/{id}/reviews/{id_review}/edit_review:
     get:
-      operationId: R404
-      summary: 'R404: Página de edição de uma avaliação a um produto'
+      operationId: R405
+      summary: 'R405: Página de edição de uma avaliação a um produto'
       description: 'Fornece a interface de edição de uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1562,8 +1495,8 @@ paths:
           description: 'OK. Mostrar a página de edição de uma avaliação a um produto.'
 
     post:
-      operationId: R405
-      summary: 'R405: Editar uma avaliação a um produto'
+      operationId: R406
+      summary: 'R406: Ação de edição de avaliação a um produto'
       description: 'Editar uma avaliação a um produto. Acesso: USR'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1616,8 +1549,8 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_review:
     post:
-      operationId: R406
-      summary: 'R406: Apagar uma avaliação a um produto'
+      operationId: R407
+      summary: 'R407: Ação de eliminação uma avaliação a um produto'
       description: 'Apagar uma avaliação a um produto. Acesso: USR, ADM'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1664,8 +1597,8 @@ paths:
 
   /products/{id}/reviews/{id_review}/delete_comment:
     post:
-      operationId: R407
-      summary: 'R407: Apagar um comentário numa avaliação'
+      operationId: R408
+      summary: 'R408: Ação de eliminação de comentário numa avaliação'
       description: 'Apagar um comentário ofensivo/inapropriado numa avaliação. Acesso: ADM'
       tags:
         - 'M04: Comentários e Avaliações'
@@ -1952,7 +1885,7 @@ paths:
   /welcome:
     get:
       operationId: R607
-      summary: 'R605: Ver a Página Inicial'
+      summary: 'R607: Ver a Página Inicial'
       description: 'Mostrar a Página Inicial do site. Acesso: PUB'
       tags:
         - 'M06: Páginas estáticas'
