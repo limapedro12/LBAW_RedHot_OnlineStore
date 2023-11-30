@@ -1,0 +1,14 @@
+openapi: 3.0.0
+
+info:
+ version: '1.0'
+ title: 'LBAW RedHot Web API'
+ description: 'Especificação dos Recursos Web (A7) para RedHot'
+
+servers:
+- url: http://lbaw2352.fe.up.pt
+- description: Servidor de Produção
+
+externalDocs:
+ description: Visite a nossa wiki
+ url: https://git.fe.up.pt/lbaw/lbaw2324/lbaw2352/-/wikis/home
