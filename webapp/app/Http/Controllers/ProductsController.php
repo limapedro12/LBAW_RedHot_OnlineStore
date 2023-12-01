@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
+use App\Events\ProductLike;
 
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
@@ -121,6 +122,11 @@ class ProductsController extends Controller {
         verifyAdmin();
         Product::where('id', '=', $id)->delete();
         return redirect('/products');
+    }
+
+    function like(Request $request) {
+        event(new ProductLike($request->id));
+        return redirect('/products/'.$request->id);
     }
 
 }

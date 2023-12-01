@@ -50,6 +50,7 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
     Route::post('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
+    Route::post('/products/like', 'like')->name('like');
 });
 
 // Cart and Purchases
