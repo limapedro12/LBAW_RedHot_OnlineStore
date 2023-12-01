@@ -42,14 +42,6 @@
             </form>
         @endif
     </section>
-    <article class="products" id="products{{ $product->id }}">
-        <h3>Product {{ $product->id }}</h3>
-        <form action="/products/like" method="post">
-            @csrf
-            <input type="hidden" name="id" value="{{ $product->id }}">
-            <button type="submit">Like!</button>
-        </form>
-    </article>
 </section>
 @endsection        
 
