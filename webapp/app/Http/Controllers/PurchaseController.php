@@ -13,6 +13,7 @@ use App\Models\ProductCart;
 use App\Models\ProductPurchase;
 
 use App\Models\Purchase;
+use App\Events\ChangePurchaseState;
 
 class PurchaseController extends Controller
 {
@@ -157,6 +158,8 @@ class PurchaseController extends Controller
         $purchase = Purchase::findOrFail($orderId);
         $purchase->estado = $request->state;
         $purchase->save();
+
+        event(new ChangePurchaseState($purchase->id, $purchase->id_utilizador, $purchase->estado));
 
         return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }

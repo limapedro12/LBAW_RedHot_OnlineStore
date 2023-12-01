@@ -21,10 +21,14 @@
         <link href="{{ url('css/footer.css') }}" rel="stylesheet">
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
+        <link href="{{ url('css/notification.css') }}" rel="stylesheet">
   
         <!-- Scripts -->
-        <script type="text/javascript" src={{ url('js/app.js') }} defer>
-        </script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
+        <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
+
+        <!-- User Identifier -->
+        <user user_id="{{ Auth::id() }}"></user>
     </head>
     <body>
         <main>

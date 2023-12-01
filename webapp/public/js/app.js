@@ -304,3 +304,29 @@ try {
     xhr.send();
   })
 } catch (error) {}
+
+// change purchase state
+
+function showNotification(text) {
+  var notification = document.createElement("div");
+  notification.innerHTML = text;
+  notification.classList.add("notification");
+  document.body.appendChild(notification);
+  setTimeout(() => {
+    document.body.removeChild(notification);
+  }, 8000);
+}
+
+if(document.querySelector('user')!=null){
+  let user_id = document.querySelector('user').getAttribute('user_id');
+  const pusher = new Pusher("7a447c0e0525f5f86bc9", {
+    cluster: "eu",
+    encrypted: true
+  })
+
+  const channel = pusher.subscribe('RedHot');
+  channel.bind('notification-to-user-' + user_id, function(data) {
+    showNotification(data.message)
+  })
+}
+

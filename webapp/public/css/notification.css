@@ -1,0 +1,23 @@
+.notification {
+    position: sticky;
+    top: 0;
+    bottom: 3em;
+    z-index: 1001;
+
+    margin-left: auto; 
+    margin-right: 3em;
+
+    width: 25em;
+    padding: 1em;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    font-size: 2em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em black;
+    animation: fade 8s linear forwards;
+}
+
+@keyframes fade {
+    0%,100% { opacity: 0 }
+    20%,80% { opacity: 1 }
+}
