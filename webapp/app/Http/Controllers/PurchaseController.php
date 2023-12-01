@@ -70,7 +70,7 @@ class PurchaseController extends Controller
         $purchase->timestamp = date('Y-m-d H:i:s');
         $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
-        $purchase->estado = 'Pendente';
+        $purchase->estado = 'Em processamento';
         $purchase->id_administrador = null; // para alterar no futuro
         $purchase->total = $total;
         $purchase->save();
@@ -118,7 +118,13 @@ class PurchaseController extends Controller
             $quantPriceProducts[] = [$quantity, $price, $product];
         }
 
-        return view('pages.orderDetails', ['purchase' => $purchase, 'quantPriceProducts' => $quantPriceProducts]);
+        $all_states = ['Em processamento', 'Enviada', 'Entregue', 'Cancelada'];
+
+        return view('pages.orderDetails', 
+                ['purchase' => $purchase, 
+                 'quantPriceProducts' => $quantPriceProducts,
+                 'remainingStates' => array_values(array_diff($all_states, [$purchase->estado])),
+                ]);
     }
 
     public function cancelOrder(int $userId, int $orderId)
@@ -138,5 +144,20 @@ class PurchaseController extends Controller
         $purchase->save();
 
         return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Encomenda cancelada com sucesso.');
+    }
+
+    public function changeState(int $userId, int $orderId, Request $request)
+    {
+        // $this->authorize;
+
+        $request->validate([
+            'state' => 'required|string'
+        ]);
+
+        $purchase = Purchase::findOrFail($orderId);
+        $purchase->estado = $request->state;
+        $purchase->save();
+
+        return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
 }

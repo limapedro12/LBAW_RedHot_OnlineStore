@@ -18,10 +18,23 @@
                 </li>
             @endforeach
         </ul>
-        @if ($purchase->estado == 'Pendente')
+        @if ($purchase->estado == 'Pendente' && Auth::check())
             <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/cancel">
                 @csrf
                 <button type="submit">Cancelar encomenda</button>
+            </form>
+        @endif
+
+        @if(Auth::guard('admin')->check())
+            <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/change_state">
+                @csrf
+                <label for="state">Mudar o estado da encomenda:</label>
+                <select name="state" id="states" multiple>
+                    <option value="{{ $remainingStates[0] }}">{{ $remainingStates[0] }}</option>
+                    <option value="{{ $remainingStates[1] }}">{{ $remainingStates[1] }}</option>
+                    <option value="{{ $remainingStates[2] }}">{{ $remainingStates[2] }}</option>
+                </select>
+                <button type="submit">Mudar estado</button>
             </form>
         @endif
 @endsection
