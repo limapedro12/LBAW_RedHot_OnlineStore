@@ -9,8 +9,10 @@
                 <label for="file">Fotografia de Perfil</label><br>
                 <input name="file" type="file" id="file"><br><br>
             </div>
+            @if ($user->hasPhoto())
             <label for="deletePicture">Apagar Fotografia de Perfil</label>
             <input type="checkbox" id="deletePhoto" name="deletePhoto"><br><br>
+            @endif
             <label for="email">E-mail</label>
             <input type="text" id="email" name="email" value="{{$user->email}}"><br><br>
             <label for="email">Password</label>

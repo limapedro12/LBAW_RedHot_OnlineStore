@@ -58,10 +58,9 @@ class FileController extends Controller
         return self::defaultAsset($type);
     }
 
-    function upload(Request $request, String $type, int $id)
+    function upload (Request $request, String $type, int $id)
     {
         $file = $request->file('file');
-        error_log($file);
         $requestType = $request->type;
         $extension = $file->getClientOriginalExtension();
 
