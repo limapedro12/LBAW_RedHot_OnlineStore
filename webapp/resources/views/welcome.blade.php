@@ -9,7 +9,7 @@
     <div class="backgroundMain">
     <img src="{{ asset('sources/main/teste-main-5.png') }}" alt="Destaques" class="backgroundDestaques">
     </div>
-    <div class='top4SellingProducts'>
+    <div class='top4SellingProducts'>        
         <div class='top4SellingProductsTitle'>
             <h2>Produtos em Destaque</h2>
         </div>

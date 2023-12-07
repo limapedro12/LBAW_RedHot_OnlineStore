@@ -98,11 +98,13 @@ Route::get('/forgetPassword', function () {
 // AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
+    Route::get('/adminNotifications', 'adminNotifications')->name('adminNotifications');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
     Route::get('/adminProducts', 'adminProducts')->name('adminProducts');
     Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
+    Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
     Route::get('/adminShipping', 'adminShipping')->name('adminShipping');
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
 });
