@@ -30,9 +30,9 @@
                 @csrf
                 <label for="state">Mudar o estado da encomenda:</label>
                 <select name="state" id="states" multiple>
-                    <option value="{{ $remainingStates[0] }}">{{ $remainingStates[0] }}</option>
-                    <option value="{{ $remainingStates[1] }}">{{ $remainingStates[1] }}</option>
-                    <option value="{{ $remainingStates[2] }}">{{ $remainingStates[2] }}</option>
+                    @foreach($remainingStates as $state)
+                        <option value="{{ $state }}">{{ $state }}</option>
+                    @endforeach
                 </select>
                 <button type="submit">Mudar estado</button>
             </form>

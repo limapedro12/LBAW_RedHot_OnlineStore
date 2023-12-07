@@ -17,6 +17,11 @@
     animation: fade 8s linear forwards;
 }
 
+.notification a {
+    color: white;
+    text-decoration: underline;
+}
+
 @keyframes fade {
     0%,100% { opacity: 0 }
     20%,80% { opacity: 1 }

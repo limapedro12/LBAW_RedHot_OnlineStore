@@ -119,7 +119,7 @@ class PurchaseController extends Controller
             $quantPriceProducts[] = [$quantity, $price, $product];
         }
 
-        $all_states = ['Em processamento', 'Enviada', 'Entregue', 'Cancelada'];
+        $all_states = ['Em processamento', 'Pagamento por Aprovar', 'Pagamento Aprovado', 'Pagamento Não Aprovado', 'Enviada', 'Entregue', 'Cancelada'];
 
         return view('pages.orderDetails', 
                 ['purchase' => $purchase, 
