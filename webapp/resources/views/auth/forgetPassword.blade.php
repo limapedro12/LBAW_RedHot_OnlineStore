@@ -8,14 +8,30 @@
         <div class="signupInput">
             <h2 class="title">Recuperar Password</h2>
 
-            <form method="POST" action="/send">
+            <h3>Introduza o email associado à sua conta de utilizador e nele receberá um link para trocar a sua password</h3>
+
+            <form method="POST" action="/send" class="signupForm">
                 @csrf
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" placeholder="Email" required>
-                <button type="submit">Enviar</button>
+
+                <div class="inputBox">
+                    <input id="email" type="email" name="email" placeholder="Email" required>
+                </div>
+                
+                 <div class="signupOptions">
+                    <button type="submit">
+                        <span class="forgotPasswordBtn">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </button>
+                    <div class="signupLinks">
+                        <a class="goBack" href="{{ route('login') }}">Voltar para o Login! <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
             </form>
 
-            {{ session('message') }}
+            <p class="textDanger">{{ session('message') }}</p>
 
             @if (session('details'))
                 <ul>

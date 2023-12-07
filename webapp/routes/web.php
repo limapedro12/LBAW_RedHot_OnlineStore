@@ -73,6 +73,8 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/users/{id}/edit', 'editProfile');
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
+    Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
+    Route::post('/users/{id}/change_password/{token}', 'changePassword');
 });
 
 // Authentication

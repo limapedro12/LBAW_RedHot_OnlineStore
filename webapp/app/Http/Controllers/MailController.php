@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\MailModel;
 use TransportException;
 use Exception;
+use App\Models\User;
 
 class MailController extends Controller
 {
@@ -30,35 +31,45 @@ class MailController extends Controller
             }
         }
 
-        if (empty($missingVariables)) {
+        $token = bin2hex(random_bytes(32));
 
-            $mailData = [
-                'name' => $request->name,
-                'email' => $request->email,
-            ];
+        $user = User::where('email', '=', $request->email)->first();
+            
+        if ($user != null) {
+            $texto = 'Foi enviado um email de recuperação para ' . $request->email;
 
-            try {
-                Mail::to($request->email)->send(new MailModel($mailData));
-                $status = 'Success!';
-                $message = 'Foi enviado um email de recuperação para ' . $request->email;
-            } catch (TransportException $e) {
-                $status = 'Error!';
-                $message = 'SMTP connection error occurred during the email sending process to ' . $request->email;
-            } catch (Exception $e) {
-                $status = 'Error!';
-                $message = 'An unhandled exception occurred during the email sending process to ' . $request->email;
-                \Log::error($e->getMessage());
-                \Log::error($e->getTraceAsString());
+            if (empty($missingVariables)) {
+
+                $mailData = [
+                    'id' => $user->id,
+                    'email' => $request->email,
+                    'token' => $token,
+                ];
+    
+                try {
+                    Mail::to($request->email)->send(new MailModel($mailData));
+                    $message = 'Foi enviado um email de recuperação para ' . $request->email;
+                } catch (TransportException $e) {
+                    $message = 'SMTP connection error occurred during the email sending process to ' . $request->email;
+                } catch (Exception $e) {
+                    $message = 'An unhandled exception occurred during the email sending process to ' . $request->email;
+                    \Log::error($e->getMessage());
+                }                 
+            } 
+            
+            else {
+                $message = 'The SMTP server cannot be reached due to missing environment variables:';
             }
 
-        } else {
-            $status = 'Error!';
-            $message = 'The SMTP server cannot be reached due to missing environment variables:';
+            $request->session()->flash('message', $message);
+            $request->session()->flash('details', $missingVariables);
         }
 
-        $request->session()->flash('status', $status);
-        $request->session()->flash('message', $message);
-        $request->session()->flash('details', $missingVariables);
+        else {
+            $texto = 'Este email é invalido ou não está associado a nenhuma conta de utilizador na plataforma da RedHot';
+            $request->session()->flash('message', $texto);
+        }
+
         return redirect()->route('forgetPassword');
     }
 }

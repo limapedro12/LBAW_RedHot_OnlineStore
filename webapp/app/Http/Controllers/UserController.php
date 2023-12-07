@@ -15,6 +15,10 @@ function verifyUser(User $user) : void {
         abort(403);
 }
 
+function verifyToken() {
+    
+}
+
 class UserController extends Controller
 {
     /**
@@ -97,5 +101,16 @@ class UserController extends Controller
         User::where('id', '=', $id)->delete();
 
         return redirect('/logout');
+    }
+
+    public function changePasswordForm(Request $request, int $id, string $token)
+    {
+        $user = User::findOrFail($id);
+
+        //verifyToken($token);
+
+        return view('pages.changePassword', [
+            'user' => $user
+        ]);
     }
 }
