@@ -46,6 +46,11 @@ class AdminController extends Controller{
                 //'most_sold' => $most_sold
         ]);
     }
+
+    public function adminNotifications(){
+        verifyAdmin();
+        return view('pages.adminNotifications');
+    }
     
     public function adminOrders(){
         verifyAdmin();
@@ -85,6 +90,11 @@ class AdminController extends Controller{
                 return $price * (1 - $discount);
             }
         ]);
+    }
+
+    public function adminProfile(){
+        verifyAdmin();
+        return view('pages.adminProfile');
     }
     
     public function adminShipping(){
