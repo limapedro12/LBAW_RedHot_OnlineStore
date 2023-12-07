@@ -23,6 +23,7 @@
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/login.css') }}" rel="stylesheet">
         <link href="{{ url('css/register.css') }}" rel="stylesheet">
+        <link href="{{ url('css/products.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer>
