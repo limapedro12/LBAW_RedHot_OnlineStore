@@ -1,4 +1,5 @@
 @section('content')
+<section>
         <h1>Encomenda {{$purchase->id}}</h1>
         <p>
             <span>Estado: {{$purchase->estado}}</span><br>
@@ -37,6 +38,7 @@
                 <button type="submit">Mudar estado</button>
             </form>
         @endif
+    </section>
 @endsection
 
 @if (Auth::guard('admin')->check())

@@ -75,6 +75,7 @@ CREATE TABLE Notificacao (
   timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   texto VARCHAR(256) NOT NULL,
   id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Produto (

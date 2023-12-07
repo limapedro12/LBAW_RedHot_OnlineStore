@@ -12,8 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\Notification;
 
-class ChangePurchaseState implements ShouldBroadcast
-{
+class ChangePurchaseState implements ShouldBroadcast{
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public string $message;
