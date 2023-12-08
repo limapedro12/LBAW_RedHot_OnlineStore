@@ -365,6 +365,7 @@ function changeStateInSpecificPages(data){
 
 function showNotification(data) {
   var notification = document.createElement("div")
+  notification.setAttribute('link_to_redirect', data.link_to_redirect)
   notification.innerHTML = data.message
   addRedirectToNotification(notification)
   notification.classList.add("notification")
