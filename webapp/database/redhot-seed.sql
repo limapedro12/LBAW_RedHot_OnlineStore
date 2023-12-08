@@ -74,8 +74,10 @@ CREATE TABLE Notificacao (
 	id SERIAL PRIMARY KEY,
   timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
   texto VARCHAR(256) NOT NULL,
-  id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE
-  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+  id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
+  link VARCHAR(1024),
+  lida BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Produto (

@@ -307,26 +307,55 @@ try {
 
 // change purchase state
 
-function showNotification(text) {
-  var notification = document.createElement("div");
-  notification.innerHTML = text;
-  notification.classList.add("notification");
-  document.body.appendChild(notification);
+function addRedirectToNotification(notification){
+  let link = notification.getAttribute('link_to_redirect')
+  notification.addEventListener('click', function(event) {
+    location.href = link
+  })
+}
+
+function changeStateInSpecificPages(data){
+  if(location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/)){
+    console.log('a expressao funfa')
+    let all_notifications = document.getElementsByClassName('notification-list')[0]
+    let notification = all_notifications.getElementsByClassName('notification-item-list')[0].cloneNode(true)
+    
+    notification.setAttribute('link_to_redirect', data.link_to_redirect)
+    notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
+    notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
+    notification.querySelector('form').setAttribute('action', `/users/${data.user_id}/notifications/${data.notification_id}/delete`)
+    
+    all_notifications.insertBefore(notification, all_notifications.firstChild)
+  }
+}
+
+function showNotification(data) {
+  var notification = document.createElement("div")
+  notification.innerHTML = data.message
+  addRedirectToNotification(notification)
+  notification.classList.add("notification")
+  document.body.appendChild(notification)
+  changeStateInSpecificPages(data)
   setTimeout(() => {
-    document.body.removeChild(notification);
-  }, 8000);
+    document.body.removeChild(notification)
+  }, 8000)
 }
 
 if(document.querySelector('user')!=null){
-  let user_id = document.querySelector('user').getAttribute('user_id');
+  let user_id = document.querySelector('user').getAttribute('user_id')
   const pusher = new Pusher("7a447c0e0525f5f86bc9", {
     cluster: "eu",
     encrypted: true
   })
 
-  const channel = pusher.subscribe('RedHot');
+  const channel = pusher.subscribe('RedHot')
   channel.bind('notification-to-user-' + user_id, function(data) {
-    showNotification(data.message)
+    showNotification(data)
   })
 }
+
+
+notifications = document.getElementsByClassName('notification-item-list')
+if(notifications.length > 0)
+  Array.from(notifications).map(addRedirectToNotification)
 

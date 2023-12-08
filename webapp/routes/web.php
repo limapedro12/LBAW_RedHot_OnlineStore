@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\NotificationController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -76,6 +77,16 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/users/{id}/delete_account', 'deleteAccount');
 });
 
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
+    Route::post('/users/{user_id}/notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
+    Route::post('/users/{user_id}/notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markNotificationAsRead');
+
+    Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
+    Route::post('admin/{admin_id}/notifications/{notification_id}/delete', 'deleteNotification')->name('deleteAdminNotification');
+    Route::post('admin/{admin_id}/notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markAdminNotificationAsRead');
+});
+
 // Authentication
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -98,7 +109,6 @@ Route::get('/forgetPassword', function () {
 // AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
-    Route::get('/adminNotifications', 'adminNotifications')->name('adminNotifications');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
     Route::get('/adminProducts', 'adminProducts')->name('adminProducts');
     Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');

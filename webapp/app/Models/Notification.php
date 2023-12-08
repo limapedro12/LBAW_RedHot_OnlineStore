@@ -18,6 +18,8 @@ class Notification extends Model{
         'timestamp',
         'texto',
         'id_utilizador',
-        'id_administrador'
+        'id_administrador',
+        'link',
+        'lida'
     ];
 }

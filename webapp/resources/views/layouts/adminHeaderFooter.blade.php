@@ -41,7 +41,7 @@
                 
                     <nav class="navbar">
                         <a href="{{ url('/admin') }}">Dashboard</a>
-                        <a href="{{ url('/adminNotifications') }}">Notificações</a>
+                        <a href="{{ route('adminNotifications', ['admin_id' => Auth::guard('admin')->id()])}}">Notificações</a>
                         <a href="{{ url('/adminProfile') }}">Admin</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </nav>
@@ -64,7 +64,7 @@
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
                         <a href="{{ url('/admin') }}"> <i class="fas fa-angle-right"></i> Dashboard</a>
-                        <a href="{{ url('/adminNotifications') }}"> <i class="fas fa-angle-right"></i> Notificações</a>
+                        <a href="{{ route('adminNotifications', ['admin_id' => Auth::guard('admin')->id()])}}"> <i class="fas fa-angle-right"></i> Notificações</a>
                         <a href="{{ url('/adminProfile') }}"> <i class="fas fa-angle-right"></i> Admin</a>
                         <a href="#"> <i class="fas fa-angle-right"></i> Logout</a>
                   </div>

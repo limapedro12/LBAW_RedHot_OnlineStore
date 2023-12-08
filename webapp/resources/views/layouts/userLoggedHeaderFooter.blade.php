@@ -43,6 +43,7 @@
                     <nav class="navbar">
                         <a href="{{ url('/products') }}">Catálogo</a>
                         <a href="{{ url('/cart') }}">Carrinho</a>
+                        <a href="{{ route('notifications', ['user_id' => Auth::id()]) }}">Notificações</a>
                         <a href="{{ url('/users/'.Auth::id()) }}">Perfil</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </nav>

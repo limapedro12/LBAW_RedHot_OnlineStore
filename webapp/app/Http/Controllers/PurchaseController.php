@@ -71,7 +71,7 @@ class PurchaseController extends Controller
         $purchase->timestamp = date('Y-m-d H:i:s');
         $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
-        $purchase->estado = 'Em processamento';
+        $purchase->estado = 'Pagamento Por Aprovar';
         $purchase->id_administrador = null; // para alterar no futuro
         $purchase->total = $total;
         $purchase->save();
