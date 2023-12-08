@@ -29,14 +29,17 @@ class MailController extends Controller
             if (empty(env($envVar))) {
                 $missingVariables[] = $envVar;
             }
-        }
-
-        $token = bin2hex(random_bytes(32));
+        }        
 
         $user = User::where('email', '=', $request->email)->first();
             
         if ($user != null) {
-            $texto = 'Foi enviado um email de recuperação para ' . $request->email;
+
+            $token = bin2hex(random_bytes(32));
+
+            $user->validTokens[$user->id] = $token;
+
+            session(['validTokens' => $user->validTokens]);
 
             if (empty($missingVariables)) {
 
