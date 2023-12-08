@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,5 +31,15 @@ class AppServiceProvider extends ServiceProvider
             $schema = explode(':', $app_url)[0];
             URL::forceScheme($schema);
         }
+
+        View::share('numberOfUnreadNotifications', function () {
+            if (Auth::check()) {
+                return Auth::user()->getNumberOfUreadNotifications();
+            } elseif (Auth::guard('admin')->check()) {
+                return Auth::guard('admin')->user()->getNumberOfUreadNotifications();
+            } else {
+                return 0;
+            }
+        });
     }
 }

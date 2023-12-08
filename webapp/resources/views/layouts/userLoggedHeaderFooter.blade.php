@@ -43,7 +43,12 @@
                     <nav class="navbar">
                         <a href="{{ url('/products') }}">Catálogo</a>
                         <a href="{{ url('/cart') }}">Carrinho</a>
-                        <a href="{{ route('notifications', ['user_id' => Auth::id()]) }}">Notificações</a>
+                        <a href="{{ route('notifications', ['user_id' => Auth::id()]) }}">
+                          Notificações
+                          @if($numberOfUnreadNotifications() > 0)
+                          <span class='number-notifications'>{{ $numberOfUnreadNotifications() }}</span>
+                          @endif
+                        </a>
                         <a href="{{ url('/users/'.Auth::id()) }}">Perfil</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </nav>

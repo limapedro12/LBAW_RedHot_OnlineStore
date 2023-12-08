@@ -22,6 +22,7 @@
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/admin.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
+        <link href="{{ url('css/notification.css') }}" rel="stylesheet">
         <link href="{{ url('css/products.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
@@ -41,7 +42,12 @@
                 
                     <nav class="navbar">
                         <a href="{{ url('/admin') }}">Dashboard</a>
-                        <a href="{{ route('adminNotifications', ['admin_id' => Auth::guard('admin')->id()])}}">Notificações</a>
+                        <a href="{{ route('adminNotifications', ['admin_id' => Auth::guard('admin')->id()])}}">
+                          Notificações
+                          @if($numberOfUnreadNotifications() > 0)
+                          <span class='number-notifications'>{{ $numberOfUnreadNotifications() }}</span>
+                          @endif
+                        </a>
                         <a href="{{ url('/adminProfile') }}">Admin</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </nav>

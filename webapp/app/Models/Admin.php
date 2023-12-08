@@ -50,4 +50,8 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function getNumberOfUreadNotifications(){
+        return Notification::where('id_administrador', $this->id)->where('lida', false)->count();
+    }
+
 }

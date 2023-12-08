@@ -31,7 +31,17 @@
     color:white;
     padding:0.1em 0.3em;
     border-radius:1em;
-    background-color:rgb(225, 3, 3);
+    background-color: var(--main-color);
+}
+
+.number-notifications {
+    color:white;
+    padding:0.1em 0.5em;
+    border-radius: 50%;
+    background-color: var(--main-color);
+
+    font-size: 0.6em;
+    vertical-align: text-top;
 }
 
 button.delete-notification {
