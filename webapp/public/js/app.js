@@ -314,16 +314,32 @@ function addRedirectToNotification(notification){
   })
 }
 
+function deleteNotification(notification){
+  notification.querySelector('button').addEventListener('click', function(event) {
+    event.preventDefault()
+    let action = notification.querySelector('form').getAttribute('action')
+    let csrf_token = document.querySelector('input[name="_token"]').value
+    let xhr = new XMLHttpRequest()
+    xhr.open('DELETE', action, true)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+    xhr.send()
+    notification.remove()
+  })
+}
+
 function changeStateInSpecificPages(data){
-  if(location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/)){
-    console.log('a expressao funfa')
+  if(location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/) || 
+     location.href.match(/[^\/]+\/\/[^\/]+\/admin\/[0-9]+\/notifications/)) {
     let all_notifications = document.getElementsByClassName('notification-list')[0]
     let notification = all_notifications.getElementsByClassName('notification-item-list')[0].cloneNode(true)
     
     notification.setAttribute('link_to_redirect', data.link_to_redirect)
     notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
     notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
-    notification.querySelector('form').setAttribute('action', `/users/${data.user_id}/notifications/${data.notification_id}/delete`)
+    notification.querySelector('form').setAttribute('action', `/notifications/${data.notification_id}/delete`)
+
+    deleteNotification(notification)
     
     all_notifications.insertBefore(notification, all_notifications.firstChild)
   }
@@ -354,8 +370,11 @@ if(document.querySelector('user')!=null){
   })
 }
 
-
 notifications = document.getElementsByClassName('notification-item-list')
-if(notifications.length > 0)
-  Array.from(notifications).map(addRedirectToNotification)
+if(notifications.length > 0){
+  Array.from(notifications)
+    .map(n => n.getElementsByClassName('notification-clickable')[0])
+    .map(addRedirectToNotification)
+  Array.from(notifications).map(deleteNotification)
+}
 

@@ -79,12 +79,11 @@ Route::controller(UserController::class)->group(function() {
 
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
-    Route::post('/users/{user_id}/notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
-    Route::post('/users/{user_id}/notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markNotificationAsRead');
-
+    
     Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
-    Route::post('admin/{admin_id}/notifications/{notification_id}/delete', 'deleteNotification')->name('deleteAdminNotification');
-    Route::post('admin/{admin_id}/notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markAdminNotificationAsRead');
+
+    Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
+    Route::put('notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markNotificationAsRead');
 });
 
 // Authentication
