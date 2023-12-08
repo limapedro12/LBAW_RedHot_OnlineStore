@@ -159,7 +159,7 @@ class PurchaseController extends Controller
         $purchase->estado = $request->state;
         $purchase->save();
 
-        event(new ChangePurchaseState($purchase->id, $purchase->id_utilizador, $purchase->estado));
+        event(new ChangePurchaseState($orderId, $purchase->id_utilizador, $purchase->estado));
 
         return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }

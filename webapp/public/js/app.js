@@ -357,7 +357,11 @@ function changeStateInSpecificPages(data){
     
     all_notifications.insertBefore(notification, all_notifications.firstChild)
   }
+  console.log(`order${data.purchase_id}State`)
+  if(data.purchase_id != null)
+    Array.from(document.getElementsByClassName(`order${data.purchase_id}State`)).map(e => e.innerHTML = `Estado: ${data.new_state}`)
 }
+  
 
 function showNotification(data) {
   var notification = document.createElement("div")
@@ -365,7 +369,6 @@ function showNotification(data) {
   addRedirectToNotification(notification)
   notification.classList.add("notification")
   document.body.appendChild(notification)
-  console.log(data.notification_id)
   markAsRead(data.notification_id)
   changeStateInSpecificPages(data)
   setTimeout(() => {

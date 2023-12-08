@@ -2,7 +2,7 @@
 <section>
         <h1>Encomenda {{$purchase->id}}</h1>
         <p>
-            <span>Estado: {{$purchase->estado}}</span><br>
+            <span class="order{{$purchase->id}}State">Estado: {{$purchase->estado}}</span><br>
             <span>{{$purchase->total}}€</span><br>
             <span>{{$purchase->timestamp}}</span><br>
             <span>Envio: {{$purchase->descricao}}</span>
