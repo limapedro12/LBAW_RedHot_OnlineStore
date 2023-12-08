@@ -15,6 +15,7 @@ use App\Models\Notification;
 class ChangePurchaseState implements ShouldBroadcast{
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public int $notification_id;
     public string $message;
     public int $purchase_id;
     public int $user_id;
@@ -28,7 +29,9 @@ class ChangePurchaseState implements ShouldBroadcast{
         $this->new_state = $new_state;
         $this->timestamp = now();
         $this->message = 'A sua compra REF '.$purchase_id.' mudou para o estado "' . $new_state.'"';
-        Notification::create(['texto' => $this->message, 'timestamp' => now(), 'id_utilizador' => $user_id, 'link' => '/users/'.$user_id.'/orders/'.$purchase_id]);
+        $this->lida = false;
+        $notification = Notification::create(['texto' => $this->message, 'timestamp' => now(), 'id_utilizador' => $user_id, 'link' => '/users/'.$user_id.'/orders/'.$purchase_id]);
+        $this->notification_id = $notification->id;
     }
 
     // You should specify the name of the channel created in Pusher.

@@ -26,3 +26,16 @@
     0%,100% { opacity: 0 }
     20%,80% { opacity: 1 }
 }
+
+.new-notification {
+    color:white;
+    padding:0.1em 0.3em;
+    border-radius:1em;
+    background-color:rgb(225, 3, 3);
+}
+
+button.delete-notification {
+    font-size: 0.9em;
+    padding:0.2em 0.5em;
+    border-radius:1em;
+}

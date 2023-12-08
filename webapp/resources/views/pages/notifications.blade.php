@@ -5,14 +5,17 @@
         <br>
         <div class="notification-list">
         @forelse($notifications as $notification)
-        <div class="notification-item-list">
+        <div class="notification-item-list" notification_id = "{{ $notification->id }}">
             <div class="notification-clickable" link_to_redirect = "{{ $notification->link }}">
-                <p class="notification-timestamp">{{$notification->timestamp}}</p>
+                <small class="notification-timestamp"> {{$notification->timestamp}} </small>
+                @if(!($notification->lida))
+                    <small class="new-notification"> Nova </small>
+                @endif
                 <p class="notification-body">{{$notification->texto}}</p>
             </div>
             <form action="{{ route('deleteNotification', ['notification_id' => $notification->id]) }}" method="delete">
                 @csrf
-                <button type="submit" class="btn btn-danger">Apagar</button>
+                <button type="submit" class="delete-notification">Apagar</button>
             </form>
             <br>
         </div>

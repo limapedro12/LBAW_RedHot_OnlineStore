@@ -83,7 +83,7 @@ Route::controller(NotificationController::class)->group(function () {
     Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
 
     Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
-    Route::put('notifications/{notification_id}/mark_as_read', 'markNotificationAsRead')->name('markNotificationAsRead');
+    Route::put('notifications/{notification_id}/markAsRead', 'markNotificationAsRead')->name('markNotificationAsRead');
 });
 
 // Authentication

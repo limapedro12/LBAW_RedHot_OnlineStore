@@ -314,7 +314,14 @@ function addRedirectToNotification(notification){
   })
 }
 
-function deleteNotification(notification){
+function markAsRead(id){
+  let xhr = new XMLHttpRequest()
+  xhr.open('PUT', `/notifications/${id}/markAsRead`, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.send()
+}
+
+function addDeleteNotificationButton(notification){
   notification.querySelector('button').addEventListener('click', function(event) {
     event.preventDefault()
     let action = notification.querySelector('form').getAttribute('action')
@@ -338,8 +345,15 @@ function changeStateInSpecificPages(data){
     notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
     notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
     notification.querySelector('form').setAttribute('action', `/notifications/${data.notification_id}/delete`)
+    let new_notification_marker = notification.getElementsByClassName('new-notification')
+    if(new_notification_marker.length == 0){
+      let new_notification_marker = document.createElement('small')
+      new_notification_marker.classList.add('new-notification')
+      new_notification_marker.innerHTML = 'Novo'
+      notification.insertBefore(new_notification_marker, notification.childNodes[1])
+    }
 
-    deleteNotification(notification)
+    addDeleteNotificationButton(notification)
     
     all_notifications.insertBefore(notification, all_notifications.firstChild)
   }
@@ -351,6 +365,8 @@ function showNotification(data) {
   addRedirectToNotification(notification)
   notification.classList.add("notification")
   document.body.appendChild(notification)
+  console.log(data.notification_id)
+  markAsRead(data.notification_id)
   changeStateInSpecificPages(data)
   setTimeout(() => {
     document.body.removeChild(notification)
@@ -375,6 +391,10 @@ if(notifications.length > 0){
   Array.from(notifications)
     .map(n => n.getElementsByClassName('notification-clickable')[0])
     .map(addRedirectToNotification)
-  Array.from(notifications).map(deleteNotification)
+  Array.from(notifications)
+    .filter(n => n.getElementsByClassName('new-notification').length > 0)
+    .map(n => n.getAttribute('notification_id'))
+    .map(markAsRead)
+  Array.from(notifications).map(addDeleteNotificationButton)
 }
 
