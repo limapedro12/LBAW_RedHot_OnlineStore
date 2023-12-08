@@ -80,7 +80,7 @@
                   <div class="box">
                     <h3>Contactos</h3>
                     <a href="#"> <i class="fas fa-phone"></i> +351 220 000 000</a>
-                    <a href="#"> <i class="fas fa-envelope"></i> ajuda@redhot.com </a>
+                    <a href="#"> <i class="fas fa-envelope"></i> redhotteam@gmail.com </a>
                     <a href="#"> <i class="fas fa-map"></i> Porto, Portugal - 4200-465</a>
                   </div>
         
