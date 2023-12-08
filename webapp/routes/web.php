@@ -10,8 +10,8 @@ use App\Http\Controllers\PurchaseController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +73,8 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/users/{id}/edit', 'editProfile');
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
+    Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
+    Route::post('/users/{id}/change_password/{token}', 'changePassword');
 });
 
 // Authentication
@@ -137,3 +139,6 @@ Route::controller(ReviewsController::class)->group(function () {
     Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
     Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
 });
+
+//Emails
+Route::post('/send', [MailController::class, 'send']);

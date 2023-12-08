@@ -15,6 +15,14 @@ function verifyUser(User $user) : void {
         abort(403);
 }
 
+function verifyToken(User $user, string $token) {
+
+    $validTokens = session('validTokens');
+
+    if($token == null || $token == "" || strlen($token) != 64 || !in_array($token, $validTokens) || $user->id != array_search($token, $validTokens))
+        abort(403);
+}
+
 class UserController extends Controller
 {
     /**
@@ -97,5 +105,32 @@ class UserController extends Controller
         User::where('id', '=', $id)->delete();
 
         return redirect('/logout');
+    }
+
+    public function changePasswordForm(Request $request, int $id, string $token) : View
+    {
+        $user = User::findOrFail($id);
+
+        verifyToken($user, $token);
+
+        return view('pages.changePassword', [
+            'user' => $user,
+            'token' => $token
+        ]);
+    }
+
+    public function changePassword(Request $request, int $id, string $token)
+    {
+        $user = User::findOrFail($id);
+
+        verifyToken($user, $token);
+
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        User::where('id', '=', $id)->update(array('password' => Hash::make($request->password)));
+
+        return redirect('/login');
     }
 }
