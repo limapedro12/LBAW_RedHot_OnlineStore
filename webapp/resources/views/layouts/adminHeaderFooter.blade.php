@@ -30,6 +30,7 @@
         <script type="text/javascript" src={{ url('js/like.js') }} defer></script>
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
 
+        <admin admin_id="{{ Auth::guard('admin')->id() }}"></admin>
     </head>
     <body>
         <main>

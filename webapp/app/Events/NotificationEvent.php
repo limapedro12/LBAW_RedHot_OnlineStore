@@ -15,12 +15,12 @@ use App\Models\Notification;
 abstract class NotificationEvent implements ShouldBroadcast{
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public int $notification_id;
+    public int $notificationId;
     public string $message;
     public string $timestamp;
-    public int $user_id = 0;
-    public int $admin_id = 0;
-    public string $link_to_redirect = '';
+    public int $userId = 0;
+    public int $adminId = 0;
+    public string $linkToRedirect = '';
     public bool $lida;
 
     public function broadcastOn() {
@@ -29,31 +29,31 @@ abstract class NotificationEvent implements ShouldBroadcast{
 
     abstract public function broadcastAs();
 
-    protected function createUserNotification(int $user_id, string $message, string $link_to_redirect) {
-        $this->user_id = $user_id;
+    protected function createUserNotification(int $userId, string $message, string $linkToRedirect) {
+        $this->userId = $userId;
         $this->timestamp = now();
         $this->message = $message;
         $this->lida = false;
-        $this->link_to_redirect = $link_to_redirect;
+        $this->linkToRedirect = $linkToRedirect;
         
         $notification = Notification::create(['texto' => $this->message, 
                                               'timestamp' => now(), 
-                                              'id_utilizador' => $user_id, 
-                                              'link' => $link_to_redirect]);
-        $this->notification_id = $notification->id;
+                                              'id_utilizador' => $userId, 
+                                              'link' => $linkToRedirect]);
+        $this->notificationId = $notification->id;
     }
 
-    protected function createAdminNotification(int $admin_id, string $message, string $link_to_redirect) {
-        $this->admin_id = $admin_id;
+    protected function createAdminNotification(int $adminId, string $message, string $linkToRedirect) {
+        $this->adminId = $adminId;
         $this->timestamp = now();
         $this->message = $message;
         $this->lida = false;
-        $this->link_to_redirect = $link_to_redirect;
+        $this->linkToRedirect = $linkToRedirect;
         
         $notification = Notification::create(['texto' => $this->message, 
                                               'timestamp' => now(), 
-                                              'id_administrador' => $admin_id, 
-                                                'link' => $link_to_redirect]);
-        $this->notification_id = $notification->id;
+                                              'id_administrador' => $adminId, 
+                                                'link' => $linkToRedirect]);
+        $this->notificationId = $notification->id;
     }
 }

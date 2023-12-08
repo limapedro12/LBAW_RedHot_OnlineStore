@@ -390,6 +390,19 @@ if(document.querySelector('user')!=null){
   })
 }
 
+if(document.querySelector('admin')!=null){
+  let admin_id = document.querySelector('admin').getAttribute('admin_id')
+  const pusher = new Pusher("7a447c0e0525f5f86bc9", {
+    cluster: "eu",
+    encrypted: true
+  })
+
+  const channel = pusher.subscribe('RedHot')
+  channel.bind('notification-to-admin-' + admin_id, function(data) {
+    showNotification(data)
+  })
+}
+
 notifications = document.getElementsByClassName('notification-item-list')
 if(notifications.length > 0){
   Array.from(notifications)

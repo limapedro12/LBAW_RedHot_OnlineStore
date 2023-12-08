@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Comment;
+use App\Events\ProductOutOfStock;
 
 class Product extends Model{
     use HasFactory;
@@ -202,6 +203,9 @@ class Product extends Model{
     public function decrementStock(int $quantity){
         $this->stock -= $quantity;
         $this->save();
+        if($this->stock <= 0){
+            event(new ProductOutOfStock($this->id_administrador, $this->id, $this->nome));
+        }
     }
 
     public function incrementStock(int $quantity){
