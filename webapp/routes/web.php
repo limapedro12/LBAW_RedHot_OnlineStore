@@ -136,6 +136,7 @@ Route::controller(ReviewsController::class)->group(function () {
 });
 Route::controller(ReviewsController::class)->group(function () {
     Route::post('/products/{id_product}/reviews/add_review', 'addReview')->name('addReview');
+    Route::get('/products/{id_product}/reviews/{id_review}/edit_review', 'editReviewForm')->name('editReviewForm');
     Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
     Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
 });

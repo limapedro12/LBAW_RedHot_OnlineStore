@@ -92,14 +92,25 @@ try {
     new_review.classList.add('review');
     new_review.setAttribute('reviewId', review.id);
 
-    // Review content
-    let reviewContent = document.createElement('p');
-    reviewContent.innerHTML = `${review.id_utilizador} -> Rating: ${review.avaliacao} / Comment: ${review.texto} / ${review.timestamp}`;
-    new_review.appendChild(reviewContent);
+    let userIdHeading = document.createElement('h3');
+    userIdHeading.textContent = `Utilizador: ${review.id_utilizador}`;
+    new_review.appendChild(userIdHeading);
+
+    let ratingHeading = document.createElement('h3');
+    ratingHeading.textContent = `Avaliação: ${review.avaliacao}`;
+    new_review.appendChild(ratingHeading);
+
+    let commentHeading = document.createElement('h4');
+    commentHeading.textContent = `Comentário: ${review.texto}`;
+    new_review.appendChild(commentHeading);
+
+    let timestampParagraph = document.createElement('p');
+    timestampParagraph.textContent = review.timestamp;
+    new_review.appendChild(timestampParagraph);
 
     // Edit form
     let editForm = document.createElement('form');
-    editForm.method = 'POST';
+    editForm.method = 'GET';
     editForm.action = `/products/${review.id_produto}/reviews/${review.id}/edit_review`; 
     editForm.classList.add('editReviewForm');
     editForm.setAttribute('reviewId', review.id);
