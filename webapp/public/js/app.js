@@ -254,8 +254,11 @@ try {
     var searchString = document.getElementById('searchedString').value
 
     //filter part
-    var priceFilterMin = document.getElementById('priceFilterMin').value;
-    var priceFilterMax = document.getElementById('priceFilterMax').value;
+    var priceFilterMin = document.getElementById('fromInput').value;
+    var priceFilterMax = document.getElementById('toInput').value;
+
+
+
     var discountFilter = document.getElementById('discountFilter').checked;
     var discountFilterMin = document.getElementById('discountFilterMin').value;
     var discountFilterMax = document.getElementById('discountFilterMax').value;

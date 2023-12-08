@@ -9,6 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" type="sources/logo/logo" href="/sources/logo/skullOnly.ico">
         
 
         <!-- Font Awesome cdnjs link -->
@@ -26,6 +27,8 @@
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
+        <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
+        
 
     </head>
     <body>
