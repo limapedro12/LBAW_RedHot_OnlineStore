@@ -18,7 +18,7 @@ use App\Events\CancelOrder;
 
 class PurchaseController extends Controller
 {
-    public function showCheckoutForm() : View
+    public function showCheckoutForm()
     {   
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
@@ -29,14 +29,14 @@ class PurchaseController extends Controller
             }
             return view('pages.checkout', ['total' => round($total, 2)]);
         } else {
-            // para utilizador não autenticado
+            return redirect('/login');
         }
     }
 
     public function checkout(Request $request)
     {
         $request->validate([
-            'cardNo' => 'required|integer|min:1000000000000000|max:9999999999999999',
+            'cardNo' => 'required|integer|min:3000000000000000|max:9999999999999999',
             'cardHolder' => 'required|string',
             'cardExpiryMonth' => 'required|integer|min:1|max:12',
             'cardExpiryYear' => 'required|integer|min:23|max:99',
@@ -100,15 +100,11 @@ class PurchaseController extends Controller
         if (Auth::check() && Auth::id() == $id) {
             $purchases = Purchase::where('id_utilizador', '=', $id)->get();
             return view('pages.orders', ['purchases' => $purchases, 'userId' => $id]);
-        } else {
-            // para utilizador não autenticado
         }
     }
 
     public function showOrderDetails(int $userId, int $orderId) : View
     {
-        // $this->authorize;
-
         $purchase = Purchase::findOrFail($orderId);
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
         $quantPriceProducts = [];
@@ -131,8 +127,6 @@ class PurchaseController extends Controller
 
     public function cancelOrder(int $userId, int $orderId)
     {
-        // $this->authorize;
-
         $purchase = Purchase::findOrFail($orderId);
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
 
@@ -152,8 +146,6 @@ class PurchaseController extends Controller
 
     public function changeState(int $userId, int $orderId, Request $request)
     {
-        // $this->authorize;
-
         $request->validate([
             'state' => 'required|string'
         ]);

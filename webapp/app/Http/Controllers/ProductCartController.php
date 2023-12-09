@@ -36,7 +36,20 @@ class ProductCartController extends Controller
                 ]);
             }
         } else {
-            // para utilizador não autenticado
+            if (!session('guestID')) session(['guestID'=> self::getNewGuestId()]);
+
+            $productCart = ProductCart::where('id_produto', '=', $id)->where('id_utilizador_nao_autenticado', '=', session('guestID'))->first();
+
+            if ($productCart) {
+                $productCart->quantidade += $request->quantidade;
+                $productCart->save();
+            } else {
+                ProductCart::create([
+                    'id_produto' => $id,
+                    'id_utilizador_nao_autenticado' => session('guestID'),
+                    'quantidade' => $request->quantidade
+                ]);
+            }
         }
 
         return redirect('/products/'.$id);
@@ -80,5 +93,17 @@ class ProductCartController extends Controller
                                       'discountFunction' => function($price, $discount) {
                                                             return $price * (1 - $discount);},
                                       'total' => round($total, 2)]);
+    }
+
+    public static function transferGuestCart(int $guestId) {
+        ProductCart::where('id_utilizador', '=', Auth::id())->delete();
+
+        $productsCart = ProductCart::where('id_utilizador_nao_autenticado', '=', $guestId)->get();
+
+        foreach ($productsCart as $productCart) {
+            $productCart->id_utilizador_nao_autenticado = null;
+            $productCart->id_utilizador = Auth::id();
+            $productCart->save();
+        }
     }
 }
