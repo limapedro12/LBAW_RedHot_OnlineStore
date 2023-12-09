@@ -113,12 +113,11 @@ Route::get('/forgetPassword', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
-    Route::get('/adminProducts', 'adminProducts')->name('adminProducts');
     Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
-    Route::get('/adminShipping', 'adminShipping')->name('adminShipping');
+    Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
 });
 
