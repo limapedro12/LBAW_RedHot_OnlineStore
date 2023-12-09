@@ -39,7 +39,7 @@
                     </a>
                 
                     <nav class="navbar">
-                        <a href="{{ url('/products') }}">Catálogo</a>
+                        <a href="{{ url('/products') }}">Produtos</a>
                         <a href="{{ url('/cart') }}">Carrinho</a>
                         <a href="{{ url('/users/'.Auth::id()) }}">Perfil</a>
                         <a href="{{ url('/logout') }}">Logout</a>
@@ -62,7 +62,7 @@
                   <div class="box">
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
-                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
+                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Produtos</a>
                         <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a>
                         <a href="{{ url('/users/'.Auth::id()) }}"> <i class="fas fa-angle-right"></i> Perfil</a>
                         <a href="{{ url('/logout') }}"> <i class="fas fa-angle-right"></i> Logout</a>

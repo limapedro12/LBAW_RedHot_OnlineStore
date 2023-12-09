@@ -20,11 +20,7 @@
 
 .productsPageTop {
     grid-area: productsPageTop;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5;
+    background-color: #FFFFFF;
 }
 
 .productsPageProducts {
@@ -267,6 +263,153 @@
 }
  
 /* CSS for the Top Products Page */
+.productsPageTop{
+    padding: 1rem;
+}
+
+.productsPageTop .productsPageTopRowOne{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs{
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    color: var(--black);
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs{
+    display: flex;
+    align-items: center;
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li{
+    list-style: none;
+    margin-right: 0.5rem;
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a{
+    text-decoration: none;
+    color: var(--black);
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a:hover{
+    color: var(--main-color);
+}
+
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border: 2px solid var(--black);
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput input{
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button i{
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button:hover i{
+    color: var(--main-color);
+}
+
+
+.productsPageTop .productsPageTopRowTwo{
+    display: grid;
+    grid-template-columns: 0.65fr 1.7fr 0.65fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . .";
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageTopTitle{
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--black);
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border: 2px solid var(--black);
+}
+
+
+.productsPageTop .productsPageTopRowTwo .productsPageSort{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortTitle{
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1.5px solid var(--black);
+}
+
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector select{
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
 
 
 
