@@ -68,7 +68,6 @@ class User extends Authenticatable
 
     public function hasPhoto() : bool
     {
-        return ($this->profile_image !== '');
+        return ($this->profile_image !== null && $this->profile_image !== '');
     }
-    
 }

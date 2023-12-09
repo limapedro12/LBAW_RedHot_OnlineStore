@@ -113,7 +113,7 @@ class ProductsController extends Controller {
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
             'description' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
@@ -171,6 +171,6 @@ class ProductsController extends Controller {
         $product = Product::where('id', '=', $id);
         FileController::delete($product->product_image);
         $product->delete();
-        return redirect('/products');
+        return redirect('/adminProductsManage');
     }
 }

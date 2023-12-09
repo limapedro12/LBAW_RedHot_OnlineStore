@@ -232,4 +232,9 @@ class Product extends Model{
     public function getProductImage() {
         return FileController::get('product', $this->id);
     }
+
+    public function hasPhoto() : bool
+    {
+        return ($this->product_image !== null && $this->product_image !== '');
+    }
 }

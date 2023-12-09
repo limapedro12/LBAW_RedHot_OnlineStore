@@ -12,7 +12,7 @@
         <input type="number" id="price" step="0.01" name="price" value="{{ $product->precoatual }}" required><br><br>
 
         <label for="discount">Desconto:</label>
-        <input type="number" step="0.001" id="discount" name="discount" value="{{ $product->desconto }}" required><br><br>
+        <input type="number" step="0.001" id="discount" name="discount" value="{{ $product->desconto }}"><br><br>
 
         <label for="stock">Stock:</label>
         <input type="number" id="stock" name="stock" value="{{ $product->stock }}" required><br><br>
@@ -20,8 +20,14 @@
         <label for="description">Descrição:</label>
         <textarea id="description" name="description" required>{{ $product->descricao }}</textarea><br><br>
 
-        <label for="file">Imagem:</label>
-        <input type="file" id="file" name="file"><br><br>
+        <div id="photoUploader">
+            <label for="file">Imagem:</label><br>
+            <input name="file" type="file" id="file"><br><br>
+        </div>
+        @if ($product->hasPhoto())
+        <label for="deletePicture">Apagar Imagem</label>
+        <input type="checkbox" id="deletePhoto" name="deletePhoto"><br><br>
+        @endif
 
         <label for="category">Categoria:</label>
         <input type="text" id="category" name="category" value="{{ $product->categoria }}"><br><br>
