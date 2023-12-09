@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 // Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\Notification;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -54,5 +56,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+    public function getNumberOfUreadNotifications(){
+        return Notification::where('id_utilizador', $this->id)->where('lida', false)->count();
+    }
+
 }

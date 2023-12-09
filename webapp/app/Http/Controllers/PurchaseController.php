@@ -13,6 +13,8 @@ use App\Models\ProductCart;
 use App\Models\ProductPurchase;
 
 use App\Models\Purchase;
+use App\Events\ChangePurchaseState;
+use App\Events\CancelOrder;
 
 class PurchaseController extends Controller
 {
@@ -70,7 +72,7 @@ class PurchaseController extends Controller
         $purchase->timestamp = date('Y-m-d H:i:s');
         $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
-        $purchase->estado = 'Pendente';
+        $purchase->estado = 'Pagamento Por Aprovar';
         $purchase->id_administrador = null; // para alterar no futuro
         $purchase->total = $total;
         $purchase->save();
@@ -118,7 +120,13 @@ class PurchaseController extends Controller
             $quantPriceProducts[] = [$quantity, $price, $product];
         }
 
-        return view('pages.orderDetails', ['purchase' => $purchase, 'quantPriceProducts' => $quantPriceProducts]);
+        $all_states = ['Em processamento', 'Pagamento por Aprovar', 'Pagamento Aprovado', 'Pagamento Não Aprovado', 'Enviada', 'Entregue', 'Cancelada'];
+
+        return view('pages.orderDetails', 
+                ['purchase' => $purchase, 
+                 'quantPriceProducts' => $quantPriceProducts,
+                 'remainingStates' => array_values(array_diff($all_states, [$purchase->estado])),
+                ]);
     }
 
     public function cancelOrder(int $userId, int $orderId)
@@ -135,8 +143,27 @@ class PurchaseController extends Controller
         }
 
         $purchase->estado = 'Cancelada';
-        $purchase->save();
+        // $purchase->save();
+
+        event(new CancelOrder($purchase->id, Auth::user()->nome, $purchase->id_utilizador));
 
         return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Encomenda cancelada com sucesso.');
+    }
+
+    public function changeState(int $userId, int $orderId, Request $request)
+    {
+        // $this->authorize;
+
+        $request->validate([
+            'state' => 'required|string'
+        ]);
+
+        $purchase = Purchase::findOrFail($orderId);
+        $purchase->estado = $request->state;
+        $purchase->save();
+
+        event(new ChangePurchaseState($orderId, $purchase->id_utilizador, $purchase->estado));
+
+        return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
 }

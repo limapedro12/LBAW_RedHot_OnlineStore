@@ -1,4 +1,5 @@
 @section('content')
+<section>
         <h1>A editar perfil de {{$user->nome}}</h1>
         <form method="post" action="/users/{{$user->id}}/edit">
             @csrf
@@ -10,6 +11,7 @@
             <input type="password" id="password" name="password" required><br><br> 
             <input type="submit" value="Submeter">
         </form>
+    </section>
 @endsection
 
 @if (Auth::guard('admin')->check())

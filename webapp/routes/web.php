@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\NotificationController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -44,12 +45,14 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/products/add', 'addProduct')->name('addProduct');
     Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
     Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+    Route::get('/products/{id}/changeStock', 'changeStockProductForm')->name('changeStockProductForm');
+    Route::post('/products/{id}/changeStock', 'changeStockProduct')->name('changeStockProduct');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
     Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
-    Route::post('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
+    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
 });
 
 // Cart and Purchases
@@ -64,6 +67,7 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::get('/users/{id}/orders', 'showOrders');
     Route::get('/users/{userId}/orders/{orderId}', 'showOrderDetails');
     Route::post('/users/{userId}/orders/{orderId}/cancel', 'cancelOrder');
+    Route::post('/users/{userId}/orders/{orderId}/change_state', 'changeState');
 });
 
 // User
@@ -75,6 +79,15 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/users/{id}/delete_account', 'deleteAccount');
     Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
     Route::post('/users/{id}/change_password/{token}', 'changePassword');
+});
+
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
+    
+    Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
+
+    Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
+    Route::put('notifications/{notification_id}/markAsRead', 'markNotificationAsRead')->name('markNotificationAsRead');
 });
 
 // Authentication
@@ -99,7 +112,6 @@ Route::get('/forgetPassword', function () {
 // AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
-    Route::get('/adminNotifications', 'adminNotifications')->name('adminNotifications');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
     Route::get('/adminProducts', 'adminProducts')->name('adminProducts');
     Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');

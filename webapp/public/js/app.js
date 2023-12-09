@@ -318,3 +318,151 @@ try {
     xhr.send();
   })
 } catch (error) {}
+
+// change purchase state
+
+function addRedirectToNotification(notification){
+  let link = notification.getAttribute('link_to_redirect')
+  notification.addEventListener('click', function(event) {
+    location.href = link
+  })
+}
+
+function markAsRead(id){
+  let xhr = new XMLHttpRequest()
+  xhr.open('PUT', `/notifications/${id}/markAsRead`, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.send()
+}
+
+function addDeleteNotificationButton(notification){
+  notification.querySelector('button').addEventListener('click', function(event) {
+    event.preventDefault()
+    let action = notification.querySelector('form').getAttribute('action')
+    let csrf_token = document.querySelector('input[name="_token"]').value
+    let xhr = new XMLHttpRequest()
+    xhr.open('DELETE', action, true)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+    xhr.send()
+    notification.remove()
+  })
+}
+
+function changeStateInSpecificPages(data){
+  if(location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/) || 
+     location.href.match(/[^\/]+\/\/[^\/]+\/admin\/[0-9]+\/notifications/)) {
+    let all_notifications = document.getElementsByClassName('notification-list')[0]
+    let notification = all_notifications.getElementsByClassName('notification-item-list')[0].cloneNode(true)
+    
+    notification.setAttribute('link_to_redirect', data.linkToRedirect)
+    notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
+    notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
+    notification.querySelector('form').setAttribute('action', `/notifications/${data.notificationId}/delete`)
+    let new_notification_marker = notification.getElementsByClassName('new-notification')
+    if(new_notification_marker.length == 0){
+      let new_notification_marker = document.createElement('small')
+      new_notification_marker.classList.add('new-notification')
+      new_notification_marker.innerHTML = 'Nova'
+      notification.childNodes[1].insertBefore(new_notification_marker, notification.childNodes[1].childNodes[2])
+      notification.childNodes[1].insertBefore(document.createTextNode(' '), notification.childNodes[1].childNodes[2])
+    }
+
+    addDeleteNotificationButton(notification)
+    
+    all_notifications.insertBefore(notification, all_notifications.firstChild)
+  }
+  if(data.purchaseId != null)
+    Array.from(document.getElementsByClassName(`order${data.purchaseId}State`)).map(e => e.innerHTML = `Estado: ${data.newState}`)
+}
+  
+
+function showNotification(data) {
+  var notification = document.createElement("div")
+  notification.setAttribute('link_to_redirect', data.linkToRedirect)
+  notification.innerHTML = data.message
+  addRedirectToNotification(notification)
+  notification.classList.add("notification")
+  document.body.appendChild(notification)
+  markAsRead(data.notificationId)
+  changeStateInSpecificPages(data)
+  setTimeout(() => {
+    document.body.removeChild(notification)
+  }, 8000)
+}
+
+if(document.querySelector('user')!=null){
+  let user_id = document.querySelector('user').getAttribute('user_id')
+  const pusher = new Pusher("7a447c0e0525f5f86bc9", {
+    cluster: "eu",
+    encrypted: true
+  })
+
+  const channel = pusher.subscribe('RedHot')
+  channel.bind('notification-to-user-' + user_id, function(data) {
+    showNotification(data)
+  })
+}
+
+if(document.querySelector('admin')!=null){
+  let admin_id = document.querySelector('admin').getAttribute('admin_id')
+  const pusher = new Pusher("7a447c0e0525f5f86bc9", {
+    cluster: "eu",
+    encrypted: true
+  })
+
+  const channel = pusher.subscribe('RedHot')
+  channel.bind('notification-to-all-admins', function(data) {
+    console.log('notification-to-all-admins')
+    showNotification(data)
+  })
+  channel.bind('notification-to-admin-' + admin_id, function(data) {
+    showNotification(data)
+  })
+}
+
+notifications = document.getElementsByClassName('notification-item-list')
+if(notifications.length > 0){
+  Array.from(notifications)
+    .map(n => n.getElementsByClassName('notification-clickable')[0])
+    .map(addRedirectToNotification)
+  Array.from(notifications)
+    .filter(n => n.getElementsByClassName('new-notification').length > 0)
+    .map(n => n.getAttribute('notification_id'))
+    .map(markAsRead)
+  Array.from(notifications).map(addDeleteNotificationButton)
+}
+
+editButton = document.getElementById('editarProduto')
+if(editButton != null){
+  editButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    location.href = editButton.getAttribute('action')
+  })
+}
+
+stockButton = document.getElementById('alterarStockDoProduto')
+if(stockButton != null){
+  stockButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    location.href = stockButton.getAttribute('action')
+  })
+}
+
+deleteButton = document.getElementById('eliminarProduto')
+if(deleteButton != null){
+  deleteButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    if(confirm('Tem a certeza que pretende eliminar este produto?')){
+      let action = deleteButton.getAttribute('action')
+      let csrf_token = document.querySelector('input[name="_token"]').value
+      let xhr = new XMLHttpRequest()
+      xhr.open('DELETE', action, true)
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+      xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+      xhr.send()
+      location.href = '/products'
+    }
+  })
+}
+

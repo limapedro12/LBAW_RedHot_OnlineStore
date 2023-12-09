@@ -8,6 +8,9 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
+use App\Models\ProductCart;
+
+use App\Events\ChangeInProductsPrice;
 
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
@@ -102,19 +105,47 @@ class ProductsController extends Controller {
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
             'discount' => 'required|numeric|min:0',
-            'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
             'url_image' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
 
+        $oldProduct = Product::findorfail($id);
+        if($oldProduct->precoatual != $request->price || $oldProduct->desconto != $request->discount){
+            $usersWithProductInCart = ProductCart::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInCart as $userWithProductInCart)
+                event(new ChangeInProductsPrice($userWithProductInCart->id_utilizador, 
+                                                $oldProduct->id, $oldProduct->nome, 
+                                                $oldProduct->precoatual*(1-$oldProduct->desconto), 
+                                                $request->price*(1-$request->discount)));
+        }
+
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
                                                      'precoatual' => $request->price, 
                                                      'desconto' => $request->discount, 
-                                                     'stock' => $request->stock, 
                                                      'descricao' => $request->description, 
                                                      'url_imagem' => $request->url_image,
                                                      'categoria' => strtolower($request->category)));
+
+        return redirect('/products/'.$id);
+    }
+
+    public function changeStockProductForm(int $id){
+        verifyAdmin();
+
+        return view('pages.productsChangeStock', [
+            'product' => Product::findorfail($id),
+        ]);
+    }
+
+    public function changeStockProduct(Request $request, int $id){
+        verifyAdmin();
+        
+        $request->validate([
+            'stock' => 'required|numeric|min:0',
+        ]);
+
+        Product::where('id', '=', $id)->update(array('stock' => $request->stock));
 
         return redirect('/products/'.$id);
     }
