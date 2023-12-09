@@ -121,22 +121,22 @@
                 <!-- Breadcrumbs -->
                 <div class="productsPageBreadcrumbs">
                     <ul class="listOfBreadcrumbs">
-                        <li class="breadcrumbs"><a href="{{ url('/') }}">Home > </a></li>
+                        <li class="breadcrumbs"><a href="{{ url('/') }}">Home</a> > </li>
                         @if (isset($searchedString) && isset($category))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
                             <li class="breadcrumbs"><a
-                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }} > </a>
+                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }}</a> > 
                             </li>
                             <li class="breadcrumbsLast"><a
                                     href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
                             </li>
                         @elseif (isset($searchedString))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
                             <li class="breadcrumbsLast"><a
                                     href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
                             </li>
                         @elseif (isset($category))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
                             <li class="breadcrumbsLast"><a
                                     href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }}</a>
                             </li>

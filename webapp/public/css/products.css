@@ -300,6 +300,10 @@
     color: var(--main-color);
 }
 
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs .breadcrumbs a{
+    text-decoration: underline;
+}
+
 
 .productsPageTop .productsPageTopRowOne .productsPageSearch{
     display: flex;
@@ -363,6 +367,7 @@
     align-items: center;
     font-size: 2rem;
     color: var(--black);
+    text-transform: uppercase;
 }
 
 .productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising{
