@@ -429,3 +429,36 @@ if(notifications.length > 0){
   Array.from(notifications).map(addDeleteNotificationButton)
 }
 
+editButton = document.getElementById('editarProduto')
+if(editButton != null){
+  editButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    location.href = editButton.getAttribute('action')
+  })
+}
+
+stockButton = document.getElementById('alterarStockDoProduto')
+if(stockButton != null){
+  stockButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    location.href = stockButton.getAttribute('action')
+  })
+}
+
+deleteButton = document.getElementById('eliminarProduto')
+if(deleteButton != null){
+  deleteButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    if(confirm('Tem a certeza que pretende eliminar este produto?')){
+      let action = deleteButton.getAttribute('action')
+      let csrf_token = document.querySelector('input[name="_token"]').value
+      let xhr = new XMLHttpRequest()
+      xhr.open('DELETE', action, true)
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+      xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+      xhr.send()
+      location.href = '/products'
+    }
+  })
+}
+

@@ -37,10 +37,10 @@
     </section>
     <section class="delete">
         @if(Auth::guard('admin')->check())
-            <form method='post' action='/products/{{ $product->id }}/delete'>
             @csrf
-            <input type="submit" value="Delete">
-            </form>
+            <input type="submit" id='editarProduto' value="Editar" action='/products/{{ $product->id }}/edit'>
+            <input type="submit" id='alterarStockDoProduto' value="Alterar Stock" action='/products/{{ $product->id }}/changeStock'>
+            <input type="submit" id='eliminarProduto' value="Eliminar" action='/products/{{ $product->id }}/delete'>
         @endif
     </section>
 </section>
