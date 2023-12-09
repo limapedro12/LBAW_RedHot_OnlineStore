@@ -78,10 +78,12 @@ class UserController extends Controller
             ]);
         }
 
-        if ($request->file) {
+        if ($request->file && !($request->deletePhoto)) {
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'profile', $id);
             User::where('id', '=', $id)->update(array('profile_image' => $hash));
+        } else if ($request->deletePhoto) {
+            User::where('id', '=', $id)->update(array('profile_image' => null));
         }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));

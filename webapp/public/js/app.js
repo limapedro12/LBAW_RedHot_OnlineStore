@@ -466,3 +466,15 @@ if(deleteButton != null){
   })
 }
 
+// delete profile picture
+try {
+  uploader = document.getElementById('photoUploader');
+  checkBox = document.getElementById('deletePhoto');
+  checkBox.addEventListener('click', function(event) {
+    if (checkBox.checked) {
+      uploader.style.display = 'none';
+    } else {
+      uploader.style.display = 'block';
+    }
+  });
+} catch (error) {}
