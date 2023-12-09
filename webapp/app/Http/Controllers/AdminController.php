@@ -107,4 +107,9 @@ class AdminController extends Controller{
         return view('pages.adminUsers');
     }
 
+    public function adminFAQ(){
+        verifyAdmin();
+        return view('pages.adminFAQ');
+    }
+
 }
