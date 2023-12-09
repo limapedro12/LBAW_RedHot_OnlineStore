@@ -29,10 +29,12 @@ class ProductsController extends Controller {
 
     public function listProducts(){
         return view('pages.products', [
+            'maxPrice' => Product::getMostExpensiveProductPrice(),
             'products' => Product::all(),
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
-            }
+            },
+            'allCategories' => Product::getAllCategories()
         ]);
     }
 
@@ -135,5 +137,8 @@ class ProductsController extends Controller {
         Product::where('id', '=', $id)->delete();
         return redirect('/products');
     }
+
+
+
 
 }

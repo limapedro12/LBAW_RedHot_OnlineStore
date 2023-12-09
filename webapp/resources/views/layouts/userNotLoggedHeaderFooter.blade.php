@@ -9,6 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" type="sources/logo/logo" href="/sources/logo/skullOnly.ico">
         
 
         <!-- Font Awesome cdnjs link -->
@@ -26,8 +27,9 @@
         <link href="{{ url('css/products.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
-        <script type="text/javascript" src={{ url('js/app.js') }} defer>
-        </script>
+        <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
+        <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
+        
     </head>
     <body>
         <main>
@@ -39,7 +41,7 @@
                   </a>
               
                   <nav class="navbar">
-                      <a href="{{ url('/products') }}">Catálogo</a>
+                      <a href="{{ url('/products') }}">Produtos</a>
                       <!-- <a href="{{ url('/cart') }}">Carrinho</a> -->
                       <a href="{{ url('/register') }}">Registar</a>
                       <a href="{{ url('/login') }}">Login</a>
@@ -62,7 +64,7 @@
                   <div class="box">
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
-                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
+                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Produtos</a>
                         <!-- <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a> -->
                         <a href="{{ url('/register') }}"> <i class="fas fa-angle-right"></i> Registar</a>
                         <a href="{{ url('/login') }}"> <i class="fas fa-angle-right"></i> Login</a>
@@ -78,7 +80,7 @@
                   <div class="box">
                     <h3>Contactos</h3>
                     <a href="#"> <i class="fas fa-phone"></i> +351 220 000 000</a>
-                    <a href="#"> <i class="fas fa-envelope"></i> ajuda@redhot.com </a>
+                    <a href="#"> <i class="fas fa-envelope"></i> redhotteam@gmail.com </a>
                     <a href="#"> <i class="fas fa-map"></i> Porto, Portugal - 4200-465</a>
                   </div>
         

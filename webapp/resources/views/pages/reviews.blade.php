@@ -6,12 +6,15 @@
             @foreach($reviews as $review)
 
             <article class="review" reviewId="{{$review->id}}">
-                <p> Utilizador: {{$review->id_utilizador}} -> Avaliação: {{$review->avaliacao}} / Comentário: {{$review->texto}} / {{$review->timestamp}}</p>
+                <h3>Utilizador: {{$review->id_utilizador}}</h3>
+                <h3>Avaliação: {{$review->avaliacao}}</h3>
+                <h4>Comentário: {{$review->texto}}</h4>
+                <p>{{$review->timestamp}}</p>
             </article>
 
                 @if(Auth::check())
                     @if($review->id_utilizador == Auth::user()->id)               
-                        <form method="POST" action="{{ route('editReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}" class="editReviewForm" reviewId="{{$review->id}}">
+                        <form method="GET" action="{{ route('editReviewForm', ['id_review' => $review->id, 'id_product' => $id_product]) }}" class="editReviewForm" reviewId="{{$review->id}}">
                             @csrf
                             <input type="submit" value="Edit Review">
                         </form>
@@ -50,8 +53,6 @@
                 <input type="submit" value="Add Review">
             </form>
         @endif
-
-        <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
 
         <script>
             // Set the current timestamp in the 'Y-m-d H:i:s' format when the form is submitted

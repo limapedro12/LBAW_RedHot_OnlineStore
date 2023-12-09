@@ -56,7 +56,7 @@ class ReviewsController extends Controller
     /**
      * Show the review for a given id.
      */
-    public function editReview(int $id_product, int $id_review)
+    public function editReviewForm(int $id_product, int $id_review)
     {
         // Get the review.
         $review = Review::findorfail($id_review);
@@ -66,6 +66,27 @@ class ReviewsController extends Controller
             'review' => $review,
             'id_product' => $id_product
         ]);
+    }
+
+    /**
+     * Edit a review.
+     */
+    public function editReview(Request $request, int $id_product, int $id_review)
+    {
+        // Find the review.
+        $review = Review::findorfail($id_review);
+
+        // Set review details.
+        $review->timestamp = $request->input('timestamp');
+        $review->texto = $request->input('comment');
+        $review->avaliacao = $request->input('rating');
+        $review->id_utilizador = Auth::user()->id;
+        $review->id_produto = $id_product;
+
+        // Save the review and redirect to the reviews page.
+        Review::where('id', '=', $id_review)->update(array('texto' => $request->comment, 'avaliacao' => $request->rating, 'timestamp' => $request->timestamp));
+
+        return redirect()->back();
     }
 
 

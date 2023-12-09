@@ -9,6 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" type="sources/logo/logo" href="/sources/logo/skullOnly.ico">
         
 
         <!-- Font Awesome cdnjs link -->
@@ -29,6 +30,8 @@
         <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
         <script type="text/javascript" src={{ url('js/like.js') }} defer></script>
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
+        <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
+        
 
         <admin admin_id="{{ Auth::guard('admin')->id() }}"></admin>
     </head>
@@ -86,7 +89,7 @@
                   <div class="box">
                     <h3>Contactos</h3>
                     <a href="#"> <i class="fas fa-phone"></i> +351 220 000 000</a>
-                    <a href="#"> <i class="fas fa-envelope"></i> ajuda@redhot.com </a>
+                    <a href="#"> <i class="fas fa-envelope"></i> redhotteam@gmail.com </a>
                     <a href="#"> <i class="fas fa-map"></i> Porto, Portugal - 4200-465</a>
                   </div>
         

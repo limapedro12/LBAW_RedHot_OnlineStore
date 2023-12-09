@@ -2,7 +2,10 @@
 
     <section>
         <article class="review" reviewId="{{$review->id}}">
-            <p> {{$review->id_utilizador}} -> Avaliação: {{$review->avaliacao}} / Comentário: {{$review->texto}} / {{$review->timestamp}} / {{$review->id}}</p>
+            <h3>Utilizador: {{$review->id_utilizador}}</h3>
+            <h3>Avaliação: {{$review->avaliacao}}</h3>
+            <h4>Comentário: {{$review->texto}}</h4>
+            <p>{{$review->timestamp}}</p><br>
         </article>
 
         @if (Auth::check() && $review->id_utilizador == Auth::user()->id)

@@ -11,8 +11,8 @@ use App\Http\Controllers\NotificationController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +75,8 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/users/{id}/edit', 'editProfile');
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
+    Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
+    Route::post('/users/{id}/change_password/{token}', 'changePassword');
 });
 
 Route::controller(NotificationController::class)->group(function () {
@@ -144,6 +146,10 @@ Route::controller(ReviewsController::class)->group(function () {
 });
 Route::controller(ReviewsController::class)->group(function () {
     Route::post('/products/{id_product}/reviews/add_review', 'addReview')->name('addReview');
+    Route::get('/products/{id_product}/reviews/{id_review}/edit_review', 'editReviewForm')->name('editReviewForm');
     Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
     Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
 });
+
+//Emails
+Route::post('/send', [MailController::class, 'send']);

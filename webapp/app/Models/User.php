@@ -21,6 +21,8 @@ class User extends Authenticatable
     public $timestamps  = false;
     public $isAdmin = true;
 
+    public $validTokens = [];
+
     protected $table = 'utilizador';
 
     /**

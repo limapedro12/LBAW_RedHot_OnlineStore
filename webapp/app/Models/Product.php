@@ -212,4 +212,19 @@ class Product extends Model{
         $this->stock += $quantity;
         $this->save();
     }
+
+    public static function getMostExpensiveProductPrice(){
+        return round(Product::orderBy('precoatual', 'desc')->first()->precoatual + 1, 0);
+    }
+
+    public static function getAllCategories(){
+        $categories = DB::table('produto')->select('categoria')->distinct()->get();
+        $categoriesArray = array();
+        foreach($categories as $category){
+            if($category->categoria != null){
+                array_push($categoriesArray, $category->categoria);
+            }
+        }
+        return $categoriesArray;
+    }
 }
