@@ -23,7 +23,7 @@ class Product extends Model{
         'desconto',
         'stock',
         'id_administrador',
-        'url_imagem',
+        'product_image',
         'categoria'
     ];
 

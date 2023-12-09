@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Notification;
+use App\Http\Controllers\FileController;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,7 @@ class User extends Authenticatable
         'nome',
         'email',
         'password',
+        'profile_image'
     ];
 
     /**
@@ -60,4 +62,8 @@ class User extends Authenticatable
         return Notification::where('id_utilizador', $this->id)->where('lida', false)->count();
     }
 
+    public function getProfileImage() {
+        return FileController::get('profile', $this->id);
+    }
+    
 }
