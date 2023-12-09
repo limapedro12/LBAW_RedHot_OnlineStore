@@ -49,24 +49,36 @@ class ProductCartController extends Controller
         return redirect('/cart');
     }
 
-    public function showCart() //: View
+    public static function getNewGuestId() {
+        $guestID = ProductCart::max('id_utilizador') + 1;
+        return $guestID;
+    }
+
+    public function showCart() : View
     {
+        $productsCart = null;
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
-            $quantityProductList = [];
-            $total = 0;
-            foreach($productsCart as $productCart) {
-                $product = Product::findOrFail($productCart->id_produto);
-                $quantityProductList[] = [$productCart->quantidade, $product];
-                $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
+        } else {
+            if (!session('guestID')) {
+                session(['guestID'=> self::getNewGuestId()]);
+                $productsCart = [];
+            } else {
+                $productsCart = ProductCart::where('id_utilizador_nao_autenticado', '=', session('guestID'))->get();
             }
-            return view('pages.cart', ['list' => $quantityProductList,
+        }
+
+        $quantityProductList = [];
+        $total = 0;
+        foreach($productsCart as $productCart) {
+            $product = Product::findOrFail($productCart->id_produto);
+            $quantityProductList[] = [$productCart->quantidade, $product];
+            $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
+        }
+
+        return view('pages.cart', ['list' => $quantityProductList,
                                       'discountFunction' => function($price, $discount) {
                                                             return $price * (1 - $discount);},
                                       'total' => round($total, 2)]);
-        } else {
-            // para utilizador não autenticado
-            return redirect('/');
-        }
     }
 }
