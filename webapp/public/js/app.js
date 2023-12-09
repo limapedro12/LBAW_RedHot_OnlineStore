@@ -201,7 +201,7 @@ try {
 
 // searchAndFilter
 
-try {
+if(document.getElementsByClassName('productsPageFilter').length > 0){
   function productToHTML(product) {
     var html = `<section class="productListItem">
                 <img src = "${product.url_imagem}" alt = "${product.nome}" height = "100">
@@ -241,83 +241,84 @@ try {
     }
   }
 
-  displayDiscountFilter()
+  // displayDiscountFilter()
 
-  document.getElementById('discountFilter').addEventListener('change', displayDiscountFilter);
+  // document.getElementById('discountFilter').addEventListener('change', displayDiscountFilter);
 
-  document.getElementById('searchAndFilter').addEventListener('submit', function(event) {
+  document.querySelector('.filterButtonContainer > button').addEventListener('click', function(event) {
     event.preventDefault();
 
-    listOfProducts.innerHTML = '<img src="https://i.gifer.com/ZKZg.gif" alt="Loading...">';
+    //listOfProducts.innerHTML = '<img src="https://i.gifer.com/ZKZg.gif" alt="Loading...">';
 
     //search part
-    var searchString = document.getElementById('searchedString').value
+    let searchString = document.getElementById('searchedString').value
+    console.log(searchString)
+
+    let filterJSON = {}
 
     //filter part
-    var priceFilterMin = document.getElementById('fromInput').value;
-    var priceFilterMax = document.getElementById('toInput').value;
+    let priceFilterMin = document.getElementById('fromInput').value;
+    let priceFilterMax = document.getElementById('toInput').value;
+    filterJSON.price = {"min":priceFilterMin, "max":priceFilterMax}
 
+    let categorias = Array.from(document.getElementsByClassName('filterCategoriesListItem'))
+                          .filter(e => e.querySelector('input').checked)
+                          .map(e => e.querySelector('input').value)
+    filterJSON.categories = categorias
 
+    let discountList = []
+    if(document.getElementById('discountFilter25').checked)
+      discountList.push({"min":0, "max":0.25})
+    if(document.getElementById('discountFilter50').checked)
+      discountList.push({"min":0.25, "max":0.5})
+    if(document.getElementById('discountFilter75').checked)
+      discountList.push({"min":0.5, "max":0.75})
+    if(document.getElementById('discountFilter100').checked)
+      discountList.push({"min":0.75, "max":1})
+    filterJSON.discount = discountList
 
-    var discountFilter = document.getElementById('discountFilter').checked;
-    var discountFilterMin = document.getElementById('discountFilterMin').value;
-    var discountFilterMax = document.getElementById('discountFilterMax').value;
-    var stockFilterMin = document.getElementById('stockFilterMin').value;
-    var stockFilterMax = document.getElementById('stockFilterMax').value;
-    var category = document.getElementById('category').value.toLowerCase();
-    var filterString = '';
-    if (priceFilterMin != '') {
-        filterString += 'preco:min:' + priceFilterMin + ';';
-    }
-    if (priceFilterMax != '') {
-        filterString += 'preco:max:' + priceFilterMax + ';';
-    }
-    if (discountFilter) {
-        filterString += 'desconto;';
-    }
-    if (discountFilterMin != '') {
-        filterString += 'desconto:min:' + discountFilterMin + ';';
-    }
-    if (discountFilterMax != '') {
-        filterString += 'desconto:max:' + discountFilterMax + ';';
-    }
-    if (stockFilterMin != '') {
-        filterString += 'stock:min:' + stockFilterMin + ';';
-    }
-    if (stockFilterMax != '') {
-        filterString += 'stock:max:' + stockFilterMax + ';';
-    }
-    if (category != '') {
-        filterString += 'categoria:' + category + ';';
-    }
+    let ratingList = []
+    if(document.getElementById('ratingFilter1').checked)
+      ratingList.push({"min":0, "max":1})
+    if(document.getElementById('ratingFilter2').checked)
+      ratingList.push({"min":1, "max":2})
+    if(document.getElementById('ratingFilter3').checked)
+      ratingList.push({"min":2, "max":3})
+    if(document.getElementById('ratingFilter4').checked)
+      ratingList.push({"min":3, "max":4})
+    if(document.getElementById('ratingFilter5').checked)
+      ratingList.push({"min":4, "max":5})
+    filterJSON.rating = ratingList
+
+    var filterString = JSON.stringify(filterJSON)
 
     if(searchString == '')
         searchString = '*'
-    if(filterString == '')
-        filterString = '*'
+
+    console.log(filterString)
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
 
     //use XMLHttpRequest to send the request to the server
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('GET', url, true);
 
-    //when the request comes back, run the following code
-    xhr.onload = function() {
-        //if everything went ok, show the search results
-        if (xhr.status == 200) {
-            let products = JSON.parse(xhr.responseText);
-            listOfProducts.innerHTML = Object.values(products).map(productToHTML).join('');
-        }
-        //if something went wrong, show the error
-        else {
-            listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
-        }
-    };
+    // //when the request comes back, run the following code
+    // xhr.onload = function() {
+    //     //if everything went ok, show the search results
+    //     if (xhr.status == 200) {
+    //         let products = JSON.parse(xhr.responseText);
+    //         listOfProducts.innerHTML = Object.values(products).map(productToHTML).join('');
+    //     }
+    //     //if something went wrong, show the error
+    //     else {
+    //         listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
+    //     }
+    // };
 
-    //send the request
-    xhr.send();
+    // //send the request
+    // xhr.send();
   })
-} catch (error) {}
+}
 
 // change purchase state
 
@@ -455,6 +456,7 @@ if(deleteButton != null){
     event.preventDefault()
     if(confirm('Tem a certeza que pretende eliminar este produto?')){
       let action = deleteButton.getAttribute('action')
+      console.log(action)
       let csrf_token = document.querySelector('input[name="_token"]').value
       let xhr = new XMLHttpRequest()
       xhr.open('DELETE', action, true)

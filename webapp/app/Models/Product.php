@@ -196,9 +196,13 @@ class Product extends Model{
         return $filteredProducts;
     }
 
+    public static function getProductsFromOneFilter($filter){
+        return;
+    }
+
     public static function searchAndFilterProducts(string $stringToSearch, string $filter){
         $searchedProducts = Product::searchProducts($stringToSearch);
-        $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
+
         return $filteredProducts;
     }
 

@@ -57,7 +57,7 @@ class ProductsController extends Controller {
         if($stringToSearch == '*')
             $products = Product::filterProducts($filter);
         else
-            $products = Product::searchAndFilterProducts($stringToSearch, $filter);
+            $products = Product::searchAndFilterProducts($stringToSearch, json.decode($filter, true));
         return json_encode($products);
     }
 
@@ -168,6 +168,6 @@ class ProductsController extends Controller {
         $product = Product::where('id', '=', $id);
         FileController::delete($product->product_image);
         $product->delete();
-        return redirect('/products');
+        return;
     }
 }
