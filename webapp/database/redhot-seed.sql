@@ -26,10 +26,11 @@ DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
-  	nome VARCHAR(256) NOT NULL,
-  	email VARCHAR(256) UNIQUE NOT NULL,
+  nome VARCHAR(256) NOT NULL,
+  email VARCHAR(256) UNIQUE NOT NULL,
 	password VARCHAR(256) NOT NULL,
-  remember_token VARCHAR(256)
+  remember_token VARCHAR(256),
+  profile_image VARCHAR(1024)
 );
 
 CREATE TABLE Administrador (
@@ -89,7 +90,7 @@ CREATE TABLE Produto (
 	desconto FLOAT CHECK (desconto >= 0 AND desconto <= 100),
   stock INTEGER NOT NULL CHECK (stock >= 0),
   id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
-  url_imagem VARCHAR(1024) DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png',
+  product_image VARCHAR(1024),
   categoria VARCHAR(256)
 );
 
@@ -309,7 +310,7 @@ EXECUTE FUNCTION update_order_status_trigger();
 
 SET timezone = 'Europe/Lisbon';
 
-INSERT INTO Utilizador (nome, email, password) VALUES ('Utilizador','user@users.com','$2y$10$Rs590ufQ2U3ies52lz1R0.KNlZaOIaVoPGJqKqbYBG5ZLaCwDVZ3.'); -- password: 12345678
+INSERT INTO Utilizador (nome, email, password, profile_image) VALUES ('Utilizador','user@users.com','$2y$10$Rs590ufQ2U3ies52lz1R0.KNlZaOIaVoPGJqKqbYBG5ZLaCwDVZ3.', 'profile/1u9ceaMiBdeI0gaSjwfqQ3C73dPHULuVKzOhzXDf.gif'); -- password: 12345678
 
 INSERT INTO Administrador (nome, email, password) VALUES ('admin', 'admin@admin.pt', '$2y$10$R6IeqCxQxMConGFO3OHuq.Um2vxTYB9NKikC6Hky8cmUCln6jl5k6'); -- password: 12345678
 

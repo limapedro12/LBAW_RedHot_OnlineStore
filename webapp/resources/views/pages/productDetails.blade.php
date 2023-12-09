@@ -1,6 +1,6 @@
 @section('content')
 <section>
-    <img style="height: 200px;" src="{{ $product->url_imagem }}" alt="Imagem do produto">
+    <img style="height: 200px;" src="{{ $product->getProductImage() }}" alt="Imagem do produto">
     <section class="productDetails">
         <h2> {{ $product->nome }} </h2> 
         <p> 

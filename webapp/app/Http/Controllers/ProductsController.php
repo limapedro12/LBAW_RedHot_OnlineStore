@@ -12,6 +12,8 @@ use App\Models\ProductCart;
 
 use App\Events\ChangeInProductsPrice;
 
+use App\Http\Controllers\FileController;
+
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
         abort(403);
@@ -30,7 +32,7 @@ class ProductsController extends Controller {
     public function listProducts(){
         return view('pages.products', [
             'maxPrice' => Product::getMostExpensiveProductPrice(),
-            'products' => Product::all(),
+            'products' => Product::orderBy('id')->get(),
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
             },
@@ -72,9 +74,14 @@ class ProductsController extends Controller {
             'discount' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'url_image' => 'required|string|max:1024',
             'category' => 'string|max:256',
         ]);
+
+        if ($request->file) {
+            $fileController = new FileController();
+            $hash = $fileController->upload($request, 'product', $id);
+            Product::where('id', '=', $id)->update(array('product_image' => $hash));
+        }
 
         $newProduct = Product::create([
             'nome' => $request->name,
@@ -83,7 +90,6 @@ class ProductsController extends Controller {
             'stock' => $request->stock,
             'id_administrador' => 1,
             'descricao' => $request->description,
-            'url_imagem' => $request->url_image,
             'categoria' => strtolower($request->category),
         ]);
 
@@ -106,7 +112,6 @@ class ProductsController extends Controller {
             'price' => 'required|numeric|min:0',
             'discount' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'url_image' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
 
@@ -119,12 +124,20 @@ class ProductsController extends Controller {
                                                 $oldProduct->precoatual*(1-$oldProduct->desconto), 
                                                 $request->price*(1-$request->discount)));
         }
+        
+        if ($request->file && !($request->deletePhoto)) {
+            $fileController = new FileController();
+            $hash = $fileController->upload($request, 'product', $id);
+            Product::where('id', '=', $id)->update(array('product_image' => $hash));
+        } else if ($request->deletePhoto) {
+            Product::where('id', '=', $id)->update(array('product_image' => null));
+        }
 
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
                                                      'precoatual' => $request->price, 
                                                      'desconto' => $request->discount, 
-                                                     'descricao' => $request->description, 
-                                                     'url_imagem' => $request->url_image,
+                                                     'stock' => $request->stock, 
+                                                     'descricao' => $request->description,
                                                      'categoria' => strtolower($request->category)));
 
         return redirect('/products/'.$id);
@@ -152,11 +165,9 @@ class ProductsController extends Controller {
 
     function deleteProduct(Request $request, int $id){
         verifyAdmin();
-        Product::where('id', '=', $id)->delete();
+        $product = Product::where('id', '=', $id);
+        FileController::delete($product->product_image);
+        $product->delete();
         return redirect('/products');
     }
-
-
-
-
 }

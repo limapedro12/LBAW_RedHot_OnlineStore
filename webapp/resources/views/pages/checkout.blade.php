@@ -37,6 +37,7 @@
             <input type="textarea" id="deliveryObs" name="deliveryObs">
             <br><br>
             <button type="submit">Confirmar encomenda</button>
+        </form>
 @endsection
 
 @if (Auth::guard('admin')->check())

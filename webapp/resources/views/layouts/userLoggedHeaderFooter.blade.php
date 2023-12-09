@@ -24,14 +24,17 @@
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/notification.css') }}" rel="stylesheet">
         <link href="{{ url('css/products.css') }}" rel="stylesheet">
+        <link href="{{ url('css/product.css') }}" rel="stylesheet">
+        <link href="{{ url('css/about.css') }}" rel="stylesheet">
   
         <!-- Scripts -->
         <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
         <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
-        
+
         <!-- User Identifier -->
         <user user_id="{{ Auth::id() }}"></user>
+        
     </head>
     <body>
         <main>

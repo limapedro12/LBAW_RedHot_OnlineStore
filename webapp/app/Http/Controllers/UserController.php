@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
+use App\Http\Controllers\FileController;
+
 function verifyUser(User $user) : void {
     if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
         abort(403);
@@ -74,6 +76,14 @@ class UserController extends Controller
             $request->validate([
                 'email' => 'unique:utilizador',
             ]);
+        }
+
+        if ($request->file && !($request->deletePhoto)) {
+            $fileController = new FileController();
+            $hash = $fileController->upload($request, 'profile', $id);
+            User::where('id', '=', $id)->update(array('profile_image' => $hash));
+        } else if ($request->deletePhoto) {
+            User::where('id', '=', $id)->update(array('profile_image' => null));
         }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));

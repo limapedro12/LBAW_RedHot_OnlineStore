@@ -1,0 +1,230 @@
+.aboutContent{
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutContent .aboutRowOne{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.aboutContent .aboutRowOne .aboutRowOneContentLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    border-right: 2px solid var(--black);
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.aboutContent .aboutRowOne .aboutRowOneContentRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.aboutTitle{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.aboutTitle .one,
+.aboutTitle .three{
+    color: var(--black);
+}
+
+.aboutTextSeparator{
+    width: 15%;
+    height: 2px;
+    background-color: var(--black);
+    margin-bottom: 1.5rem;
+}
+
+.aboutTextSeparatorTwo{
+    width: 15%;
+    height: 2px;
+    background-color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.aboutText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.aboutText .one,
+.aboutText .three{
+    color: var(--black);
+}
+
+.aboutRowTwo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--black);
+}
+
+.aboutRowTwo .aboutRowTwoContentLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.aboutRowTwo .aboutRowTwoContentRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+
+
+.aboutTitle .two{
+    color: var(--white);
+}
+
+.aboutText .two{
+    color: var(--white);
+}
+
+.aboutRowTwo .aboutRowTwoContentRight a .aboutButtonToProducts{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2.5rem;
+}
+
+.aboutRowTwo .aboutRowTwoContentRight a .aboutButtonToProducts {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.aboutRowTwo .aboutRowTwoContentRight .aboutButtonToProducts:hover{
+    opacity: 0.8;
+}
+
+.aboutRowThree{
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutRowThree .aboutRowThreeContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.aboutRowThree .aboutRowThreeContent .aboutTextSeparatorThree{
+    width: 10%;
+    height: 2px;
+    background-color: var(--black);
+    margin-bottom: 1.5rem;
+}
+
+.aboutRowThree .aboutRowThreeContent .aboutText .three{
+    color: var(--black);
+    width: 80%;
+}
+
+.aboutTeam{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.aboutTeam img{
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.aboutTeam .aboutTeamMember{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberName{
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberRole{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberNickname{
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberDescription{
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a{
+    text-decoration: none;
+    font-size: 2.5rem;
+    color: var(--main-color);
+}
+
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a:hover{
+    opacity: 0.8;
+}

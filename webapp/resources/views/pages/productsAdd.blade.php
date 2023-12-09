@@ -2,7 +2,7 @@
 <section>
     <h1>Adicionar Novo Produto</h1>
 
-    <form id="addProductForm" method="post" action="{{ route('addProduct') }}">
+    <form id="addProductForm" method="post" action="{{ route('addProduct') }} enctype="multipart/form-data"">
         @csrf
 
         <label for="name">Nome:</label>
@@ -20,13 +20,13 @@
         <label for="description">Descrição:</label>
         <textarea id="description" name="description" required></textarea><br><br>
 
-        <label for="url_image">URL da Imagem:</label>
-        <input type="text" id="url_image" name="url_image" required><br><br>
+        <label for="file">Imagem:</label>
+        <input type="file" id="file" name="file"><br><br>
 
         <label for="category">Categoria:</label>
         <input type="text" id="category" name="category"><br><br>
 
-        <input type="submit" value="Add Product">
+        <input type="submit" value="Adicionar Produto">
     </form>
 </section>
 @endsection
