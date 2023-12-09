@@ -23,6 +23,8 @@
         <link href="{{ url('css/extraPages.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/products.css') }}" rel="stylesheet">
+        <link href="{{ url('css/product.css') }}" rel="stylesheet">
+        <link href="{{ url('css/about.css') }}" rel="stylesheet">
   
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
