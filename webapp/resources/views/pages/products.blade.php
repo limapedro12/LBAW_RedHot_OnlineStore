@@ -212,7 +212,7 @@
                 <div class="productListItem">
                     <div class="productListItemImg">
                         <a href = "/products/{{ $product->id }}">
-                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}">
+                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
                         </a>
                     </div>
                     <div class="productListItemTitle">
