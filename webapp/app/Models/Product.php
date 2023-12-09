@@ -228,6 +228,7 @@ class Product extends Model{
             }
         }
         return $categoriesArray;
+    }
     public function getProductImage() {
         return FileController::get('product', $this->id);
     }
