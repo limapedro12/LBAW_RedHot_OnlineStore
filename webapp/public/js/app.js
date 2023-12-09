@@ -341,36 +341,36 @@ function changeStateInSpecificPages(data){
     let all_notifications = document.getElementsByClassName('notification-list')[0]
     let notification = all_notifications.getElementsByClassName('notification-item-list')[0].cloneNode(true)
     
-    notification.setAttribute('link_to_redirect', data.link_to_redirect)
+    notification.setAttribute('link_to_redirect', data.linkToRedirect)
     notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
     notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
-    notification.querySelector('form').setAttribute('action', `/notifications/${data.notification_id}/delete`)
+    notification.querySelector('form').setAttribute('action', `/notifications/${data.notificationId}/delete`)
     let new_notification_marker = notification.getElementsByClassName('new-notification')
     if(new_notification_marker.length == 0){
       let new_notification_marker = document.createElement('small')
       new_notification_marker.classList.add('new-notification')
-      new_notification_marker.innerHTML = 'Novo'
-      notification.insertBefore(new_notification_marker, notification.childNodes[1])
+      new_notification_marker.innerHTML = 'Nova'
+      notification.childNodes[1].insertBefore(new_notification_marker, notification.childNodes[1].childNodes[2])
+      notification.childNodes[1].insertBefore(document.createTextNode(' '), notification.childNodes[1].childNodes[2])
     }
 
     addDeleteNotificationButton(notification)
     
     all_notifications.insertBefore(notification, all_notifications.firstChild)
   }
-  console.log(`order${data.purchase_id}State`)
-  if(data.purchase_id != null)
-    Array.from(document.getElementsByClassName(`order${data.purchase_id}State`)).map(e => e.innerHTML = `Estado: ${data.new_state}`)
+  if(data.purchaseId != null)
+    Array.from(document.getElementsByClassName(`order${data.purchaseId}State`)).map(e => e.innerHTML = `Estado: ${data.newState}`)
 }
   
 
 function showNotification(data) {
   var notification = document.createElement("div")
-  notification.setAttribute('link_to_redirect', data.link_to_redirect)
+  notification.setAttribute('link_to_redirect', data.linkToRedirect)
   notification.innerHTML = data.message
   addRedirectToNotification(notification)
   notification.classList.add("notification")
   document.body.appendChild(notification)
-  markAsRead(data.notification_id)
+  markAsRead(data.notificationId)
   changeStateInSpecificPages(data)
   setTimeout(() => {
     document.body.removeChild(notification)
