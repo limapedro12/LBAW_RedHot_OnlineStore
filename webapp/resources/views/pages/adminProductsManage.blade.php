@@ -70,18 +70,17 @@
                 <section>
                     <h1>Adicionar Novo Produto</h1>
 
-                    <form id="addProductForm" method="POST" action="{{ route('addProduct') }}"
-                        enctype="multipart/form-data">
+                    <form action="/products/add" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <label for="name">Nome:</label>
                         <input type="text" id="name" name="name" required><br><br>
 
-                        <label for="price">Preco:</label>
+                        <label for="price">Preço:</label>
                         <input type="number" step="0.01" id="price" name="price" required><br><br>
 
                         <label for="discount">Desconto:</label>
-                        <input type="number" step="0.001" id="discount" name="discount" required><br><br>
+                        <input type="number" step="0.001" id="discount" name="discount"><br><br>
 
                         <label for="stock">Stock:</label>
                         <input type="number" id="stock" name="stock" required><br><br>
