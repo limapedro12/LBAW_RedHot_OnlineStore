@@ -16,6 +16,7 @@
             <br>
         @endif
         <p> Categoria: {{ $product->categoria }} </p>
+        <p> Stock: {{ $product->stock }} </p>
         <p> Descrição: </p>
         <p> {{ $product->descricao }} </p>
     </section>

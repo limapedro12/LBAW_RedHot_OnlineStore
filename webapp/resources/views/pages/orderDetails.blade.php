@@ -1,7 +1,8 @@
 @section('content')
+<section>
         <h1>Encomenda {{$purchase->id}}</h1>
         <p>
-            <span>Estado: {{$purchase->estado}}</span><br>
+            <span class="order{{$purchase->id}}State">Estado: {{$purchase->estado}}</span><br>
             <span>{{$purchase->total}}€</span><br>
             <span>{{$purchase->timestamp}}</span><br>
             <span>Envio: {{$purchase->descricao}}</span>
@@ -18,12 +19,26 @@
                 </li>
             @endforeach
         </ul>
-        @if ($purchase->estado == 'Pendente')
+        @if ($purchase->estado == 'Pendente' && Auth::check())
             <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/cancel">
                 @csrf
                 <button type="submit">Cancelar encomenda</button>
             </form>
         @endif
+
+        @if(Auth::guard('admin')->check())
+            <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/change_state">
+                @csrf
+                <label for="state">Mudar o estado da encomenda:</label>
+                <select name="state" id="states" multiple>
+                    @foreach($remainingStates as $state)
+                        <option value="{{ $state }}">{{ $state }}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Mudar estado</button>
+            </form>
+        @endif
+    </section>
 @endsection
 
 @if (Auth::guard('admin')->check())

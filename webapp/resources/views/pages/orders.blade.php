@@ -1,12 +1,12 @@
 @section('content')
-    <body>
+<section>
         <h1>As Minhas Encomendas</h1>
         <ul>
             @foreach ($purchases as $purchase)
                 @include ('partials.purchase', ['purchase' => $purchase, 'userId' => $userId])
             @endforeach
         </ul>
-    </body>
+</section>
 @endsection
 
 @if (Auth::guard('admin')->check())

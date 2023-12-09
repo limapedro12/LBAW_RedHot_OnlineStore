@@ -8,6 +8,9 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
+use App\Models\ProductCart;
+
+use App\Events\ChangeInProductsPrice;
 
 function verifyAdmin() : void {
     if(Auth::guard('admin')->user()==null)
@@ -107,6 +110,16 @@ class ProductsController extends Controller {
             'url_image' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
+
+        $oldProduct = Product::findorfail($id);
+        if($oldProduct->precoatual != $request->price || $oldProduct->desconto != $request->discount){
+            $usersWithProductInCart = ProductCart::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInCart as $userWithProductInCart)
+                event(new ChangeInProductsPrice($userWithProductInCart->id_utilizador, 
+                                                $oldProduct->id, $oldProduct->nome, 
+                                                $oldProduct->precoatual*(1-$oldProduct->desconto), 
+                                                $request->price*(1-$request->discount)));
+        }
 
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
                                                      'precoatual' => $request->price, 
