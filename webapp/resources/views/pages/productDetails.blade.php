@@ -20,7 +20,7 @@
         <p> Descrição: </p>
         <p> {{ $product->descricao }} </p>
     </section>
-        @if (Auth::check() && $product->stock > 0)
+        @if ($product->stock > 0 && !(Auth::guard('admin')->check()))
             <form action="/products/{{$product->id}}/add_to_cart" method="POST">
                 @csrf
                 <label for="quantidade"> Quantidade: </label>

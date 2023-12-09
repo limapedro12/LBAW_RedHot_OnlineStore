@@ -20,7 +20,6 @@ DROP TABLE IF EXISTS Preco CASCADE;
 DROP TABLE IF EXISTS ProdutoCarrinho CASCADE;
 DROP TABLE IF EXISTS ProdutoCompra CASCADE;
 DROP TABLE IF EXISTS ProdutoWishlist CASCADE;
-DROP TABLE IF EXISTS UtilizadorNaoAutenticadoComProdutosNoCarrinho CASCADE;
 DROP TABLE IF EXISTS Notificacao_Carrinho CASCADE;
 DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
 
@@ -151,7 +150,7 @@ CREATE TABLE ProdutoCarrinho (
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
   quantidade INTEGER NOT NULL CHECK (quantidade > 0),
-	id_utilizador_nao_autenticado INTEGER REFERENCES UtilizadorNaoAutenticadoComProdutosNoCarrinho (id) ON UPDATE CASCADE
+	id_utilizador_nao_autenticado INTEGER
 );
 
 CREATE TABLE ProdutoCompra (
