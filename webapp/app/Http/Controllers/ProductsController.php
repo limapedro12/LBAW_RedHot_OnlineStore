@@ -57,7 +57,7 @@ class ProductsController extends Controller {
         if($stringToSearch == '*')
             $products = Product::filterProducts($filter);
         else
-            $products = Product::searchAndFilterProducts($stringToSearch, json.decode($filter, true));
+            $products = Product::searchAndFilterProducts($stringToSearch, json.decode($filter));
         return json_encode($products);
     }
 

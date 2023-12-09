@@ -125,59 +125,88 @@ class Product extends Model{
 
         
 
-    public static function filterFunctionFactory(string $filter){
+    public static function filterFunctionFactory($filter){
         return function($product) use ($filter){
-            $splitedFilter = explode(";", $filter);
-            foreach($splitedFilter as $partOfFilter){
-                $splitedPartOfFilter = explode(":", $partOfFilter);
-                if($splitedPartOfFilter[0] == "preco"){
-                    if($splitedPartOfFilter[1] == "min"){
-                        if($product->precoatual*(1 - $product->desconto) < $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                    else if($splitedPartOfFilter[1] == "max"){
-                        if($product->precoatual*(1 - $product->desconto) > $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                }
-                else if($splitedPartOfFilter[0] == "desconto"){
-                    if(sizeof($splitedPartOfFilter) == 1){
-                        if($product->desconto == 0){
-                            return false;
-                        }
-                    }
-                    else if($splitedPartOfFilter[1] == "min"){
-                        if($product->desconto < $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                    else if($splitedPartOfFilter[1] == "max"){
-                        if($product->desconto > $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                }
-                else if($splitedPartOfFilter[0] == "stock"){
-                    if($splitedPartOfFilter[1] == "min"){
-                        if($product->stock < $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                    else if($splitedPartOfFilter[1] == "max"){
-                        if($product->stock > $splitedPartOfFilter[2]){
-                            return false;
-                        }
-                    }
-                }
-                else if($splitedPartOfFilter[0] == "categoria"){
-                    if($product->categoria != $splitedPartOfFilter[1]){
-                        return false;
-                    }
+            $price = $filter->{'price'};
+            $categories = $filter->{'categories'};
+            $discount = $filter->{'discount'};
+            $rating = $filter->{'rating'};
+
+            if($price->{'min'} != null){
+                if($product->precoatual*(1 - $product->desconto) < $price->{'min'}){
+                    return false;
                 }
             }
-            return true;
+
+            if($price->{'max'} != null){
+                if($product->precoatual*(1 - $product->desconto) > $price->{'max'}){
+                    return false;
+                }
+            }
+
+            if($categories != []){
+                if(!in_array($product->categoria, $categories)){
+                    return false;
+                }
+            }
+
+            if($discount != []){
+                $inteval_function = fn($interval) =>
+                    ($product->desconto >= $interval->{'min'} && $product->desconto <= $interval->{'max'})
+                return array_reduce(array_map($discount, $inteval_function), (||))
+            }
+
+            // $splitedFilter = explode(";", $filter);
+            // foreach($splitedFilter as $partOfFilter){
+            //     $splitedPartOfFilter = explode(":", $partOfFilter);
+            //     if($splitedPartOfFilter[0] == "preco"){
+            //         if($splitedPartOfFilter[1] == "min"){
+            //             if($product->precoatual*(1 - $product->desconto) < $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //         else if($splitedPartOfFilter[1] == "max"){
+            //             if($product->precoatual*(1 - $product->desconto) > $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //     }
+            //     else if($splitedPartOfFilter[0] == "desconto"){
+            //         if(sizeof($splitedPartOfFilter) == 1){
+            //             if($product->desconto == 0){
+            //                 return false;
+            //             }
+            //         }
+            //         else if($splitedPartOfFilter[1] == "min"){
+            //             if($product->desconto < $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //         else if($splitedPartOfFilter[1] == "max"){
+            //             if($product->desconto > $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //     }
+            //     else if($splitedPartOfFilter[0] == "stock"){
+            //         if($splitedPartOfFilter[1] == "min"){
+            //             if($product->stock < $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //         else if($splitedPartOfFilter[1] == "max"){
+            //             if($product->stock > $splitedPartOfFilter[2]){
+            //                 return false;
+            //             }
+            //         }
+            //     }
+            //     else if($splitedPartOfFilter[0] == "categoria"){
+            //         if($product->categoria != $splitedPartOfFilter[1]){
+            //             return false;
+            //         }
+            //     }
+            // }
+            // return true;
         };
     }
 
@@ -196,13 +225,9 @@ class Product extends Model{
         return $filteredProducts;
     }
 
-    public static function getProductsFromOneFilter($filter){
-        return;
-    }
-
     public static function searchAndFilterProducts(string $stringToSearch, string $filter){
         $searchedProducts = Product::searchProducts($stringToSearch);
-
+        $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
         return $filteredProducts;
     }
 
