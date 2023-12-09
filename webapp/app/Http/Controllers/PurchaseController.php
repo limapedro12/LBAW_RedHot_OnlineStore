@@ -14,6 +14,7 @@ use App\Models\ProductPurchase;
 
 use App\Models\Purchase;
 use App\Events\ChangePurchaseState;
+use App\Events\CancelOrder;
 
 class PurchaseController extends Controller
 {
@@ -142,7 +143,9 @@ class PurchaseController extends Controller
         }
 
         $purchase->estado = 'Cancelada';
-        $purchase->save();
+        // $purchase->save();
+
+        event(new CancelOrder($purchase->id, Auth::user()->nome, $purchase->id_utilizador));
 
         return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Encomenda cancelada com sucesso.');
     }

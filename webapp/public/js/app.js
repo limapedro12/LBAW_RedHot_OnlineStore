@@ -412,6 +412,10 @@ if(document.querySelector('admin')!=null){
   })
 
   const channel = pusher.subscribe('RedHot')
+  channel.bind('notification-to-all-admins', function(data) {
+    console.log('notification-to-all-admins')
+    showNotification(data)
+  })
   channel.bind('notification-to-admin-' + admin_id, function(data) {
     showNotification(data)
   })

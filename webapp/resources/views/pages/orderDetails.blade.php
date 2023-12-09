@@ -19,7 +19,10 @@
                 </li>
             @endforeach
         </ul>
-        @if ($purchase->estado == 'Pendente' && Auth::check())
+        @if ($purchase->estado != 'Enviada' &&
+              $purchase->estado != 'Entregue' &&
+              $purchase->estado != 'Cancelada' &&
+              Auth::check())
             <form method=post action="/users/{{$purchase->id_utilizador}}/orders/{{$purchase->id}}/cancel">
                 @csrf
                 <button type="submit">Cancelar encomenda</button>

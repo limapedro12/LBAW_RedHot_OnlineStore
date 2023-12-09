@@ -7,7 +7,10 @@ use App\Models\Notification;
 
 class NotificationController extends Controller {
     public function listNotifications(int $user_id) {
-        $notifications = Notification::where('id_utilizador', '=', $user_id)->orderBy('timestamp', 'desc')->get();
+        $notifications = Notifications::where(function ($query) {
+            $query->where('id_utilizador', '=', $user_id)
+                  ->orWhere('para_todos_administradores', '=', true);
+        })->orderBy('timestamp', 'desc')->get();
         return view('pages.notifications', ['notifications' => $notifications]);
     }
 

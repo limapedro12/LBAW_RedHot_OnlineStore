@@ -53,7 +53,20 @@ abstract class NotificationEvent implements ShouldBroadcast{
         $notification = Notification::create(['texto' => $this->message, 
                                               'timestamp' => now(), 
                                               'id_administrador' => $adminId, 
-                                                'link' => $linkToRedirect]);
+                                              'link' => $linkToRedirect]);
+        $this->notificationId = $notification->id;
+    }
+
+    protected function createNotificationToAllAdmins(string $message, string $linkToRedirect) {
+        $this->timestamp = now();
+        $this->message = $message;
+        $this->lida = false;
+        $this->linkToRedirect = $linkToRedirect;
+        
+        $notification = Notification::create(['texto' => $this->message, 
+                                              'timestamp' => now(), 
+                                              'link' => $linkToRedirect,
+                                              'para_todos_administradores' => true]);
         $this->notificationId = $notification->id;
     }
 }
