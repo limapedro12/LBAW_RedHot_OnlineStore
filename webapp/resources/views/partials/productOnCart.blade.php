@@ -1,5 +1,6 @@
 <li>
     <a href="/products/{{$product->id}}">{{$product->nome}}</a>
+    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" height = "100">
     <p>
         @if($product->desconto > 0)
             <span style = "text-decoration: line-through;">

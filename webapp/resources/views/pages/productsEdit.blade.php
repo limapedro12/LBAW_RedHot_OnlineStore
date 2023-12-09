@@ -2,7 +2,7 @@
 <section>
     <h1>Edit Product: {{ $product->nome }}</h1>
 
-    <form action="/products/{{ $product->id }}/edit" method="POST">
+    <form action="/products/{{ $product->id }}/edit" method="POST" enctype="multipart/form-data">
         @csrf
 
         <label for="name">Nome:</label>
@@ -20,13 +20,13 @@
         <label for="description">Descrição:</label>
         <textarea id="description" name="description" required>{{ $product->descricao }}</textarea><br><br>
 
-        <label for="url_image">Image URL:</label>
-        <input type="text" id="url_image" name="url_image" value="{{ $product->url_imagem }}" required><br><br>
+        <label for="file">Imagem:</label>
+        <input type="file" id="file" name="file"><br><br>
 
         <label for="category">Categoria:</label>
         <input type="text" id="category" name="category" value="{{ $product->categoria }}"><br><br>
 
-        <input type="submit" value="Save">
+        <input type="submit" value="Guardar">
     </form>
 </section>
 @endsection
