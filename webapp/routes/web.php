@@ -45,6 +45,8 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/products/add', 'addProduct')->name('addProduct');
     Route::get('/products/{id}/edit', 'editProductForm')->name('editProductForm');
     Route::post('/products/{id}/edit', 'editProduct')->name('editProduct');
+    Route::get('/products/{id}/changeStock', 'changeStockProductForm')->name('changeStockProductForm');
+    Route::post('/products/{id}/changeStock', 'changeStockProduct')->name('changeStockProduct');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
