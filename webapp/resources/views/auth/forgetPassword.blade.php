@@ -6,13 +6,14 @@
             <img src="{{ asset('sources/logo/logo_lbaw-black.png') }}" alt="logo">
         </div>
         <div class="signupInput">
+            <div class="fillerFP"></div>
             <h2 class="title">Recuperar Password</h2>
 
-            <h3>Introduza o email associado à sua conta de utilizador e nele receberá um link para trocar a sua password</h3>
-
+            
             <form method="POST" action="/send" class="signupForm">
                 @csrf
-
+                
+                <p>Introduza o email associado à sua conta de utilizador e nele receberá um link para trocar a sua password</p>
                 <div class="inputBox">
                     <input id="email" type="email" name="email" placeholder="Email" required>
                 </div>

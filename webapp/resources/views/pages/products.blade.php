@@ -7,7 +7,7 @@
             <div class="productsPageFilterSelected">
             </div>
             <div class="productsPageFilterFilters">
-                <form id="searchAndFilter" class="filterForm">
+                <form id="filterForm" class="filterForm">
 
 
 
@@ -117,9 +117,94 @@
         </div>
 
         <div class="productsPageTop">
-            <!-- Search -->
-            <label for="searchedString">Pesquisa:</label>
-            <input type="text" name="searchedString" id="searchedString">
+            <div class="productsPageTopRowOne">
+                <!-- Breadcrumbs -->
+                <div class="productsPageBreadcrumbs">
+                    <ul class="listOfBreadcrumbs">
+                        <li class="breadcrumbs"><a href="{{ url('/') }}">Home > </a></li>
+                        @if (isset($searchedString) && isset($category))
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbs"><a
+                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }} > </a>
+                            </li>
+                            <li class="breadcrumbsLast"><a
+                                    href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
+                            </li>
+                        @elseif (isset($searchedString))
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbsLast"><a
+                                    href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
+                            </li>
+                        @elseif (isset($category))
+                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos > </a></li>
+                            <li class="breadcrumbsLast"><a
+                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }}</a>
+                            </li>
+                        @else
+                            <li class="breadcrumbsLast"><a href="{{ url('/products') }}">Produtos</a></li>
+                        @endif
+                    </ul>
+                </div>
+
+                <!-- Search -->
+                <div class="productsPageSearch">
+                    <form class="productSearchForm" action="" method="GET">
+                        <div class="productsPageSearchInput">
+                            <input type="text" name="searchedString" id="searchedString" placeholder="Produto..">
+                            <div class="productsPageSearchButton">
+                                <button type="submit">
+                                    <span class="searchButton">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="productsPageTopRowTwo">
+                <!-- Title -->
+                @if (isset($searchedString))
+                    <div class="productsPageTopTitle">
+                        <h1>{{ $searchedString }}</h1>
+                    </div>
+                @elseif (isset($category))
+                    <div class="productsPageTopTitle">
+                        <h1>{{ $category }}</h1>
+                    </div>
+                @else
+                    <div class="productsPageTopTitle">
+                        <h1>Produtos</h1>
+                    </div>
+                @endif
+
+                <div class="productsPageTopAdvertising">
+                    <!-- Put Admin Managing the Advertising Banner here -->
+                    <img src="{{ asset('sources/banners/bannerNatal.png') }}" alt="Advertising" width="895"
+                        height="100">
+
+                </div>
+
+                <!-- Sort -->
+                <div class="productsPageSort">
+                    <!-- Selector -->
+                    <label class="productsPageSortTitle" for="sortSelector">Ordenar por:</label>
+                    <input type="hidden" id="sort" name="sort" value="default">
+                    <select class="productsPageSortSelector" name="sortSelector" id="sortSelector">
+                        <option value="default" selected>Relevância</option>
+                        <option value="nameAsc">A ➜ Z</option>
+                        <option value="nameDesc">Z ➜ A</option>
+                        <option value="priceAsc">Preço Asc.</i></option>
+                        <option value="priceDesc">Preço Desc.</i></option>
+                        <option value="ratingAsc">Rating Asc.</option>
+                        <option value="ratingDesc">Rating Desc.</option>
+                        <option value="discountAsc">Desconto Asc.</i></option>
+                        <option value="discountDesc">Desconto Desc.</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
 
         <div class="productsPageProducts" id='listOfProducts'>

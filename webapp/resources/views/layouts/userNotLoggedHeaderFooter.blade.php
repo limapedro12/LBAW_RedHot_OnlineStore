@@ -41,7 +41,7 @@
                   </a>
               
                   <nav class="navbar">
-                      <a href="{{ url('/products') }}">Catálogo</a>
+                      <a href="{{ url('/products') }}">Produtos</a>
                       <!-- <a href="{{ url('/cart') }}">Carrinho</a> -->
                       <a href="{{ url('/register') }}">Registar</a>
                       <a href="{{ url('/login') }}">Login</a>
@@ -64,7 +64,7 @@
                   <div class="box">
                     <h3>Links Rápidos</h3>
                         <a href="{{ url('/about') }}"> <i class="fas fa-angle-right"></i> Sobre Nós</a>
-                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Catálogo</a>
+                        <a href="{{ url('/products') }}"> <i class="fas fa-angle-right"></i> Produtos</a>
                         <!-- <a href="{{ url('/cart') }}"> <i class="fas fa-angle-right"></i> Carrinho</a> -->
                         <a href="{{ url('/register') }}"> <i class="fas fa-angle-right"></i> Registar</a>
                         <a href="{{ url('/login') }}"> <i class="fas fa-angle-right"></i> Login</a>
@@ -80,7 +80,7 @@
                   <div class="box">
                     <h3>Contactos</h3>
                     <a href="#"> <i class="fas fa-phone"></i> +351 220 000 000</a>
-                    <a href="#"> <i class="fas fa-envelope"></i> ajuda@redhot.com </a>
+                    <a href="#"> <i class="fas fa-envelope"></i> redhotteam@gmail.com </a>
                     <a href="#"> <i class="fas fa-map"></i> Porto, Portugal - 4200-465</a>
                   </div>
         
