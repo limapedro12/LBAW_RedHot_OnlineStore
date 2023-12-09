@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
 
+use Illuminate\Support\Facades\Storage;
+
 class FileController extends Controller
 {
     static $default = 'default.jpg';
@@ -64,10 +66,16 @@ class FileController extends Controller
         $requestType = $request->type;
         $extension = $file->getClientOriginalExtension();
 
+        error_log($file);
+
         $fileName = $type . '/' . $file->hashName();
 
         $request->file->storeAs($requestType, $fileName, self::$diskName);
 
         return $fileName;
+    }
+
+    public static function delete(String $hash) {
+        Storage::delete($hash);
     }
 }

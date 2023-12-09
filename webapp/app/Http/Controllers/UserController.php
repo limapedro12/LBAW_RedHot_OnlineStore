@@ -144,6 +144,3 @@ class UserController extends Controller
         return redirect('/login');
     }
 }
-
-// TODO
-// Apenas mostrar input de apagar se já tiver foto

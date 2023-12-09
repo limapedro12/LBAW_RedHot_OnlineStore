@@ -102,7 +102,7 @@
                 <div id='listOfProducts'>
                     @foreach ($products as $product) 
                         <section class="productListItem">
-                            <img src="{{ $product->url_imagem }}" alt="{{ $product->nome }}" height = "100">
+                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" height = "100">
                             <h4> <a href = "/products/{{ $product->id }}"> {{ $product->nome }} </a> </h4> 
                             <p> 
                                 @if($product->desconto > 0)
