@@ -43,17 +43,32 @@ class FileController extends Controller
         return $fileName;
     }
 
-    static function get (String $type, int $userId)
+    static function get (String $type, int $id)
     {
         if (!self::isValidType($type)) {
             return self::defaultAsset($type);
         }
 
-        $fileName = self::getFileName($type, $userId);
+        $fileName = self::getFileName($type, $id);
+        
         if ($fileName) {
-            return asset($type . '/' . $fileName);
+            return asset($fileName);
         }
 
         return self::defaultAsset($type);
+    }
+
+    function upload(Request $request, String $type, int $id)
+    {
+        $file = $request->file('file');
+        error_log($file);
+        $requestType = $request->type;
+        $extension = $file->getClientOriginalExtension();
+
+        $fileName = $type . '/' . $file->hashName();
+
+        $request->file->storeAs($requestType, $fileName, self::$diskName);
+
+        return $fileName;
     }
 }

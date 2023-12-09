@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Comment;
 use App\Events\ProductOutOfStock;
 
+use App\Http\Controllers\FileController;
+
 class Product extends Model{
     use HasFactory;
 
@@ -226,5 +228,7 @@ class Product extends Model{
             }
         }
         return $categoriesArray;
+    public function getProductImage() {
+        return FileController::get('product', $this->id);
     }
 }
