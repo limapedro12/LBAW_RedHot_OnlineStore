@@ -99,7 +99,6 @@
             </section>
             <section>
                 <h1>Lista de Produtos</h1>
-                    @include('partials.searchAndFilterForms')
                 <div id='listOfProducts'>
                     @foreach ($products as $product) 
                         <section class="productListItem">
