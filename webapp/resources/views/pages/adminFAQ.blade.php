@@ -23,7 +23,7 @@
                         </div>
                     </a>
 
-                    <a href="{{ url('/adminProducts') }}">
+                    <a href="{{ url('/adminProductsManage') }}">
                         <div class="adminSideBarOption" id="optionNotSelected">
                             <p>Produtos</p>
                             <i class="fas fa-angle-down"></i>
