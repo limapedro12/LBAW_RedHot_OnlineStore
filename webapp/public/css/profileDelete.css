@@ -1,0 +1,110 @@
+.deleteAccountTitle{
+    text-align: center;
+    font-size: 3rem;
+    padding-bottom: 1rem;
+    padding-top: 3rem;
+    color: var(--black);
+}
+
+.deleteAccountForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.deleteAccountForm .inputBox .deleteAccount{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.deleteAccountForm .inputBox .deleteAccount label{
+    display: block;
+    font-size: 1.7rem;
+    padding-bottom: 1rem;
+    color: var(--black);
+}
+
+.deleteAccountForm .inputBox .deleteAccount input{
+    width: 60%;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+    border-bottom: var(--main-color) 2px solid;
+    outline: none;
+    background: transparent;
+    color: var(--black);
+}
+
+.deleteAccountForm .inputBox .deleteAccount input:focus{
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.deleteAccountForm .deleteAccountButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3rem;
+}
+
+.deleteAccountForm .deleteAccountButton input{
+    display: inline-block;
+    background: var(--main-color);
+    margin-top: 1rem;
+    color: var(--white);
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.deleteAccountForm .deleteAccountButton input:hover{
+    opacity: 0.8;
+}
+
+.finalLinksDel{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+    justify-content: center;
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    margin: 0;
+}
+
+.finalLinksDel a{
+    font-size: 1.7rem;
+    color: var(--black);
+    text-decoration: none;
+    border: none;
+    background: transparent;
+}
+
+.finalLinksDel a:hover{
+    color: var(--main-color);
+}
+
+.finalLinksDel a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: var(--main-color);
+    display: block;
+    transition: 0.5s;
+}
+
+.finalLinksDel a:hover::after {
+    width: 100%;
+}
+
+.passwordChangeDel{
+    padding-right: 7rem;
+}
+
+.editProfileDel{
+    padding-right: 2rem;
+}
