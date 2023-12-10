@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    static $default = 'default.jpg';
+    static $default = 'default.png';
     static $diskName = 'images';
 
     static $systemTypes = [
