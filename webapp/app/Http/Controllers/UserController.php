@@ -85,10 +85,13 @@ class UserController extends Controller
         }
 
         if ($request->file && !($request->deletePhoto)) {
+            $oldPhoto = $user->profile_image;
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'profile', $id);
             User::where('id', '=', $id)->update(array('profile_image' => $hash));
+            FileController::delete($oldPhoto);
         } else if ($request->deletePhoto) {
+            FileController::delete($user->profile_image);
             User::where('id', '=', $id)->update(array('profile_image' => null));
         }
 
@@ -117,6 +120,8 @@ class UserController extends Controller
         if (!Hash::check($request->password, $user->password)) {
             return redirect('/users/'.$id.'/delete_account');
         }
+
+        FileController::delete($user->profile_image);
 
         User::where('id', '=', $id)->delete();
 

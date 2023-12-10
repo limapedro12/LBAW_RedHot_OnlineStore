@@ -164,11 +164,13 @@ class ProductsController extends Controller {
         return redirect('/products/'.$id);
     }
 
-    function deleteProduct(Request $request, int $id){
+    public static function deleteProduct(Request $request, int $id){
+        error_log($id);
         verifyAdmin();
+        error_log($id);
         $product = Product::where('id', '=', $id);
+        error_log($product->product_image);
         FileController::delete($product->product_image);
         $product->delete();
-        return redirect('/adminProductsManage');
     }
 }
