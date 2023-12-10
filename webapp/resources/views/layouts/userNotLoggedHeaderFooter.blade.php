@@ -31,6 +31,7 @@
         <link href="{{ url('css/profileEdit.css') }}" rel="stylesheet">
         <link href="{{ url('css/profileEditPassword.css') }}" rel="stylesheet">
         <link href="{{ url('css/profileDelete.css') }}" rel="stylesheet">
+        <link href="{{ url('css/faqs.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>

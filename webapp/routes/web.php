@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\FaqsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,4 +164,12 @@ Route::controller(WishlistController::class)->group(function () {
     Route::get('/users/{id}/wishlist', 'listWishlist')->name('listWishlist');
     Route::post('/users/{id}/wishlist/{id_product}/add_to_wishlist', 'addToWishlist')->name('addToWishlist');
     Route::post('/users/{id}/wishlist/{id_product}/remove_from_wishlist', 'removeFromWishlist')->name('removeFromWishlist');
+});
+
+// Faqs
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
 });

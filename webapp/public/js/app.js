@@ -493,3 +493,13 @@ if (input_img != null) {
     });
 
 }
+
+// Faqs
+const faqs = document.querySelectorAll('.faq');
+if (faqs != null) {
+    faqs.forEach(faq => {
+        faq.addEventListener('click', () => {
+            faq.classList.toggle('active');
+        });
+    });
+}
