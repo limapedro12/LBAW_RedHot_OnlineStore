@@ -41,7 +41,7 @@
                             <div class="profileEditImg">
                                 <div class="profileImgOnEdit">
                                     <img src="{{ asset('/profile/default.png') }}" alt="Foto de Perfil">
-                                <div class="profileImgOnEdit">
+                                </div>
                                 <div class="filesBox">
                                     <div class="fileImgEdit">
                                         <label for="file">
