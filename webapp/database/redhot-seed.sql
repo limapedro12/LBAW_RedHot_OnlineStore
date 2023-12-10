@@ -175,6 +175,13 @@ CREATE TABLE Notificacao_Wishlist (
   id_produto_wishlist INTEGER REFERENCES ProdutoWishlist (id) ON UPDATE CASCADE
 );
 
+CREATE TABLE Faqs (
+  id SERIAL PRIMARY KEY,
+  pergunta TEXT NOT NULL,
+  resposta TEXT NOT NULL,
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+);
+
 -- IDX01
 CREATE INDEX notificacao_tempo ON Notificacao USING btree (timestamp);
 CLUSTER Notificacao USING notificacao_tempo;
