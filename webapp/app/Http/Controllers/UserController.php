@@ -42,7 +42,11 @@ class UserController extends Controller
         verifyUser($user);
 
         return view('pages.user', [
-            'user' => $user
+            'user' => $user,
+            'totalOrders' => $this->getTotalOrders($id),
+            'totalReviews' => $this->getTotalReviews($id),
+            'orders' => $this->getOrders($id),
+            'unreadNotifications' => $this->getNumberOfUreadNotifications($id)
         ]);
     }
 
@@ -142,5 +146,42 @@ class UserController extends Controller
         User::where('id', '=', $id)->update(array('password' => Hash::make($request->password)));
 
         return redirect('/login');
+    }
+
+
+    public function getTotalOrders(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->orders()->count();
+    }
+
+    public function getTotalReviews(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->totalReviews();
+    }
+
+    public function getOrders(int $id)
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->orders()->get();
+    }
+
+    public function getNumberOfUreadNotifications(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->getNumberOfUreadNotifications();
     }
 }

@@ -27,10 +27,12 @@
         <link href="{{ url('css/products.css') }}" rel="stylesheet">
         <link href="{{ url('css/product.css') }}" rel="stylesheet">
         <link href="{{ url('css/about.css') }}" rel="stylesheet">
+        <link href="{{ url('css/profile.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
         <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
+        <script type="text/javascript" src={{ url('js/tables.js') }} defer></script>
         
     </head>
     <body>

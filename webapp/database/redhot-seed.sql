@@ -28,6 +28,10 @@ CREATE TABLE Utilizador (
   nome VARCHAR(256) NOT NULL,
   email VARCHAR(256) UNIQUE NOT NULL,
 	password VARCHAR(256) NOT NULL,
+  telefone VARCHAR(256),
+  morada VARCHAR(256),
+  codigo_postal VARCHAR(256),
+  localidade VARCHAR(256),
   remember_token VARCHAR(256),
   profile_image VARCHAR(1024)
 );
@@ -475,3 +479,91 @@ INSERT INTO Produto (nome, descricao, precoAtual, desconto, stock, id_administra
   ('Malagueta Scotch Bonnet Fresca', 'Malagueta Scotch Bonnet fresca, ideal para pratos caribenhos autênticos.', 14.25, 0, 30, 1, 'Malaguetas Frescas'),
   ('Molho de Malagueta Blueberry Heat', 'Molho de malagueta com o toque frutado das amoras azuis.', 11.99, 0, 25, 1, 'Molhos');
   
+INSERT INTO Compra (timestamp, total, descricao, id_utilizador, estado, id_administrador) VALUES
+  (CURRENT_TIMESTAMP, 50.99, 'Compra de molhos picantes', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 30.25, 'Compra de sementes de malagueta', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 75.50, 'Compra de picles de malagueta', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 20.99, 'Compra de malaguetas frescas', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 45.75, 'Compra de molho de pimenta', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 60.50, 'Compra de especiarias', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 15.99, 'Compra de sementes de pimenta', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 35.25, 'Compra de molho de pimenta doce', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 28.75, 'Compra de conservas picantes', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 10.50, 'Compra de malaguetas em conserva', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 42.99, 'Compra de temperos exóticos', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 18.50, 'Compra de molho de pimenta tailandês', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 55.75, 'Compra de pó de malagueta', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 22.25, 'Compra de molho de pimenta defumado', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 38.99, 'Compra de picles de pimenta', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 48.75, 'Compra de malaguetas secas', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 25.99, 'Compra de molho de pimenta agridoce', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 30.50, 'Compra de malaguetas em conserva', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 12.25, 'Compra de sementes de malagueta habanero', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 36.99, 'Compra de molho de pimenta cítrico', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 19.75, 'Compra de picles de pimenta doce', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 26.50, 'Compra de molho de pimenta picante', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 8.99, 'Compra de malagueta fresca', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 33.75, 'Compra de molho de pimenta defumado', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 15.50, 'Compra de pó de malagueta', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 23.99, 'Compra de malagueta em conserva', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 40.25, 'Compra de molho de pimenta agridoce', 1, 'Pendente', 1),
+  (CURRENT_TIMESTAMP, 14.75, 'Compra de picles de pimenta picante', 1, 'Em andamento', 1),
+  (CURRENT_TIMESTAMP, 29.50, 'Compra de sementes de malagueta jalapeño', 1, 'Concluído', 1),
+  (CURRENT_TIMESTAMP, 17.25, 'Compra de molho de pimenta tailandês', 1, 'Pendente', 1);
+
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Ótimo produto! Muito picante, exatamente como eu gosto.', 5, 1, 1),
+  (CURRENT_TIMESTAMP, 'Adorei o molho de pimenta, excelente sabor!', 4, 1, 2),
+  (CURRENT_TIMESTAMP, 'As sementes de malagueta cresceram rápido, estou muito satisfeito.', 5, 1, 3),
+  (CURRENT_TIMESTAMP, 'Produto de qualidade, chegou em perfeito estado.', 4, 1, 4),
+  (CURRENT_TIMESTAMP, 'Molho de tomate picante é uma ótima adição às minhas receitas.', 3, 1, 5),
+  (CURRENT_TIMESTAMP, 'Picles de malagueta são deliciosos, recomendo!', 5, 1, 6),
+  (CURRENT_TIMESTAMP, 'Molho de piri-piri é perfeito para pratos mais leves.', 4, 1, 7),
+  (CURRENT_TIMESTAMP, 'Excelente produto, o mix de malaguetas frescas é incrível.', 5, 1, 8),
+  (CURRENT_TIMESTAMP, 'Malagueta em conserva é um ótimo acompanhamento para lanches.', 4, 1, 9),
+  (CURRENT_TIMESTAMP, 'Sabor intenso! Molho de malagueta com alho e limão é incrível.', 5, 1, 10),
+  (CURRENT_TIMESTAMP, 'Malagueta scotch bonnet fresca é muito aromática, adorei!', 5, 1, 11),
+  (CURRENT_TIMESTAMP, 'Molho de malagueta com manga é uma explosão de sabores.', 4, 1, 12),
+  (CURRENT_TIMESTAMP, 'Pó de malagueta datil é perfeito para pratos mais apimentados.', 5, 1, 13),
+  (CURRENT_TIMESTAMP, 'Molho de malagueta sweet onion é delicioso, equilibra bem o doce e o picante.', 4, 1, 14),
+  (CURRENT_TIMESTAMP, 'Picles de malagueta thai bird eye são picantes e viciantes.', 5, 1, 15);
+
+-- Avaliação 1
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Produto não atendeu às expectativas, muito decepcionado.', 1, 1, 16),
+  (CURRENT_TIMESTAMP, 'Não gostei do sabor, não recomendaria.', 1, 1, 17),
+  (CURRENT_TIMESTAMP, 'Sementes de malagueta não germinaram corretamente.', 1, 1, 18),
+  (CURRENT_TIMESTAMP, 'Produto danificado durante o transporte.', 1, 1, 19),
+  (CURRENT_TIMESTAMP, 'Molho de pimenta muito fraco, sem sabor.', 1, 1, 20);
+
+-- Avaliação 2
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Aceitável, mas esperava mais.', 2, 1, 21),
+  (CURRENT_TIMESTAMP, 'Não é ruim, mas definitivamente não é ótimo.', 2, 1, 22),
+  (CURRENT_TIMESTAMP, 'Sabor mediano, não compraria novamente.', 2, 1, 23),
+  (CURRENT_TIMESTAMP, 'Produto com qualidade inferior ao esperado.', 2, 1, 24),
+  (CURRENT_TIMESTAMP, 'Molho de pimenta de média intensidade.', 2, 1, 25);
+
+-- Avaliação 3
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Produto decente, atendeu parcialmente às expectativas.', 3, 1, 26),
+  (CURRENT_TIMESTAMP, 'Gosto aceitável, mas não excepcional.', 3, 1, 27),
+  (CURRENT_TIMESTAMP, 'Sabor razoável, consideraria outras opções.', 3, 1, 28),
+  (CURRENT_TIMESTAMP, 'Produto dentro da média, sem grande destaque.', 3, 1, 29),
+  (CURRENT_TIMESTAMP, 'Molho de pimenta com calor moderado.', 3, 1, 30);
+
+-- Avaliação 4
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Bom produto, sabor agradável.', 4, 1, 31),
+  (CURRENT_TIMESTAMP, 'Gostei bastante, compraria novamente.', 4, 1, 32),
+  (CURRENT_TIMESTAMP, 'Sabor acima da média, recomendo.', 4, 1, 33),
+  (CURRENT_TIMESTAMP, 'Produto de qualidade, superou as expectativas.', 4, 1, 34),
+  (CURRENT_TIMESTAMP, 'Molho de pimenta com bom equilíbrio de sabores.', 4, 1, 35);
+
+-- Avaliação 5
+INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) VALUES
+  (CURRENT_TIMESTAMP, 'Produto incrível, superou todas as expectativas!', 5, 1, 36),
+  (CURRENT_TIMESTAMP, 'Sabor extraordinário, definitivamente recomendaria.', 5, 1, 37),
+  (CURRENT_TIMESTAMP, 'O melhor que já experimentei, vale cada centavo.', 5, 1, 38),
+  (CURRENT_TIMESTAMP, 'Produto de alta qualidade, não tenho do que reclamar.', 5, 1, 39),
+  (CURRENT_TIMESTAMP, 'Molho de pimenta extremamente picante e delicioso.', 5, 1, 40);

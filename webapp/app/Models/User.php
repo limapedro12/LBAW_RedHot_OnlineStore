@@ -35,6 +35,10 @@ class User extends Authenticatable
         'nome',
         'email',
         'password',
+        'telefone',
+        'morada',
+        'codigo_postal',
+        'localidade',
         'profile_image'
     ];
 
@@ -70,4 +74,22 @@ class User extends Authenticatable
     {
         return ($this->profile_image !== null && $this->profile_image !== '');
     }
+<<<<<<< 454e633034122ddda528e6c794d7b2d83a241fad
+
+    public function totalOrders() : int
+    {
+        return $this->hasMany('App\Models\Order', 'id_utilizador')->count();
+    }
+
+    public function totalReviews() : int
+    {
+        return $this->hasMany('App\Models\Review', 'id_utilizador')->count();
+    }
+    
+    public function orders() : HasMany
+    {
+        return $this->hasMany('App\Models\Order', 'id_utilizador');
+    }
+=======
+>>>>>>> 91a6669bbcb8147ce8cd5bdb6a06c8c95ef2560f
 }

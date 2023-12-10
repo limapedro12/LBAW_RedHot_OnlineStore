@@ -1,0 +1,236 @@
+.profile {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5rem;
+}
+
+.profile .profilePicContainer {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 3rem;
+}
+
+.profile .profilePicContainer .profilePic {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    display: 1 1 41rem;
+}
+
+.profile .profilePicContainer .profilePic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile .profileInfo {
+    width: 50%;
+    display: 1 1 41rem;
+    border-left: var(--main-color) 5px solid;
+    padding-left: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: block;
+}
+
+
+
+.profile .profileInfo .profileTitle {
+    display: flex;
+    align-items: center;
+    font-size: 3rem;
+    padding-bottom: 1rem;
+}
+
+.profile .profileInfo .profileTable {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.profile .profileInfo .profileTable tr {
+    padding-bottom: 1rem;
+}
+
+.profile .profileInfo .profileTable tr th {
+    padding-right: 1rem;
+    text-align: left;
+}
+
+.profile .profileInfo .profileTable tr td {
+    padding-right: 1rem;
+    text-align: left;
+}
+
+.profile .profileLinks {
+    display: 1 1 41rem;
+    border-radius: 50%;
+    padding-left: 3rem;
+}
+
+.profile .profileLinks a {
+    display: block;
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+    color: var(--black);
+}
+
+.profile .profileLinks a:hover {
+    color: var(--main-color);
+}
+
+
+.profileOrders {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.profileOrders .profileTitle {
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.topOfTable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.filterTable {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    width: 100%;
+}
+
+.filterTable input {
+    font-size: 1.5rem;
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.myOrdersTable {
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.myOrdersTable .myOrdersTableBody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+}
+
+.myOrdersTable .myOrdersTableBody table,
+.myOrdersTable .myOrdersTableBody th,
+.myOrdersTable .myOrdersTableBody td {
+    padding: 1rem;
+}
+
+.myOrdersTable .myOrdersTableBody table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+    display: 1 1 41rem;
+}
+
+.myOrdersTable .myOrdersTableBody table thead {
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.myOrdersTable .myOrdersTableBody table thead th {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.myOrdersTable .myOrdersTableBody table tbody tr {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.myOrdersTable .myOrdersTableBody table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.myOrdersTable .myOrdersTableBody table tbody tr:hover {
+    background-color: var(--light-bg);
+}
+
+.myOrdersTable .myOrdersTableBody table tbody tr td {
+    font-size: 1.5rem;
+    font-weight: 300;
+    padding: 1rem;
+}
+
+.myOrdersTable .myOrdersTableBody p {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    color: var(--black);
+}
+
+.myOrdersTable .myOrdersTableBody .myOrderDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myOrdersTable .myOrdersTableBody .myOrderDetails a {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    color: var(--black);
+}
+
+.myOrdersTable .myOrdersTableBody .myOrderDetails a:hover {
+    color: var(--main-color);
+}
+
+.myNotifications {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myNotifications .numberOfNotifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--black);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--main-color);
+    color: var(--white);
+    border-radius: 25px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.myNotifications .numberOfNotifications:hover {
+    opacity: 0.8;
+}
+
+.myNotifications .numberOfNotifications p {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
