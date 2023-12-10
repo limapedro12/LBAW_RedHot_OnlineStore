@@ -78,8 +78,6 @@ class ProductsController extends Controller {
             'category' => 'nullable|string|max:256',
         ]);
 
-        error_log('aqui2').
-
         $newProduct = Product::create([
             'nome' => $request->name,
             'precoatual' => $request->price,

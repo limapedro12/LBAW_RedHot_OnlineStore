@@ -32,6 +32,7 @@
         </form>
     @endif
 
+    @unless (Auth::guard('admin')->check())
     <?php 
         $productWishlist = App\Models\Wishlist::where('id_utilizador', Auth::user()->id)->where('id_produto', $product->id)->first();
     ?>
@@ -57,6 +58,7 @@
             <input type="submit" value="Ver comentarios">
         </form>
     </section>
+    @endunless
 
     <section class="delete">
         @if(Auth::guard('admin')->check())

@@ -41,7 +41,7 @@
                             <div class="profileEditImg">
                                 <div class="profileImgOnEdit">
                                     <img src="{{ asset('/profile/default.png') }}" alt="Foto de Perfil">
-                                <div class="profileImgOnEdit">
+                                </div>
                                 <div class="filesBox">
                                     <div class="fileImgEdit">
                                         <label for="file">
@@ -172,7 +172,7 @@
                 <a href="/users/{{ $user->id }}/delete_account"><i class="fas fa-trash-alt"></i> Apagar Conta</a>
             </div>
             <div class="passwordChange">
-                <a href="/users/{{ $user->id }}/changePassword">Alterar Password</a>
+                <a href="/users/{{ $user->id }}/edit_password">Alterar Password</a>
             </div>
             <div class="back">
                 <a href="/users/{{ $user->id }}">Voltar para Perfil <i class="fas fa-arrow-right"></i></a>

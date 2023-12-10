@@ -123,6 +123,37 @@ class UserController extends Controller
         return redirect('/logout');
     }
 
+    // edit password version
+    public function editPasswordForm(Request $request, int $id) : View
+    {
+        $user = User::findOrFail($id);
+
+        return view('pages.editPassword', [
+            'user' => $user,
+        ]);
+    }
+
+    // edit password version
+    public function editPassword(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'new_password' => 'required|min:8',
+        ]);
+
+        if (!Hash::check($request->old_password, $user->old_password)) 
+            return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+
+        if ($request->new_password !== $request->new_password_confirmation)
+            return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
+
+        User::where('id', '=', $id)->update(array('password' => Hash::make($request->new_password)));
+
+        return redirect('/users/'.$id);
+    }
+
+    // forgot password version
     public function changePasswordForm(Request $request, int $id, string $token) : View
     {
         $user = User::findOrFail($id);
@@ -135,6 +166,7 @@ class UserController extends Controller
         ]);
     }
 
+    // forgot password version
     public function changePassword(Request $request, int $id, string $token)
     {
         $user = User::findOrFail($id);
@@ -149,7 +181,6 @@ class UserController extends Controller
 
         return redirect('/login');
     }
-
 
     public function getTotalOrders(int $id) : int
     {

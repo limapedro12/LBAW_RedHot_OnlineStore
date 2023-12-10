@@ -72,9 +72,8 @@ class User extends Authenticatable
 
     public function hasPhoto() : bool
     {
-        return ($this->profile_image !== null && $this->profile_image !== '' || $this->profile_image !== 'default.png');
+        return ($this->profile_image !== null && $this->profile_image !== '');
     }
-
 
     public function totalOrders() : int
     {
