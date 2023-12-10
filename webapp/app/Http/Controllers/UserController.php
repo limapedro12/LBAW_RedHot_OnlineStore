@@ -142,7 +142,7 @@ class UserController extends Controller
             'new_password' => 'required|min:8',
         ]);
 
-        if (!Hash::check($request->old_password, $user->old_password)) 
+        if (!Hash::check($request->old_password, $user->password))
             return back()->withErrors(['password' => 'A sua password atual está incorreta']);
 
         if ($request->new_password !== $request->new_password_confirmation)
