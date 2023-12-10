@@ -212,12 +212,12 @@
                 <div class="productListItem">
                     <div class="productListItemImg">
                         <a href = "/products/{{ $product->id }}">
-                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                            <img class="productImage" src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
                         </a>
                     </div>
                     <div class="productListItemTitle">
-                        <a href = "/products/{{ $product->id }}">
-                            <h3>
+                        <a href = "/products/{{ $product->id }}" class="productListItemTitleLink">
+                            <h3 class="productListItemTitleText">
                                 {{ $product->nome }}
                             </h3>
                         </a>
@@ -225,10 +225,10 @@
                     <div class="productListItemBottom">
                         <div class="productListItemRating">
                             <div class="productListItemNumberOfReviews">
-                                <p> 723 {{ $product->avaliacao }} avaliações </p>
+                                <p> <span class="productListItemNumberOfReviewsSpan">{{ $product->getNumberOfReviews() }}<span> avaliações </p>
                             </div>
                             <div class="productListItemHearts">
-                                <p> {{ $product->getAverageRating() }} / 5 <i class="fa-solid fa-heart"></i> </p>
+                                <p> <span class="productListItemAverageRating">{{ $product->getAverageRating() }}</span> / 5 <i class="fa-solid fa-heart"></i> </p>
                             </div>
                         </div>
                         <div class="productListItemPrices">

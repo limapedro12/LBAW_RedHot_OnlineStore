@@ -44,23 +44,17 @@ class Product extends Model{
             $discount = $filter->{'discount'};
             $rating = $filter->{'rating'};
 
-            if($price->{'min'} != null){
-                if($product->precoatual*(1 - $product->desconto) < $price->{'min'}){
+            if($price->{'min'} != null)
+                if($product->precoatual*(1 - $product->desconto) < $price->{'min'})
                     return false;
-                }
-            }
 
-            if($price->{'max'} != null){
-                if($product->precoatual*(1 - $product->desconto) > $price->{'max'}){
+            if($price->{'max'} != null)
+                if($product->precoatual*(1 - $product->desconto) > $price->{'max'})
                     return false;
-                }
-            }
 
-            if($categories != []){
-                if(!in_array($product->categoria, $categories)){
+            if($categories != [])
+                if(!in_array($product->categoria, $categories))
                     return false;
-                }
-            }
 
             if($discount != []){
                 $inteval_function = fn($interval) =>
@@ -70,6 +64,8 @@ class Product extends Model{
             } 
 
             if($rating != []){
+                if($product->getNumberOfReviews() == 0)
+                    return false;
                 $averageRating = $product->getAverageRating();
                 $inteval_function = fn($interval) =>
                     ($averageRating >= $interval->{'min'} && $averageRating <= $interval->{'max'});
@@ -144,5 +140,9 @@ class Product extends Model{
         if(count($reviews) == 0)
             return 0;
         return $sum/count($reviews);
+    }
+
+    public function getNumberOfReviews(){
+        return count(Review::where('id_produto', '=', $this->id)->get());
     }
 }
