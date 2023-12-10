@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+use App\Http\Controllers\ProductCartController;
+
 function verifyNotAutenticated() : void {
     if(Auth::check() || Auth::guard('admin')->check())
         abort(403);
@@ -48,8 +50,15 @@ class LoginController extends Controller
             return redirect()->intended('/admin');
         }
 
+        $guestId = session('guestID');
+
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+
+            if ($guestId) {
+                ProductCartController::transferGuestCart($guestId);
+                return redirect()->intended('/cart');
+            }
  
             return redirect()->intended('/products');
         }

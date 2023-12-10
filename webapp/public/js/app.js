@@ -453,7 +453,7 @@ deleteButton = document.getElementById('eliminarProduto')
 if(deleteButton != null){
   deleteButton.addEventListener('click', function(event) {
     event.preventDefault()
-    if(confirm('Tem a certeza que pretende eliminar este produto?')){
+    if(confirm('Tem a certeza de que pretende eliminar este produto?')){
       let action = deleteButton.getAttribute('action')
       let csrf_token = document.querySelector('input[name="_token"]').value
       let xhr = new XMLHttpRequest()
@@ -461,7 +461,7 @@ if(deleteButton != null){
       xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
       xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
       xhr.send()
-      location.href = '/products'
+      location.href = '/adminProductsManage'
     }
   })
 }

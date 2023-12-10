@@ -66,32 +66,35 @@ class ProductsController extends Controller {
         return view('pages.productsAdd');
     }
 
-    public function addProduct(Request $request){
+    public function addProduct(Request $request) {
         verifyAdmin();
+
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0|max:1',
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'category' => 'string|max:256',
+            'category' => 'nullable|string|max:256',
         ]);
 
-        if ($request->file) {
-            $fileController = new FileController();
-            $hash = $fileController->upload($request, 'product', $id);
-            Product::where('id', '=', $id)->update(array('product_image' => $hash));
-        }
+        error_log('aqui2').
 
         $newProduct = Product::create([
             'nome' => $request->name,
-            'precoatual' => 20,
-            'desconto' => $request->discount,
+            'precoatual' => $request->price,
+            'desconto' => ($request->discount? $request->discount : 0),
             'stock' => $request->stock,
             'id_administrador' => 1,
             'descricao' => $request->description,
             'categoria' => strtolower($request->category),
         ]);
+
+        if ($request->file) {
+            $fileController = new FileController();
+            $hash = $fileController->upload($request, 'product', $newProduct->id);
+            $newProduct->update(array('product_image' => $hash));
+        }
 
         return redirect('/products/'.$newProduct->id);
     }
@@ -110,7 +113,7 @@ class ProductsController extends Controller {
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
             'description' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
@@ -168,6 +171,6 @@ class ProductsController extends Controller {
         $product = Product::where('id', '=', $id);
         FileController::delete($product->product_image);
         $product->delete();
-        return redirect('/products');
+        return redirect('/adminProductsManage');
     }
 }

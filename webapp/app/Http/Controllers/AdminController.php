@@ -85,7 +85,7 @@ class AdminController extends Controller{
     public function adminProductsManage(){
         verifyAdmin();
         return view('pages.adminProductsManage', [
-            'products' => Product::all(),
+            'products' => Product::orderBy('id')->get(),
             'discountFunction' => function($price, $discount){
                 return $price * (1 - $discount);
             }

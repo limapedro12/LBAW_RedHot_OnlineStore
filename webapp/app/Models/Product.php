@@ -191,7 +191,7 @@ class Product extends Model{
 
     public static function filterProducts(string $filter){
 
-        $filteredProducts = array_filter(Product::collectionToArray(Product::all()), Product::filterFunctionFactory($filter));
+        $filteredProducts = array_filter(Product::collectionToArray(Product::orderBy('id')->get()), Product::filterFunctionFactory($filter));
 
         return $filteredProducts;
     }
@@ -231,5 +231,10 @@ class Product extends Model{
     }
     public function getProductImage() {
         return FileController::get('product', $this->id);
+    }
+
+    public function hasPhoto() : bool
+    {
+        return ($this->product_image !== null && $this->product_image !== '');
     }
 }
