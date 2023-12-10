@@ -478,3 +478,18 @@ try {
     }
   });
 } catch (error) {}
+
+
+
+// uploaded image
+let input_img = document.getElementById('file');
+let img_name = document.getElementById('fileImgName');
+
+if (input_img != null) {
+
+    input_img.addEventListener('change', () => {
+        let inputImage = document.querySelector('input[id=file]').files[0];
+        img_name.innerText = inputImage.name;
+    });
+
+}

@@ -28,6 +28,7 @@
         <link href="{{ url('css/product.css') }}" rel="stylesheet">
         <link href="{{ url('css/about.css') }}" rel="stylesheet">
         <link href="{{ url('css/profile.css') }}" rel="stylesheet">
+        <link href="{{ url('css/profileEdit.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
         <script type="text/javascript" src={{ url('js/app.js') }} defer></script>

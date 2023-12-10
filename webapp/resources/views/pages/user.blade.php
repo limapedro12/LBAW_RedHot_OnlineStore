@@ -142,9 +142,6 @@
                 </div>
             </div>
         @endif
-        <section>
-            <a href="/users/{{ $user->id }}/delete_account">Apagar Conta...</a>
-        </section>
     </section>
 @endsection
 
