@@ -40,24 +40,11 @@ class ProductsController extends Controller {
         ]);
     }
 
-    public function searchAndFilterProducts(string $stringToSearch, string $filter){
-        $products = Product::searchAndFilterProducts($stringToSearch, $filter);
-        return view('pages.productsSearchAndFilter', [
-            'searchedString' => $stringToSearch,
-            'filter' => Product::filterToDisplay($filter),
-            'filterArr' => Product::filterToArray($filter),
-            'products' => $products,
-            'discountFunction' => function($price, $discount){
-                return $price * (1 - $discount);
-            }
-        ]);
-    }
-
     public function searchAndFilterProductsAPI(string $stringToSearch, string $filter){
         if($stringToSearch == '*')
-            $products = Product::filterProducts($filter);
+            $products = Product::filterProducts(json_decode($filter));
         else
-            $products = Product::searchAndFilterProducts($stringToSearch, json.decode($filter));
+            $products = Product::searchAndFilterProducts($stringToSearch, json_decode($filter));
         return json_encode($products);
     }
 

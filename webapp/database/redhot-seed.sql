@@ -316,7 +316,7 @@ INSERT INTO Administrador (nome, email, password) VALUES ('admin', 'admin@admin.
 
 INSERT INTO Produto (nome, descricao, precoAtual, desconto, stock, id_administrador, categoria) VALUES
   ('Molho de Malagueta Habanero Extra Forte', 'Molho picante feito com malaguetas Habanero para os amantes de pimenta.', 7.99, 0.1, 40, 1, 'Molhos'),
-  ('Sementes de Malagueta Jalapeño', 'Sementes de malagueta Jalapeño para cultivar em seu jardim ou horta.', 4.50, 0.05, 100, 1, 'Sementes'),
+  ('Sementes de Malagueta Jalapeño', 'Sementes de malagueta Jalapeño para cultivar em seu jardim ou horta.', 4.50, 0.85, 100, 1, 'Sementes'),
   ('Malagueta Ghost Pepper Seca', 'Malagueta seca da variedade Ghost Pepper, conhecida por sua extrema pungência.', 10.99, 0.15, 30, 1, 'Especiarias'),
   ('Picles de Malagueta Agridoce', 'Picles de malagueta agridoce, uma deliciosa opção para aperitivos.', 6.25, 0.08, 50, 1, 'Conservas'),
   ('Molho de Malagueta Chipotle Defumado', 'Molho defumado com malaguetas Chipotle para um sabor único.', 8.75, 0.12, 35, 1, 'Molhos'),

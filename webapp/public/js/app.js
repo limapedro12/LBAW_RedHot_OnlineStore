@@ -295,28 +295,28 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
     if(searchString == '')
         searchString = '*'
 
-    console.log(filterString)
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
+    console.log("Pedido GET para " + url)
 
-    //use XMLHttpRequest to send the request to the server
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('GET', url, true);
+    // use XMLHttpRequest to send the request to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
 
-    // //when the request comes back, run the following code
-    // xhr.onload = function() {
-    //     //if everything went ok, show the search results
-    //     if (xhr.status == 200) {
-    //         let products = JSON.parse(xhr.responseText);
-    //         listOfProducts.innerHTML = Object.values(products).map(productToHTML).join('');
-    //     }
-    //     //if something went wrong, show the error
-    //     else {
-    //         listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
-    //     }
-    // };
+    //when the request comes back, run the following code
+    xhr.onload = function() {
+        //if everything went ok, show the search results
+        if (xhr.status == 200) {
+            let products = JSON.parse(xhr.responseText);
+            listOfProducts.innerHTML = Object.values(products).map(productToHTML).join('');
+        }
+        //if something went wrong, show the error
+        else {
+            listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
+        }
+    };
 
-    // //send the request
-    // xhr.send();
+    //send the request
+    xhr.send();
   })
 }
 

@@ -32,10 +32,9 @@ class Product extends Model{
     public static function searchProducts(string $stringToSearch){
         $searchTemperature = 0.1;
         $searchedProducts = DB::table('produto')
-                            ->whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
-                            ->orderByRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) DESC", [$stringToSearch])
-                            ->get();
-
+                              ->whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
+                              ->orderByRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) DESC", [$stringToSearch])
+                              ->get();
         return $searchedProducts;
     }
 
@@ -152,9 +151,10 @@ class Product extends Model{
 
             if($discount != []){
                 $inteval_function = fn($interval) =>
-                    ($product->desconto >= $interval->{'min'} && $product->desconto <= $interval->{'max'})
-                return array_reduce(array_map($discount, $inteval_function), (||))
-            }
+                    ($product->desconto >= $interval->{'min'} && $product->desconto <= $interval->{'max'});
+                if(!in_array(true, array_map($inteval_function, $discount)))
+                    return false;
+            } 
 
             // $splitedFilter = explode(";", $filter);
             // foreach($splitedFilter as $partOfFilter){
@@ -206,7 +206,7 @@ class Product extends Model{
             //         }
             //     }
             // }
-            // return true;
+            return true;
         };
     }
 
@@ -218,14 +218,14 @@ class Product extends Model{
         return $array;
     }
 
-    public static function filterProducts(string $filter){
+    public static function filterProducts($filter){
 
         $filteredProducts = array_filter(Product::collectionToArray(Product::all()), Product::filterFunctionFactory($filter));
 
         return $filteredProducts;
     }
 
-    public static function searchAndFilterProducts(string $stringToSearch, string $filter){
+    public static function searchAndFilterProducts(string $stringToSearch, $filter){
         $searchedProducts = Product::searchProducts($stringToSearch);
         $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
         return $filteredProducts;
