@@ -67,9 +67,11 @@ class UserController extends Controller
 
         verifyUser($user);
 
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/'.$id.'/edit');
-        }
+        if ($request->password !== $request->password_confirmation)
+            return back()->withErrors(['password' => 'As passwords introduzidas não coincidem']);
+
+        if (!Hash::check($request->password, $user->password)) 
+            return back()->withErrors(['password' => 'A password introduzida não corresponde à sua password atual']);
 
         $request->validate([
             'nome' => 'required|string|max:256',
