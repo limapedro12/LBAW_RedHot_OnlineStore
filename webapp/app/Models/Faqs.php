@@ -20,15 +20,18 @@ class Faqs extends Model
         'id_administrador'
     ];
 
-    public function administrador() {
+    public function administrador()
+    {
         return $this->belongsTo(Admin::class, 'id_administrador');
     }
 
-    public function getAdministrador() {
+    public function getAdministrador()
+    {
         return $this->administrador()->get();
     }
 
-    public function getAllFaqs(){
+    public function getAllFaqs()
+    {
         return $this->all();
     }
 }

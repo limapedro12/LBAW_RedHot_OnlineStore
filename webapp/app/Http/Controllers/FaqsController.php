@@ -13,14 +13,16 @@ use App\Models\Faqs;
 
 class FaqsController extends Controller
 {
-    public function listFaqs() {
+    public function listFaqs()
+    {
 
         $faqs = Faqs::all();
 
         return view('pages.faqs', ['faqs' => $faqs]);
     }
 
-    public function createFaqs(Request $request) {
+    public function createFaqs(Request $request)
+    {
 
         $faqs = new Faqs();
 
@@ -33,7 +35,8 @@ class FaqsController extends Controller
         return redirect()->back();
     }
 
-    public function updateFaqs(Request $request, $id) {
+    public function updateFaqs(Request $request, $id)
+    {
 
         $faqs = Faqs::find($id);
 
@@ -46,7 +49,8 @@ class FaqsController extends Controller
         return redirect()->back();
     }
 
-    public function deleteFaqs($id) {
+    public function deleteFaqs($id)
+    {
 
         $faqs = Faqs::find($id);
 

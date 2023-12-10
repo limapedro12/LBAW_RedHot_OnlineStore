@@ -72,7 +72,7 @@ Route::controller(PurchaseController::class)->group(function () {
 });
 
 // User
-Route::controller(UserController::class)->group(function() {
+Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'showProfileDetails');
     Route::get('/users/{id}/edit', 'editProfileForm');
     Route::post('/users/{id}/edit', 'editProfile');
@@ -86,7 +86,7 @@ Route::controller(UserController::class)->group(function() {
 
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
-    
+
     Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
 
     Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
