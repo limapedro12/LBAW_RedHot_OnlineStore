@@ -73,6 +73,11 @@
 
             </div>
         </div>
+
+        <div>
+            <a href="{{ route('listWishlist', ['id' => Auth::id()]) }}"><button>Minha Wishlist</button></a>
+        </div>
+
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
             <div class="profileOrders">
 

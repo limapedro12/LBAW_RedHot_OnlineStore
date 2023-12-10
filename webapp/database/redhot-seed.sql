@@ -140,7 +140,7 @@ CREATE TABLE Preco (
 );
 
 CREATE TABLE ProdutoWishlist (
-	id INTEGER PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
   id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
 );
@@ -567,3 +567,7 @@ INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) 
   (CURRENT_TIMESTAMP, 'O melhor que já experimentei, vale cada centavo.', 5, 1, 38),
   (CURRENT_TIMESTAMP, 'Produto de alta qualidade, não tenho do que reclamar.', 5, 1, 39),
   (CURRENT_TIMESTAMP, 'Molho de pimenta extremamente picante e delicioso.', 5, 1, 40);
+
+INSERT INTO ProdutoWishlist (id_utilizador, id_produto) VALUES
+  (1, 5),
+  (1, 7);
