@@ -466,6 +466,23 @@ if(deleteButton != null){
   })
 }
 
+deleteButton = document.getElementById('banUser')
+if(deleteButton != null){
+  deleteButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    if(confirm('Tem a certeza de que pretende banir este utilizador?')){
+      let action = deleteButton.getAttribute('action')
+      let csrf_token = document.querySelector('input[name="_token"]').value
+      let xhr = new XMLHttpRequest()
+      xhr.open('DELETE', action, true)
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+      xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+      xhr.send()
+      location.href = '/adminUsers'
+    }
+  })
+}
+
 // delete profile picture
 try {
   uploader = document.getElementById('photoUploader');

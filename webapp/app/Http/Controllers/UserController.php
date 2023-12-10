@@ -222,4 +222,13 @@ class UserController extends Controller
 
         return $user->getNumberOfUreadNotifications();
     }
+
+    public static function banUser(Request $request, int $id)
+    {
+        verifyAdmin();
+
+        $user = User::findOrFail($id);
+
+        $user->delete();
+    }
 }

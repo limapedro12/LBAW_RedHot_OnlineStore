@@ -30,27 +30,6 @@
                             <i class="fas fa-angle-down"></i>
                         </div>
                     </a>
-                    <!--
-                    <div class="adminSideBarOptionSubOptions">
-                        <a href="{{ url('/adminProductsManage') }}">
-                            <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Gerir</p>
-                            </div>
-                        </a>
-
-                        <a href="{{ url('/adminProductsHighlights') }}">
-                            <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Destaques</p>
-                            </div>
-                        </a>
-
-                        <a href="{{ url('/adminProductsDiscounts') }}">
-                            <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Descontos</p>
-                            </div>
-                        </a>
-                    </div>
-                -->
                     <a href="{{ url('/adminUsers') }}">
                         <div class="adminSideBarOption" id="optionNotSelected">
                             <p>Utilizadores</p>

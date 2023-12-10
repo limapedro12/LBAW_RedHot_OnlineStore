@@ -74,15 +74,25 @@
             </div>
         </div>
 
+        @unless (Auth::guard('admin')->check())
         <div>
             <a href="{{ route('listWishlist', ['id' => Auth::id()]) }}"><button>Minha Wishlist</button></a>
         </div>
+        @endunless
+
+        @if (Auth::guard('admin')->check())
+            <input type="submit" class="deleteButton" id="banUser" value = "Banir Utilizador" action="/users/{{ $user->id }}/ban">
+        @endif
 
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
             <div class="profileOrders">
 
                 <div class="profileTitle">
-                    <h1>Minhas Encomendas</h1>
+                    @if (Auth::guard('admin')->check())
+                        <h1>Encomendas</h1>
+                    @else
+                        <h1>Minhas Encomendas</h1>
+                    @endif
                 </div>
 
                 <div class="topOfTable">
