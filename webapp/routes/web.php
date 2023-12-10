@@ -8,11 +8,11 @@ use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\NotificationController;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ Route::get('/forgetPassword', function () {
 
 
 
-// AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
+// AdminPage
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
@@ -154,3 +154,11 @@ Route::controller(ReviewsController::class)->group(function () {
 
 //Emails
 Route::post('/send', [MailController::class, 'send']);
+
+
+//Wishlist
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('/users/{id}/wishlist', 'listWishlist')->name('listWishlist');
+    Route::post('/users/{id}/wishlist/{id_product}/add_to_wishlist', 'addToWishlist')->name('addToWishlist');
+    Route::post('/users/{id}/wishlist/{id_product}/remove_from_wishlist', 'removeFromWishlist')->name('removeFromWishlist');
+});
