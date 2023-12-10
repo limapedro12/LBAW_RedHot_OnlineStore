@@ -136,7 +136,7 @@
                                         </td>
                                         <td>
                                             <div class="myOrderDetails">
-                                                <a href="/orders/{{ $order->id }}">+Info</a>
+                                                <a href="/users/{{ $user->id }}/orders/{{ $order->id }}">+Info</a>
                                             </div>
                                         </td>
                                     </tr>

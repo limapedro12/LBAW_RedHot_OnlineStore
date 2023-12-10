@@ -1,4 +1,4 @@
-@section('content')\
+@section('content')
 <section>
         <h1>A eliminar conta de {{$user->nome}}</h1>
         <form method="post" action="/users/{{$user->id}}/delete_account">
