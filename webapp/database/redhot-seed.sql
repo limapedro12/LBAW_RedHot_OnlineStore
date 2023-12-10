@@ -578,3 +578,15 @@ INSERT INTO Comentario (timestamp, texto, avaliacao, id_utilizador, id_produto) 
 INSERT INTO ProdutoWishlist (id_utilizador, id_produto) VALUES
   (1, 5),
   (1, 7);
+
+INSERT INTO Faqs (pergunta, resposta, id_administrador) VALUES
+  ('Qual é o prazo de entrega dos produtos?', 'O prazo de entrega dos nossos produtos é de 3 a 5 dias úteis após a confirmação do pagamento.', 1),
+  ('Como posso devolver um produto?', 'Para devolver um produto, entre em contacto com o nosso serviço de apoio ao cliente dentro de 30 dias após a compra. Verificaremos as condições e procederemos ao reembolso ou forneceremos uma alternativa adequada.', 1),
+  ('Posso cancelar uma encomenda após a compra?', 'Infelizmente, não podemos cancelar uma encomenda após a compra, uma vez que processamos os pedidos rapidamente para garantir a entrega o mais breve possível. Certifique-se de revisar cuidadosamente os itens no seu carrinho antes de finalizar a compra.', 1),
+  ('Como faço para registar uma conta?', 'Para registar uma conta, clique no botão "Registar" no canto superior direito do nosso site. Preencha os campos necessários com as suas informações pessoais e siga as instruções para criar a sua conta.', 1),
+  ('É seguro comprar no site da RedHot?', 'Sim, é seguro comprar no site da RedHot. Tomamos medidas rigorosas para garantir a segurança das suas informações e transações. Utilizamos métodos de pagamento seguros e protegemos os seus dados pessoais.', 1),
+  ('O que devo fazer se esquecer a minha palavra-passe?', 'Se esquecer a sua palavra-passe, clique em "Esqueceu a palavra-passe?" na página de login. Siga as instruções para redefinir a sua palavra-passe. Se precisar de assistência, contacte o nosso serviço de apoio ao cliente.', 1),
+  ('Como posso contactar o serviço de apoio ao cliente?', 'Pode contactar o nosso serviço de apoio ao cliente enviando um e-mail para ajuda@redhot.pt. Estamos disponíveis para responder às suas perguntas e resolver quaisquer problemas que possa ter.', 1),
+  ('Posso adicionar vários produtos ao meu carrinho?', 'Sim, pode adicionar vários produtos ao seu carrinho antes de finalizar a compra. Certifique-se de rever os itens no seu carrinho antes de concluir a compra para garantir que tem tudo o que precisa.', 1),
+  ('Qual é a política de privacidade da RedHot?', 'A nossa política de privacidade detalha como recolhemos, utilizamos e divulgamos as suas informações pessoais. Pode encontrar informações detalhadas na secção de Políticas de Privacidade no nosso site.', 1),
+  ('Como posso seguir o estado da minha encomenda?', 'Pode seguir o estado da sua encomenda iniciando sessão na sua conta e acedendo à secção "Histórico de Encomendas". Lá encontrará informações atualizadas sobre o estado da sua encomenda.', 1);
