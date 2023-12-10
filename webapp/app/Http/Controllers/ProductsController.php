@@ -85,7 +85,7 @@ class ProductsController extends Controller {
             'stock' => $request->stock,
             'id_administrador' => 1,
             'descricao' => $request->description,
-            'categoria' => strtolower($request->category),
+            'categoria' => $request->category,
         ]);
 
         if ($request->file) {
@@ -139,7 +139,7 @@ class ProductsController extends Controller {
                                                      'desconto' => $request->discount, 
                                                      'stock' => $request->stock, 
                                                      'descricao' => $request->description,
-                                                     'categoria' => strtolower($request->category)));
+                                                     'categoria' => $request->category));
 
         return redirect('/products/'.$id);
     }
