@@ -1,37 +1,54 @@
 @section('content')
-
-    <h1>A mudar a password de {{$user->nome}}</h1>
-    <form method="post" action="/users/{{$user->id}}/edit_password">
-        @csrf
-        
-        <label for="old_password">Password antiga</label>
-        <div class="inputBox">
-            <input type="password" name="old_password" id="old_password" required>
-            @if ($errors->has('password'))
-                <p class="textDanger">
-                    {{ $errors->first('password') }}
-                </p>
-            @endif
+<section>
+    <div class="editPassword">
+        <div class="editPasswordTitle">
+            <h1>Alterar password</h1>
         </div>
 
-        <label for="new_password">Nova password</label>
-        <div class="inputBox">
-            <input type="password" name="new_password" id="new_password" required>
-            @if ($errors->has('password_confirmation'))
-                <p class="textDanger">
-                    {{ $errors->first('password_confirmation') }}
-                </p>
-            @endif
+        <div class="editPasswordForm">
+            <form method="post" action="/users/{{ $user->id }}/edit_password" class="editPassForm">
+                @csrf
+
+                <div class="inputBox">
+                    <div class="editPassword">
+                        <label for="old_password">Password antiga:</label>
+                        <input type="password" id="old_password" name="old_password" placeholder="Password antiga" required>
+                    </div>
+                </div>
+
+                <div class="inputBox">
+                    <div class="editPassword">
+                        <label for="new_password">Nova password:</label>
+                        <input type="password" id="new_password" name="new_password" placeholder="Nova password" required>
+                    </div>
+                </div>
+
+                <div class="inputBox">
+                    <div class="editPassword">
+                        <label for="new_password_confirmation">Confirme a nova password:</label>
+                        <input type="password" id="new_password_confirmation" name="new_password_confirmation" placeholder="Confirme a nova password" required>
+                    </div>
+                </div>
+
+                <div class="editPasswordButton">
+                    <input type="submit" value="Alterar">
+                </div>
+            </form>
         </div>
 
-        <label for="new_password_confirmation">Confirme a nova password</label>
-        <div class="inputBox">
-            <input type="password" name="new_password_confirmation" id="new_password_confirmation" required>
+        <div class="finalLinksPass">
+            <div class="deleteAccountPass">
+                <a href="/users/{{ $user->id }}/delete_account"><i class="fas fa-trash-alt"></i> Apagar Conta</a>
+            </div>
+            <div class="editProfilePass">
+                <a href="/users/{{ $user->id }}/edit">Editar Perfil</a>
+            </div>
+            <div class="backPass">
+                <a href="/users/{{ $user->id }}">Perfil <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
-
-        <input type="submit" value="Alterar">
-    </form>
-        
+    </div>
+</section>
 @endsection
 
 @if (Auth::guard('admin')->check())
