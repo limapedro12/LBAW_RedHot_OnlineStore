@@ -15,20 +15,20 @@
                     <div class="rangeContainer">
                         <label class="filtersRangeTitle">Preço:</label>
                         <div class="slidersControl">
-                            <input id="fromSlider" type="range" value="1" min="0" max="{{ $maxPrice + 1 }}" />
-                            <input id="toSlider" type="range" value="{{ round(($maxPrice + 1) / 2) }}" min="0"
+                            <input id="fromSlider" type="range" value="0" min="0" max="{{ $maxPrice + 1 }}" />
+                            <input id="toSlider" type="range" value="{{ round(($maxPrice + 1)) }}" min="0"
                                 max="{{ $maxPrice + 1 }}" />
                         </div>
                         <div class="formControl">
                             <div class="formControlContainer">
                                 <div class="formControlContainerTime">Min:</div>
-                                <input class="formControlContainerTimeInput" type="number" id="fromInput" value="1"
+                                <input class="formControlContainerTimeInput" type="number" id="fromInput" value="0"
                                     min="0" max="{{ $maxPrice + 1 }}" />
                             </div>
                             <div class="formControlContainer">
                                 <div class="formControlContainerTime">Max:</div>
                                 <input class="formControlContainerTimeInput" type="number" id="toInput"
-                                    value="{{ round(($maxPrice + 1) / 2) }}" min="0" max="{{ $maxPrice + 1 }}" />
+                                    value="{{ round(($maxPrice + 1)) }}" min="0" max="{{ $maxPrice + 1 }}" />
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                                 <p> 723 {{ $product->avaliacao }} avaliações </p>
                             </div>
                             <div class="productListItemHearts">
-                                <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                                <p> {{ $product->getAverageRating() }} / 5 <i class="fa-solid fa-heart"></i> </p>
                             </div>
                         </div>
                         <div class="productListItemPrices">
