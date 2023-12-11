@@ -25,13 +25,13 @@
     <link href="{{ url('css/home.css') }}" rel="stylesheet">
     <link href="{{ url('css/notification.css') }}" rel="stylesheet">
     <link href="{{ url('css/products.css') }}" rel="stylesheet">
-    <link href="{{ url('css/product.css') }}" rel="stylesheet">
     <link href="{{ url('css/about.css') }}" rel="stylesheet">
     <link href="{{ url('css/profile.css') }}" rel="stylesheet">
     <link href="{{ url('css/profileEdit.css') }}" rel="stylesheet">
     <link href="{{ url('css/profileEditPassword.css') }}" rel="stylesheet">
     <link href="{{ url('css/profileDelete.css') }}" rel="stylesheet">
     <link href="{{ url('css/faqs.css') }}" rel="stylesheet">
+    <link href="{{ url('css/productDetail.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
