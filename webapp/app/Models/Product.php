@@ -26,7 +26,8 @@ class Product extends Model{
         'stock',
         'id_administrador',
         'product_image',
-        'categoria'
+        'categoria',
+        'destaque'
     ];
 
     public static function searchProducts(string $stringToSearch){

@@ -33,10 +33,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
-
-
 // Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
@@ -118,6 +114,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
     Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
+    Route::post('/adminProductsHighlights/addHighlight/{id}', 'addHighlight')->name('addHighlight');
+    Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');

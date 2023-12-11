@@ -66,36 +66,129 @@
             </div>
             <div class="adminOptionContent">
                 <h2>Produtos em Destaque</h2>
-                <div class='mainDestaques'>
-                    <div class='top4SellingProducts'>
-                        <div class='top4SellingProductsList'>
-                            <a href="{{ url('/products/1') }}">
-                                <div class='top4SellingProductsItem'>
-                                    <div class='top4SellingProductsItemImg'>
-                                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}"
-                                            alt="Produto 1">
+
+                @if ($destaques->count() == 0)
+                    <p>Não existem produtos em destaque.</p>
+                @endif
+                
+                <div class="productsPageProducts" id='listOfProducts'>
+                    @foreach ($destaques as $product)
+                        <div class="productListItem">
+                            <div class="productListItemImg">
+                                <a href = "/products/{{ $product->id }}">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                </a>
+                            </div>
+                            <div class="productListItemTitle">
+                                <a href = "/products/{{ $product->id }}">
+                                    <h3>
+                                        {{ $product->nome }}
+                                    </h3>
+                                </a>
+                            </div>
+                            <div class="productListItemBottom">
+                                <div class="productListItemRating">
+                                    <div class="productListItemNumberOfReviews">
+                                        <p> 723 {{ $product->avaliacao }} avaliações </p>
                                     </div>
-                                    <div class='top4SellingProductsItemInfo'>
-                                        <h3>Produto 1</h3>
-                                        <p>Avaliação: 5</p>
-                                        <p>Preço: 10€</p>
+                                    <div class="productListItemHearts">
+                                        <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="{{ url('/products/2') }}">
-                                <div class='top4SellingProductsItem'>
-                                    <div class='top4SellingProductsItemImg'>
-                                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}"
-                                            alt="Produto 2">
-                                    </div>
-                                    <div class='top4SellingProductsItemInfo'>
-                                        <h3>Produto 2</h3>
-                                        <p>Avaliação: 4.9</p>
-                                        <p>Preço: 10€</p>
-                                    </div>
+                                <div class="productListItemPrices">
+                                    @if ($product->desconto > 0)
+                                        <div class="productListItemOldPrice">
+                                            <p class="discount">
+                                                {{ $product->desconto * 100 }}%
+                                            </p>
+                                            <p class="oldPrices">
+                                                {{ $product->precoatual }}
+                                            </p>
+                                            <p class="euro">€ </p>
+                                        </div>
+                                        <div class="productListItemNewPrice">
+                                            <p class="newPrices">
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                            </p>
+                                        </div>
+                                    @else
+                                        <div class="productListItemPrice">
+                                            <p class="Price">
+                                                {{ $product->precoatual }}€
+                                            </p>
+                                        </div>
+                                    @endif
                                 </div>
+                            </div>
+
+                            <form action="{{ route('removeHighlight', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit">Remover dos Destaques</button>
+                            </form>
+
                         </div>
-                    </div>
+                    @endforeach
+                </div>
+
+                <h2>Restantes Produtos</h2>
+
+                <div class="productsPageProducts" id='listOfProducts'>
+                    @foreach ($restantesProdutos as $product)
+                        <div class="productListItem">
+                            <div class="productListItemImg">
+                                <a href = "/products/{{ $product->id }}">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                </a>
+                            </div>
+                            <div class="productListItemTitle">
+                                <a href = "/products/{{ $product->id }}">
+                                    <h3>
+                                        {{ $product->nome }}
+                                    </h3>
+                                </a>
+                            </div>
+                            <div class="productListItemBottom">
+                                <div class="productListItemRating">
+                                    <div class="productListItemNumberOfReviews">
+                                        <p> 723 {{ $product->avaliacao }} avaliações </p>
+                                    </div>
+                                    <div class="productListItemHearts">
+                                        <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                                    </div>
+                                </div>
+                                <div class="productListItemPrices">
+                                    @if ($product->desconto > 0)
+                                        <div class="productListItemOldPrice">
+                                            <p class="discount">
+                                                {{ $product->desconto * 100 }}%
+                                            </p>
+                                            <p class="oldPrices">
+                                                {{ $product->precoatual }}
+                                            </p>
+                                            <p class="euro">€ </p>
+                                        </div>
+                                        <div class="productListItemNewPrice">
+                                            <p class="newPrices">
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                            </p>
+                                        </div>
+                                    @else
+                                        <div class="productListItemPrice">
+                                            <p class="Price">
+                                                {{ $product->precoatual }}€
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <form action="{{ route('addHighlight', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit">Adicionar aos Destaques</button>
+                            </form>
+
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

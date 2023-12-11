@@ -79,7 +79,38 @@ class AdminController extends Controller{
     
     public function adminProductsHighlights(){
         verifyAdmin();
-        return view('pages.adminProductsHighlights');
+
+        return view('pages.adminProductsHighlights', [
+            'destaques' => Product::where('destaque', 1)->get(),
+            'restantesProdutos' => Product::where('destaque', 0)->get(),
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
+    }
+
+    public function addHighlight($id) {
+        verifyAdmin();
+
+        $product = Product::find($id);
+
+        $product->destaque = 1;
+
+        $product->save();
+
+        return redirect('/adminProductsHighlights');
+    }
+
+    public function removeHighlight($id) {
+        verifyAdmin();
+
+        $product = Product::find($id);
+
+        $product->destaque = 0;
+
+        $product->save();
+
+        return redirect('/adminProductsHighlights');
     }
     
     public function adminProductsManage(){
