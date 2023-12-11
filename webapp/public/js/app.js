@@ -205,21 +205,22 @@ function discountFunction(precoatual, desconto) {
   return Math.round((precoatual - precoatual * desconto) * 100) / 100
 }
 
-function getProductTemplate(){
-  return document.getElementsByClassName('productListItem')[0].cloneNode(true)
-}
 
+let productTemplateOriginal = (document.getElementsByClassName('productListItem').length > 0) ?
+                        document.getElementsByClassName('productListItem')[0].cloneNode(true) :
+                        null
+                        
 function createProductHTML(product){
-  let productTemplate = getProductTemplate()
+  let productTemplate = productTemplateOriginal.cloneNode(true)
   productTemplate.getElementsByClassName('productImage')[0].src = product.url_imagem
   productTemplate.getElementsByClassName('productImage')[0].alt = product.nome
   productTemplate.getElementsByClassName('productListItemTitleLink')[0].href = `/products/${product.id}`
   productTemplate.getElementsByClassName('productListItemTitleText')[0].innerHTML = product.nome
-  productTemplate.getElementsByClassName('productListItemNumberOfReviewsSpan')[0].innerHTML = product.numero_reviews
+  productTemplate.getElementsByClassName('productListItemNumberOfReviews')[0].querySelector('p').innerHTML = `${product.numero_reviews} avaliações`
   productTemplate.getElementsByClassName('productListItemAverageRating')[0].innerHTML = product.avaliacao_media
 
   // Create a parent container
-  let container = document.getElementsByClassName('productListItemPrices')[0];
+  let container = productTemplate.getElementsByClassName('productListItemPrices')[0];
   container.innerHTML = '';
 
   if (product.desconto > 0) {
@@ -228,7 +229,7 @@ function createProductHTML(product){
 
     let discountP = document.createElement('p');
     discountP.className = "discount";
-    discountP.textContent = product.desconto * 100 + "%";
+    discountP.textContent = Math.round(product.desconto * 100) + "%";
     oldPriceDiv.appendChild(discountP);
 
     let oldPriceP = document.createElement('p');
@@ -329,8 +330,6 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
         //if everything went ok, show the search results
         if (xhr.status == 200) {
             let products = JSON.parse(xhr.responseText);
-            console.log(products)
-            console.log(Object.values(products).map(createProductHTML).join(''))
             listOfProducts.innerHTML = Object.values(products).map(createProductHTML).join('');
         }
         //if something went wrong, show the error

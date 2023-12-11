@@ -45,6 +45,11 @@ class ProductsController extends Controller {
             $products = Product::filterProducts(json_decode($filter));
         else
             $products = Product::searchAndFilterProducts($stringToSearch, json_decode($filter));
+        foreach($products as $product){
+            $product->avaliacao_media = $product->getAverageRating();
+            $product->numero_reviews = $product->getNumberOfReviews();
+            $product->url_imagem = FileController::get('product', $product->id);
+        }
         return json_encode($products);
     }
 

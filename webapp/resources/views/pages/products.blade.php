@@ -225,7 +225,7 @@
                     <div class="productListItemBottom">
                         <div class="productListItemRating">
                             <div class="productListItemNumberOfReviews">
-                                <p> <span class="productListItemNumberOfReviewsSpan">{{ $product->getNumberOfReviews() }}<span> avaliações </p>
+                                <p>{{ $product->getNumberOfReviews() }} avaliações </p>
                             </div>
                             <div class="productListItemHearts">
                                 <p> <span class="productListItemAverageRating">{{ $product->getAverageRating() }}</span> / 5 <i class="fa-solid fa-heart"></i> </p>
