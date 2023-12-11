@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\AdminController;
 
 function verifyUser(User $user) : void {
     if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
@@ -225,10 +226,16 @@ class UserController extends Controller
 
     public static function banUser(Request $request, int $id)
     {
-        verifyAdmin();
+        error_log("banUser");
+        AdminController::verifyAdmin2();
+        error_log("banUser2");
 
         $user = User::findOrFail($id);
 
-        $user->delete();
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['ban' => 'O utilizador tem encomendas pendentes!']);
+        }
+
+        $user->ban();
     }
 }

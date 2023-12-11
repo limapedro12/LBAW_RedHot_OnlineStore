@@ -114,4 +114,9 @@ class AdminController extends Controller{
         verifyAdmin();
         return view('pages.adminFAQ');
     }
+
+    public static function verifyAdmin2() : void {
+        if(Auth::guard('admin')->user()==null)
+            abort(403);
+    }
 }

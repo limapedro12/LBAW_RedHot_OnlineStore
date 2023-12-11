@@ -81,7 +81,15 @@
         @endunless
 
         @if (Auth::guard('admin')->check())
-            <input type="submit" class="deleteButton" id="banUser" value = "Banir Utilizador" action="/users/{{ $user->id }}/ban">
+            <form action="/users/{{ $user->id }}/ban" method="POST">
+                @csrf
+                <input type="submit" class="deleteButton" id="banUser" value="Banir Utilizador">
+            </form>
+            @if ($errors->has('ban'))
+                <p class="textDanger">
+                    {{ $errors->first('ban') }}
+                </p>
+            @endif
         @endif
 
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
