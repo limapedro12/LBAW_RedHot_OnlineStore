@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+use App\Models\User;
+
 use App\Http\Controllers\ProductCartController;
 
 function verifyNotAutenticated() : void {
@@ -43,6 +45,12 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        if (User::where('email', $credentials['email'])->first()->banned) {
+            return back()->withErrors([
+                'email' => 'A sua conta foi banida.',
+            ])->onlyInput('email');
+        }
  
         if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
