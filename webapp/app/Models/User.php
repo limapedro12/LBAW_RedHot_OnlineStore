@@ -42,7 +42,8 @@ class User extends Authenticatable
         'codigo_postal',
         'localidade',
         'profile_image',
-        'banned'
+        'banned',
+        'became_admin'
     ];
 
     /**

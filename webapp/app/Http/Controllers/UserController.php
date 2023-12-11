@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Admin;
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
@@ -226,9 +227,7 @@ class UserController extends Controller
 
     public static function banUser(Request $request, int $id)
     {
-        error_log("banUser");
         AdminController::verifyAdmin2();
-        error_log("banUser2");
 
         $user = User::findOrFail($id);
 
@@ -239,5 +238,27 @@ class UserController extends Controller
         $user->ban();
 
         return redirect('/users/'.$id);
+    }
+
+    public function becomeAdmin(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['promote' => 'Não pode promover um utilizador com encomendas pendentes!']);
+        }
+
+        $admin = new Admin();
+        $admin->nome = $user->nome;
+        $admin->email = $user->email;
+        $admin->password = $user->password;
+        $admin->save();
+
+        $user->became_admin = true;
+        $user->save();
+
+        return redirect('/adminUsers');
     }
 }

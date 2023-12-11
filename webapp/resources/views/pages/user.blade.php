@@ -28,6 +28,8 @@
                     <h1>Detalhes</h1>
                     @if ($user->banned)
                         <h3> (BANIDO)</h3>
+                    @elseif ($user->became_admin)
+                        <h3> (PROMOVIDO)</h3>
                     @endif
                     @if (Auth::check() && Auth::user()->id == $user->id)
                         <div class="profileLinks">
@@ -83,17 +85,28 @@
         </div>
         @endunless
 
-        @if (Auth::guard('admin')->check() && !$user->banned)
-            <form action="/users/{{ $user->id }}/ban" method="POST">
-                @csrf
-                <input type="submit" class="deleteButton" id="banUser" value="Banir Utilizador">
-            </form>
-            @if ($errors->has('ban'))
-                <p class="textDanger">
-                    {{ $errors->first('ban') }}
-                </p>
+        @unless ($user->became_admin)
+            @if (Auth::guard('admin')->check() && !$user->banned)
+                <form action="/users/{{ $user->id }}/ban" method="POST">
+                    @csrf
+                    <input type="submit" id="banUser" value="Banir Utilizador">
+                </form>
+                @if ($errors->has('ban'))
+                    <p class="textDanger">
+                        {{ $errors->first('ban') }}
+                    </p>
+                @endif
+                <form action="/users/{{ $user->id }}/promote" method="POST">
+                    @csrf
+                    <input type="submit" id="promoteUser" value="Promover a Administrador">
+                </form>
+                @if ($errors->has('promote'))
+                    <p class="textDanger">
+                        {{ $errors->first('promote') }}
+                    </p>
+                @endif
             @endif
-        @endif
+        @endunless
 
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
             <div class="profileOrders">

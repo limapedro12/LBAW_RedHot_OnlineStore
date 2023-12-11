@@ -45,23 +45,23 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
-        if (User::where('email', $credentials['email'])->first()->banned) {
-            return back()->withErrors([
-                'email' => 'A sua conta foi banida.',
-            ])->onlyInput('email');
-        }
  
         if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
  
             return redirect()->intended('/admin');
-        }
+        }     
 
         $guestId = session('guestID');
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+
+            if (User::where('email', $credentials['email'])->first()->banned) {
+                return back()->withErrors([
+                    'email' => 'A sua conta foi banida.',
+                ])->onlyInput('email');
+            }
 
             if ($guestId) {
                 ProductCartController::transferGuestCart($guestId);
@@ -72,7 +72,7 @@ class LoginController extends Controller
         }
  
         return back()->withErrors([
-            'email' => 'As credenciais dadas não correspodem ao nossos registos.',
+            'email' => 'As credenciais introduzidas não correspodem aos nossos registos.',
         ])->onlyInput('email');
     }
 
