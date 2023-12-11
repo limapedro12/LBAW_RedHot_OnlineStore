@@ -33,10 +33,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
-
-
 // Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
@@ -116,8 +112,10 @@ Route::get('/forgetPassword', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
-    Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
+    Route::get('/adminProductsAdd', 'adminProductsAdd')->name('adminProductsAdd');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
+    Route::post('/adminProductsHighlights/addHighlight/{id}', 'addHighlight')->name('addHighlight');
+    Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
@@ -140,9 +138,12 @@ Route::get('/about', function () {
 })->name('about');
 
 // faqs
-Route::get('/faqs', function () {
-    return view('pages.faqs');
-})->name('faqs');
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {
