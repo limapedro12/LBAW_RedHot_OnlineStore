@@ -104,7 +104,7 @@ CREATE TABLE Comentario (
   texto TEXT NOT NULL,
   avaliacao INTEGER NOT NULL CHECK (avaliacao >= 1 AND avaliacao <= 5),
   id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
-  id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE
+  id_produto INTEGER NOT NULL REFERENCES Produto (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Notificacao_Compra (

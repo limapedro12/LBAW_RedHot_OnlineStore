@@ -112,7 +112,7 @@ Route::get('/forgetPassword', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
-    Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
+    Route::get('/adminProductsAdd', 'adminProductsAdd')->name('adminProductsAdd');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
     Route::post('/adminProductsHighlights/addHighlight/{id}', 'addHighlight')->name('addHighlight');
     Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');

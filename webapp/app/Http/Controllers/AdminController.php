@@ -72,9 +72,9 @@ class AdminController extends Controller{
         ]);
     }
     
-    public function adminProductsDiscounts(){
+    public function adminProductsAdd(){
         verifyAdmin();
-        return view('pages.adminProductsDiscounts');
+        return view('pages.adminProductsAdd');
     }
     
     public function adminProductsHighlights(){

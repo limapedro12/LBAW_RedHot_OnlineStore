@@ -169,8 +169,10 @@ class ProductsController extends Controller {
         verifyAdmin();
         error_log($id);
         $product = Product::where('id', '=', $id);
-        error_log($product->product_image);
-        FileController::delete($product->product_image);
+        //error_log($product->product_image);
+        //FileController::delete($product->product_image);
         $product->delete();
+
+        return redirect('/adminProductsManage');
     }
 }

@@ -44,9 +44,9 @@
                             </div>
                         </a>
 
-                        <a href="{{ url('/adminProductsDiscounts') }}">
+                        <a href="{{ url('/adminProductsAdd') }}">
                             <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Descontos</p>
+                                <p>Adicionar</p>
                             </div>
                         </a>
                     </div>
@@ -128,6 +128,10 @@
 
                         </div>
                     @endforeach
+
+                    @if ($destaques->count() == 4)
+                        <p>Atingido o número máximo de produtos em destaque</p>
+                    @endif
                 </div>
 
                 <h2>Restantes Produtos</h2>
@@ -182,10 +186,12 @@
                                 </div>
                             </div>
 
-                            <form action="{{ route('addHighlight', ['id' => $product->id]) }}" method="post">
-                                @csrf
-                                <button type="submit">Adicionar aos Destaques</button>
-                            </form>
+                            @if ($destaques->count() < 4)                               
+                                <form action="{{ route('addHighlight', ['id' => $product->id]) }}" method="post">
+                                    @csrf
+                                    <button type="submit">Adicionar aos Destaques</button>
+                                </form>
+                            @endif
 
                         </div>
                     @endforeach
