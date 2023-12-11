@@ -11,6 +11,7 @@ use App\Models\Admin;
 use App\Models\Purchase;
 use App\Models\Product;
 use App\Models\ProductPurchase;
+use App\Models\User;
 use App\Models\Faqs;
 
 use App\Policies\UserPolicy;
@@ -136,7 +137,9 @@ class AdminController extends Controller{
     
     public function adminUsers(){
         verifyAdmin();
-        return view('pages.adminUsers');
+        return view('pages.adminUsers', [
+            'users' => User::all()
+        ]);
     }
 
     public function adminFAQ(){
@@ -146,4 +149,8 @@ class AdminController extends Controller{
         ]);
     }
 
+    public static function verifyAdmin2() : void {
+        if(Auth::guard('admin')->user()==null)
+            abort(403);
+    }
 }

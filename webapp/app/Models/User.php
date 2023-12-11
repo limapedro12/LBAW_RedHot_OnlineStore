@@ -12,6 +12,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Notification;
+use App\Models\Purchase;
+
 use App\Http\Controllers\FileController;
 
 class User extends Authenticatable
@@ -39,7 +41,9 @@ class User extends Authenticatable
         'morada',
         'codigo_postal',
         'localidade',
-        'profile_image'
+        'profile_image',
+        'banned',
+        'became_admin'
     ];
 
     /**
@@ -90,4 +94,19 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order', 'id_utilizador');
     }
 
+    public function ban() : void
+    {
+        $this->banned = true;
+        $this->save();
+    }
+
+    public function hasPendingOrders() : bool
+    {
+        $pending = Purchase::where('id_utilizador', $this->id)
+                            ->where('estado', '!=', 'Concluído')
+                            ->where('estado', '!=', 'Cancelada')
+                            ->count();
+        
+        return $pending > 0;
+    }
 }

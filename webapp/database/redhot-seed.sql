@@ -33,7 +33,9 @@ CREATE TABLE Utilizador (
   codigo_postal VARCHAR(256),
   localidade VARCHAR(256),
   remember_token VARCHAR(256),
-  profile_image VARCHAR(1024)
+  profile_image VARCHAR(1024),
+  banned BOOLEAN DEFAULT FALSE,
+  became_admin BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Administrador (

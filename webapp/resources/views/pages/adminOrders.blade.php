@@ -30,7 +30,7 @@
                             <i class="fas fa-angle-down"></i>
                         </div>
                     </a>
-
+                    
                     <a href="{{ url('/adminUsers') }}">
                         <div class="adminSideBarOption" id="optionNotSelected">
                             <p>Utilizadores</p>

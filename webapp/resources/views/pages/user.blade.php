@@ -26,6 +26,11 @@
             <div class="profileInfo">
                 <div class="profileTitle">
                     <h1>Detalhes</h1>
+                    @if ($user->banned)
+                        <h3> (BANIDO)</h3>
+                    @elseif ($user->became_admin)
+                        <h3> (PROMOVIDO)</h3>
+                    @endif
                     @if (Auth::check() && Auth::user()->id == $user->id)
                         <div class="profileLinks">
                             <a href="/users/{{ $user->id }}/edit"><i class="fas fa-user-pen"></i></a>
@@ -74,15 +79,44 @@
             </div>
         </div>
 
+        @unless (Auth::guard('admin')->check())
         <div>
             <a href="{{ route('listWishlist', ['id' => Auth::id()]) }}"><button>Minha Wishlist</button></a>
         </div>
+        @endunless
+
+        @unless ($user->became_admin)
+            @if (Auth::guard('admin')->check() && !$user->banned)
+                <form action="/users/{{ $user->id }}/ban" method="POST">
+                    @csrf
+                    <input type="submit" id="banUser" value="Banir Utilizador">
+                </form>
+                @if ($errors->has('ban'))
+                    <p class="textDanger">
+                        {{ $errors->first('ban') }}
+                    </p>
+                @endif
+                <form action="/users/{{ $user->id }}/promote" method="POST">
+                    @csrf
+                    <input type="submit" id="promoteUser" value="Promover a Administrador">
+                </form>
+                @if ($errors->has('promote'))
+                    <p class="textDanger">
+                        {{ $errors->first('promote') }}
+                    </p>
+                @endif
+            @endif
+        @endunless
 
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
             <div class="profileOrders">
 
                 <div class="profileTitle">
-                    <h1>Minhas Encomendas</h1>
+                    @if (Auth::guard('admin')->check())
+                        <h1>Encomendas</h1>
+                    @else
+                        <h1>Minhas Encomendas</h1>
+                    @endif
                 </div>
 
                 <div class="topOfTable">

@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Admin;
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\AdminController;
 
 function verifyUser(User $user) : void {
     if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
@@ -221,5 +223,42 @@ class UserController extends Controller
         verifyUser($user);
 
         return $user->getNumberOfUreadNotifications();
+    }
+
+    public static function banUser(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['ban' => 'Não pode banir um utilizador com encomendas pendentes!']);
+        }
+
+        $user->ban();
+
+        return redirect('/users/'.$id);
+    }
+
+    public function becomeAdmin(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['promote' => 'Não pode promover um utilizador com encomendas pendentes!']);
+        }
+
+        $admin = new Admin();
+        $admin->nome = $user->nome;
+        $admin->email = $user->email;
+        $admin->password = $user->password;
+        $admin->save();
+
+        $user->became_admin = true;
+        $user->save();
+
+        return redirect('/adminUsers');
     }
 }
