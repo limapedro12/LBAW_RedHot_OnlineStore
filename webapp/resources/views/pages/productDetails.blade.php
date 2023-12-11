@@ -2,6 +2,67 @@
 
 <section>
 
+    <div class="productDetailsBreadcrumb">
+        <a href="{{ url('/') }}">Home</a> > <a href="{{ url('/products') }}">Produtos</a> > {{ $product->nome }}
+    </div>
+
+    <div class="productDisplay">
+        <div class="productImage">
+            <img style="height: 200px;" src="{{ $product->getProductImage() }}" alt="Imagem do produto">
+        </div>
+        <div class="productDetails">
+            <div class="productTitle">
+                <h2> {{ $product->nome }} </h2>
+            </div>
+            <div class="productDetailCategory">
+                <h3>{{ $product->categoria }} </h3>
+            </div>
+            <div class="productRatingAndReviews">
+                <div class="productRating">
+                    
+                    <p> {{ $product->getProductRating() }}/5 <i class="fa-solid fa-heart"></i></p>
+                </div>
+                <div class="productReviews">
+                    <p> {{ $product->getProductNumberOfReviews() }} Avaliações </p>
+                </div>
+            </div>
+
+
+
+
+            <div class="similarProducts">
+                <p> Produtos semelhantes: </p>
+                <div class="similarProductsName">
+                    @foreach ($product->getTwoSimilarProductsRandom($product->id) as $similarProduct)
+                        <a href="{{ route('productsdetails', ['id' => $similarProduct->id]) }}">{{ $similarProduct->nome }}</a>
+                    @endforeach
+                </div>
+            </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <img style="height: 200px;" src="{{ $product->getProductImage() }}" alt="Imagem do produto">
     <section class="productDetails">
         <h2> {{ $product->nome }} </h2> 

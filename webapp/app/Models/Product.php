@@ -237,4 +237,28 @@ class Product extends Model{
     {
         return ($this->product_image !== null && $this->product_image !== '');
     }
+
+    public function getTwoSimilarProductsRandom(int $id){
+        //They need to be of the same category
+        $similarProducts = Product::where('categoria', $this->categoria)->where('id', '!=', $id)->inRandomOrder()->take(2)->get();
+        return $similarProducts;
+    }
+
+    public function getProductRating(){
+        $comments = Review::where('id_produto', $this->id)->get();
+        $rating = 0;
+        foreach($comments as $comment){
+            $rating += $comment->avaliacao;
+        }
+        if(sizeof($comments) == 0){
+            return 0;
+        }
+        else{
+            return round($rating/sizeof($comments), 1);
+        }
+    }
+
+    public function getProductNumberOfReviews(){
+        return sizeof(Review::where('id_produto', $this->id)->get());
+    }
 }
