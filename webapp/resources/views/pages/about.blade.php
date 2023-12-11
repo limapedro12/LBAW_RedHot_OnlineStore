@@ -96,7 +96,7 @@
                             <h2 class="three">Pedro Januário</h2>
                         </div>
                         <div class="aboutTeamMemberNickname">
-                            <h4 class="three">Janeiras</h4>
+                            <h4 class="three">Janeiras ☭</h4>
                         </div>
                         <div class="aboutTeamMemberRole">
                             <h3 class="three">CO-FOUNDER</h3>
