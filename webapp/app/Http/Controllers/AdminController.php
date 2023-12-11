@@ -12,6 +12,7 @@ use App\Models\Purchase;
 use App\Models\Product;
 use App\Models\ProductPurchase;
 use App\Models\User;
+use App\Models\Faqs;
 
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
@@ -73,14 +74,45 @@ class AdminController extends Controller{
         ]);
     }
     
-    public function adminProductsDiscounts(){
+    public function adminProductsAdd(){
         verifyAdmin();
-        return view('pages.adminProductsDiscounts');
+        return view('pages.adminProductsAdd');
     }
     
     public function adminProductsHighlights(){
         verifyAdmin();
-        return view('pages.adminProductsHighlights');
+
+        return view('pages.adminProductsHighlights', [
+            'destaques' => Product::where('destaque', 1)->get(),
+            'restantesProdutos' => Product::where('destaque', 0)->get(),
+            'discountFunction' => function($price, $discount){
+                return $price * (1 - $discount);
+            }
+        ]);
+    }
+
+    public function addHighlight($id) {
+        verifyAdmin();
+
+        $product = Product::find($id);
+
+        $product->destaque = 1;
+
+        $product->save();
+
+        return redirect('/adminProductsHighlights');
+    }
+
+    public function removeHighlight($id) {
+        verifyAdmin();
+
+        $product = Product::find($id);
+
+        $product->destaque = 0;
+
+        $product->save();
+
+        return redirect('/adminProductsHighlights');
     }
     
     public function adminProductsManage(){
@@ -112,7 +144,9 @@ class AdminController extends Controller{
 
     public function adminFAQ(){
         verifyAdmin();
-        return view('pages.adminFAQ');
+        return view('pages.adminFAQ', [
+            'faqs' => Faqs::all()
+        ]);
     }
 
     public static function verifyAdmin2() : void {

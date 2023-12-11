@@ -1,4 +1,14 @@
 @section('content')
+
+<?php
+    use App\Models\Product;
+
+    $destaques = Product::where('destaque', 1)->get();
+    $discountFunction = function($price, $discount){
+        return $price * (1 - $discount);
+    }
+?>
+
 <div class='home'>
     <img src="{{ asset('sources/main/teste-main-3.png') }}" alt="Termos de Uso" class="background">
     <div class='buttonOnHome'>
@@ -14,65 +24,62 @@
             <h2>Produtos em Destaque</h2>
         </div>
         <div class='top4SellingProductsList'>
-            <a href="{{ url('/products/1') }}">
-                <div class='top4SellingProductsItem'>
-                    <div class='top4SellingProductsItemImg'>
-                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}" alt="Produto 1">
+        <div class="productsPageProducts" id='listOfProducts'>
+            @foreach ($destaques as $product)
+                <div class="productListItem">
+                    <div class="productListItemImg">
+                        <a href = "/products/{{ $product->id }}">
+                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                        </a>
                     </div>
-                    <div class='top4SellingProductsItemInfo'>
-                        <h3>Produto 1</h3>
-                        <p>Avaliação: 5</p>
-                        <p>Preço: 10€</p>
+                    <div class="productListItemTitle">
+                        <a href = "/products/{{ $product->id }}">
+                            <h3>
+                                {{ $product->nome }}
+                            </h3>
+                        </a>
+                    </div>
+                    <div class="productListItemBottom">
+                        <div class="productListItemRating">
+                            <div class="productListItemNumberOfReviews">
+                                <p> 723 {{ $product->avaliacao }} avaliações </p>
+                            </div>
+                            <div class="productListItemHearts">
+                                <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                            </div>
+                        </div>
+                        <div class="productListItemPrices">
+                            @if ($product->desconto > 0)
+                                <div class="productListItemOldPrice">
+                                    <p class="discount">
+                                        {{ $product->desconto * 100 }}%
+                                    </p>
+                                    <p class="oldPrices">
+                                        {{ $product->precoatual }}
+                                    </p>
+                                    <p class="euro">€ </p>
+                                </div>
+                                <div class="productListItemNewPrice">
+                                    <p class="newPrices">
+                                        {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                    </p>
+                                </div>
+                            @else
+                                <div class="productListItemPrice">
+                                    <p class="Price">
+                                        {{ $product->precoatual }}€
+                                    </p>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </a>
-            <a href="{{ url('/products/2') }}">
-                <div class='top4SellingProductsItem'>
-                    <div class='top4SellingProductsItemImg'>
-                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}" alt="Produto 2">
-                    </div>
-                    <div class='top4SellingProductsItemInfo'>
-                        <h3>Produto 2</h3>
-                        <p>Avaliação: 4.9</p>
-                        <p>Preço: 10€</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ url('/products/3') }}">
-                <div class='top4SellingProductsItem'>
-                    <div class='top4SellingProductsItemImg'>
-                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}" alt="Produto 3">
-                    </div>
-                    <div class='top4SellingProductsItemInfo'>
-                        <h3>Produto 3</h3>
-                        <p>Avaliação: 4.8</p>
-                        <p>Preço: 10€</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ url('/products/4') }}">
-                <div class='top4SellingProductsItem'>
-                    <div class='top4SellingProductsItemImg'>
-                        <img src="{{ asset('sources/main/sacana_extra_picante_75ml.png') }}" alt="Produto 4">
-                    </div>
-                    <div class='top4SellingProductsItemInfo'>
-                        <h3>Produto 4</h3>
-                        <p>Avaliação: 4.5</p>
-                        <p>Preço: 10€</p>
-                    </div>
-                </div>
-            </a>
+            @endforeach
+        </div>
         </div>
     </div>
 </div>
 @endsection
-
-
-
-
-
-
-
 
 @if (Auth::guard('admin')->check())
 @include('layouts.adminHeaderFooter')

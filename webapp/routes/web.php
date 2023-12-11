@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\FaqsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,6 @@ Route::redirect('/', 'welcome');
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
-
-
-
-
 
 // Catalogue
 Route::controller(ProductsController::class)->group(function () {
@@ -71,7 +68,7 @@ Route::controller(PurchaseController::class)->group(function () {
 });
 
 // User
-Route::controller(UserController::class)->group(function() {
+Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'showProfileDetails');
     Route::get('/users/{id}/edit', 'editProfileForm');
     Route::post('/users/{id}/edit', 'editProfile');
@@ -87,7 +84,7 @@ Route::controller(UserController::class)->group(function() {
 
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
-    
+
     Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
 
     Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
@@ -117,8 +114,10 @@ Route::get('/forgetPassword', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
-    Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
+    Route::get('/adminProductsAdd', 'adminProductsAdd')->name('adminProductsAdd');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
+    Route::post('/adminProductsHighlights/addHighlight/{id}', 'addHighlight')->name('addHighlight');
+    Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
@@ -141,9 +140,12 @@ Route::get('/about', function () {
 })->name('about');
 
 // faqs
-Route::get('/faqs', function () {
-    return view('pages.faqs');
-})->name('faqs');
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {
@@ -165,4 +167,12 @@ Route::controller(WishlistController::class)->group(function () {
     Route::get('/users/{id}/wishlist', 'listWishlist')->name('listWishlist');
     Route::post('/users/{id}/wishlist/{id_product}/add_to_wishlist', 'addToWishlist')->name('addToWishlist');
     Route::post('/users/{id}/wishlist/{id_product}/remove_from_wishlist', 'removeFromWishlist')->name('removeFromWishlist');
+});
+
+// Faqs
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
 });
