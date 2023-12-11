@@ -102,13 +102,13 @@
                     </div>
 
 
-                    <div class="filterButtonContainer">
+                    <!-- <div class="filterButtonContainer">
                         <button type="submit">
                             <span class="filterButton">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                         </button>
-                    </div>
+                    </div> -->
 
 
 

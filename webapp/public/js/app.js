@@ -270,10 +270,18 @@ function createProductHTML(product){
 
 if(document.getElementsByClassName('productsPageFilter').length > 0){
 
+  document.querySelector('form.productSearchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+  })
+
+  document.querySelector('form#filterForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+  })  
+
   listOfProducts = document.getElementById('listOfProducts');
 
-  document.querySelector('.filterButtonContainer > button').addEventListener('click', function(event) {
-    event.preventDefault();
+  // document.querySelector('.filterButtonContainer > button').addEventListener('click', function(event) {
+  function filterProducts(event){
 
     //search part
     let searchString = document.getElementById('searchedString').value
@@ -337,11 +345,13 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
             listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
         }
     };
-
-    //send the request
     xhr.send();
-  })
+  }
+
+  document.getElementById('searchedString').addEventListener('keypress', filterProducts)
+  Array.from(document.querySelectorAll('input')).map(e => e.addEventListener('change', filterProducts))
 }
+
 
 // change purchase state
 
