@@ -138,9 +138,12 @@ Route::get('/about', function () {
 })->name('about');
 
 // faqs
-Route::get('/faqs', function () {
-    return view('pages.faqs');
-})->name('faqs');
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {

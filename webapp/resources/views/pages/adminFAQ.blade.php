@@ -29,27 +29,6 @@
                             <i class="fas fa-angle-down"></i>
                         </div>
                     </a>
-                    <!--
-                            <div class="adminSideBarOptionSubOptions">
-                                <a href="{{ url('/adminProductsManage') }}">
-                                    <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                        <p>Gerir</p>
-                                    </div>
-                                </a>
-                                
-                                <a href="{{ url('/adminProductsHighlights') }}">
-                                    <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                        <p>Destaques</p>
-                                    </div>
-                                </a>
-                                
-                                <a href="{{ url('/adminProductsDiscounts') }}">
-                                <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                    <p>Descontos</p>
-                                </div>
-                            </a>
-                        </div>
-                    -->
 
                     <a href="{{ url('/adminUsers') }}">
                         <div class="adminSideBarOption" id="optionNotSelected">
@@ -65,9 +44,35 @@
                     </a>
                 </div>
             </div>
-            <div class="adminOptionContent">
-                <h2>Admin Content</h2>
-                <p>Admin content goes here</p>
+
+            <div class="adminOptionContent">              
+                <section>
+                    <div class="faqs">
+                        <div class="faqsTitle">
+                            <h1>Perguntas Frequentes</h1>
+                        </div>
+
+                        <div class="faqsDisplay">
+                            @foreach ($faqs as $faq)
+                                <div class="faq">
+                                    <div class="faqQuestion">
+                                        <h2>{{ $faq->pergunta }}</h2>
+                                        <span class="faqArrow"><i class="fas fa-sort-down"></i></span>
+                                    </div>
+                                    <div class="faqAnswer">
+                                        <p>{{ $faq->resposta }}</p>
+                                    </div>
+                                    <div class="adminFAQButtons">
+                                        <button class="adminFAQButton"><i class="fas fa-edit"></i></button>
+                                        <button class="adminFAQButton"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </section>            
+            </div>   
+                
             </div>
         </div>
     </div>
