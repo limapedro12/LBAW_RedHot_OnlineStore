@@ -233,9 +233,11 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->hasPendingOrders()) {
-            return back()->withErrors(['ban' => 'O utilizador tem encomendas pendentes!']);
+            return back()->withErrors(['ban' => 'Não pode banir um utilizador com encomendas pendentes!']);
         }
 
         $user->ban();
+
+        return redirect('/users/'.$id);
     }
 }

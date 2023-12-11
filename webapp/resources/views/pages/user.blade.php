@@ -26,6 +26,9 @@
             <div class="profileInfo">
                 <div class="profileTitle">
                     <h1>Detalhes</h1>
+                    @if ($user->banned)
+                        <h3> (BANIDO)</h3>
+                    @endif
                     @if (Auth::check() && Auth::user()->id == $user->id)
                         <div class="profileLinks">
                             <a href="/users/{{ $user->id }}/edit"><i class="fas fa-user-pen"></i></a>
@@ -80,7 +83,7 @@
         </div>
         @endunless
 
-        @if (Auth::guard('admin')->check())
+        @if (Auth::guard('admin')->check() && !$user->banned)
             <form action="/users/{{ $user->id }}/ban" method="POST">
                 @csrf
                 <input type="submit" class="deleteButton" id="banUser" value="Banir Utilizador">
