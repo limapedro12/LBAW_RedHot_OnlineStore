@@ -122,27 +122,7 @@
                 <div class="productsPageBreadcrumbs">
                     <ul class="listOfBreadcrumbs">
                         <li class="breadcrumbs"><a href="{{ url('/') }}">Home</a> > </li>
-                        @if (isset($searchedString) && isset($category))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
-                            <li class="breadcrumbs"><a
-                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }}</a> > 
-                            </li>
-                            <li class="breadcrumbsLast"><a
-                                    href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
-                            </li>
-                        @elseif (isset($searchedString))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
-                            <li class="breadcrumbsLast"><a
-                                    href="{{ url('/products') }}?searchedString={{ $searchedString }}">{{ $searchedString }}</a>
-                            </li>
-                        @elseif (isset($category))
-                            <li class="breadcrumbs"><a href="{{ url('/products') }}">Produtos</a> > </li>
-                            <li class="breadcrumbsLast"><a
-                                    href="{{ url('/products') }}?searchedString={{ $category }}">{{ $category }}</a>
-                            </li>
-                        @else
-                            <li class="breadcrumbsLast"><a href="{{ url('/products') }}">Produtos</a></li>
-                        @endif
+                        <li class="breadcrumbsLast"><a href="{{ url('/products') }}">Produtos</a></li>
                     </ul>
                 </div>
 
@@ -165,19 +145,11 @@
 
             <div class="productsPageTopRowTwo">
                 <!-- Title -->
-                @if (isset($searchedString))
-                    <div class="productsPageTopTitle">
-                        <h1>{{ $searchedString }}</h1>
-                    </div>
-                @elseif (isset($category))
-                    <div class="productsPageTopTitle">
-                        <h1>{{ $category }}</h1>
-                    </div>
-                @else
-                    <div class="productsPageTopTitle">
-                        <h1>Produtos</h1>
-                    </div>
-                @endif
+
+                <div class="productsPageTopTitle">
+                    <h1>Produtos</h1>
+                </div>
+
 
                 <div class="productsPageTopAdvertising">
                     <!-- Put Admin Managing the Advertising Banner here -->
@@ -212,7 +184,8 @@
                 <div class="productListItem">
                     <div class="productListItemImg">
                         <a href = "/products/{{ $product->id }}">
-                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
+                                width="100px" height="100px">
                         </a>
                     </div>
                     <div class="productListItemTitle">
