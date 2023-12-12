@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+use App\Models\User;
+
+use App\Http\Controllers\ProductCartController;
+
 function verifyNotAutenticated() : void {
     if(Auth::check() || Auth::guard('admin')->check())
         abort(403);
@@ -46,16 +50,29 @@ class LoginController extends Controller
             $request->session()->regenerate();
  
             return redirect()->intended('/admin');
-        }
+        }     
+
+        $guestId = session('guestID');
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+
+            if (User::where('email', $credentials['email'])->first()->banned) {
+                return back()->withErrors([
+                    'email' => 'A sua conta foi banida.',
+                ])->onlyInput('email');
+            }
+
+            if ($guestId) {
+                ProductCartController::transferGuestCart($guestId);
+                return redirect()->intended('/cart');
+            }
  
             return redirect()->intended('/products');
         }
  
         return back()->withErrors([
-            'email' => 'As credenciais dadas não correspodem ao nossos registos.',
+            'email' => 'As credenciais introduzidas não correspodem aos nossos registos.',
         ])->onlyInput('email');
     }
 

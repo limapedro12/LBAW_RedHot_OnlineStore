@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Order;
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\AdminController;
 
 function verifyUser(User $user) : void {
     if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
@@ -41,8 +44,14 @@ class UserController extends Controller
 
         verifyUser($user);
 
+        $orders = Order::where('id_utilizador', $id)->get();
+
         return view('pages.user', [
-            'user' => $user
+            'user' => $user,
+            'totalOrders' => $this->getTotalOrders($id),
+            'totalReviews' => $this->getTotalReviews($id),
+            'orders' => $orders,
+            'unreadNotifications' => $this->getNumberOfUreadNotifications($id)
         ]);
     }
 
@@ -63,9 +72,11 @@ class UserController extends Controller
 
         verifyUser($user);
 
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/'.$id.'/edit');
-        }
+        if ($request->password !== $request->password_confirmation)
+            return back()->withErrors(['password' => 'As passwords introduzidas não coincidem']);
+
+        if (!Hash::check($request->password, $user->password)) 
+            return back()->withErrors(['password' => 'A password introduzida não corresponde à sua password atual']);
 
         $request->validate([
             'nome' => 'required|string|max:256',
@@ -79,10 +90,13 @@ class UserController extends Controller
         }
 
         if ($request->file && !($request->deletePhoto)) {
+            $oldPhoto = $user->profile_image;
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'profile', $id);
             User::where('id', '=', $id)->update(array('profile_image' => $hash));
+            FileController::delete($oldPhoto);
         } else if ($request->deletePhoto) {
+            FileController::delete($user->profile_image);
             User::where('id', '=', $id)->update(array('profile_image' => null));
         }
 
@@ -112,11 +126,44 @@ class UserController extends Controller
             return redirect('/users/'.$id.'/delete_account');
         }
 
+        FileController::delete($user->profile_image);
+
         User::where('id', '=', $id)->delete();
 
         return redirect('/logout');
     }
 
+    // edit password version
+    public function editPasswordForm(Request $request, int $id) : View
+    {
+        $user = User::findOrFail($id);
+
+        return view('pages.editPassword', [
+            'user' => $user,
+        ]);
+    }
+
+    // edit password version
+    public function editPassword(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'new_password' => 'required|min:8',
+        ]);
+
+        if (!Hash::check($request->old_password, $user->password))
+            return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+
+        if ($request->new_password !== $request->new_password_confirmation)
+            return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
+
+        User::where('id', '=', $id)->update(array('password' => Hash::make($request->new_password)));
+
+        return redirect('/users/'.$id);
+    }
+
+    // forgot password version
     public function changePasswordForm(Request $request, int $id, string $token) : View
     {
         $user = User::findOrFail($id);
@@ -129,6 +176,7 @@ class UserController extends Controller
         ]);
     }
 
+    // forgot password version
     public function changePassword(Request $request, int $id, string $token)
     {
         $user = User::findOrFail($id);
@@ -143,4 +191,80 @@ class UserController extends Controller
 
         return redirect('/login');
     }
+
+    public function getTotalOrders(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->orders()->count();
+    }
+
+    public function getTotalReviews(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->totalReviews();
+    }
+
+    public function getOrders(int $id)
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->orders()->get();
+    }
+
+    public function getNumberOfUreadNotifications(int $id) : int
+    {
+        $user = User::findOrFail($id);
+
+        verifyUser($user);
+
+        return $user->getNumberOfUreadNotifications();
+    }
+
+    public static function banUser(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['ban' => 'Não pode banir um utilizador com encomendas pendentes!']);
+        }
+
+        $user->ban();
+
+        return redirect('/users/'.$id);
+    }
+
+    public function becomeAdmin(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasPendingOrders()) {
+            return back()->withErrors(['promote' => 'Não pode promover um utilizador com encomendas pendentes!']);
+        }
+
+        $admin = new Admin();
+        $admin->nome = $user->nome;
+        $admin->email = $user->email;
+        $admin->password = $user->password;
+        $admin->save();
+
+        $user->became_admin = true;
+        $user->save();
+
+        return redirect('/adminUsers');
+    }
+
+
+
 }

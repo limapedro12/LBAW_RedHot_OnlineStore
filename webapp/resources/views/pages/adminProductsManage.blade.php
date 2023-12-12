@@ -44,9 +44,9 @@
                             </div>
                         </a>
 
-                        <a href="{{ url('/adminProductsDiscounts') }}">
+                        <a href="{{ url('/adminProductsAdd') }}">
                             <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Descontos</p>
+                                <p>Adicionar</p>
                             </div>
                         </a>
                     </div>
@@ -67,67 +67,77 @@
             <div class="adminOptionContent">
 
                 <h2>Gestão de Produtos</h2>
-                <section>
-                    <h1>Adicionar Novo Produto</h1>
-
-                    <form id="addProductForm" method="POST" action="{{ route('addProduct') }}"
-                        enctype="multipart/form-data">
-                        @csrf
-
-                        <label for="name">Nome:</label>
-                        <input type="text" id="name" name="name" required><br><br>
-
-                        <label for="price">Preco:</label>
-                        <input type="number" step="0.01" id="price" name="price" required><br><br>
-
-                        <label for="discount">Desconto:</label>
-                        <input type="number" step="0.001" id="discount" name="discount" required><br><br>
-
-                        <label for="stock">Stock:</label>
-                        <input type="number" id="stock" name="stock" required><br><br>
-
-                        <label for="description">Descrição:</label>
-                        <textarea id="description" name="description" required></textarea><br><br>
-
-                        <label for="file">Imagem:</label>
-                        <input type="file" id="file" name="file"><br><br>
-
-                        <label for="category">Categoria:</label>
-                        <input type="text" id="category" name="category"><br><br>
-
-                        <input type="submit" value="Adicionar Produto">
-                    </form>
-                </section>
-                <section>
-                    <h1>Lista de Produtos</h1>
-                    <div id='listOfProducts'>
-                        @foreach ($products as $product)
-                            <section class="productListItem">
-                                <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
-                                    height = "100">
-                                <h4> <a href = "/products/{{ $product->id }}"> {{ $product->nome }} </a> </h4>
-                                <p>
+                
+                <div class="productsPageProducts" id='listOfProducts'>
+                    @foreach ($products as $product)
+                        <div class="productListItem">
+                            <div class="productListItemImg">
+                                <a href = "/products/{{ $product->id }}">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                </a>
+                            </div>
+                            <div class="productListItemTitle">
+                                <a href = "/products/{{ $product->id }}">
+                                    <h3>
+                                        {{ $product->nome }}
+                                    </h3>
+                                </a>
+                            </div>
+                            <div class="productListItemBottom">
+                                <div class="productListItemRating">
+                                    <div class="productListItemNumberOfReviews">
+                                        <p> 723 {{ $product->avaliacao }} avaliações </p>
+                                    </div>
+                                    <div class="productListItemHearts">
+                                        <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                                    </div>
+                                </div>
+                                <div class="productListItemPrices">
                                     @if ($product->desconto > 0)
-                                        <span style = "text-decoration: line-through;">
-                                            {{ $product->precoatual }}
-                                        </span>&nbsp
+                                        <div class="productListItemOldPrice">
+                                            <p class="discount">
+                                                {{ $product->desconto * 100 }}%
+                                            </p>
+                                            <p class="oldPrices">
+                                                {{ $product->precoatual }}
+                                            </p>
+                                            <p class="euro">€ </p>
+                                        </div>
+                                        <div class="productListItemNewPrice">
+                                            <p class="newPrices">
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                            </p>
+                                        </div>
+                                    @else
+                                        <div class="productListItemPrice">
+                                            <p class="Price">
+                                                {{ $product->precoatual }}€
+                                            </p>
+                                        </div>
                                     @endif
-                                    {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
-                                </p>
-                                @if ($product->desconto > 0)
-                                    <p> Desconto: {{ $product->desconto * 100 }}% </p>
-                                @endif
-                                <p> Categoria: {{ $product->categoria }} </p>
-                                <br>
+                                </div>
+                            </div>
 
-                                <form method="GET" action="{{ route('editProduct', ['id' => $product->id]) }}">
-                                    <input type="submit" value="Editar informações">
-                                </form>
+                            <form method="GET" action="{{ route('editProduct', ['id' => $product->id]) }}">
+                                @csrf
+                                <button type="submit">Editar Informações</button>
+                            </form>
 
-                            </section>
-                        @endforeach
-                    </div>
-                </section>
+                            <form method="GET" action="{{ route('changeStockProduct', ['id' => $product->id]) }}">
+                                @csrf
+                                <button type="submit">Alterar Stock</button>
+                            </form>
+
+                            <form method="POST" action="{{ route('deleteProduct', ['id' => $product->id]) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">Apagar Produto</button>
+                            </form>                            
+
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

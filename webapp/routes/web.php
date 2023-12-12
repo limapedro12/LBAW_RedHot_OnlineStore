@@ -8,11 +8,13 @@ use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\NotificationController;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +34,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
-
-
 // Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
@@ -47,11 +45,10 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/{id}/changeStock', 'changeStockProductForm')->name('changeStockProductForm');
     Route::post('/products/{id}/changeStock', 'changeStockProduct')->name('changeStockProduct');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
     Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
-    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
+    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');    
 });
 
 // Cart and Purchases
@@ -70,19 +67,23 @@ Route::controller(PurchaseController::class)->group(function () {
 });
 
 // User
-Route::controller(UserController::class)->group(function() {
+Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'showProfileDetails');
     Route::get('/users/{id}/edit', 'editProfileForm');
     Route::post('/users/{id}/edit', 'editProfile');
     Route::get('/users/{id}/delete_account', 'deleteAccountForm');
     Route::post('/users/{id}/delete_account', 'deleteAccount');
+    Route::get('/users/{id}/edit_password', 'editPasswordForm');
+    Route::post('/users/{id}/edit_password', 'editPassword');
     Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
     Route::post('/users/{id}/change_password/{token}', 'changePassword');
+    Route::post('/users/{id}/ban', 'banUser');
+    Route::post('/users/{id}/promote', 'becomeAdmin');
 });
 
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/users/{user_id}/notifications', 'listNotifications')->name('notifications');
-    
+
     Route::get('admin/{admin_id}/notifications', 'adminNotifications')->name('adminNotifications');
 
     Route::delete('notifications/{notification_id}/delete', 'deleteNotification')->name('deleteNotification');
@@ -108,12 +109,14 @@ Route::get('/forgetPassword', function () {
 
 
 
-// AdminPage = Quando um gajo que faz frontend tenta fazer backend e não sabe o que está a fazer :D
+// AdminPage
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
     Route::get('/adminOrders', 'adminOrders')->name('adminOrders');
-    Route::get('/adminProductsDiscounts', 'adminProductsDiscounts')->name('adminProductsDiscounts');
+    Route::get('/adminProductsAdd', 'adminProductsAdd')->name('adminProductsAdd');
     Route::get('/adminProductsHighlights', 'adminProductsHighlights')->name('adminProductsHighlights');
+    Route::post('/adminProductsHighlights/addHighlight/{id}', 'addHighlight')->name('addHighlight');
+    Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
@@ -136,9 +139,12 @@ Route::get('/about', function () {
 })->name('about');
 
 // faqs
-Route::get('/faqs', function () {
-    return view('pages.faqs');
-})->name('faqs');
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
+    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
+    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});
 
 //Reviews
 Route::controller(ReviewsController::class)->group(function () {
@@ -153,3 +159,21 @@ Route::controller(ReviewsController::class)->group(function () {
 
 //Emails
 Route::post('/send', [MailController::class, 'send']);
+
+
+//Wishlist
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('/users/{id}/wishlist', 'listWishlist')->name('listWishlist');
+    Route::post('/users/{id}/wishlist/{id_product}/add_to_wishlist', 'addToWishlist')->name('addToWishlist');
+    Route::post('/users/{id}/wishlist/{id_product}/remove_from_wishlist', 'removeFromWishlist')->name('removeFromWishlist');
+});
+
+// Faqs
+Route::controller(FaqsController::class)->group(function () {
+    Route::get('/faqs', 'listFaqs')->name('faqs');
+    Route::get('/faqs/{id}', 'faq')->name('faq');
+    Route::get('/adminFAQ/add', 'addFaqForm')->name('addFaqForm');
+    Route::post('/adminFAQ/add', 'createFaqs')->name('createFaqs');
+    Route::post('/adminFAQ/{id}/edit', 'editFaqs')->name('editFaqs');
+    Route::delete('/adminFAQ/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});

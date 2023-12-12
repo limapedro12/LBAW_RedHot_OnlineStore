@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    static $default = 'default.jpg';
+    static $default = 'default.png';
     static $diskName = 'images';
 
     static $systemTypes = [
@@ -66,8 +66,6 @@ class FileController extends Controller
         $requestType = $request->type;
         $extension = $file->getClientOriginalExtension();
 
-        error_log($file);
-
         $fileName = $type . '/' . $file->hashName();
 
         $request->file->storeAs($requestType, $fileName, self::$diskName);
@@ -75,7 +73,9 @@ class FileController extends Controller
         return $fileName;
     }
 
-    public static function delete(String $hash) {
-        Storage::delete($hash);
+    public static function delete (String $hash) {
+        error_log('Deleting file: ' . $hash);
+        Storage::disk(self::$diskName)->delete($hash);
+        error_log('Deleted file: ' . $hash);
     }
 }

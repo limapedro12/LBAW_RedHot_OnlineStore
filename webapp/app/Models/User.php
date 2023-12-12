@@ -12,6 +12,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Notification;
+use App\Models\Purchase;
+
 use App\Http\Controllers\FileController;
 
 class User extends Authenticatable
@@ -35,7 +37,13 @@ class User extends Authenticatable
         'nome',
         'email',
         'password',
-        'profile_image'
+        'telefone',
+        'morada',
+        'codigo_postal',
+        'localidade',
+        'profile_image',
+        'banned',
+        'became_admin'
     ];
 
     /**
@@ -68,7 +76,49 @@ class User extends Authenticatable
 
     public function hasPhoto() : bool
     {
-        return ($this->profile_image !== '');
+        return ($this->profile_image !== null && $this->profile_image !== '');
+    }
+
+    public function totalOrders() : int
+    {
+        return $this->hasMany('App\Models\Order', 'id_utilizador')->count();
+    }
+
+    public function totalReviews() : int
+    {
+        return $this->hasMany('App\Models\Review', 'id_utilizador')->count();
     }
     
+    public function orders() : HasMany
+    {
+        return $this->hasMany('App\Models\Order', 'id_utilizador');
+    }
+
+    public function ban() : void
+    {
+        $this->banned = true;
+        $this->save();
+    }
+
+    public function hasPendingOrders() : bool
+    {
+        $pending = Purchase::where('id_utilizador', $this->id)
+                            ->where('estado', '!=', 'Concluído')
+                            ->where('estado', '!=', 'Cancelada')
+                            ->count();
+        
+        return $pending > 0;
+    }
+
+    public function getNormalizeOrderId(int $id)
+    {
+                
+        $highestId = Order::max('id');
+        $highestIdLength = strlen((string)$highestId);
+        $id = (string)$id;
+        $idLength = strlen((string)$id);
+        $id = str_pad($id,($highestIdLength + 1) , '0', STR_PAD_LEFT);
+        return $id;
+
+    }
 }

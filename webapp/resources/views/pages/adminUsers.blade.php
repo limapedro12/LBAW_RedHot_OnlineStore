@@ -29,27 +29,6 @@
                             <i class="fas fa-angle-down"></i>
                         </div>
                     </a>
-                    <!--
-                        <div class="adminSideBarOptionSubOptions">
-                            <a href="{{ url('/adminProductsManage') }}">
-                                <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                    <p>Gerir</p>
-                                </div>
-                            </a>
-                            
-                            <a href="{{ url('/adminProductsHighlights') }}">
-                                <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                    <p>Destaques</p>
-                                </div>
-                            </a>
-                            
-                            <a href="{{ url('/adminProductsDiscounts') }}">
-                            <div class="adminSideBarOptionSubOption" id="optionNotSelected">
-                                <p>Descontos</p>
-                            </div>
-                        </a>
-                    </div>
-                -->
 
                     <a href="{{ url('/adminUsers') }}">
                         <div class="adminSideBarOption" id="optionSelected">
@@ -66,8 +45,14 @@
                 </div>
             </div>
             <div class="adminOptionContent">
-                <h2>Admin Content</h2>
-                <p>Admin content goes here</p>
+                <h2>Gestão de Utilizadores</h2>
+                <ul>
+                    @foreach ($users as $user)
+                        @include ('partials.user', [
+                            'user' => $user,
+                        ])
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

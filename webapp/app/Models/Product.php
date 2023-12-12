@@ -26,7 +26,8 @@ class Product extends Model{
         'stock',
         'id_administrador',
         'product_image',
-        'categoria'
+        'categoria',
+        'destaque'
     ];
 
     public static function searchProducts(string $stringToSearch){
@@ -168,6 +169,20 @@ class Product extends Model{
         return FileController::get('product', $this->id);
     }
 
+<<<<<<< webapp/app/Models/Product.php
+=======
+    public function hasPhoto() : bool
+    {
+        return ($this->product_image !== null && $this->product_image !== '');
+    }
+
+    public function getTwoSimilarProductsRandom(int $id){
+        //They need to be of the same category
+        $similarProducts = Product::where('categoria', $this->categoria)->where('id', '!=', $id)->inRandomOrder()->take(2)->get();
+        return $similarProducts;
+    }
+
+>>>>>>> webapp/app/Models/Product.php
     public function getProductRating(){
         $comments = Review::where('id_produto', $this->id)->get();
         $rating = 0;
@@ -185,5 +200,8 @@ class Product extends Model{
     public function getProductNumberOfReviews(){
         return sizeof(Review::where('id_produto', $this->id)->get());
     }
+<<<<<<< webapp/app/Models/Product.php
 
+=======
+>>>>>>> webapp/app/Models/Product.php
 }

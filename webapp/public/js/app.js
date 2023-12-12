@@ -5,15 +5,15 @@ try {
     let ReviewId = document.querySelector('form.addReviewForm').getAttribute('reviewId');
     if (reviewCreator != null) {
       reviewCreator.addEventListener('submit', function (event) {
-          sendCreateReviewRequest.call(this, event, ReviewId);
-          addReviewAlert();
+        sendCreateReviewRequest.call(this, event, ReviewId);
+        addReviewAlert();
       });
     }
 
     let reviewDeleters = document.querySelectorAll('form.deleteReviewForm');
-    [].forEach.call(reviewDeleters, function(deleter) {
+    [].forEach.call(reviewDeleters, function (deleter) {
       deleter.addEventListener('submit', function (event) {
-        if(deleteAlert()) {
+        if (deleteAlert()) {
           let ReviewId = this.getAttribute('reviewId');
           let ProductId = this.getAttribute('productId');
           sendDeleteReviewRequest.call(this, event, ProductId, ReviewId);
@@ -24,10 +24,10 @@ try {
       });
     });
   }
-    
+
   function encodeForAjax(data) {
     if (data == null) return null;
-    return Object.keys(data).map(function(k){
+    return Object.keys(data).map(function (k) {
       return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&');
   }
@@ -47,7 +47,7 @@ try {
     let comment = this.querySelector('input[name=comment]').value;
     let timestamp = this.querySelector('input[name=timestamp]').value;
 
-    sendAjaxRequest('post', `/products/${id}/reviews/add_review`, {rating: rating, comment: comment, timestamp:timestamp}, reviewAddedHandler);
+    sendAjaxRequest('post', `/products/${id}/reviews/add_review`, { rating: rating, comment: comment, timestamp: timestamp }, reviewAddedHandler);
 
     event.preventDefault();
   }
@@ -68,7 +68,7 @@ try {
 
     // Reset the new review input
     let form = document.querySelector('form.addReviewForm');
-    form.querySelector('[type=text]').value="";
+    form.querySelector('[type=text]').value = "";
 
     // Insert the new review
     let section = document.querySelector('section#reviews');
@@ -111,7 +111,7 @@ try {
     // Edit form
     let editForm = document.createElement('form');
     editForm.method = 'GET';
-    editForm.action = `/products/${review.id_produto}/reviews/${review.id}/edit_review`; 
+    editForm.action = `/products/${review.id_produto}/reviews/${review.id}/edit_review`;
     editForm.classList.add('editReviewForm');
     editForm.setAttribute('reviewId', review.id);
     let csrfInputEdit = document.createElement('input');
@@ -134,7 +134,7 @@ try {
       text = "Review eliminada com sucesso!";
       document.querySelector(".alertMessage").innerHTML = text;
       return true;
-    } 
+    }
     else {
       text = "Operação cancelada!";
       document.querySelector(".alertMessage").innerHTML = text;
@@ -148,12 +148,12 @@ try {
   }
 
   addEventListeners();
-} catch (error) {}
+} catch (error) { }
 
 // addProduct
 
 try {
-  document.getElementById('addProductForm').addEventListener('submit', function(event) {
+  document.getElementById('addProductForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
     var name = document.getElementById('name').value;
@@ -174,13 +174,13 @@ try {
     xhr.open('POST', '/products/add', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-        }
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var json = JSON.parse(xhr.responseText);
+      }
     }
     xhr.send(formData);
   });
-} catch (error) {}
+} catch (error) { }
 
 
 // header
@@ -191,16 +191,15 @@ try {
 
 
   if (menu_pop != null) {
-      menu_pop.addEventListener('click', () => {
-          menu_pop.classList.toggle('fa-times');
-          navbar.classList.toggle('active');
-      });
+    menu_pop.addEventListener('click', () => {
+      menu_pop.classList.toggle('fa-times');
+      navbar.classList.toggle('active');
+    });
   }
-} catch (error) {}
+} catch (error) { }
 
 
 // searchAndFilter
-
 function discountFunction(precoatual, desconto) {
   return Math.round((precoatual - precoatual * desconto) * 100) / 100
 }
@@ -283,7 +282,6 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
 
   // document.querySelector('.filterButtonContainer > button').addEventListener('click', function(event) {
   function filterProducts(event){
-
     //search part
     let searchString = document.getElementById('searchedString').value
 
@@ -356,25 +354,24 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
   document.querySelector('select.productsPageSortSelector').addEventListener('change', filterProducts)
 }
 
-
 // change purchase state
 
-function addRedirectToNotification(notification){
+function addRedirectToNotification(notification) {
   let link = notification.getAttribute('link_to_redirect')
-  notification.addEventListener('click', function(event) {
+  notification.addEventListener('click', function (event) {
     location.href = link
   })
 }
 
-function markAsRead(id){
+function markAsRead(id) {
   let xhr = new XMLHttpRequest()
   xhr.open('PUT', `/notifications/${id}/markAsRead`, true)
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
   xhr.send()
 }
 
-function addDeleteNotificationButton(notification){
-  notification.querySelector('button').addEventListener('click', function(event) {
+function addDeleteNotificationButton(notification) {
+  notification.querySelector('button').addEventListener('click', function (event) {
     event.preventDefault()
     let action = notification.querySelector('form').getAttribute('action')
     let csrf_token = document.querySelector('input[name="_token"]').value
@@ -387,18 +384,18 @@ function addDeleteNotificationButton(notification){
   })
 }
 
-function changeStateInSpecificPages(data){
-  if(location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/) || 
-     location.href.match(/[^\/]+\/\/[^\/]+\/admin\/[0-9]+\/notifications/)) {
+function changeStateInSpecificPages(data) {
+  if (location.href.match(/[^\/]+\/\/[^\/]+\/users\/[0-9]+\/notifications/) ||
+    location.href.match(/[^\/]+\/\/[^\/]+\/admin\/[0-9]+\/notifications/)) {
     let all_notifications = document.getElementsByClassName('notification-list')[0]
     let notification = all_notifications.getElementsByClassName('notification-item-list')[0].cloneNode(true)
-    
+
     notification.setAttribute('link_to_redirect', data.linkToRedirect)
     notification.getElementsByClassName('notification-timestamp')[0].innerHTML = data.timestamp
     notification.getElementsByClassName('notification-body')[0].innerHTML = data.message
     notification.querySelector('form').setAttribute('action', `/notifications/${data.notificationId}/delete`)
     let new_notification_marker = notification.getElementsByClassName('new-notification')
-    if(new_notification_marker.length == 0){
+    if (new_notification_marker.length == 0) {
       let new_notification_marker = document.createElement('small')
       new_notification_marker.classList.add('new-notification')
       new_notification_marker.innerHTML = 'Nova'
@@ -407,13 +404,13 @@ function changeStateInSpecificPages(data){
     }
 
     addDeleteNotificationButton(notification)
-    
+
     all_notifications.insertBefore(notification, all_notifications.firstChild)
   }
-  if(data.purchaseId != null)
+  if (data.purchaseId != null)
     Array.from(document.getElementsByClassName(`order${data.purchaseId}State`)).map(e => e.innerHTML = `Estado: ${data.newState}`)
 }
-  
+
 
 function showNotification(data) {
   var notification = document.createElement("div")
@@ -429,7 +426,7 @@ function showNotification(data) {
   }, 8000)
 }
 
-if(document.querySelector('user')!=null){
+if (document.querySelector('user') != null) {
   let user_id = document.querySelector('user').getAttribute('user_id')
   const pusher = new Pusher("7a447c0e0525f5f86bc9", {
     cluster: "eu",
@@ -437,12 +434,12 @@ if(document.querySelector('user')!=null){
   })
 
   const channel = pusher.subscribe('RedHot')
-  channel.bind('notification-to-user-' + user_id, function(data) {
+  channel.bind('notification-to-user-' + user_id, function (data) {
     showNotification(data)
   })
 }
 
-if(document.querySelector('admin')!=null){
+if (document.querySelector('admin') != null) {
   let admin_id = document.querySelector('admin').getAttribute('admin_id')
   const pusher = new Pusher("7a447c0e0525f5f86bc9", {
     cluster: "eu",
@@ -450,16 +447,16 @@ if(document.querySelector('admin')!=null){
   })
 
   const channel = pusher.subscribe('RedHot')
-  channel.bind('notification-to-all-admins', function(data) {
+  channel.bind('notification-to-all-admins', function (data) {
     showNotification(data)
   })
-  channel.bind('notification-to-admin-' + admin_id, function(data) {
+  channel.bind('notification-to-admin-' + admin_id, function (data) {
     showNotification(data)
   })
 }
 
 notifications = document.getElementsByClassName('notification-item-list')
-if(notifications.length > 0){
+if (notifications.length > 0) {
   Array.from(notifications)
     .map(n => n.getElementsByClassName('notification-clickable')[0])
     .map(addRedirectToNotification)
@@ -471,26 +468,26 @@ if(notifications.length > 0){
 }
 
 editButton = document.getElementById('editarProduto')
-if(editButton != null){
-  editButton.addEventListener('click', function(event) {
+if (editButton != null) {
+  editButton.addEventListener('click', function (event) {
     event.preventDefault()
     location.href = editButton.getAttribute('action')
   })
 }
 
 stockButton = document.getElementById('alterarStockDoProduto')
-if(stockButton != null){
-  stockButton.addEventListener('click', function(event) {
+if (stockButton != null) {
+  stockButton.addEventListener('click', function (event) {
     event.preventDefault()
     location.href = stockButton.getAttribute('action')
   })
 }
 
 deleteButton = document.getElementById('eliminarProduto')
-if(deleteButton != null){
-  deleteButton.addEventListener('click', function(event) {
+if (deleteButton != null) {
+  deleteButton.addEventListener('click', function (event) {
     event.preventDefault()
-    if(confirm('Tem a certeza que pretende eliminar este produto?')){
+    if (confirm('Tem a certeza de que pretende eliminar este produto?')) {
       let action = deleteButton.getAttribute('action')
       let csrf_token = document.querySelector('input[name="_token"]').value
       let xhr = new XMLHttpRequest()
@@ -498,7 +495,7 @@ if(deleteButton != null){
       xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
       xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
       xhr.send()
-      location.href = '/products'
+      location.href = '/adminProductsManage'
     }
   })
 }
@@ -507,11 +504,36 @@ if(deleteButton != null){
 try {
   uploader = document.getElementById('photoUploader');
   checkBox = document.getElementById('deletePhoto');
-  checkBox.addEventListener('click', function(event) {
+  checkBox.addEventListener('click', function (event) {
     if (checkBox.checked) {
       uploader.style.display = 'none';
     } else {
       uploader.style.display = 'block';
     }
   });
-} catch (error) {}
+} catch (error) { }
+
+
+
+// uploaded image
+let input_img = document.getElementById('file');
+let img_name = document.getElementById('fileImgName');
+
+if (input_img != null) {
+
+  input_img.addEventListener('change', () => {
+    let inputImage = document.querySelector('input[id=file]').files[0];
+    img_name.innerText = inputImage.name;
+  });
+
+}
+
+// Faqs
+const faqs = document.querySelectorAll('.faq');
+if (faqs != null) {
+  faqs.forEach(faq => {
+    faq.addEventListener('click', () => {
+      faq.classList.toggle('active');
+    });
+  });
+}

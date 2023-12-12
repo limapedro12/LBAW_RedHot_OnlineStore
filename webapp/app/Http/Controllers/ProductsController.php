@@ -58,32 +58,33 @@ class ProductsController extends Controller {
         return view('pages.productsAdd');
     }
 
-    public function addProduct(Request $request){
+    public function addProduct(Request $request) {
         verifyAdmin();
+
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0|max:1',
             'stock' => 'required|numeric|min:0',
             'description' => 'required|string|max:256',
-            'category' => 'string|max:256',
+            'category' => 'nullable|string|max:256',
+        ]);
+
+        $newProduct = Product::create([
+            'nome' => $request->name,
+            'precoatual' => $request->price,
+            'desconto' => ($request->discount? $request->discount : 0),
+            'stock' => $request->stock,
+            'id_administrador' => 1,
+            'descricao' => $request->description,
+            'categoria' => ucfirst($request->category),
         ]);
 
         if ($request->file) {
             $fileController = new FileController();
-            $hash = $fileController->upload($request, 'product', $id);
-            Product::where('id', '=', $id)->update(array('product_image' => $hash));
+            $hash = $fileController->upload($request, 'product', $newProduct->id);
+            $newProduct->update(array('product_image' => $hash));
         }
-
-        $newProduct = Product::create([
-            'nome' => $request->name,
-            'precoatual' => 20,
-            'desconto' => $request->discount,
-            'stock' => $request->stock,
-            'id_administrador' => 1,
-            'descricao' => $request->description,
-            'categoria' => strtolower($request->category),
-        ]);
 
         return redirect('/products/'.$newProduct->id);
     }
@@ -102,7 +103,7 @@ class ProductsController extends Controller {
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
             'description' => 'required|string|max:256',
             'category' => 'string|max:256',
         ]);
@@ -130,7 +131,7 @@ class ProductsController extends Controller {
                                                      'desconto' => $request->discount, 
                                                      'stock' => $request->stock, 
                                                      'descricao' => $request->description,
-                                                     'categoria' => strtolower($request->category)));
+                                                     'categoria' => ucfirst($request->category)));
 
         return redirect('/products/'.$id);
     }
@@ -155,10 +156,13 @@ class ProductsController extends Controller {
         return redirect('/products/'.$id);
     }
 
-    function deleteProduct(Request $request, int $id){
+    public static function deleteProduct(Request $request, int $id){
+        error_log($id);
         verifyAdmin();
+        error_log($id);
         $product = Product::where('id', '=', $id);
-        FileController::delete($product->product_image);
+        //error_log($product->product_image);
+        //FileController::delete($product->product_image);
         $product->delete();
         return;
     }
