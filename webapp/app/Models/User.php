@@ -109,4 +109,16 @@ class User extends Authenticatable
         
         return $pending > 0;
     }
+
+    public function getNormalizeOrderId(int $id)
+    {
+                
+        $highestId = Order::max('id');
+        $highestIdLength = strlen((string)$highestId);
+        $id = (string)$id;
+        $idLength = strlen((string)$id);
+        $id = str_pad($id,($highestIdLength + 1) , '0', STR_PAD_LEFT);
+        return $id;
+
+    }
 }

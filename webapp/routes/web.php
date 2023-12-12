@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +46,10 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/{id}/changeStock', 'changeStockProductForm')->name('changeStockProductForm');
     Route::post('/products/{id}/changeStock', 'changeStockProduct')->name('changeStockProduct');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
     Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
-    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
+    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');    
 });
 
 // Cart and Purchases
