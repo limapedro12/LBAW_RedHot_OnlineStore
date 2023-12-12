@@ -338,6 +338,7 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
         //if everything went ok, show the search results
         if (xhr.status == 200) {
             let products = JSON.parse(xhr.responseText);
+            console.log(products)
             listOfProducts.innerHTML = Object.values(products).map(createProductHTML).join('');
         }
         //if something went wrong, show the error
