@@ -11,6 +11,9 @@ class Faqs extends Model
 {
     use HasFactory;
 
+    // Don't add create and update timestamps in database.
+    public $timestamps  = false;
+
     protected $table = 'faqs';
 
     protected $fillable = [
