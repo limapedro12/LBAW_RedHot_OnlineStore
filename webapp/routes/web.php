@@ -172,7 +172,9 @@ Route::controller(WishlistController::class)->group(function () {
 // Faqs
 Route::controller(FaqsController::class)->group(function () {
     Route::get('/faqs', 'listFaqs')->name('faqs');
-    Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
-    Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
-    Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+    Route::get('/faqs/{id}', 'faq')->name('faq');
+    Route::get('/adminFAQ/add', 'addFaqForm')->name('addFaqForm');
+    Route::post('/adminFAQ/add', 'createFaqs')->name('createFaqs');
+    Route::post('/adminFAQ/{id}/edit', 'editFaqs')->name('editFaqs');
+    Route::delete('/adminFAQ/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
 });
