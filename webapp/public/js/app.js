@@ -322,12 +322,16 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
       ratingList.push({"min":4, "max":5})
     filterJSON.rating = ratingList
 
+    filterJSON.orderBy = 'discount'
+    filterJSON.orderDirection = 'desc'
+
     var filterString = JSON.stringify(filterJSON)
 
     if(searchString == '')
         searchString = '*'
 
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
+    console.log(url)
 
     // use XMLHttpRequest to send the request to the server
     var xhr = new XMLHttpRequest();

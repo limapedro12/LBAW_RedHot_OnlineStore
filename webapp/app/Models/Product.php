@@ -85,17 +85,63 @@ class Product extends Model{
         return $array;
     }
 
+    public static function order(string $orderBy, string $orderDirection, $products){
+        if($orderBy == 'price'){
+            if($orderDirection == 'desc')
+                usort($products, function($a, $b){
+                    return ($b->precoatual*(1 - $b->desconto)) > ($a->precoatual*(1 - $a->desconto));
+                });
+            else
+                usort($products, function($a, $b){
+                    return ($a->precoatual*(1 - $a->desconto)) > ($b->precoatual*(1 - $b->desconto));
+                });
+        }
+        else if($orderBy == 'rating'){
+            if($orderDirection == 'desc')
+                usort($products, function($a, $b){
+                    return $b->getAverageRating() > $a->getAverageRating();
+                });
+            else
+                usort($products, function($a, $b){
+                    return $a->getAverageRating() > $b->getAverageRating();
+                });
+        }
+        else if($orderBy == 'name'){
+            if($orderDirection == 'desc')
+                usort($products, function($a, $b){
+                    return strcmp($b->nome, $a->nome);
+                });
+            else
+                usort($products, function($a, $b){
+                    return strcmp($a->nome, $b->nome);
+                });
+        }
+        else if($orderBy == 'discount'){
+            if($orderDirection == 'desc')
+                usort($products, function($a, $b){
+                    return $b->desconto > $a->desconto;
+                });
+            else
+                usort($products, function($a, $b){
+                    return $a->desconto > $b->desconto;
+                });
+        }
+        return $products;
+
+    }
+
     public static function filterProducts($filter){
 
         $filteredProducts = array_filter(Product::collectionToArray(Product::all()), Product::filterFunctionFactory($filter));
-
-        return $filteredProducts;
+        $orderedProducts = Product::order($filter->{'orderBy'}, $filter->{'orderDirection'}, $filteredProducts);
+        return $orderedProducts;
     }
 
     public static function searchAndFilterProducts(string $stringToSearch, $filter){
         $searchedProducts = Product::searchProducts($stringToSearch);
         $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
-        return $filteredProducts;
+        $orderedProducts = order($filter->{'orderBy'}, $filter->{'orderDirection'}, $filteredProducts);
+        return $orderedProducts;
     }
 
     public function decrementStock(int $quantity){
