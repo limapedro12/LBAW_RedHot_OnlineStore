@@ -209,7 +209,8 @@ function discountFunction(precoatual, desconto) {
 let productTemplateOriginal = (document.getElementsByClassName('productListItem').length > 0) ?
                         document.getElementsByClassName('productListItem')[0].cloneNode(true) :
                         null
-                        
+
+
 function createProductHTML(product){
   let productTemplate = productTemplateOriginal.cloneNode(true)
   productTemplate.getElementsByClassName('productImage')[0].src = product.url_imagem
@@ -322,8 +323,7 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
       ratingList.push({"min":4, "max":5})
     filterJSON.rating = ratingList
 
-    filterJSON.orderBy = 'discount'
-    filterJSON.orderDirection = 'desc'
+    filterJSON.orderBy = document.querySelector('select.productsPageSortSelector').value
 
     var filterString = JSON.stringify(filterJSON)
 
@@ -355,6 +355,7 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
 
   document.getElementById('searchedString').addEventListener('keypress', filterProducts)
   Array.from(document.querySelectorAll('input')).map(e => e.addEventListener('change', filterProducts))
+  document.querySelector('select.productsPageSortSelector').addEventListener('change', filterProducts)
 }
 
 

@@ -30,11 +30,15 @@ class Product extends Model{
     ];
 
     public static function searchProducts(string $stringToSearch){
+        // $stringToSearch = "'".$stringToSearch."'";
         $searchTemperature = 0.1;
-        $searchedProducts = Product::whereRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
-                                   ->orderByRaw("ts_rank(tsvectors, plainto_tsquery('portuguese', ?)) DESC", [$stringToSearch])
+        $searchedProducts = Product::whereRaw("tsvectors @@ to_tsquery('portuguese', CAST(? AS VARCHAR)) ".
+                                              "OR (LOWER(nome) LIKE CONCAT('%',  LOWER(CAST(? AS VARCHAR)), '%'))", 
+                                              [$stringToSearch, $stringToSearch])
+                                   ->orderByRaw("ts_rank(tsvectors, to_tsquery('portuguese', ?)) DESC", [$stringToSearch])
                                    ->get();
         return $searchedProducts;
+        // whereRaw("ts_rank(tsvectors, to_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
     }   
 
     public static function filterFunctionFactory($filter){
@@ -85,62 +89,54 @@ class Product extends Model{
         return $array;
     }
 
-    public static function order(string $orderBy, string $orderDirection, $products){
-        if($orderBy == 'price'){
-            if($orderDirection == 'desc')
-                usort($products, function($a, $b){
-                    return ($b->precoatual*(1 - $b->desconto)) > ($a->precoatual*(1 - $a->desconto));
-                });
-            else
-                usort($products, function($a, $b){
-                    return ($a->precoatual*(1 - $a->desconto)) > ($b->precoatual*(1 - $b->desconto));
-                });
-        }
-        else if($orderBy == 'rating'){
-            if($orderDirection == 'desc')
-                usort($products, function($a, $b){
-                    return $b->getAverageRating() > $a->getAverageRating();
-                });
-            else
-                usort($products, function($a, $b){
-                    return $a->getAverageRating() > $b->getAverageRating();
-                });
-        }
-        else if($orderBy == 'name'){
-            if($orderDirection == 'desc')
-                usort($products, function($a, $b){
-                    return strcmp($b->nome, $a->nome);
-                });
-            else
-                usort($products, function($a, $b){
-                    return strcmp($a->nome, $b->nome);
-                });
-        }
-        else if($orderBy == 'discount'){
-            if($orderDirection == 'desc')
-                usort($products, function($a, $b){
-                    return $b->desconto > $a->desconto;
-                });
-            else
-                usort($products, function($a, $b){
-                    return $a->desconto > $b->desconto;
-                });
-        }
+    public static function order(string $orderBy, $products){
+        // nameAsc, nameDesc, priceAsc, priceDesc, ratingAsc, ratingDesc, discountAsc, discountDesc
+        if($orderBy == 'priceDesc')
+            usort($products, function($a, $b){
+                return ($b->precoatual*(1 - $b->desconto)) > ($a->precoatual*(1 - $a->desconto));
+            });
+        else if($orderBy == 'priceAsc')
+            usort($products, function($a, $b){
+                return ($a->precoatual*(1 - $a->desconto)) > ($b->precoatual*(1 - $b->desconto));
+            });
+        else if($orderBy == 'nameDesc')
+            usort($products, function($a, $b){
+                return $b->nome > $a->nome;
+            });
+        else if($orderBy == 'nameAsc')
+            usort($products, function($a, $b){
+                return $a->nome > $b->nome;
+            });
+        else if($orderBy == 'ratingDesc')
+            usort($products, function($a, $b){
+                return $b->getAverageRating() > $a->getAverageRating();
+            });
+        else if($orderBy == 'ratingAsc')
+            usort($products, function($a, $b){
+                return $a->getAverageRating() > $b->getAverageRating();
+            });
+        else if($orderBy == 'discountDesc')
+            usort($products, function($a, $b){
+                return $b->desconto > $a->desconto;
+            });
+        else if($orderBy == 'discountAsc')
+            usort($products, function($a, $b){
+                return $a->desconto > $b->desconto;
+            });
         return $products;
-
     }
 
     public static function filterProducts($filter){
 
         $filteredProducts = array_filter(Product::collectionToArray(Product::all()), Product::filterFunctionFactory($filter));
-        $orderedProducts = Product::order($filter->{'orderBy'}, $filter->{'orderDirection'}, $filteredProducts);
+        $orderedProducts = Product::order($filter->{'orderBy'}, $filteredProducts);
         return $orderedProducts;
     }
 
     public static function searchAndFilterProducts(string $stringToSearch, $filter){
         $searchedProducts = Product::searchProducts($stringToSearch);
         $filteredProducts = array_filter(Product::collectionToArray($searchedProducts), Product::filterFunctionFactory($filter));
-        $orderedProducts = order($filter->{'orderBy'}, $filter->{'orderDirection'}, $filteredProducts);
+        $orderedProducts = Product::order($filter->{'orderBy'}, $filteredProducts);
         return $orderedProducts;
     }
 
