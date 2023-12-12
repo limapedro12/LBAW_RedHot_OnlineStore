@@ -331,7 +331,6 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
         searchString = '*'
 
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
-    console.log(url)
 
     // use XMLHttpRequest to send the request to the server
     var xhr = new XMLHttpRequest();
@@ -342,7 +341,6 @@ if(document.getElementsByClassName('productsPageFilter').length > 0){
         //if everything went ok, show the search results
         if (xhr.status == 200) {
             let products = JSON.parse(xhr.responseText);
-            console.log(products)
             listOfProducts.innerHTML = Object.values(products).map(createProductHTML).join('');
         }
         //if something went wrong, show the error

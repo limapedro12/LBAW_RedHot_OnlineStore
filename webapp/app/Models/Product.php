@@ -30,15 +30,12 @@ class Product extends Model{
     ];
 
     public static function searchProducts(string $stringToSearch){
-        // $stringToSearch = "'".$stringToSearch."'";
-        $searchTemperature = 0.1;
         $searchedProducts = Product::whereRaw("tsvectors @@ to_tsquery('portuguese', CAST(? AS VARCHAR)) ".
                                               "OR (LOWER(nome) LIKE CONCAT('%',  LOWER(CAST(? AS VARCHAR)), '%'))", 
                                               [$stringToSearch, $stringToSearch])
                                    ->orderByRaw("ts_rank(tsvectors, to_tsquery('portuguese', ?)) DESC", [$stringToSearch])
                                    ->get();
         return $searchedProducts;
-        // whereRaw("ts_rank(tsvectors, to_tsquery('portuguese', ?)) > ?", [$stringToSearch, $searchTemperature])
     }   
 
     public static function filterFunctionFactory($filter){
@@ -68,9 +65,9 @@ class Product extends Model{
             } 
 
             if($rating != []){
-                if($product->getNumberOfReviews() == 0)
+                if($product->getProductNumberOfReviews() == 0)
                     return false;
-                $averageRating = $product->getAverageRating();
+                $averageRating = $product->getProductRating();
                 $inteval_function = fn($interval) =>
                     ($averageRating >= $interval->{'min'} && $averageRating <= $interval->{'max'});
                 if(!in_array(true, array_map($inteval_function, $rating)))
@@ -109,11 +106,11 @@ class Product extends Model{
             });
         else if($orderBy == 'ratingDesc')
             usort($products, function($a, $b){
-                return $b->getAverageRating() > $a->getAverageRating();
+                return $b->getProductRating() > $a->getProductRating();
             });
         else if($orderBy == 'ratingAsc')
             usort($products, function($a, $b){
-                return $a->getAverageRating() > $b->getAverageRating();
+                return $a->getProductRating() > $b->getProductRating();
             });
         else if($orderBy == 'discountDesc')
             usort($products, function($a, $b){
@@ -171,20 +168,22 @@ class Product extends Model{
         return FileController::get('product', $this->id);
     }
 
-    public function getAverageRating(){
-        $reviews = Review::where('id_produto', '=', $this->id)->get();
-        if(count($reviews) == 0)
-            return 5;
-        $sum = 0;
-        foreach($reviews as $review){
-            $sum += $review->avaliacao;
+    public function getProductRating(){
+        $comments = Review::where('id_produto', $this->id)->get();
+        $rating = 0;
+        foreach($comments as $comment){
+            $rating += $comment->avaliacao;
         }
-        if(count($reviews) == 0)
+        if(sizeof($comments) == 0){
             return 0;
-        return $sum/count($reviews);
+        }
+        else{
+            return round($rating/sizeof($comments), 1);
+        }
     }
 
-    public function getNumberOfReviews(){
-        return count(Review::where('id_produto', '=', $this->id)->get());
+    public function getProductNumberOfReviews(){
+        return sizeof(Review::where('id_produto', $this->id)->get());
     }
+
 }

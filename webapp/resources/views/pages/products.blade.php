@@ -225,10 +225,10 @@
                     <div class="productListItemBottom">
                         <div class="productListItemRating">
                             <div class="productListItemNumberOfReviews">
-                                <p>{{ $product->getNumberOfReviews() }} avaliações </p>
+                                <p>{{ $product->getProductNumberOfReviews() }} avaliações </p>
                             </div>
                             <div class="productListItemHearts">
-                                <p> <span class="productListItemAverageRating">{{ $product->getAverageRating() }}</span> / 5 <i class="fa-solid fa-heart"></i> </p>
+                                <p> <span class="productListItemAverageRating">{{ $product->getProductRating() }}</span> / 5 <i class="fa-solid fa-heart"></i> </p>
                             </div>
                         </div>
                         <div class="productListItemPrices">
