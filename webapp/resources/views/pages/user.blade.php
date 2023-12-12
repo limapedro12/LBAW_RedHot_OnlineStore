@@ -143,7 +143,7 @@
                                         <td>
                                             <div class="myOrderID">
                                                 <p>
-                                                    {{ $order->id }}
+                                                    {{ $user->getNormalizeOrderId($order->id) }}
                                                 </p>
                                             </div>
                                         </td>

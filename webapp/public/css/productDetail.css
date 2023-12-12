@@ -55,7 +55,8 @@
     margin-right: 40px;
 }
 
-.productDisplay .productBottomLeft .productAdminOptions input{
+.productDisplay .productBottomLeft .productAdminOptions input,
+.productDisplay .productBottomLeft .productAdminOptions a{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -72,7 +73,8 @@
     cursor: pointer;
 }
 
-.productDisplay .productBottomLeft .productAdminOptions input:hover{
+.productDisplay .productBottomLeft .productAdminOptions input:hover,
+.productDisplay .productBottomLeft .productAdminOptions a:hover{
     opacity: 0.8;
 }
 
