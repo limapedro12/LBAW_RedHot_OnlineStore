@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +46,10 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/products/{id}/changeStock', 'changeStockProductForm')->name('changeStockProductForm');
     Route::post('/products/{id}/changeStock', 'changeStockProduct')->name('changeStockProduct');
     Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
-    Route::get('/products/{id}', 'productsDetails')->name('productsdetails');
     Route::get('/products/search/{stringToSearch}', 'searchProducts')->name('productsSearch');
     Route::get('/products/filter/{filter}', 'filterProducts')->name('productsFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
-    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');
+    Route::delete('/products/{id}/delete', 'deleteProduct')->name('deleteProduct');    
 });
 
 // Cart and Purchases
@@ -175,4 +175,13 @@ Route::controller(FaqsController::class)->group(function () {
     Route::post('/faqs/add', 'createFaqs')->name('createFaqs');
     Route::post('/faqs/{id}/edit', 'updateFaqs')->name('updateFaqs');
     Route::delete('/faqs/{id}/delete', 'deleteFaqs')->name('deleteFaqs');
+});
+
+
+// Orders
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/users/{id}/orders', 'listOrders')->name('orders');
+    Route::get('/users/{id}/orders/{id_order}', 'showOrderDetails')->name('showOrderDetails');
+    Route::post('/users/{id}/orders/{id_order}/cancel', 'cancelOrder')->name('cancelOrder');
+    Route::post('/users/{id}/orders/{id_order}/change_state', 'changeState')->name('changeState');
 });

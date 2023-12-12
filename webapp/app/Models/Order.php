@@ -21,4 +21,20 @@ class Order extends Model
         'id_administrador'
     ];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_utilizador');
+    }
+
+    public function normalizeOrderId(int $id)
+    {
+        $highestId = Order::max('id');
+        $highestIdLength = strlen((string)$highestId);
+        $id = (string)$id;
+        $idLength = strlen((string)$id);
+        $id = str_pad($id, $highestIdLength + 1 - $idLength, '0', STR_PAD_LEFT);
+        return $id;
+    }
+
 }

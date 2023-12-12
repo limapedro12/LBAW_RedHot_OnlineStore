@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Order;
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
@@ -43,11 +44,13 @@ class UserController extends Controller
 
         verifyUser($user);
 
+        $orders = Order::where('id_utilizador', $id)->get();
+
         return view('pages.user', [
             'user' => $user,
             'totalOrders' => $this->getTotalOrders($id),
             'totalReviews' => $this->getTotalReviews($id),
-            'orders' => $this->getOrders($id),
+            'orders' => $orders,
             'unreadNotifications' => $this->getNumberOfUreadNotifications($id)
         ]);
     }
@@ -261,4 +264,7 @@ class UserController extends Controller
 
         return redirect('/adminUsers');
     }
+
+
+
 }

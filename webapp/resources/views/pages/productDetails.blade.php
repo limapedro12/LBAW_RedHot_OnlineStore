@@ -22,8 +22,7 @@
                                     action='/products/{{ $product->id }}/changeStock'>
                             </div>
                             <div class="productDelete">
-                                <input type="submit" id='eliminarProduto' value="Eliminar"
-                                    action='/products/{{ $product->id }}/delete'>
+                                <a href="{{ route('editProduct', ['id' => $product->id]) }}">Editar</a>
                             </div>
                         @endif
                     </div>
@@ -37,8 +36,7 @@
                             <h2> {{ $product->nome }} </h2>
                             @if (Auth::guard('admin')->check())
                                 <div class="productEdit">
-                                    <a href="{{ route('editProduct', ['id' => $product->id]) }}"><i
-                                            class="fa-solid fa-edit"></i></a>
+                                    <a href='/products/{{ $product->id }}/delete' id='eliminarProduto'><i class="fas fa-trash-alt"></i> </a>
                                 </div>
                             @endif
                         </div>
