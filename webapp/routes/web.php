@@ -37,7 +37,6 @@ Route::get('/welcome', function () {
 // Catalogue
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/products', 'listProducts')->name('productsList');
-    Route::get('/products/search/{stringToSearch}/filter/{filter}', 'searchAndFilterProducts')->name('productsSearchAndFilter');
     Route::get('/products/search/{stringToSearch}/filter/{filter}/API', 'searchAndFilterProductsAPI')->name('productsSearchAndFilterAPI');
     Route::get('/products/add', 'addProductForm')->name('addProductForm');
     Route::post('/products/add', 'addProduct')->name('addProduct');

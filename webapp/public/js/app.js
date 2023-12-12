@@ -200,124 +200,159 @@ try {
 
 
 // searchAndFilter
+function discountFunction(precoatual, desconto) {
+  return Math.round((precoatual - precoatual * desconto) * 100) / 100
+}
 
-try {
-  function productToHTML(product) {
-    var html = `<section class="productListItem">
-                <img src = "${product.url_imagem}" alt = "${product.nome}" height = "100">
-                <h4> <a href = "/products/${product.id}">${product.nome}</a> </h4>
-                <p>`
-    if (product.desconto > 0) {
-      html += `<span style = "text-decoration: line-through;">${product.precoatual}</span>&nbsp`
-    }
-    html += discountFunction(product.precoatual, product.desconto);
-    html += ` €</p>`;
-    if (product.desconto > 0) {
-      html += `<p> Desconto: ${product.desconto * 100}% </p>`
-    }
-    html += `<p>Categoria: ${product.categoria}</p>
-                <br>
-                </section>`;
-    return html;
+
+let productTemplateOriginal = (document.getElementsByClassName('productListItem').length > 0) ?
+                        document.getElementsByClassName('productListItem')[0].cloneNode(true) :
+                        null
+
+
+function createProductHTML(product){
+  let productTemplate = productTemplateOriginal.cloneNode(true)
+  productTemplate.getElementsByClassName('productImage')[0].src = product.url_imagem
+  productTemplate.getElementsByClassName('productImage')[0].alt = product.nome
+  productTemplate.getElementsByClassName('productListItemTitleLink')[0].href = `/products/${product.id}`
+  productTemplate.getElementsByClassName('productListItemTitleText')[0].innerHTML = product.nome
+  productTemplate.getElementsByClassName('productListItemNumberOfReviews')[0].querySelector('p').innerHTML = `${product.numero_reviews} avaliações`
+  productTemplate.getElementsByClassName('productListItemAverageRating')[0].innerHTML = product.avaliacao_media
+
+  // Create a parent container
+  let container = productTemplate.getElementsByClassName('productListItemPrices')[0];
+  container.innerHTML = '';
+
+  if (product.desconto > 0) {
+    let oldPriceDiv = document.createElement('div');
+    oldPriceDiv.className = "productListItemOldPrice";
+
+    let discountP = document.createElement('p');
+    discountP.className = "discount";
+    discountP.textContent = Math.round(product.desconto * 100) + "%";
+    oldPriceDiv.appendChild(discountP);
+
+    let oldPriceP = document.createElement('p');
+    oldPriceP.className = "oldPrices";
+    oldPriceP.textContent = product.precoatual;
+    oldPriceDiv.appendChild(oldPriceP);
+
+    let euroP = document.createElement('p');
+    euroP.className = "euro";
+    euroP.textContent = "€";
+    oldPriceDiv.appendChild(euroP);
+
+    container.appendChild(oldPriceDiv);
+
+    let newPriceDiv = document.createElement('div');
+    newPriceDiv.className = "productListItemNewPrice";
+
+    let newPriceP = document.createElement('p');
+    newPriceP.className = "newPrices";
+    newPriceP.textContent = discountFunction(product.precoatual, product.desconto) + " €";
+    newPriceDiv.appendChild(newPriceP);
+
+    container.appendChild(newPriceDiv);
+  } else {
+    let priceDiv = document.createElement('div');
+    priceDiv.className = "productListItemPrice";
+
+    let priceP = document.createElement('p');
+    priceP.className = "Price";
+    priceP.textContent = product.precoatual + "€";
+    priceDiv.appendChild(priceP);
+
+    container.appendChild(priceDiv);
   }
 
-  function discountFunction(precoatual, desconto) {
-    // Implement your discount function here
-    // For example:
-    return Math.round((precoatual - precoatual * desconto) * 100) / 100
-  }
+  return productTemplate.outerHTML
+}
+
+if(document.getElementsByClassName('productsPageFilter').length > 0){
+
+  document.querySelector('form.productSearchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+  })
+
+  document.querySelector('form#filterForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+  })  
 
   listOfProducts = document.getElementById('listOfProducts');
 
-  function displayDiscountFilter() {
-    var discountFilterMin = document.getElementById('discountFilterMin');
-    var discountFilterMax = document.getElementById('discountFilterMax');
-    if (document.getElementById('discountFilter').checked) {
-      discountFilterMin.style.display = 'inline-block';
-      discountFilterMax.style.display = 'inline-block';
-    } else {
-      discountFilterMin.style.display = 'none';
-      discountFilterMax.style.display = 'none';
-    }
-  }
-
-  displayDiscountFilter()
-
-  document.getElementById('discountFilter').addEventListener('change', displayDiscountFilter);
-
-  document.getElementById('searchAndFilter').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    listOfProducts.innerHTML = '<img src="https://i.gifer.com/ZKZg.gif" alt="Loading...">';
-
+  // document.querySelector('.filterButtonContainer > button').addEventListener('click', function(event) {
+  function filterProducts(event){
     //search part
-    var searchString = document.getElementById('searchedString').value
+    let searchString = document.getElementById('searchedString').value
+
+    let filterJSON = {}
 
     //filter part
-    var priceFilterMin = document.getElementById('fromInput').value;
-    var priceFilterMax = document.getElementById('toInput').value;
+    let priceFilterMin = document.getElementById('fromInput').value;
+    let priceFilterMax = document.getElementById('toInput').value;
+    filterJSON.price = {"min":priceFilterMin, "max":priceFilterMax}
 
+    let categorias = Array.from(document.getElementsByClassName('filterCategoriesListItem'))
+                          .filter(e => e.querySelector('input').checked)
+                          .map(e => e.querySelector('input').value)
+    filterJSON.categories = categorias
 
+    let discountList = []
+    if(document.getElementById('discountFilter25').checked)
+      discountList.push({"min":0, "max":0.25})
+    if(document.getElementById('discountFilter50').checked)
+      discountList.push({"min":0.25, "max":0.5})
+    if(document.getElementById('discountFilter75').checked)
+      discountList.push({"min":0.5, "max":0.75})
+    if(document.getElementById('discountFilter100').checked)
+      discountList.push({"min":0.75, "max":1})
+    filterJSON.discount = discountList
 
-    var discountFilter = document.getElementById('discountFilter').checked;
-    var discountFilterMin = document.getElementById('discountFilterMin').value;
-    var discountFilterMax = document.getElementById('discountFilterMax').value;
-    var stockFilterMin = document.getElementById('stockFilterMin').value;
-    var stockFilterMax = document.getElementById('stockFilterMax').value;
-    var category = document.getElementById('category').value.toLowerCase();
-    var filterString = '';
-    if (priceFilterMin != '') {
-      filterString += 'preco:min:' + priceFilterMin + ';';
-    }
-    if (priceFilterMax != '') {
-      filterString += 'preco:max:' + priceFilterMax + ';';
-    }
-    if (discountFilter) {
-      filterString += 'desconto;';
-    }
-    if (discountFilterMin != '') {
-      filterString += 'desconto:min:' + discountFilterMin + ';';
-    }
-    if (discountFilterMax != '') {
-      filterString += 'desconto:max:' + discountFilterMax + ';';
-    }
-    if (stockFilterMin != '') {
-      filterString += 'stock:min:' + stockFilterMin + ';';
-    }
-    if (stockFilterMax != '') {
-      filterString += 'stock:max:' + stockFilterMax + ';';
-    }
-    if (category != '') {
-      filterString += 'categoria:' + category + ';';
-    }
+    let ratingList = []
+    if(document.getElementById('ratingFilter1').checked)
+      ratingList.push({"min":0, "max":1})
+    if(document.getElementById('ratingFilter2').checked)
+      ratingList.push({"min":1, "max":2})
+    if(document.getElementById('ratingFilter3').checked)
+      ratingList.push({"min":2, "max":3})
+    if(document.getElementById('ratingFilter4').checked)
+      ratingList.push({"min":3, "max":4})
+    if(document.getElementById('ratingFilter5').checked)
+      ratingList.push({"min":4, "max":5})
+    filterJSON.rating = ratingList
 
-    if (searchString == '')
-      searchString = '*'
-    if (filterString == '')
-      filterString = '*'
+    filterJSON.orderBy = document.querySelector('select.productsPageSortSelector').value
+
+    var filterString = JSON.stringify(filterJSON)
+
+    if(searchString == '')
+        searchString = '*'
+
     url = '/products/search/' + encodeURIComponent(searchString) + '/filter/' + filterString + '/API'
 
-    //use XMLHttpRequest to send the request to the server
+    // use XMLHttpRequest to send the request to the server
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
 
     //when the request comes back, run the following code
-    xhr.onload = function () {
-      //if everything went ok, show the search results
-      if (xhr.status == 200) {
-        let products = JSON.parse(xhr.responseText);
-        listOfProducts.innerHTML = Object.values(products).map(productToHTML).join('');
-      }
-      //if something went wrong, show the error
-      else {
-        listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
-      }
+    xhr.onload = function() {
+        //if everything went ok, show the search results
+        if (xhr.status == 200) {
+            let products = JSON.parse(xhr.responseText);
+            listOfProducts.innerHTML = Object.values(products).map(createProductHTML).join('');
+        }
+        //if something went wrong, show the error
+        else {
+            listOfProducts.innerHTML = '<p>Error: ' + xhr.status + '</p>';
+        }
     };
-
-    //send the request
     xhr.send();
-  })
-} catch (error) { }
+  }
+
+  document.getElementById('searchedString').addEventListener('keypress', filterProducts)
+  Array.from(document.querySelectorAll('input')).map(e => e.addEventListener('change', filterProducts))
+  document.querySelector('select.productsPageSortSelector').addEventListener('change', filterProducts)
+}
 
 // change purchase state
 
@@ -413,7 +448,6 @@ if (document.querySelector('admin') != null) {
 
   const channel = pusher.subscribe('RedHot')
   channel.bind('notification-to-all-admins', function (data) {
-    console.log('notification-to-all-admins')
     showNotification(data)
   })
   channel.bind('notification-to-admin-' + admin_id, function (data) {

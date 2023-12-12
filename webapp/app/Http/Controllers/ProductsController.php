@@ -40,24 +40,16 @@ class ProductsController extends Controller {
         ]);
     }
 
-    public function searchAndFilterProducts(string $stringToSearch, string $filter){
-        $products = Product::searchAndFilterProducts($stringToSearch, $filter);
-        return view('pages.productsSearchAndFilter', [
-            'searchedString' => $stringToSearch,
-            'filter' => Product::filterToDisplay($filter),
-            'filterArr' => Product::filterToArray($filter),
-            'products' => $products,
-            'discountFunction' => function($price, $discount){
-                return $price * (1 - $discount);
-            }
-        ]);
-    }
-
     public function searchAndFilterProductsAPI(string $stringToSearch, string $filter){
         if($stringToSearch == '*')
-            $products = Product::filterProducts($filter);
+            $products = Product::filterProducts(json_decode($filter));
         else
-            $products = Product::searchAndFilterProducts($stringToSearch, $filter);
+            $products = Product::searchAndFilterProducts($stringToSearch, json_decode($filter));
+        foreach($products as $product){
+            $product->avaliacao_media = $product->getProductRating();
+            $product->numero_reviews = $product->getProductNumberOfReviews();
+            $product->url_imagem = FileController::get('product', $product->id);
+        }
         return json_encode($products);
     }
 
@@ -172,7 +164,6 @@ class ProductsController extends Controller {
         //error_log($product->product_image);
         //FileController::delete($product->product_image);
         $product->delete();
-
-        return redirect('/adminProductsManage');
+        return;
     }
 }
