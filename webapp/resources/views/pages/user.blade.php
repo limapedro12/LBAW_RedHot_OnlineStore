@@ -80,8 +80,8 @@
         </div>
 
         @unless (Auth::guard('admin')->check())
-        <div>
-            <a href="{{ route('listWishlist', ['id' => Auth::id()]) }}"><button>Minha Wishlist</button></a>
+        <div class="profileWishlistButton">
+            <a href="{{ route('listWishlist', ['id' => Auth::id()]) }}">Minha Wishlist</a>
         </div>
         @endunless
 

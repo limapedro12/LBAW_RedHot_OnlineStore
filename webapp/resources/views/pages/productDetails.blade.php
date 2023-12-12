@@ -17,10 +17,6 @@
                     <div class="productAdminOptions">
                         @if (Auth::guard('admin')->check())
                             @csrf
-                            <div class="editProductStock">
-                                <input type="submit" id='alterarStockDoProduto' value="Alterar Stock"
-                                    action='/products/{{ $product->id }}/changeStock'>
-                            </div>
                             <div class="productDelete">
                                 <a href="{{ route('editProduct', ['id' => $product->id]) }}">Editar</a>
                             </div>

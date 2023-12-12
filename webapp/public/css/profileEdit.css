@@ -149,7 +149,6 @@
     width: 100%;
     padding: 0.5rem;
     font-size: 1.5rem;
-    border: none;
     border-bottom: var(--main-color) 2px solid;
     outline: none;
     background: transparent;

@@ -33,6 +33,7 @@
     <link href="{{ url('css/profileDelete.css') }}" rel="stylesheet">
     <link href="{{ url('css/faqs.css') }}" rel="stylesheet">
     <link href="{{ url('css/productDetail.css') }}" rel="stylesheet">
+    <link href="{{ url('css/productEdit.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>

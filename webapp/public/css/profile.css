@@ -234,3 +234,28 @@
     font-size: 1.5rem;
     font-weight: 400;
 }
+
+
+.profileWishlistButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileWishlistButton a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--main-color);
+    color: var(--white);
+    border-radius: 10px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.profileWishlistButton a:hover{
+    opacity: 0.8;
+}
