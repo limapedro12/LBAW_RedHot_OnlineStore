@@ -236,13 +236,13 @@
 }
 
 
-.profileWishlistButton{
+.profileWishlistButton {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.profileWishlistButton a{
+.profileWishlistButton a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -256,6 +256,6 @@
     font-size: 1.5rem;
 }
 
-.profileWishlistButton a:hover{
+.profileWishlistButton a:hover {
     opacity: 0.8;
 }

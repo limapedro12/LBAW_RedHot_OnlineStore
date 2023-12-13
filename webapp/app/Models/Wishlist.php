@@ -11,7 +11,7 @@ class Wishlist extends Model
     use HasFactory;
 
     // Don't add create and update timestamps in database.
-    public $timestamps  = false;
+    public $timestamps = false;
 
     protected $table = 'produtowishlist';
 

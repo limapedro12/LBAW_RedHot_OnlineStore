@@ -19,17 +19,17 @@ class FileController extends Controller
         'product' => ['png', 'jpg', 'jpeg', 'gif'],
     ];
 
-    private static function isValidType (String $type)
+    private static function isValidType(string $type)
     {
         return array_key_exists($type, self::$systemTypes);
     }
 
-    private static function defaultAsset (String $type)
+    private static function defaultAsset(string $type)
     {
         return asset($type . '/' . self::$default);
     }
 
-    private static function getFileName (String $type, int $id)
+    private static function getFileName(string $type, int $id)
     {
         $fileName = null;
 
@@ -45,14 +45,14 @@ class FileController extends Controller
         return $fileName;
     }
 
-    static function get (String $type, int $id)
+    static function get(string $type, int $id)
     {
         if (!self::isValidType($type)) {
             return self::defaultAsset($type);
         }
 
         $fileName = self::getFileName($type, $id);
-        
+
         if ($fileName) {
             return asset($fileName);
         }
@@ -60,7 +60,7 @@ class FileController extends Controller
         return self::defaultAsset($type);
     }
 
-    function upload (Request $request, String $type, int $id)
+    function upload(Request $request, string $type, int $id)
     {
         $file = $request->file('file');
         $requestType = $request->type;
@@ -73,7 +73,8 @@ class FileController extends Controller
         return $fileName;
     }
 
-    public static function delete (String $hash) {
+    public static function delete(string $hash)
+    {
         error_log('Deleting file: ' . $hash);
         Storage::disk(self::$diskName)->delete($hash);
         error_log('Deleted file: ' . $hash);

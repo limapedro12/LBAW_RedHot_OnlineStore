@@ -12,7 +12,7 @@ class Purchase extends Model
     use HasFactory;
 
     protected $table = 'compra';
-    public $timestamps  = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'timestamp',

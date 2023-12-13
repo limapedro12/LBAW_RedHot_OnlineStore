@@ -32,7 +32,8 @@
                             <h2> {{ $product->nome }} </h2>
                             @if (Auth::guard('admin')->check())
                                 <div class="productEdit">
-                                    <a href='/products/{{ $product->id }}/delete' id='eliminarProduto'><i class="fas fa-trash-alt"></i> </a>
+                                    <a href='/products/{{ $product->id }}/delete' id='eliminarProduto'><i
+                                            class="fas fa-trash-alt"></i> </a>
                                 </div>
                             @endif
                         </div>

@@ -1,12 +1,12 @@
 @section('content')
-<section>
+    <section>
         <h1>As Minhas Encomendas</h1>
         <ul>
             @foreach ($purchases as $purchase)
                 @include ('partials.purchase', ['purchase' => $purchase, 'userId' => $userId])
             @endforeach
         </ul>
-</section>
+    </section>
 @endsection
 
 @if (Auth::guard('admin')->check())
@@ -16,4 +16,3 @@
 @else
     @include('layouts.userNotLoggedHeaderFooter')
 @endif
-

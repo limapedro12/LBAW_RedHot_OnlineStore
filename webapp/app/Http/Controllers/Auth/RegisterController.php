@@ -13,8 +13,9 @@ use Illuminate\View\View;
 use App\Models\User;
 
 
-function verifyNotAutenticated() : void {
-    if(Auth::check() || Auth::guard('admin')->check())
+function verifyNotAutenticated(): void
+{
+    if (Auth::check() || Auth::guard('admin')->check())
         abort(403);
 }
 
@@ -32,7 +33,8 @@ class RegisterController extends Controller
     /**
      * Register a new user.
      */
-    public function register(Request $request){   
+    public function register(Request $request)
+    {
         verifyNotAutenticated();
         $credentials = $request->validate([
             'nome' => 'required|string|max:256',
@@ -40,7 +42,7 @@ class RegisterController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
 
-        if(User::where('email', $request->email)->first() != null)
+        if (User::where('email', $request->email)->first() != null)
             return redirect('/register')
                 ->withInput($request->only('nome', 'email'))
                 ->withErrors(['email' => 'Email já registado!']);
@@ -60,10 +62,10 @@ class RegisterController extends Controller
                 ProductCartController::transferGuestCart($guestId);
                 return redirect()->intended('/cart');
             }
- 
+
             return redirect()->intended('/products');
         }
- 
+
         return back()->withErrors([
             'email' => 'Erro ao criar conta.',
         ])->onlyInput('nome', 'email');

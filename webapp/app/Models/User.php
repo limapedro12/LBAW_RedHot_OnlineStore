@@ -21,7 +21,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     // Don't add create and update timestamps in database.
-    public $timestamps  = false;
+    public $timestamps = false;
     public $isAdmin = true;
 
     public $validTokens = [];
@@ -66,58 +66,59 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getNumberOfUreadNotifications(){
+    public function getNumberOfUreadNotifications()
+    {
         return Notification::where('id_utilizador', $this->id)->where('lida', false)->count();
     }
 
-    public function getProfileImage() {
+    public function getProfileImage()
+    {
         return FileController::get('profile', $this->id);
     }
 
-    public function hasPhoto() : bool
+    public function hasPhoto(): bool
     {
         return ($this->profile_image !== null && $this->profile_image !== '');
     }
 
-    public function totalOrders() : int
+    public function totalOrders(): int
     {
         return $this->hasMany('App\Models\Order', 'id_utilizador')->count();
     }
 
-    public function totalReviews() : int
+    public function totalReviews(): int
     {
         return $this->hasMany('App\Models\Review', 'id_utilizador')->count();
     }
-    
-    public function orders() : HasMany
+
+    public function orders(): HasMany
     {
         return $this->hasMany('App\Models\Order', 'id_utilizador');
     }
 
-    public function ban() : void
+    public function ban(): void
     {
         $this->banned = true;
         $this->save();
     }
 
-    public function hasPendingOrders() : bool
+    public function hasPendingOrders(): bool
     {
         $pending = Purchase::where('id_utilizador', $this->id)
-                            ->where('estado', '!=', 'Concluído')
-                            ->where('estado', '!=', 'Cancelada')
-                            ->count();
-        
+            ->where('estado', '!=', 'Concluído')
+            ->where('estado', '!=', 'Cancelada')
+            ->count();
+
         return $pending > 0;
     }
 
     public function getNormalizeOrderId(int $id)
     {
-                
+
         $highestId = Order::max('id');
-        $highestIdLength = strlen((string)$highestId);
-        $id = (string)$id;
-        $idLength = strlen((string)$id);
-        $id = str_pad($id,($highestIdLength + 1) , '0', STR_PAD_LEFT);
+        $highestIdLength = strlen((string) $highestId);
+        $id = (string) $id;
+        $id = str_pad($id, ($highestIdLength + 1), '0', STR_PAD_LEFT);
         return $id;
 
     }

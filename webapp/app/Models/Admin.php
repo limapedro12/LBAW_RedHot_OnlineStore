@@ -16,7 +16,7 @@ class Admin extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     // Don't add create and update timestamps in database.
-    public $timestamps  = false;
+    public $timestamps = false;
     public $isAdmin = true;
 
     protected $table = 'administrador';
@@ -29,7 +29,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'id',
         'nome',
-        'email', 
+        'email',
         'password'
     ];
 
@@ -53,7 +53,8 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getNumberOfUreadNotifications(){
+    public function getNumberOfUreadNotifications()
+    {
         return Notification::where('id_administrador', $this->id)->where('lida', false)->count();
     }
 

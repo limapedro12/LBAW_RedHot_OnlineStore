@@ -9,16 +9,17 @@
             <div class="fillerFP"></div>
             <h2 class="title">Recuperar Password</h2>
 
-            
+
             <form method="POST" action="/send" class="signupForm">
                 @csrf
-                
-                <p>Introduza o email associado à sua conta de utilizador e nele receberá um link para trocar a sua password</p>
+
+                <p>Introduza o email associado à sua conta de utilizador e nele receberá um link para trocar a sua password
+                </p>
                 <div class="inputBox">
                     <input id="email" type="email" name="email" placeholder="Email" required>
                 </div>
-                
-                 <div class="signupOptions">
+
+                <div class="signupOptions">
                     <button type="submit">
                         <span class="forgotPasswordBtn">
                             <i class="fas fa-arrow-right"></i>

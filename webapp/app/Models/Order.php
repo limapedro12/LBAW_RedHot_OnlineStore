@@ -30,9 +30,9 @@ class Order extends Model
     public function normalizeOrderId(int $id)
     {
         $highestId = Order::max('id');
-        $highestIdLength = strlen((string)$highestId);
-        $id = (string)$id;
-        $idLength = strlen((string)$id);
+        $highestIdLength = strlen((string) $highestId);
+        $id = (string) $id;
+        $idLength = strlen((string) $id);
         $id = str_pad($id, $highestIdLength + 1 - $idLength, '0', STR_PAD_LEFT);
         return $id;
     }

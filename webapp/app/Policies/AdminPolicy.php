@@ -14,11 +14,13 @@ class AdminPolicy
         //
     }
 
-    public function onlyAdmin($logged, Admin $user) : bool {
+    public function onlyAdmin($logged, Admin $user): bool
+    {
         return $user->isAdmin;
     }
 
-    public function notAdmin($logged, Admin $user) : bool {
+    public function notAdmin($logged, Admin $user): bool
+    {
         return !$user->isAdmin;
     }
 }

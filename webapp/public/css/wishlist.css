@@ -1,4 +1,4 @@
-.wishlistHeader{
+.wishlistHeader {
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
@@ -6,14 +6,14 @@
     color: var(--black);
 }
 
-.wishlistEmpty{
+.wishlistEmpty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.wishlistEmpty .wishlistEmptyText{
+.wishlistEmpty .wishlistEmptyText {
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
@@ -22,7 +22,7 @@
     color: var(--black);
 }
 
-.wishlistEmpty .wishlistEmptyButton a{
+.wishlistEmpty .wishlistEmptyButton a {
     text-decoration: none;
     color: var(--white);
     background-color: var(--main-color);
@@ -32,11 +32,11 @@
     font-weight: bold;
 }
 
-.wishlistEmpty .wishlistEmptyButton a:hover{
+.wishlistEmpty .wishlistEmptyButton a:hover {
     opacity: 0.8;
 }
 
-.removeFromWishlistForm{
+.removeFromWishlistForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +44,7 @@
     margin-top: 1rem;
 }
 
-.removeFromWishlistForm input{
+.removeFromWishlistForm input {
     text-decoration: none;
     color: var(--white);
     background-color: var(--main-color);
@@ -54,10 +54,10 @@
     font-weight: bold;
 }
 
-.removeFromWishlistForm input:hover{
+.removeFromWishlistForm input:hover {
     opacity: 0.8;
 }
 
-.removeFromWishlistForm .productAsNoDiscountWishlist{
+.removeFromWishlistForm .productAsNoDiscountWishlist {
     margin-top: 1.5rem;
 }

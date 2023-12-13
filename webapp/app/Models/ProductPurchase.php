@@ -10,7 +10,7 @@ class ProductPurchase extends Model
     use HasFactory;
 
     protected $table = 'produtocompra';
-    public $timestamps  = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'id_produto',

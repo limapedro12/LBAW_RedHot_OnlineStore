@@ -43,7 +43,7 @@
 
 
 /* CSS for the Products Filter */
-.productsPageFilter{
+.productsPageFilter {
     display: flex;
     flex-direction: column;
 }
@@ -154,7 +154,7 @@
     align-items: center;
 }
 
-.formControlContainer .formControlContainerTime{
+.formControlContainer .formControlContainerTime {
     margin-right: 1rem;
 }
 
@@ -241,7 +241,7 @@
     align-items: center;
 }
 
-.filterForm .filterButtonContainer button{
+.filterForm .filterButtonContainer button {
     display: flex;
     padding: 1rem 1.5rem;
     align-items: center;
@@ -256,54 +256,54 @@
     margin-bottom: 3rem;
 }
 
-.filterForm .filterButtonContainer button:hover{
+.filterForm .filterButtonContainer button:hover {
     opacity: 0.8;
 }
- 
+
 /* CSS for the Top Products Page */
-.productsPageTop{
+.productsPageTop {
     padding: 1rem;
 }
 
-.productsPageTop .productsPageTopRowOne{
+.productsPageTop .productsPageTopRowOne {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs {
     display: flex;
     align-items: center;
     font-size: 1.25rem;
     color: var(--black);
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs {
     display: flex;
     align-items: center;
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li {
     list-style: none;
     margin-right: 0.5rem;
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a {
     text-decoration: none;
     color: var(--black);
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a:hover{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs li a:hover {
     color: var(--main-color);
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs .breadcrumbs a{
+.productsPageTop .productsPageTopRowOne .productsPageBreadcrumbs .listOfBreadcrumbs .breadcrumbs a {
     text-decoration: underline;
 }
 
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch{
+.productsPageTop .productsPageTopRowOne .productsPageSearch {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -312,7 +312,7 @@
     margin-top: 1rem;
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput{
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -323,7 +323,7 @@
     border: 2px solid var(--black);
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput input{
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput input {
     border: none;
     outline: none;
     font-size: 1.5rem;
@@ -332,7 +332,7 @@
 
 
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button{
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -342,17 +342,17 @@
     cursor: pointer;
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button i{
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button i {
     font-size: 1.5rem;
     color: var(--black);
 }
 
-.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button:hover i{
+.productsPageTop .productsPageTopRowOne .productsPageSearch .productsPageSearchInput button:hover i {
     color: var(--main-color);
 }
 
 
-.productsPageTop .productsPageTopRowTwo{
+.productsPageTop .productsPageTopRowTwo {
     display: grid;
     grid-template-columns: 0.65fr 1.7fr 0.65fr;
     grid-template-rows: 1fr;
@@ -360,7 +360,7 @@
     grid-template-areas: ". . .";
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageTopTitle{
+.productsPageTop .productsPageTopRowTwo .productsPageTopTitle {
     display: flex;
     align-items: center;
     font-size: 2rem;
@@ -368,27 +368,27 @@
     text-transform: uppercase;
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising{
+.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising img{
+.productsPageTop .productsPageTopRowTwo .productsPageTopAdvertising img {
     height: 100%;
     width: 100%;
     object-fit: contain;
 }
 
 
-.productsPageTop .productsPageTopRowTwo .productsPageSort{
+.productsPageTop .productsPageTopRowTwo .productsPageSort {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 2rem;
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortTitle{
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortTitle {
     font-size: 1.5rem;
     color: var(--black);
 }
@@ -397,7 +397,7 @@ label.productsPageSortTitle {
     white-space: nowrap;
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector{
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -409,7 +409,7 @@ label.productsPageSortTitle {
     border-bottom: 1.5px solid var(--black);
 }
 
-.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector select{
+.productsPageTop .productsPageTopRowTwo .productsPageSort .productsPageSortSelector select {
     border: none;
     outline: none;
     font-size: 1.5rem;

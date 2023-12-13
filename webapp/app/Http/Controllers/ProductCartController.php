@@ -20,7 +20,7 @@ class ProductCartController extends Controller
         ]);
 
         if ($request->quantidade > $product->stock) {
-            return redirect('/products/'.$id);
+            return redirect('/products/' . $id);
         }
 
         if (Auth::check()) {
@@ -36,7 +36,8 @@ class ProductCartController extends Controller
                 ]);
             }
         } else {
-            if (!session('guestID')) session(['guestID'=> self::getNewGuestId()]);
+            if (!session('guestID'))
+                session(['guestID' => self::getNewGuestId()]);
 
             $productCart = ProductCart::where('id_produto', '=', $id)->where('id_utilizador_nao_autenticado', '=', session('guestID'))->first();
 
@@ -52,29 +53,30 @@ class ProductCartController extends Controller
             }
         }
 
-        return redirect('/products/'.$id);
+        return redirect('/products/' . $id);
     }
 
     public function removeFromCart(Request $request)
     {
-        ProductCart::where(['id_utilizador' => Auth::id(),'id_produto' => $request->id_produto])->delete();
-        
+        ProductCart::where(['id_utilizador' => Auth::id(), 'id_produto' => $request->id_produto])->delete();
+
         return redirect('/cart');
     }
 
-    public static function getNewGuestId() {
+    public static function getNewGuestId()
+    {
         $guestID = ProductCart::max('id_utilizador') + 1;
         return $guestID;
     }
 
-    public function showCart() : View
+    public function showCart(): View
     {
         $productsCart = null;
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
         } else {
             if (!session('guestID')) {
-                session(['guestID'=> self::getNewGuestId()]);
+                session(['guestID' => self::getNewGuestId()]);
                 $productsCart = [];
             } else {
                 $productsCart = ProductCart::where('id_utilizador_nao_autenticado', '=', session('guestID'))->get();
@@ -83,19 +85,21 @@ class ProductCartController extends Controller
 
         $quantityProductList = [];
         $total = 0;
-        foreach($productsCart as $productCart) {
+        foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
             $quantityProductList[] = [$productCart->quantidade, $product];
             $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
         }
 
         return view('pages.cart', ['list' => $quantityProductList,
-                                      'discountFunction' => function($price, $discount) {
-                                                            return $price * (1 - $discount);},
-                                      'total' => round($total, 2)]);
+            'discountFunction' => function ($price, $discount) {
+                return $price * (1 - $discount);
+            },
+            'total' => round($total, 2)]);
     }
 
-    public static function transferGuestCart(int $guestId) {
+    public static function transferGuestCart(int $guestId)
+    {
         ProductCart::where('id_utilizador', '=', Auth::id())->delete();
 
         $productsCart = ProductCart::where('id_utilizador_nao_autenticado', '=', $guestId)->get();
