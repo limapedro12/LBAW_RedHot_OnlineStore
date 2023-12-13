@@ -1,10 +1,13 @@
 @section('content')
-    <section>
+<section>
         <h1>Carrinho</h1>
         <ul>
-            @foreach ($list as $elem)
-                @include ('partials.productOnCart', ['quantidade' => $elem[0], 'product' => $elem[1]])
-            @endforeach
+            @forelse ($list as $elem)
+                @include ('partials.productOnCart', ['quantidade' => $elem[0],
+                                                    'product' => $elem[1]])
+            @empty
+                <p>Ainda não tem produtos no carrinho</p> 
+            @endforelse
         </ul>
         <p>Total: {{ $total }} €</p>
         @if (count($list) > 0)

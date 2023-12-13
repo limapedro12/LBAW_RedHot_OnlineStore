@@ -20,8 +20,4 @@ class ChangeInProductsPrice extends NotificationEvent {
 
         $this->createUserNotification($userId, $message, $link);
     }
-
-    public function broadcastAs() {
-        return 'notification-to-user-' . $this->userId;
-    }
 }

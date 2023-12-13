@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Review;
+use App\Models\Wishlist;
 use App\Events\ProductOutOfStock;
+use App\Events\WishlistProductAvailable;
+use App\Events\WishlistProductNotAvailable;
 
 use App\Http\Controllers\FileController;
 
@@ -139,6 +142,12 @@ class Product extends Model{
     }
 
     public function decrementStock(int $quantity){
+        if($this->stock - $quantity <= 0 && $this->stock > 0){
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductNotAvailable($userWithProductInWishlist->id_utilizador, 
+                                                      $oldProduct->id, $oldProduct->nome));
+        }
         $this->stock -= $quantity;
         $this->save();
         if($this->stock <= 0){
@@ -147,6 +156,12 @@ class Product extends Model{
     }
 
     public function incrementStock(int $quantity){
+        if($this->stock + $quantity > 0 && $this->stock <= 0){
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductAvailable($userWithProductInWishlist->id_utilizador, 
+                                                   $oldProduct->id, $oldProduct->nome));
+        }
         $this->stock += $quantity;
         $this->save();
     }

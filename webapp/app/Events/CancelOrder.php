@@ -13,8 +13,4 @@ class CancelOrder extends NotificationEvent {
 
         $this->createNotificationToAllAdmins($message, $link);
     }
-
-    public function broadcastAs() {
-        return 'notification-to-all-admins';
-    }
 }

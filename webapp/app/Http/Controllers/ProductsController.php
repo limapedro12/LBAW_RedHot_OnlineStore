@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 use App\Models\ProductCart;
+use App\Models\Wishlist;
 
 use App\Events\ChangeInProductsPrice;
+use App\Events\WishlistProductAvailable;
+use App\Events\WishlistProductNotAvailable;
 
 use App\Http\Controllers\FileController;
 
@@ -124,6 +127,18 @@ class ProductsController extends Controller {
             Product::where('id', '=', $id)->update(array('product_image' => $hash));
         } else if ($request->deletePhoto) {
             Product::where('id', '=', $id)->update(array('product_image' => null));
+        }
+
+        if($request->stock <= 0 && $oldProduct->stock > 0){
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductNotAvailable($userWithProductInWishlist->id_utilizador, 
+                                                      $oldProduct->id, $oldProduct->nome));
+        } else if($oldProduct->stock <= 0 && $request->stock > 0){
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductAvailable($userWithProductInWishlist->id_utilizador, 
+                                                   $oldProduct->id, $oldProduct->nome));
         }
 
         Product::where('id', '=', $id)->update(array('nome' => $request->name, 
