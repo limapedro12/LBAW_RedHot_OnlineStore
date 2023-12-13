@@ -31,7 +31,7 @@ class MailModel extends Mailable
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
-            subject: 'Email de recuperação de passoword',
+            subject: 'Email de recuperação de password',
         );
     }
 
