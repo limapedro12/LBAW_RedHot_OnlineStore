@@ -1,4 +1,5 @@
 @section('content')
+    <section>
         <h1>Checkout</h1>
         <p>Total: {{ $total }} €</p>
         <form method=post action="/cart/checkout">
@@ -38,6 +39,7 @@
             <br><br>
             <button type="submit">Confirmar encomenda</button>
         </form>
+    </section>
 @endsection
 
 @if (Auth::guard('admin')->check())
@@ -47,4 +49,3 @@
 @else
     @include('layouts.userNotLoggedHeaderFooter')
 @endif
-

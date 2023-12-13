@@ -19,7 +19,7 @@
                                 <div class="filesBox">
                                     <div class="fileImgEdit">
                                         <label for="file">
-                                            <i class="fa fa-2x fa-camera"></i> 
+                                            <i class="fa fa-2x fa-camera"></i>
                                             Editar Fotografia de Perfil
                                             <input type="file" name="file" id="file" class="inputfile">
                                             <br />
