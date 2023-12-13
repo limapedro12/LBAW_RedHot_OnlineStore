@@ -9,9 +9,9 @@
                 <p>Ainda não tem produtos no carrinho</p> 
             @endforelse
         </ul>
-        <p>Total: {{$total}} €</p>
+        <p>Total: {{ $total }} €</p>
         @if (count($list) > 0)
-        <a href="/cart/checkout"><button>Checkout</button></a>
+            <a href="/cart/checkout"><button>Checkout</button></a>
         @endif
     </section>
 @endsection
@@ -23,4 +23,3 @@
 @else
     @include('layouts.userNotLoggedHeaderFooter')
 @endif
-

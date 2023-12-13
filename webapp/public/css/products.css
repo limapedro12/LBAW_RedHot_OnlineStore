@@ -13,8 +13,6 @@
 
 .productsPageFilter {
     grid-area: productsPageFilter;
-    overflow: auto;
-    scroll-behavior: smooth;
     border-right: 2px solid var(--black);
 }
 
