@@ -95,11 +95,11 @@ class UserController extends Controller
             $oldPhoto = $user->profile_image;
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'profile', $id);
-            User::where('id', '=', $id)->update(array('profile_image' => $hash));
-            FileController::delete($oldPhoto);
+            $user->update(array('profile_image' => $hash));
+            if ($oldPhoto) FileController::delete($oldPhoto);
         } else if ($request->deletePhoto) {
             FileController::delete($user->profile_image);
-            User::where('id', '=', $id)->update(array('profile_image' => null));
+            $user->update(array('profile_image' => null));
         }
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));
