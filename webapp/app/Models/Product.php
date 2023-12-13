@@ -143,10 +143,10 @@ class Product extends Model{
 
     public function decrementStock(int $quantity){
         if($this->stock - $quantity <= 0 && $this->stock > 0){
-            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $this->id)->get();
             foreach($usersWithProductInWishlist as $userWithProductInWishlist)
                 event(new WishlistProductNotAvailable($userWithProductInWishlist->id_utilizador, 
-                                                      $oldProduct->id, $oldProduct->nome));
+                                                      $this->id, $this->nome));
         }
         $this->stock -= $quantity;
         $this->save();
@@ -157,10 +157,10 @@ class Product extends Model{
 
     public function incrementStock(int $quantity){
         if($this->stock + $quantity > 0 && $this->stock <= 0){
-            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
+            $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $this->id)->get();
             foreach($usersWithProductInWishlist as $userWithProductInWishlist)
                 event(new WishlistProductAvailable($userWithProductInWishlist->id_utilizador, 
-                                                   $oldProduct->id, $oldProduct->nome));
+                                                   $this->id, $this->nome));
         }
         $this->stock += $quantity;
         $this->save();

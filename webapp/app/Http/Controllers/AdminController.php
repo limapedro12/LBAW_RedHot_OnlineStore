@@ -57,7 +57,7 @@ class AdminController extends Controller{
     public function adminOrders(){
         verifyAdmin();
 
-        $orders = Purchase::all();
+        $orders = Purchase::all()->sortByDesc('timestamp');
 
         return view('pages.adminOrders', [
             'orders' => $orders
