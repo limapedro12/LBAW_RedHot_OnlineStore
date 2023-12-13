@@ -22,12 +22,15 @@ abstract class NotificationEvent implements ShouldBroadcast{
     public int $adminId = 0;
     public string $linkToRedirect = '';
     public bool $lida;
+    public string $channel;
 
     public function broadcastOn() {
         return 'RedHot';
     }
 
-    abstract public function broadcastAs();
+    public function broadcastAs(){
+        return $this->channel;
+    }
 
     protected function createUserNotification(int $userId, string $message, string $linkToRedirect) {
         $this->userId = $userId;
@@ -41,6 +44,7 @@ abstract class NotificationEvent implements ShouldBroadcast{
                                               'id_utilizador' => $userId, 
                                               'link' => $linkToRedirect]);
         $this->notificationId = $notification->id;
+        $this->channel = 'notification-to-user-' . $this->userId;
     }
 
     protected function createAdminNotification(int $adminId, string $message, string $linkToRedirect) {
@@ -55,6 +59,7 @@ abstract class NotificationEvent implements ShouldBroadcast{
                                               'id_administrador' => $adminId, 
                                               'link' => $linkToRedirect]);
         $this->notificationId = $notification->id;
+        $this->channel = 'notification-to-admin-' . $this->adminId;
     }
 
     protected function createNotificationToAllAdmins(string $message, string $linkToRedirect) {
@@ -68,5 +73,6 @@ abstract class NotificationEvent implements ShouldBroadcast{
                                               'link' => $linkToRedirect,
                                               'para_todos_administradores' => true]);
         $this->notificationId = $notification->id;
+        $this->channel = 'notification-to-all-admins';
     }
 }

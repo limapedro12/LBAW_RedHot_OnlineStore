@@ -13,8 +13,4 @@ class ProductOutOfStock extends NotificationEvent {
 
         $this->createAdminNotification($adminId, $message, $link);
     }
-
-    public function broadcastAs() {
-        return 'notification-to-admin-' . $this->adminId;
-    }
 }

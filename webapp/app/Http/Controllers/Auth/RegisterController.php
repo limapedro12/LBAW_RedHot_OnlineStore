@@ -32,15 +32,18 @@ class RegisterController extends Controller
     /**
      * Register a new user.
      */
-    public function register(Request $request)
-    {   
-
+    public function register(Request $request){   
         verifyNotAutenticated();
-        $request->validate([
+        $credentials = $request->validate([
             'nome' => 'required|string|max:256',
             'email' => 'required|email|max:256|unique:utilizador',
             'password' => 'required|min:8|confirmed'
         ]);
+
+        if(User::where('email', $request->email)->first() != null)
+            return redirect('/register')
+                ->withInput($request->only('nome', 'email'))
+                ->withErrors(['email' => 'Email já registado!']);
 
         $newUser = User::create([
             'nome' => $request->nome,
@@ -48,7 +51,21 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect('/login')
-            ->withSuccess('Conta criada com sucesso!');
+        $guestId = session('guestID');
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+
+            if ($guestId) {
+                ProductCartController::transferGuestCart($guestId);
+                return redirect()->intended('/cart');
+            }
+ 
+            return redirect()->intended('/products');
+        }
+ 
+        return back()->withErrors([
+            'email' => 'Erro ao criar conta.',
+        ])->onlyInput('nome', 'email');
     }
 }
