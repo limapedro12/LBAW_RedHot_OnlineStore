@@ -17,38 +17,43 @@ use App\Events\WishlistProductNotAvailable;
 
 use App\Http\Controllers\FileController;
 
-function verifyAdmin() : void {
-    if(Auth::guard('admin')->user()==null)
+function verifyAdmin(): void
+{
+    if (Auth::guard('admin')->user() == null)
         abort(403);
 }
 
-class ProductsController extends Controller {
-    public function productsDetails(int $id){
+class ProductsController extends Controller
+{
+    public function productsDetails(int $id)
+    {
         return view('pages.productDetails', [
             'product' => Product::findorfail($id),
-            'discountFunction' => function($price, $discount){
+            'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             }
         ]);
     }
 
-    public function listProducts(){
+    public function listProducts()
+    {
         return view('pages.products', [
             'maxPrice' => Product::getMostExpensiveProductPrice(),
             'products' => Product::orderBy('id')->get(),
-            'discountFunction' => function($price, $discount){
+            'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             },
             'allCategories' => Product::getAllCategories()
         ]);
     }
 
-    public function searchAndFilterProductsAPI(string $stringToSearch, string $filter){
-        if($stringToSearch == '*')
+    public function searchAndFilterProductsAPI(string $stringToSearch, string $filter)
+    {
+        if ($stringToSearch == '*')
             $products = Product::filterProducts(json_decode($filter));
         else
             $products = Product::searchAndFilterProducts($stringToSearch, json_decode($filter));
-        foreach($products as $product){
+        foreach ($products as $product) {
             $product->avaliacao_media = $product->getProductRating();
             $product->numero_reviews = $product->getProductNumberOfReviews();
             $product->url_imagem = FileController::get('product', $product->id);
@@ -56,12 +61,14 @@ class ProductsController extends Controller {
         return json_encode($products);
     }
 
-    public function addProductForm(){
+    public function addProductForm()
+    {
         verifyAdmin();
         return view('pages.productsAdd');
     }
 
-    public function addProduct(Request $request) {
+    public function addProduct(Request $request)
+    {
         verifyAdmin();
 
         $request->validate([
@@ -76,7 +83,7 @@ class ProductsController extends Controller {
         $newProduct = Product::create([
             'nome' => $request->name,
             'precoatual' => $request->price,
-            'desconto' => ($request->discount? $request->discount : 0),
+            'desconto' => ($request->discount ? $request->discount : 0),
             'stock' => $request->stock,
             'id_administrador' => 1,
             'descricao' => $request->description,
@@ -89,10 +96,11 @@ class ProductsController extends Controller {
             $newProduct->update(array('product_image' => $hash));
         }
 
-        return redirect('/products/'.$newProduct->id);
+        return redirect('/products/' . $newProduct->id);
     }
 
-    public function editProductForm(int $id){
+    public function editProductForm(int $id)
+    {
         verifyAdmin();
 
         return view('pages.productsEdit', [
@@ -100,9 +108,10 @@ class ProductsController extends Controller {
         ]);
     }
 
-    public function editProduct(Request $request, int $id){
+    public function editProduct(Request $request, int $id)
+    {
         verifyAdmin();
-        
+
         $request->validate([
             'name' => 'required|string|max:256',
             'price' => 'required|numeric|min:0',
@@ -112,15 +121,15 @@ class ProductsController extends Controller {
         ]);
 
         $oldProduct = Product::findorfail($id);
-        if($oldProduct->precoatual != $request->price || $oldProduct->desconto != $request->discount){
+        if ($oldProduct->precoatual != $request->price || $oldProduct->desconto != $request->discount) {
             $usersWithProductInCart = ProductCart::where('id_produto', '=', $id)->get();
-            foreach($usersWithProductInCart as $userWithProductInCart)
-                event(new ChangeInProductsPrice($userWithProductInCart->id_utilizador, 
-                                                $oldProduct->id, $oldProduct->nome, 
-                                                $oldProduct->precoatual*(1-$oldProduct->desconto), 
-                                                $request->price*(1-$request->discount)));
+            foreach ($usersWithProductInCart as $userWithProductInCart)
+                event(new ChangeInProductsPrice($userWithProductInCart->id_utilizador,
+                    $oldProduct->id, $oldProduct->nome,
+                    $oldProduct->precoatual * (1 - $oldProduct->desconto),
+                    $request->price * (1 - $request->discount)));
         }
-        
+
         if ($request->file && !($request->deletePhoto)) {
             $product = Product::findorfail($id);
             $oldPhoto = $product->product_image;
@@ -134,29 +143,30 @@ class ProductsController extends Controller {
             $product->update(array('product_image' => null));
         }
 
-        if($request->stock <= 0 && $oldProduct->stock > 0){
+        if ($request->stock <= 0 && $oldProduct->stock > 0) {
             $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
-            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
-                event(new WishlistProductNotAvailable($userWithProductInWishlist->id_utilizador, 
-                                                      $oldProduct->id, $oldProduct->nome));
-        } else if($oldProduct->stock <= 0 && $request->stock > 0){
+            foreach ($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductNotAvailable($userWithProductInWishlist->id_utilizador,
+                    $oldProduct->id, $oldProduct->nome));
+        } else if ($oldProduct->stock <= 0 && $request->stock > 0) {
             $usersWithProductInWishlist = Wishlist::where('id_produto', '=', $id)->get();
-            foreach($usersWithProductInWishlist as $userWithProductInWishlist)
-                event(new WishlistProductAvailable($userWithProductInWishlist->id_utilizador, 
-                                                   $oldProduct->id, $oldProduct->nome));
+            foreach ($usersWithProductInWishlist as $userWithProductInWishlist)
+                event(new WishlistProductAvailable($userWithProductInWishlist->id_utilizador,
+                    $oldProduct->id, $oldProduct->nome));
         }
 
-        Product::where('id', '=', $id)->update(array('nome' => $request->name, 
-                                                     'precoatual' => $request->price, 
-                                                     'desconto' => $request->discount, 
-                                                     'stock' => $request->stock, 
-                                                     'descricao' => $request->description,
-                                                     'categoria' => ucfirst($request->category)));
+        Product::where('id', '=', $id)->update(array('nome' => $request->name,
+            'precoatual' => $request->price,
+            'desconto' => $request->discount,
+            'stock' => $request->stock,
+            'descricao' => $request->description,
+            'categoria' => ucfirst($request->category)));
 
-        return redirect('/products/'.$id);
+        return redirect('/products/' . $id);
     }
 
-    public function changeStockProductForm(int $id){
+    public function changeStockProductForm(int $id)
+    {
         verifyAdmin();
 
         return view('pages.productsChangeStock', [
@@ -164,19 +174,21 @@ class ProductsController extends Controller {
         ]);
     }
 
-    public function changeStockProduct(Request $request, int $id){
+    public function changeStockProduct(Request $request, int $id)
+    {
         verifyAdmin();
-        
+
         $request->validate([
             'stock' => 'required|numeric|min:0',
         ]);
 
         Product::where('id', '=', $id)->update(array('stock' => $request->stock));
 
-        return redirect('/products/'.$id);
+        return redirect('/products/' . $id);
     }
 
-    public static function deleteProduct(Request $request, int $id){
+    public static function deleteProduct(Request $request, int $id)
+    {
         error_log($id);
         verifyAdmin();
         error_log($id);

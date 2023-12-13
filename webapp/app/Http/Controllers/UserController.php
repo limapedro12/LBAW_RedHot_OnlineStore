@@ -15,16 +15,18 @@ use App\Models\Order;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
 
-function verifyUser(User $user) : void {
-    if((Auth::user()==null || Auth::user()->id != $user->id) && Auth::guard('admin')->user()==null)
+function verifyUser(User $user): void
+{
+    if ((Auth::user() == null || Auth::user()->id != $user->id) && Auth::guard('admin')->user() == null)
         abort(403);
 }
 
-function verifyToken(User $user, string $token) {
+function verifyToken(User $user, string $token)
+{
 
     $validTokens = session('validTokens');
 
-    if($token == null || $token == "" || strlen($token) != 64 || !in_array($token, $validTokens) || $user->id != array_search($token, $validTokens))
+    if ($token == null || $token == "" || strlen($token) != 64 || !in_array($token, $validTokens) || $user->id != array_search($token, $validTokens))
         abort(403);
 }
 
@@ -38,7 +40,7 @@ class UserController extends Controller
         //
     }
 
-    public function showProfileDetails(int $id) : View
+    public function showProfileDetails(int $id): View
     {
         $user = User::findOrFail($id);
 
@@ -55,7 +57,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function editProfileForm(int $id) : View
+    public function editProfileForm(int $id): View
     {
         $user = User::findOrFail($id);
 
@@ -75,7 +77,7 @@ class UserController extends Controller
         if ($request->password !== $request->password_confirmation)
             return back()->withErrors(['password' => 'As passwords introduzidas não coincidem']);
 
-        if (!Hash::check($request->password, $user->password)) 
+        if (!Hash::check($request->password, $user->password))
             return back()->withErrors(['password' => 'A password introduzida não corresponde à sua password atual']);
 
         $request->validate([
@@ -102,10 +104,10 @@ class UserController extends Controller
 
         User::where('id', '=', $id)->update(array('nome' => $request->nome, 'email' => $request->email));
 
-        return redirect('/users/'.$id);
+        return redirect('/users/' . $id);
     }
 
-    public function deleteAccountForm(int $id) : View
+    public function deleteAccountForm(int $id): View
     {
         $user = User::findOrFail($id);
 
@@ -123,7 +125,7 @@ class UserController extends Controller
         $this->authorize('deleteAccount', $user);
 
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/'.$id.'/delete_account');
+            return redirect('/users/' . $id . '/delete_account');
         }
 
         FileController::delete($user->profile_image);
@@ -134,7 +136,7 @@ class UserController extends Controller
     }
 
     // edit password version
-    public function editPasswordForm(Request $request, int $id) : View
+    public function editPasswordForm(Request $request, int $id): View
     {
         $user = User::findOrFail($id);
 
@@ -160,11 +162,11 @@ class UserController extends Controller
 
         User::where('id', '=', $id)->update(array('password' => Hash::make($request->new_password)));
 
-        return redirect('/users/'.$id);
+        return redirect('/users/' . $id);
     }
 
     // forgot password version
-    public function changePasswordForm(Request $request, int $id, string $token) : View
+    public function changePasswordForm(Request $request, int $id, string $token): View
     {
         $user = User::findOrFail($id);
 
@@ -192,7 +194,7 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    public function getTotalOrders(int $id) : int
+    public function getTotalOrders(int $id): int
     {
         $user = User::findOrFail($id);
 
@@ -201,7 +203,7 @@ class UserController extends Controller
         return $user->orders()->count();
     }
 
-    public function getTotalReviews(int $id) : int
+    public function getTotalReviews(int $id): int
     {
         $user = User::findOrFail($id);
 
@@ -219,7 +221,7 @@ class UserController extends Controller
         return $user->orders()->get();
     }
 
-    public function getNumberOfUreadNotifications(int $id) : int
+    public function getNumberOfUreadNotifications(int $id): int
     {
         $user = User::findOrFail($id);
 
@@ -240,7 +242,7 @@ class UserController extends Controller
 
         $user->ban();
 
-        return redirect('/users/'.$id);
+        return redirect('/users/' . $id);
     }
 
     public function becomeAdmin(Request $request, int $id)

@@ -319,7 +319,7 @@ EXECUTE FUNCTION update_order_status_trigger();
 
 SET timezone = 'Europe/Lisbon';
 
-INSERT INTO Utilizador (nome, email, password, profile_image) VALUES ('Utilizador','user@users.com','$2y$10$Rs590ufQ2U3ies52lz1R0.KNlZaOIaVoPGJqKqbYBG5ZLaCwDVZ3.', 'profile/1u9ceaMiBdeI0gaSjwfqQ3C73dPHULuVKzOhzXDf.gif'); -- password: 12345678
+INSERT INTO Utilizador (nome, email, password) VALUES ('Utilizador','user@users.com','$2y$10$Rs590ufQ2U3ies52lz1R0.KNlZaOIaVoPGJqKqbYBG5ZLaCwDVZ3.'); -- password: 12345678
 
 INSERT INTO Administrador (nome, email, password) VALUES ('admin', 'admin@admin.pt', '$2y$10$R6IeqCxQxMConGFO3OHuq.Um2vxTYB9NKikC6Hky8cmUCln6jl5k6'); -- password: 12345678
 

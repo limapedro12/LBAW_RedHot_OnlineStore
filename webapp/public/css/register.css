@@ -119,7 +119,7 @@
     display: none;
 }
 
-.signup .signupInput .signupForm p{
+.signup .signupInput .signupForm p {
     font-size: 1.5rem;
     color: var(--light-black);
     margin-bottom: 1rem;
@@ -127,6 +127,6 @@
 }
 
 
-.fillerFP{
+.fillerFP {
     padding-top: 5rem;
 }

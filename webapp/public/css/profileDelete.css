@@ -1,4 +1,4 @@
-.deleteAccountTitle{
+.deleteAccountTitle {
     text-align: center;
     font-size: 3rem;
     padding-bottom: 1rem;
@@ -6,7 +6,7 @@
     color: var(--black);
 }
 
-.deleteAccountForm{
+.deleteAccountForm {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
 
 
 
-.deleteAccountForm .inputBox .deleteAccount{
+.deleteAccountForm .inputBox .deleteAccount {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,14 +22,14 @@
     padding-bottom: 2rem;
 }
 
-.deleteAccountForm .inputBox .deleteAccount label{
+.deleteAccountForm .inputBox .deleteAccount label {
     display: block;
     font-size: 1.7rem;
     padding-bottom: 1rem;
     color: var(--black);
 }
 
-.deleteAccountForm .inputBox .deleteAccount input{
+.deleteAccountForm .inputBox .deleteAccount input {
     width: 60%;
     padding: 0.5rem;
     font-size: 1.5rem;
@@ -40,18 +40,18 @@
     color: var(--black);
 }
 
-.deleteAccountForm .inputBox .deleteAccount input:focus{
+.deleteAccountForm .inputBox .deleteAccount input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.deleteAccountForm .deleteAccountButton{
+.deleteAccountForm .deleteAccountButton {
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 3rem;
 }
 
-.deleteAccountForm .deleteAccountButton input{
+.deleteAccountForm .deleteAccountButton input {
     display: inline-block;
     background: var(--main-color);
     margin-top: 1rem;
@@ -61,11 +61,11 @@
     cursor: pointer;
 }
 
-.deleteAccountForm .deleteAccountButton input:hover{
+.deleteAccountForm .deleteAccountButton input:hover {
     opacity: 0.8;
 }
 
-.finalLinksDel{
+.finalLinksDel {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -76,7 +76,7 @@
     margin: 0;
 }
 
-.finalLinksDel a{
+.finalLinksDel a {
     font-size: 1.7rem;
     color: var(--black);
     text-decoration: none;
@@ -84,7 +84,7 @@
     background: transparent;
 }
 
-.finalLinksDel a:hover{
+.finalLinksDel a:hover {
     color: var(--main-color);
 }
 
@@ -101,10 +101,10 @@
     width: 100%;
 }
 
-.passwordChangeDel{
+.passwordChangeDel {
     padding-right: 7rem;
 }
 
-.editProfileDel{
+.editProfileDel {
     padding-right: 2rem;
 }

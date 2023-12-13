@@ -1,9 +1,9 @@
-.aboutContent{
+.aboutContent {
     display: flex;
     flex-direction: column;
 }
 
-.aboutContent .aboutRowOne{
+.aboutContent .aboutRowOne {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -12,7 +12,7 @@
     margin-bottom: 1rem;
 }
 
-.aboutContent .aboutRowOne .aboutRowOneContentLeft{
+.aboutContent .aboutRowOne .aboutRowOneContentLeft {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,7 +22,8 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
-.aboutContent .aboutRowOne .aboutRowOneContentRight{
+
+.aboutContent .aboutRowOne .aboutRowOneContentRight {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,32 +31,32 @@
     width: 40%;
 }
 
-.aboutTitle{
+.aboutTitle {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 2rem;
 }
 
 .aboutTitle .one,
-.aboutTitle .three{
+.aboutTitle .three {
     color: var(--black);
 }
 
-.aboutTextSeparator{
+.aboutTextSeparator {
     width: 15%;
     height: 2px;
     background-color: var(--black);
     margin-bottom: 1.5rem;
 }
 
-.aboutTextSeparatorTwo{
+.aboutTextSeparatorTwo {
     width: 15%;
     height: 2px;
     background-color: var(--white);
     margin-bottom: 1.5rem;
 }
 
-.aboutText{
+.aboutText {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,11 +69,11 @@
 }
 
 .aboutText .one,
-.aboutText .three{
+.aboutText .three {
     color: var(--black);
 }
 
-.aboutRowTwo{
+.aboutRowTwo {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -82,7 +83,7 @@
     background-color: var(--black);
 }
 
-.aboutRowTwo .aboutRowTwoContentLeft{
+.aboutRowTwo .aboutRowTwoContentLeft {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,7 +91,7 @@
     opacity: 0.8;
 }
 
-.aboutRowTwo .aboutRowTwoContentRight{
+.aboutRowTwo .aboutRowTwoContentRight {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,15 +101,15 @@
 
 
 
-.aboutTitle .two{
+.aboutTitle .two {
     color: var(--white);
 }
 
-.aboutText .two{
+.aboutText .two {
     color: var(--white);
 }
 
-.aboutRowTwo .aboutRowTwoContentRight a .aboutButtonToProducts{
+.aboutRowTwo .aboutRowTwoContentRight a .aboutButtonToProducts {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -129,16 +130,16 @@
     font-weight: 600;
 }
 
-.aboutRowTwo .aboutRowTwoContentRight .aboutButtonToProducts:hover{
+.aboutRowTwo .aboutRowTwoContentRight .aboutButtonToProducts:hover {
     opacity: 0.8;
 }
 
-.aboutRowThree{
+.aboutRowThree {
     display: flex;
     flex-direction: column;
 }
 
-.aboutRowThree .aboutRowThreeContent{
+.aboutRowThree .aboutRowThreeContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -147,19 +148,19 @@
     margin-bottom: 1rem;
 }
 
-.aboutRowThree .aboutRowThreeContent .aboutTextSeparatorThree{
+.aboutRowThree .aboutRowThreeContent .aboutTextSeparatorThree {
     width: 10%;
     height: 2px;
     background-color: var(--black);
     margin-bottom: 1.5rem;
 }
 
-.aboutRowThree .aboutRowThreeContent .aboutText .three{
+.aboutRowThree .aboutRowThreeContent .aboutText .three {
     color: var(--black);
     width: 80%;
 }
 
-.aboutTeam{
+.aboutTeam {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -168,14 +169,14 @@
     margin-bottom: 1rem;
 }
 
-.aboutTeam img{
+.aboutTeam img {
     width: 20rem;
     height: 20rem;
     border-radius: 50%;
     margin-bottom: 1rem;
 }
 
-.aboutTeam .aboutTeamMember{
+.aboutTeam .aboutTeamMember {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -183,24 +184,24 @@
     width: 30%;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberName{
+.aboutTeam .aboutTeamMember .aboutTeamMemberName {
     font-size: 1.7rem;
     font-weight: 600;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberRole{
+.aboutTeam .aboutTeamMember .aboutTeamMemberRole {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberNickname{
+.aboutTeam .aboutTeamMember .aboutTeamMemberNickname {
     font-size: 1.3rem;
     font-weight: 400;
     margin-bottom: 1rem;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberDescription{
+.aboutTeam .aboutTeamMember .aboutTeamMemberDescription {
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: 1rem;
@@ -211,7 +212,7 @@
     width: 80%;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia{
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -219,12 +220,12 @@
     width: 15%;
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a{
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a {
     text-decoration: none;
     font-size: 2.5rem;
     color: var(--main-color);
 }
 
-.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a:hover{
+.aboutTeam .aboutTeamMember .aboutTeamMemberSocialMedia a:hover {
     opacity: 0.8;
 }

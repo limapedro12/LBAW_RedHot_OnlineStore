@@ -1,5 +1,5 @@
 <?php
-  
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -14,8 +14,9 @@ use App\Models\User;
 
 use App\Http\Controllers\ProductCartController;
 
-function verifyNotAutenticated() : void {
-    if(Auth::check() || Auth::guard('admin')->check())
+function verifyNotAutenticated(): void
+{
+    if (Auth::check() || Auth::guard('admin')->check())
         abort(403);
 }
 
@@ -45,12 +46,12 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
- 
+
             return redirect()->intended('/admin');
-        }     
+        }
 
         $guestId = session('guestID');
 
@@ -67,10 +68,10 @@ class LoginController extends Controller
                 ProductCartController::transferGuestCart($guestId);
                 return redirect()->intended('/cart');
             }
- 
+
             return redirect()->intended('/products');
         }
- 
+
         return back()->withErrors([
             'email' => 'As credenciais introduzidas não correspodem aos nossos registos.',
         ])->onlyInput('email');
@@ -88,5 +89,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect('/')
             ->withSuccess('Logout efetuado com sucesso!');
-    } 
+    }
 }

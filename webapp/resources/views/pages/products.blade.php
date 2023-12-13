@@ -16,7 +16,7 @@
                         <label class="filtersRangeTitle">Preço:</label>
                         <div class="slidersControl">
                             <input id="fromSlider" type="range" value="0" min="0" max="{{ $maxPrice + 1 }}" />
-                            <input id="toSlider" type="range" value="{{ round(($maxPrice + 1)) }}" min="0"
+                            <input id="toSlider" type="range" value="{{ round($maxPrice + 1) }}" min="0"
                                 max="{{ $maxPrice + 1 }}" />
                         </div>
                         <div class="formControl">
@@ -28,7 +28,7 @@
                             <div class="formControlContainer">
                                 <div class="formControlContainerTime">Max:</div>
                                 <input class="formControlContainerTimeInput" type="number" id="toInput"
-                                    value="{{ round(($maxPrice + 1)) }}" min="0" max="{{ $maxPrice + 1 }}" />
+                                    value="{{ round($maxPrice + 1) }}" min="0" max="{{ $maxPrice + 1 }}" />
                             </div>
                         </div>
                     </div>
@@ -103,12 +103,12 @@
 
 
                     <!-- <div class="filterButtonContainer">
-                        <button type="submit">
-                            <span class="filterButton">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                        </button>
-                    </div> -->
+                                <button type="submit">
+                                    <span class="filterButton">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </button>
+                            </div> -->
 
 
 
@@ -184,7 +184,8 @@
                 <div class="productListItem">
                     <div class="productListItemImg">
                         <a href = "/products/{{ $product->id }}">
-                            <img class="productImage" src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                            <img class="productImage" src="{{ $product->getProductImage() }}"
+                                alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
                         </a>
                     </div>
                     <div class="productListItemTitle">
@@ -200,7 +201,8 @@
                                 <p>{{ $product->getProductNumberOfReviews() }} avaliações </p>
                             </div>
                             <div class="productListItemHearts">
-                                <p> <span class="productListItemAverageRating">{{ $product->getProductRating() }}</span> / 5 <i class="fa-solid fa-heart"></i> </p>
+                                <p> <span class="productListItemAverageRating">{{ $product->getProductRating() }}</span> /
+                                    5 <i class="fa-solid fa-heart"></i> </p>
                             </div>
                         </div>
                         <div class="productListItemPrices">

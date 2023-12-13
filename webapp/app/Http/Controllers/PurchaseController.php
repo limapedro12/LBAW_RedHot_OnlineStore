@@ -19,11 +19,11 @@ use App\Events\CancelOrder;
 class PurchaseController extends Controller
 {
     public function showCheckoutForm()
-    {   
+    {
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
             $total = 0;
-            foreach($productsCart as $productCart) {
+            foreach ($productsCart as $productCart) {
                 $product = Product::findOrFail($productCart->id_produto);
                 $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
             }
@@ -55,9 +55,9 @@ class PurchaseController extends Controller
 
         $address = $request->street . ', ' . $request->doorNo . ', ' . $request->city . ', ' . $request->country;
 
-        foreach($productsCart as $productCart) {
+        foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
-            
+
             // increment total
             $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
 
@@ -77,7 +77,7 @@ class PurchaseController extends Controller
         $purchase->total = $total;
         $purchase->save();
 
-        foreach($productsCart as $productCart) {
+        foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
 
             // associate each product with purchase
@@ -95,7 +95,7 @@ class PurchaseController extends Controller
         return redirect('/')->with('success', 'Encomenda efetuada com sucesso!');
     }
 
-    public function showOrders(int $id) : View
+    public function showOrders(int $id): View
     {
         if (Auth::check() && Auth::id() == $id) {
             $purchases = Purchase::where('id_utilizador', '=', $id)->get();
@@ -103,7 +103,7 @@ class PurchaseController extends Controller
         }
     }
 
-    public function showOrderDetails(int $userId, int $orderId) : View
+    public function showOrderDetails(int $userId, int $orderId): View
     {
         $purchase = Purchase::findOrFail($orderId);
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
@@ -118,11 +118,11 @@ class PurchaseController extends Controller
 
         $all_states = ['Em processamento', 'Pagamento por Aprovar', 'Pagamento Aprovado', 'Pagamento Não Aprovado', 'Enviada', 'Entregue', 'Cancelada'];
 
-        return view('pages.orderDetails', 
-                ['purchase' => $purchase, 
-                 'quantPriceProducts' => $quantPriceProducts,
-                 'remainingStates' => array_values(array_diff($all_states, [$purchase->estado])),
-                ]);
+        return view('pages.orderDetails',
+            ['purchase' => $purchase,
+                'quantPriceProducts' => $quantPriceProducts,
+                'remainingStates' => array_values(array_diff($all_states, [$purchase->estado])),
+            ]);
     }
 
     public function cancelOrder(int $userId, int $orderId)
@@ -141,7 +141,7 @@ class PurchaseController extends Controller
 
         event(new CancelOrder($purchase->id, Auth::user()->nome, $purchase->id_utilizador));
 
-        return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Encomenda cancelada com sucesso.');
+        return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Encomenda cancelada com sucesso.');
     }
 
     public function changeState(int $userId, int $orderId, Request $request)
@@ -156,6 +156,6 @@ class PurchaseController extends Controller
 
         event(new ChangePurchaseState($orderId, $purchase->id_utilizador, $purchase->estado));
 
-        return redirect('/users/'.$userId.'/orders/'.$orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
+        return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
 }

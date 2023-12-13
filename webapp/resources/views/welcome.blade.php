@@ -23,7 +23,7 @@
                 <h2>Produtos em Destaque</h2>
             </div>
             <div class='top4SellingProductsList'>
-                <div class="productsPageProducts" id='listOfProducts'>
+                <div class="productsDestaqueProducts" id='listOfProducts'>
                     @foreach ($destaques as $product)
                         <div class="productListItem">
                             <div class="productListItemImg">
