@@ -25,7 +25,7 @@
     padding-bottom: 3rem;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .profileImgOnEdit{
+.profileEditForm .userEditForm .changes .profileEditImg .profileImgOnEdit {
     width: 30rem;
     height: 30rem;
     border-radius: 50%;
@@ -34,7 +34,7 @@
     display: 1 1 41rem;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .profileImgOnEdit img{
+.profileEditForm .userEditForm .changes .profileEditImg .profileImgOnEdit img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -54,18 +54,18 @@
     color: var(--main-color);
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgEdit input{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgEdit input {
     display: none;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgEdit .fileName{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgEdit .fileName {
     font-size: 1.5rem;
     padding-bottom: 1rem;
     color: var(--black);
     text-align: center;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete label{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete label {
     display: block;
     text-align: center;
     font-size: 1.7rem;
@@ -75,15 +75,15 @@
     padding-right: 1.5rem;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete label:hover{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete label:hover {
     color: var(--main-color);
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input {
     display: none;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input+label::before{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input+label::before {
     content: "";
     display: inline-block;
     width: 1.5rem;
@@ -96,7 +96,7 @@
     vertical-align: middle;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input:checked+label::before{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox .fileImgDelete input:checked+label::before {
     background-color: var(--main-color);
     content: "\f00c";
     font-family: "Font Awesome 5 Free";
@@ -107,7 +107,7 @@
     vertical-align: middle;
 }
 
-.profileEditForm .userEditForm .changes .profileEditImg .filesBox i{
+.profileEditForm .userEditForm .changes .profileEditImg .filesBox i {
     font-size: 2.5rem;
     padding-bottom: 1rem;
 }
@@ -223,7 +223,7 @@
     padding-bottom: 3rem;
 }
 
-.profileEditForm .userEditForm .confirm .confirmButton .btn{
+.profileEditForm .userEditForm .confirm .confirmButton .btn {
     display: inline-block;
     background: var(--main-color);
     margin-top: 1rem;
@@ -233,7 +233,7 @@
     cursor: pointer;
 }
 
-.profileEditForm .userEditForm .confirm .confirmButton .btn:hover{
+.profileEditForm .userEditForm .confirm .confirmButton .btn:hover {
     opacity: 0.8;
 }
 
@@ -247,7 +247,7 @@
     margin: 0;
 }
 
-.finalLinks a{
+.finalLinks a {
     font-size: 1.7rem;
     color: var(--black);
     text-decoration: none;

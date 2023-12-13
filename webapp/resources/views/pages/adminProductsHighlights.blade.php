@@ -70,13 +70,14 @@
                 @if ($destaques->count() == 0)
                     <p>Não existem produtos em destaque.</p>
                 @endif
-                
+
                 <div class="productsPageProducts" id='listOfProducts'>
                     @foreach ($destaques as $product)
                         <div class="productListItem">
                             <div class="productListItemImg">
                                 <a href = "/products/{{ $product->id }}">
-                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
+                                        width="100px" height="100px">
                                 </a>
                             </div>
                             <div class="productListItemTitle">
@@ -108,7 +109,8 @@
                                         </div>
                                         <div class="productListItemNewPrice">
                                             <p class="newPrices">
-                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
+                                                €
                                             </p>
                                         </div>
                                     @else
@@ -141,7 +143,8 @@
                         <div class="productListItem">
                             <div class="productListItemImg">
                                 <a href = "/products/{{ $product->id }}">
-                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
+                                        width="100px" height="100px">
                                 </a>
                             </div>
                             <div class="productListItemTitle">
@@ -173,7 +176,8 @@
                                         </div>
                                         <div class="productListItemNewPrice">
                                             <p class="newPrices">
-                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
+                                                €
                                             </p>
                                         </div>
                                     @else
@@ -186,7 +190,7 @@
                                 </div>
                             </div>
 
-                            @if ($destaques->count() < 4)                               
+                            @if ($destaques->count() < 4)
                                 <form action="{{ route('addHighlight', ['id' => $product->id]) }}" method="post">
                                     @csrf
                                     <button type="submit">Adicionar aos Destaques</button>

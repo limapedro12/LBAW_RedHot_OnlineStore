@@ -52,7 +52,7 @@ class ReviewsController extends Controller
         return response()->json($review);
     }
 
-    
+
     /**
      * Show the review for a given id.
      */
