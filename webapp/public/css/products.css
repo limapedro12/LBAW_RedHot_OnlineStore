@@ -14,6 +14,7 @@
 .productsPageFilter {
     grid-area: productsPageFilter;
     border-right: 2px solid var(--black);
+    overflow: scroll;
 }
 
 .productsPageTop {
