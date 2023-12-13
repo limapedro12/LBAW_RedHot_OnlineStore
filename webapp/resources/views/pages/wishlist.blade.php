@@ -14,7 +14,7 @@
                     <h2> A tua wishlist está vazia! </h2>
                 </div>
                 <div class="wishlistEmptyButton">
-                    <a href="{{ url('/products') }}">Catalogo</a>
+                    <a href="{{ url('/products') }}">Catálogo</a>
                 </div>
             </div>
         @endif
