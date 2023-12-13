@@ -488,7 +488,7 @@ if (deleteButton != null) {
   deleteButton.addEventListener('click', function (event) {
     event.preventDefault()
     if (confirm('Tem a certeza de que pretende eliminar este produto?')) {
-      let action = deleteButton.getAttribute('action')
+      let action = deleteButton.getAttribute('href')
       let csrf_token = document.querySelector('input[name="_token"]').value
       let xhr = new XMLHttpRequest()
       xhr.open('DELETE', action, true)
