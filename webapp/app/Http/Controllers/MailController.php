@@ -46,8 +46,9 @@ class MailController extends Controller
 
                 $mailData = [
                     'id' => $user->id,
+                    'name' => $user->nome,
                     'email' => $request->email,
-                    'token' => $token,
+                    'token' => $token
                 ];
 
                 try {
