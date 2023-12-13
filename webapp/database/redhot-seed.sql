@@ -148,10 +148,6 @@ CREATE TABLE ProdutoWishlist (
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE UtilizadorNaoAutenticadoComProdutosNoCarrinho (
-	id INTEGER PRIMARY KEY
-);
-
 CREATE TABLE ProdutoCarrinho (
 	id SERIAL PRIMARY KEY,
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,

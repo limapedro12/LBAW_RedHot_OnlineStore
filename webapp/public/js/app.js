@@ -502,7 +502,7 @@ if (deleteButton != null) {
 
 // delete profile picture
 try {
-  uploader = document.getElementById('photoUploader');
+  uploader = document.getElementsByClassName('filesBox')[0]
   checkBox = document.getElementById('deletePhoto');
   checkBox.addEventListener('click', function (event) {
     if (checkBox.checked) {
@@ -511,9 +511,7 @@ try {
       uploader.style.display = 'block';
     }
   });
-} catch (error) { }
-
-
+} catch (error) {}
 
 // uploaded image
 let input_img = document.getElementById('file');

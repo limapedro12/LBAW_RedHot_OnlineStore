@@ -122,11 +122,16 @@ class ProductsController extends Controller {
         }
         
         if ($request->file && !($request->deletePhoto)) {
+            $product = Product::findorfail($id);
+            $oldPhoto = $product->product_image;
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'product', $id);
-            Product::where('id', '=', $id)->update(array('product_image' => $hash));
+            $product->update(array('product_image' => $hash));
+            if ($oldPhoto) FileController::delete($oldPhoto);
         } else if ($request->deletePhoto) {
-            Product::where('id', '=', $id)->update(array('product_image' => null));
+            $product = Product::findorfail($id);
+            FileController::delete($product->product_image);
+            $product->update(array('product_image' => null));
         }
 
         if($request->stock <= 0 && $oldProduct->stock > 0){
@@ -175,10 +180,22 @@ class ProductsController extends Controller {
         error_log($id);
         verifyAdmin();
         error_log($id);
-        $product = Product::where('id', '=', $id);
-        //error_log($product->product_image);
-        //FileController::delete($product->product_image);
+        $product = Product::findorfail($id);
+        if ($product->product_image) FileController::delete($product->product_image);
+        
+        $wishlistProducts = Wishlist::where('id_produto', '=', $id)->get();
+        foreach($wishlistProducts as $wishlistProduct) $wishlistProduct->delete();
+
+        $productCarts = ProductCart::where('id_produto', '=', $id)->get();
+        foreach($productCarts as $productCart) $productCart->delete();
+
+        $productReviews = ProductReview::where('id_produto', '=', $id)->get();
+        foreach($productReviews as $productReview) $productReview->delete();
+
+        //$productOrders = ProductOrder::where('id_produto', '=', $id)->get();
+        //foreach($productOrders as $productOrder) $productOrder->delete();
+
         $product->delete();
-        return;
+        return redirect('/adminProductsManage');
     }
 }
