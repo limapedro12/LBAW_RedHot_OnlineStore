@@ -1,4 +1,4 @@
-.productEditImg{
+.productEditImg {
     width: 100%;
     height: 100%;
     display: flex;
@@ -7,7 +7,7 @@
     margin-right: 3rem;
 }
 
-.productEditImg .filesBox .fileImgEdit label{
+.productEditImg .filesBox .fileImgEdit label {
     display: block;
     font-size: 1.5rem;
     padding-bottom: 1rem;
@@ -15,25 +15,25 @@
     text-align: center;
     cursor: pointer;
     padding-top: 1rem;
-    
+
 }
 
-.productEditImg .filesBox .fileImgEdit label:hover{
+.productEditImg .filesBox .fileImgEdit label:hover {
     color: var(--main-color);
 }
 
-.productEditImg .filesBox .fileImgEdit input{
+.productEditImg .filesBox .fileImgEdit input {
     display: none;
 }
 
-.productEditImg .filesBox .fileImgEdit .fileName{
+.productEditImg .filesBox .fileImgEdit .fileName {
     font-size: 1.5rem;
     padding-bottom: 1rem;
     color: var(--black);
     text-align: center;
 }
 
-.productEditImg .filesBox .fileImgDelete label{
+.productEditImg .filesBox .fileImgDelete label {
     display: block;
     text-align: center;
     font-size: 1.5rem;
@@ -43,15 +43,15 @@
     padding-right: 1.5rem;
 }
 
-.productEditImg .filesBox .fileImgDelete label:hover{
+.productEditImg .filesBox .fileImgDelete label:hover {
     color: var(--main-color);
 }
 
-.productEditImg .filesBox .fileImgDelete input{
+.productEditImg .filesBox .fileImgDelete input {
     display: none;
 }
 
-.productEditImg .filesBox .fileImgDelete input+label::before{
+.productEditImg .filesBox .fileImgDelete input+label::before {
     content: "";
     display: inline-block;
     width: 1.5rem;
@@ -64,7 +64,7 @@
     vertical-align: middle;
 }
 
-.productEditImg .filesBox .fileImgDelete input:checked+label::before{
+.productEditImg .filesBox .fileImgDelete input:checked+label::before {
     background-color: var(--main-color);
     content: "\f00c";
     font-family: "Font Awesome 5 Free";
@@ -75,12 +75,12 @@
     vertical-align: middle;
 }
 
-.productEditImg .filesBox i{
+.productEditImg .filesBox i {
     font-size: 2rem;
 }
 
 
-.productEditDetails{
+.productEditDetails {
     width: 100%;
     height: 100%;
     display: flex;
@@ -89,21 +89,21 @@
 }
 
 
-.productEditTitle{
+.productEditTitle {
     display: flex;
     flex-direction: column;
     align-items: left;
 
 }
 
-.productEditTitle label{
+.productEditTitle label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
     font-weight: 600;
 }
 
-.productEditTitle input{
+.productEditTitle input {
     height: 3rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -115,24 +115,24 @@
     margin-bottom: 1rem;
 }
 
-.productEditTitle input:focus{
+.productEditTitle input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.productEditCategory{
+.productEditCategory {
     display: flex;
     flex-direction: column;
     align-items: left;
 }
 
-.productEditCategory label{
+.productEditCategory label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
     font-weight: 600;
 }
 
-.productEditCategory input{
+.productEditCategory input {
     height: 3rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -144,24 +144,24 @@
     margin-bottom: 1rem;
 }
 
-.productEditCategory input:focus{
+.productEditCategory input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.productEditDescription{
+.productEditDescription {
     display: flex;
     flex-direction: column;
     align-items: left;
 }
 
-.productEditDescription label{
+.productEditDescription label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
     font-weight: 600;
 }
 
-.productEditDescription textarea{
+.productEditDescription textarea {
     height: 9.5rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -173,7 +173,7 @@
     margin-bottom: 1rem;
 }
 
-.productEditDescription textarea:focus{
+.productEditDescription textarea:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
@@ -189,13 +189,13 @@
     background: var(--main-color);
 }
 
-.productEditPrice{
+.productEditPrice {
     display: flex;
     flex-direction: row;
     align-items: left;
 }
 
-.productEditPrice label{
+.productEditPrice label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
@@ -203,7 +203,7 @@
     margin-right: 1rem;
 }
 
-.productEditPrice input{
+.productEditPrice input {
     height: 3rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -215,17 +215,17 @@
     margin-bottom: 1rem;
 }
 
-.productEditPrice input:focus{
+.productEditPrice input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.productEditDiscount{
+.productEditDiscount {
     display: flex;
     flex-direction: row;
     align-items: left;
 }
 
-.productEditDiscount label{
+.productEditDiscount label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
@@ -233,7 +233,7 @@
     margin-right: 1rem;
 }
 
-.productEditDiscount input{
+.productEditDiscount input {
     height: 3rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -245,17 +245,17 @@
     margin-bottom: 1rem;
 }
 
-.productEditDiscount input:focus{
+.productEditDiscount input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.productEditStock{
+.productEditStock {
     display: flex;
     flex-direction: row;
     align-items: left;
 }
 
-.productEditStock label{
+.productEditStock label {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: 1rem;
@@ -263,7 +263,7 @@
     margin-right: 1rem;
 }
 
-.productEditStock input{
+.productEditStock input {
     height: 3rem;
     border-bottom: 2px solid var(--main-color);
     padding-left: 0.5rem;
@@ -275,11 +275,11 @@
     margin-bottom: 1rem;
 }
 
-.productEditStock input:focus{
+.productEditStock input:focus {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
 }
 
-.productEditButtons{
+.productEditButtons {
     width: 110%;
     display: flex;
     align-items: center;
@@ -287,8 +287,8 @@
     margin-top: 3rem;
 }
 
-.productEditButtons .productEditSave input{
-    
+.productEditButtons .productEditSave input {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,12 +304,12 @@
     cursor: pointer;
 }
 
-.productEditButtons .productEditSave input:hover{
+.productEditButtons .productEditSave input:hover {
     opacity: 0.8;
 }
 
-.productEditButtons .productEditCancel a{
-    
+.productEditButtons .productEditCancel a {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,18 +325,18 @@
     cursor: pointer;
 }
 
-.productEditButtons .productEditCancel a:hover{
+.productEditButtons .productEditCancel a:hover {
     opacity: 0.8;
 }
 
-.productEditMainTitle{
+.productEditMainTitle {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 5rem;
 }
 
-.productEditMainTitle h1{
+.productEditMainTitle h1 {
     font-size: 4rem;
     color: var(--black);
     font-weight: 600;

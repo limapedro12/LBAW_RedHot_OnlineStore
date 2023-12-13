@@ -1,7 +1,8 @@
-.home{
+.home {
     position: relative;
 }
-.home .buttonOnHome{
+
+.home .buttonOnHome {
     position: absolute;
     top: 300px;
     left: 179px;
@@ -9,7 +10,7 @@
     height: 50px;
 }
 
-.home .buttonOnHome a{
+.home .buttonOnHome a {
     text-decoration: none;
     color: var(--white);
     font-size: 20px;
@@ -23,20 +24,20 @@
     border-radius: 10px;
 }
 
-.home .buttonOnHome a:hover{
+.home .buttonOnHome a:hover {
     background-color: var(--hover-admin-option);
     transition: 0.2s;
 }
 
-.mainDestaques{
+.mainDestaques {
     position: relative;
 }
 
-.mainDestaques .backgroundMain{
+.mainDestaques .backgroundMain {
     z-index: 1;
 }
 
-.mainDestaques .top4SellingProducts{
+.mainDestaques .top4SellingProducts {
     z-index: 2;
     position: absolute;
     top: 0;
@@ -45,7 +46,7 @@
     height: 100%;
 }
 
-.mainDestaques .top4SellingProducts .top4SellingProductsTitle{
+.mainDestaques .top4SellingProducts .top4SellingProductsTitle {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -56,10 +57,10 @@
     margin-top: 10rem;
     padding-top: 2rem;
     margin-bottom: 10rem;
-    
+
 }
 
-.mainDestaques .top4SellingProducts .top4SellingProductsList .productsDestaqueProducts{
+.mainDestaques .top4SellingProducts .top4SellingProductsList .productsDestaqueProducts {
     width: 100%;
     display: flex;
     justify-content: center;

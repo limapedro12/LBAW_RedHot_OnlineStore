@@ -67,13 +67,14 @@
             <div class="adminOptionContent">
 
                 <h2>Gestão de Produtos</h2>
-                
+
                 <div class="productsPageProducts" id='listOfProducts'>
                     @foreach ($products as $product)
                         <div class="productListItem">
                             <div class="productListItemImg">
                                 <a href = "/products/{{ $product->id }}">
-                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
+                                        width="100px" height="100px">
                                 </a>
                             </div>
                             <div class="productListItemTitle">
@@ -86,10 +87,10 @@
                             <div class="productListItemBottom">
                                 <div class="productListItemRating">
                                     <div class="productListItemNumberOfReviews">
-                                        <p> 723 {{ $product->avaliacao }} avaliações </p>
+                                        <p> {{ $product->getProductNumberOfReviews() }} avaliações </p>
                                     </div>
                                     <div class="productListItemHearts">
-                                        <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                                        <p> {{ $product->getProductRating() }}/ 5 <i class="fa-solid fa-heart"></i> </p>
                                     </div>
                                 </div>
                                 <div class="productListItemPrices">
@@ -105,7 +106,8 @@
                                         </div>
                                         <div class="productListItemNewPrice">
                                             <p class="newPrices">
-                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
+                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
+                                                €
                                             </p>
                                         </div>
                                     @else
@@ -132,7 +134,7 @@
                                 @csrf
                                 @method('delete')
                                 <button type="submit">Apagar Produto</button>
-                            </form>                            
+                            </form>
 
                         </div>
                     @endforeach

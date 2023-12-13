@@ -80,7 +80,7 @@
                         action="{{ route('removeFromWishlist', ['id' => $productWishlist->id_utilizador, 'id_product' => $product->id]) }}"
                         class="removeFromWishlistForm">
                         @csrf
-                        @if($product->desconto > 0)
+                        @if ($product->desconto > 0)
                             <input type="submit" value="Remover da Wishlist" class="productAsDiscountWishlist">
                         @else
                             <input type="submit" value="Remover da Wishlist" class="productAsNoDiscountWishlist">

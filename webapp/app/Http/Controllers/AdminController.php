@@ -17,20 +17,23 @@ use App\Models\Faqs;
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
 
-function verifyAdmin() : void {
-    if(Auth::guard('admin')->user()==null)
+function verifyAdmin(): void
+{
+    if (Auth::guard('admin')->user() == null)
         abort(403);
 }
 
-class AdminController extends Controller{
+class AdminController extends Controller
+{
 
-    public function admin(){
+    public function admin()
+    {
         verifyAdmin();
 
         $sales = [];
-        
+
         $sales["count"] = Purchase::count();
-        
+
         if ($sales["count"] == 0) {
             $sales["avg"] = 0;
             $sales["total"] = 0;
@@ -44,17 +47,19 @@ class AdminController extends Controller{
         //$most_sold = Product::find($most_sold_id);
 
         return view('pages.admin', [
-                'sales' => $sales//,
-                //'most_sold' => $most_sold
+            'sales' => $sales //,
+            //'most_sold' => $most_sold
         ]);
     }
 
-    public function adminNotifications(){
+    public function adminNotifications()
+    {
         verifyAdmin();
         return view('pages.adminNotifications');
     }
-    
-    public function adminOrders(){
+
+    public function adminOrders()
+    {
         verifyAdmin();
 
         $orders = Purchase::all();
@@ -63,35 +68,39 @@ class AdminController extends Controller{
             'orders' => $orders
         ]);
     }
-    
-    public function adminProducts(){
+
+    public function adminProducts()
+    {
         verifyAdmin();
         return view('pages.adminProductsManage', [
             'products' => Product::orderBy('id')->get(),
-            'discountFunction' => function($price, $discount){
+            'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             }
         ]);
     }
-    
-    public function adminProductsAdd(){
+
+    public function adminProductsAdd()
+    {
         verifyAdmin();
         return view('pages.adminProductsAdd');
     }
-    
-    public function adminProductsHighlights(){
+
+    public function adminProductsHighlights()
+    {
         verifyAdmin();
 
         return view('pages.adminProductsHighlights', [
             'destaques' => Product::where('destaque', 1)->get(),
             'restantesProdutos' => Product::where('destaque', 0)->get(),
-            'discountFunction' => function($price, $discount){
+            'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             }
         ]);
     }
 
-    public function addHighlight($id) {
+    public function addHighlight($id)
+    {
         verifyAdmin();
 
         $product = Product::find($id);
@@ -103,7 +112,8 @@ class AdminController extends Controller{
         return redirect('/adminProductsHighlights');
     }
 
-    public function removeHighlight($id) {
+    public function removeHighlight($id)
+    {
         verifyAdmin();
 
         $product = Product::find($id);
@@ -114,43 +124,49 @@ class AdminController extends Controller{
 
         return redirect('/adminProductsHighlights');
     }
-    
-    public function adminProductsManage(){
+
+    public function adminProductsManage()
+    {
         verifyAdmin();
         return view('pages.adminProductsManage', [
             'products' => Product::orderBy('id')->get(),
-            'discountFunction' => function($price, $discount){
+            'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             }
         ]);
     }
 
-    public function adminProfile(){
+    public function adminProfile()
+    {
         verifyAdmin();
         return view('pages.adminProfile');
     }
-    
-    public function adminShipping(){
+
+    public function adminShipping()
+    {
         verifyAdmin();
         return view('pages.adminShipping');
     }
-    
-    public function adminUsers(){
+
+    public function adminUsers()
+    {
         verifyAdmin();
         return view('pages.adminUsers', [
             'users' => User::all()
         ]);
     }
 
-    public function adminFAQ(){
+    public function adminFAQ()
+    {
         verifyAdmin();
         return view('pages.adminFAQ', [
             'faqs' => Faqs::all()
         ]);
     }
 
-    public static function verifyAdmin2() : void {
-        if(Auth::guard('admin')->user()==null)
+    public static function verifyAdmin2(): void
+    {
+        if (Auth::guard('admin')->user() == null)
             abort(403);
     }
 }

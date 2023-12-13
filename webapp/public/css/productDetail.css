@@ -33,7 +33,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
+    justify-content: flex-start;
 }
 
 .productDisplay .productBottomLeft {
@@ -56,7 +56,7 @@
 }
 
 .productDisplay .productBottomLeft .productAdminOptions input,
-.productDisplay .productBottomLeft .productAdminOptions a{
+.productDisplay .productBottomLeft .productAdminOptions a {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -74,7 +74,7 @@
 }
 
 .productDisplay .productBottomLeft .productAdminOptions input:hover,
-.productDisplay .productBottomLeft .productAdminOptions a:hover{
+.productDisplay .productBottomLeft .productAdminOptions a:hover {
     opacity: 0.8;
 }
 
@@ -87,7 +87,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-right: 1.5rem;
 }
 
@@ -97,7 +97,7 @@
     border-radius: 10px;
 }
 
-.productDisplay .productRight .productInfo{
+.productDisplay .productRight .productInfo {
     width: 420px;
     height: 420px;
     display: flex;
@@ -119,18 +119,18 @@
     color: var(--black);
 }
 
-.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit{
+.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit {
     text-decoration: none;
     padding-top: 0.5rem;
 }
 
-.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit a{
+.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit a {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--black);
 }
 
-.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit a:hover{
+.productDisplay .productRight .productInfo .productDetails .productTitle .productEdit a:hover {
     color: var(--main-color);
 }
 
@@ -157,18 +157,18 @@
     color: var(--black);
 }
 
-.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productRating p i{
+.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productRating p i {
     color: var(--main-color);
 }
 
-.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productReviews a{
+.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productReviews a {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--black);
     text-decoration: underline;
 }
 
-.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productReviews a:hover{
+.productDisplay .productRight .productInfo .productDetails .productRatingAndReviews .productReviews a:hover {
     color: var(--main-color);
 }
 
@@ -180,7 +180,7 @@
     margin-bottom: 1rem;
 }
 
-.productDisplay .productRight .productInfo .similarProducts p{
+.productDisplay .productRight .productInfo .similarProducts p {
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--black);
@@ -192,14 +192,14 @@
     justify-content: flex-start;
 }
 
-.productDisplay .productRight .productInfo .similarProducts .similarProductsName a{
+.productDisplay .productRight .productInfo .similarProducts .similarProductsName a {
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--black);
     padding-left: 0.5rem;
 }
 
-.productDisplay .productRight .productInfo .similarProducts .similarProductsName a:hover{
+.productDisplay .productRight .productInfo .similarProducts .similarProductsName a:hover {
     color: var(--main-color);
 }
 
@@ -322,11 +322,11 @@
     align-items: center;
 }
 
-.productAddCart .addToCart{
+.productAddCart .addToCart {
     width: 100%;
 }
 
-.productAddCart .addToCart .productQuantity{
+.productAddCart .addToCart .productQuantity {
     margin-bottom: 1rem;
 }
 
@@ -358,7 +358,7 @@
 
 }
 
-.productAddCart .addToCart .productAddToCart input{
+.productAddCart .addToCart .productAddToCart input {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -376,6 +376,6 @@
     cursor: pointer;
 }
 
-.productAddCart .addToCart .productAddToCart input:hover{
+.productAddCart .addToCart .productAddToCart input:hover {
     opacity: 0.8;
 }
