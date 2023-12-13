@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Wishlist;
 
-class WishlistController extends Controller {
-    
-    public function listWishlist(int $id) {
+class WishlistController extends Controller
+{
+
+    public function listWishlist(int $id)
+    {
 
         $wishlist = Wishlist::where('id_utilizador', $id)->get();
 
-        return view('pages.wishlist', ['wishlist' => $wishlist]);
+        return view('pages.wishlist', [
+            'wishlist' => $wishlist,
+            'discountFunction' => function ($price, $discount) {
+                return $price * (1 - $discount);
+            }]);
     }
 
-    public function addToWishlist($id, $id_product) {
+    public function addToWishlist($id, $id_product)
+    {
 
         $wishlistProduct = new Wishlist();
 
@@ -31,8 +38,9 @@ class WishlistController extends Controller {
 
     }
 
-    public function removeFromWishlist($id, $id_product) {
-       
+    public function removeFromWishlist($id, $id_product)
+    {
+
         $wishlistProduct = Wishlist::where('id_utilizador', $id)->where('id_produto', $id_product)->first();
 
         $wishlistProduct->delete();

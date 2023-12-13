@@ -33,6 +33,7 @@
     <link href="{{ url('css/profileDelete.css') }}" rel="stylesheet">
     <link href="{{ url('css/faqs.css') }}" rel="stylesheet">
     <link href="{{ url('css/productDetail.css') }}" rel="stylesheet">
+    <link href="{{ url('css/wishlist.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script type="text/javascript" src={{ url('js/app.js') }} defer></script>

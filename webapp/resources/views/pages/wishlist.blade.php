@@ -1,26 +1,35 @@
 @section('content')
-
     <section>
 
-        <h1>Minha Wishlist</h1>
+        <div class="wishlistHeader">
+            <h1>Minha Wishlist</h1>
+        </div>
 
         @if (count($wishlist) == 0)
-            <h3> A sua wishlist está vazia </h3>
-            <p>Adicione os seus produtos favoritos!</p>
-            <a href="/products"><button>Catalogo</button></a>
+            <div class="wishlistEmpty">
+                <div class="wishlistEmptyImg">
+                    <img src="{{ asset('sources/wishlist/empty-wishlist.png') }}" alt="Wishlist Vazia">
+                </div>
+                <div class="wishlistEmptyText">
+                    <h2> A tua wishlist está vazia! </h2>
+                </div>
+                <div class="wishlistEmptyButton">
+                    <a href="{{ url('/products') }}">Catalogo</a>
+                </div>
+            </div>
         @endif
 
         <div class="productsPageProducts" id='listOfProducts'>
             @foreach ($wishlist as $productWishlist)
-
                 <?php
-                    $product = App\Models\Product::where('id', $productWishlist->id_produto)->first();
+                $product = App\Models\Product::where('id', $productWishlist->id_produto)->first();
                 ?>
 
                 <div class="productListItem">
                     <div class="productListItemImg">
                         <a href = "/products/{{ $product->id }}">
-                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
+                            <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px"
+                                height="100px">
                         </a>
                     </div>
                     <div class="productListItemTitle">
@@ -34,10 +43,10 @@
                     <div class="productListItemBottom">
                         <div class="productListItemRating">
                             <div class="productListItemNumberOfReviews">
-                                <p> 723 {{ $product->avaliacao }} avaliações </p>
+                                <p> {{ $product->getProductNumberOfReviews() }} avaliações </p>
                             </div>
                             <div class="productListItemHearts">
-                                <p> 4.3 {{ $product->avaliacao }}/ 5 <i class="fa-solid fa-heart"></i> </p>
+                                <p> {{ $product->getProductRating() }}/ 5 <i class="fa-solid fa-heart"></i> </p>
                             </div>
                         </div>
                         <div class="productListItemPrices">
@@ -51,6 +60,12 @@
                                     </p>
                                     <p class="euro">€</p>
                                 </div>
+                                <div class="productListItemNewPrice">
+                                    <p class="newPrices">
+                                        {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
+                                        €
+                                    </p>
+                                </div>
                             @else
                                 <div class="productListItemPrice">
                                     <p class="Price">
@@ -61,17 +76,21 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('removeFromWishlist', ['id' => $productWishlist->id_utilizador, 'id_product' => $product->id]) }}" class="removeFromWishlistForm">
+                    <form method="POST"
+                        action="{{ route('removeFromWishlist', ['id' => $productWishlist->id_utilizador, 'id_product' => $product->id]) }}"
+                        class="removeFromWishlistForm">
                         @csrf
-                        <input type="submit" value="Remover da Wishlist">
+                        @if($product->desconto > 0)
+                            <input type="submit" value="Remover da Wishlist" class="productAsDiscountWishlist">
+                        @else
+                            <input type="submit" value="Remover da Wishlist" class="productAsNoDiscountWishlist">
+                        @endif
                     </form>
-                </div>       
-
+                </div>
             @endforeach
         </div>
 
     </section>
-
 @endsection
 
 
