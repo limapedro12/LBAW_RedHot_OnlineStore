@@ -28,6 +28,16 @@
                         </form>
                     @endif
                 @endif
+
+                @if (Auth::guard('admin')->check())
+                    <form method="POST"
+                        action="{{ route('adminDeleteReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}"
+                        class="adminDeleteReview" reviewId="{{ $review->id }}" productId="{{ $id_product }}">
+                        @csrf
+                        <input type="submit" value="Delete Review">
+                    </form>
+                @endif
+
             @endforeach
         </section>
 

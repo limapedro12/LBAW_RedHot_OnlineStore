@@ -30,26 +30,64 @@ class AdminController extends Controller
     {
         verifyAdmin();
 
-        $sales = [];
+        $sales = [Purchase::whereMonth('timestamp', '01')->get(), Purchase::whereMonth('timestamp', '02')->get(),
+            Purchase::whereMonth('timestamp', '03')->get(), Purchase::whereMonth('timestamp', '04')->get(),
+            Purchase::whereMonth('timestamp', '05')->get(), Purchase::whereMonth('timestamp', '06')->get(),
+            Purchase::whereMonth('timestamp', '07')->get(), Purchase::whereMonth('timestamp', '08')->get(),
+            Purchase::whereMonth('timestamp', '09')->get(), Purchase::whereMonth('timestamp', '10')->get(),
+            Purchase::whereMonth('timestamp', '11')->get(), Purchase::whereMonth('timestamp', '12')->get()];
 
-        $sales["count"] = Purchase::count();
+        $janeiro = $this->getSalesFromMonth(1); $fevereiro = $this->getSalesFromMonth(2); $marco = $this->getSalesFromMonth(3);
+        $abril = $this->getSalesFromMonth(4); $maio = $this->getSalesFromMonth(5); $junho = $this->getSalesFromMonth(6);
+        $julho = $this->getSalesFromMonth(7); $agosto = $this->getSalesFromMonth(8); $setembro = $this->getSalesFromMonth(9);
+        $outubro = $this->getSalesFromMonth(10); $novembro = $this->getSalesFromMonth(11); $dezembro = $this->getSalesFromMonth(12);
 
-        if ($sales["count"] == 0) {
-            $sales["avg"] = 0;
-            $sales["total"] = 0;
-        } else {
-            $sales["total"] = Purchase::sum('total');
-            $sales["avg"] = $sales["total"] / $sales["count"];
-        }
+        $janeiroMoney = $this->getMoneyFromMonth(1); $fevereiroMoney = $this->getMoneyFromMonth(2); $marcoMoney = $this->getMoneyFromMonth(3);
+        $abrilMoney = $this->getMoneyFromMonth(4); $maioMoney = $this->getMoneyFromMonth(5); $junhoMoney = $this->getMoneyFromMonth(6);
+        $julhoMoney = $this->getMoneyFromMonth(7); $agostoMoney = $this->getMoneyFromMonth(8); $setembroMoney = $this->getMoneyFromMonth(9);
+        $outubroMoney = $this->getMoneyFromMonth(10); $novembroMoney = $this->getMoneyFromMonth(11); $dezembroMoney = $this->getMoneyFromMonth(12);
 
-        //$most_sold_id = ProductPurchase::select('id_produto')->groupBy('id_produto')->orderBy('quantidade', 'desc')->first();
+        $yearLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-        //$most_sold = Product::find($most_sold_id);
+        $monthLabels = ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30','31'];
 
         return view('pages.admin', [
-            'sales' => $sales //,
-            //'most_sold' => $most_sold
+            'sales' => $sales,
+            'janeiro' => $janeiro, 'fevereiro' => $fevereiro, 'marco' => $marco, 'abril' => $abril, 'maio' => $maio, 'junho' => $junho,
+            'julho' => $julho,'agosto' => $agosto,'setembro' => $setembro,'outubro' => $outubro,'novembro' => $novembro,'dezembro' => $dezembro,
+            'janeiroMoney' => $janeiroMoney, 'fevereiroMoney' => $fevereiroMoney, 'marcoMoney' => $marcoMoney, 'abrilMoney' => $abrilMoney, 'maioMoney' => $maioMoney, 'junhoMoney' => $junhoMoney,
+            'julhoMoney' => $julhoMoney,'agostoMoney' => $agostoMoney,'setembroMoney' => $setembroMoney,'outubroMoney' => $outubroMoney,'novembroMoney' => $novembroMoney,'dezembroMoney' => $dezembroMoney,
+            'yearLabels' => $yearLabels,
+            'monthLabels' => $monthLabels
         ]);
+    }
+
+    public function getSalesFromMonth($month)
+    {
+        $monthSales = [];
+        for ($day = 0; $day <= 30; $day++) {
+            $numberSales = Purchase::whereMonth('timestamp', $month)
+                ->whereDay('timestamp', $day)
+                ->count();
+
+            $monthSales[$day] = $numberSales;
+        }
+
+        return $monthSales;
+    }
+
+    public function getMoneyFromMonth($month)
+    {
+        $monthSales = [];
+        for ($day = 0; $day <= 30; $day++) {
+            $numberSales = Purchase::whereMonth('timestamp', $month)
+                ->whereDay('timestamp', $day)
+                ->sum('total');
+
+            $monthSales[$day] = $numberSales;
+        }
+
+        return $monthSales;
     }
 
     public function adminNotifications()

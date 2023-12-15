@@ -22,4 +22,5 @@ class Purchase extends Model
         'estado',
         'id_administrador'
     ];
+
 }

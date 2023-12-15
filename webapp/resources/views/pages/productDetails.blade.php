@@ -118,9 +118,21 @@
                                 <p class="euro">€ </p>
                             </div>
                             <div class = "productStockAndPrice">
-                                <div class="productStock">
+
+                            @if (Auth::guard('admin')->check())
+                                <div class="productStock">                               
                                     <p> Stock: {{ $product->stock }} </p>
+                                </div>        
+                            @else
+                                <div class="productStock">
+                                    @if ($product->stock > 0)
+                                        <p> Produto Disponível </p>
+                                    @else
+                                        <p> Produto Indisponível: Sem Stock </p>
+                                    @endif
                                 </div>
+                            @endif
+                                
                                 <div class="productNewPrice">
                                     <p class="newPrice">
                                         {{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €
@@ -130,7 +142,11 @@
                         @else
                             <div class = "productStockAndPrice">
                                 <div class="productStock">
-                                    <p> Stock: {{ $product->stock }} </p>
+                                    @if ($product->stock > 0)
+                                        <p> Produto Disponível </p>
+                                    @else
+                                        <p> Produto Indisponível: Sem Stock </p>
+                                    @endif
                                 </div>
                                 <div class="productPrice">
                                     <p class="Price">

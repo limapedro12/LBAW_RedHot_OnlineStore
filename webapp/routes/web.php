@@ -147,6 +147,7 @@ Route::controller(ReviewsController::class)->group(function () {
     Route::get('/products/{id_product}/reviews/{id_review}/edit_review', 'editReviewForm')->name('editReviewForm');
     Route::post('/products/{id_product}/reviews/{id_review}/edit_review', 'editReview')->name('editReview');
     Route::post('/products/{id_product}/reviews/{id_review}/delete_review', 'deleteReview')->name('deleteReview');
+    Route::post('/products/{id_product}/reviews/{id_review}/admin_delete_review', 'adminDeleteReview')->name('adminDeleteReview');
 });
 
 //Emails
