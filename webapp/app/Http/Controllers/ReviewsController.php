@@ -102,4 +102,16 @@ class ReviewsController extends Controller
         $review->delete();
         return response()->json($review);
     }
+
+    /**
+     * Delete a review.
+     */
+    public function adminDeleteReview(Request $request, int $id_product, int $id_review)
+    {
+        // Find the review.
+        $review = Review::findorfail($id_review);
+
+        $review->delete();
+        return redirect()->back();
+    }
 }
