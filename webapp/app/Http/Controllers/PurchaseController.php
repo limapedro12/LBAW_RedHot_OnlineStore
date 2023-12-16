@@ -128,6 +128,13 @@ class PurchaseController extends Controller
     public function cancelOrder(int $userId, int $orderId)
     {
         $purchase = Purchase::findOrFail($orderId);
+
+        if ($purchase->estado == 'Enviada' ||
+            $purchase->estado == 'Entregue' ||
+            $purchase->estado == 'Cancelada' ||
+            Auth::user()->id != $userId)
+            abort(403);
+
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
 
         foreach ($productIDs as $productID) {
@@ -137,7 +144,7 @@ class PurchaseController extends Controller
         }
 
         $purchase->estado = 'Cancelada';
-        // $purchase->save();
+        $purchase->save();
 
         event(new CancelOrder($purchase->id, Auth::user()->nome, $purchase->id_utilizador));
 
@@ -146,6 +153,8 @@ class PurchaseController extends Controller
 
     public function changeState(int $userId, int $orderId, Request $request)
     {
+        if (!Auth::guard('admin')->check())
+            abort(403);
         $request->validate([
             'state' => 'required|string'
         ]);
