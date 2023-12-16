@@ -1,9 +1,4 @@
 /* SideBar css and layout*/
-.adminContent {
-    margin: 0;
-    padding: 0;
-}
-
 .adminPage {
     display: flex;
     flex-direction: row;
@@ -36,8 +31,6 @@
     background-color: var(--white);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
