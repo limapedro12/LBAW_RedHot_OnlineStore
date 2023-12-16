@@ -31,8 +31,6 @@
     background-color: var(--white);
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .adminPage .adminSideBar .adminSearchBarOnSideBar {
@@ -174,4 +172,332 @@
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+/*Admin Option Content*/
+.adminPage .adminOptionContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--light-white);
+    min-height: 100vh;
+}
+
+.adminPage .adminOptionContent .adminOptionContentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionContentTitle h1{
+    font-size: 4rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics{
+    width: 30%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .smallTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--light-black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .smallTitle h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    padding-left: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText p{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText h2{
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statNumber{
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableTitleAvg{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 1rem;
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableTitleAvg h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .separator{
+    width: 3px;
+    height: 100%;
+    background-color: var(--main-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg p{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg h2{
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg .tableValueAvgNumber{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg i{
+    font-size: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .green{
+    color: var(--green);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .red{
+    color: var(--red);
+}
+
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .tableTitleTop5{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 1rem;
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .tableTitleTop5 h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo:last-child{
+    border-bottom: none;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo a{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo p{
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs{
+    width: 68.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .salesGraf,
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .moneyGraf{
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    margin: 0.5rem;
+    background-color: var(--white);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection label{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection select{
+    width: 15rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--black);
+    border-bottom: 2px solid var(--main-color);
+    outline: none;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .graf{
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
 }

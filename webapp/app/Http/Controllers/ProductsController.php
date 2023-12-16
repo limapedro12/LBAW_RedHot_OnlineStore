@@ -218,4 +218,9 @@ class ProductsController extends Controller
 
         return redirect('/adminProductsManage');
     }
+
+    public function getProductById(int $id)
+    {
+        return Product::findorfail($id);
+    }
 }

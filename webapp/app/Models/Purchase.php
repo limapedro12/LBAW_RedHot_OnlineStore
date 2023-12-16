@@ -23,4 +23,9 @@ class Purchase extends Model
         'id_administrador'
     ];
 
+    public function getProducts()
+    {
+        return ProductPurchase::all()->where('id_compra', $this->id)->join('produto', 'produto.id');
+    }
+
 }
