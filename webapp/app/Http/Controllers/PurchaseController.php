@@ -167,4 +167,20 @@ class PurchaseController extends Controller
 
         return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
+
+    public function changeQuantity(Request $request){
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+            'id' => 'required|integer|min:1'
+        ]);
+
+        $product = Product::findOrFail($request->id);
+        if($request->quantity > $product->stock)
+            return redirect('/cart')->with('error', 'Quantidade indisponível em stock.');
+        $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=', $request->id)->first();
+        $productCart->quantidade = $request->quantity;
+        $productCart->save();
+
+        return redirect('/cart')->with('success', 'Quantidade alterada com sucesso.');
+    }
 }

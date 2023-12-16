@@ -535,3 +535,50 @@ if (faqs != null) {
     });
   });
 }
+
+if(document.getElementsByClassName('changeQuantityButton').length > 0){
+  Array.from(document.getElementsByClassName('changeQuantityInput'))
+    .map(e => e.style.display = 'none')
+  Array.from(document.getElementsByClassName('changeQuantitySubmit'))
+    .map(e => e.style.display = 'none')  
+  Array.from(document.getElementsByClassName('changeQuantityButton'))
+    .map(e => e.addEventListener('click', function(event){
+      this.style.display = 'none'
+      event.preventDefault()
+      let input = this.parentElement.querySelector('.changeQuantityInput')
+      let submit = this.parentElement.querySelector('.changeQuantitySubmit')
+      if(input.style.display == 'none'){
+        input.style.display = 'block'
+        submit.style.display = 'block'
+      }else{
+        input.style.display = 'none'
+        submit.style.display = 'none'
+      }
+      submit.addEventListener('click', function(event){
+        input.style.display = 'none'
+        submit.style.display = 'none'
+        this.parentElement.querySelector('.changeQuantityButton').style.display = 'block'
+        event.preventDefault()
+        let csrf_token = document.querySelector('input[name="_token"]').value
+        let xhr = new XMLHttpRequest()
+        xhr.open('PUT', '/cart/change_quantity/', true)
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+        xhr.send('id=' + this.parentElement.querySelector('input').getAttribute('product_id') + '&quantity=' + this.parentElement.querySelector('input').value)
+        // location.reload()
+      })
+    }))
+    
+    
+  //   function(event){
+  //     event.preventDefault()
+  //     let csrf_token = document.querySelector('input[name="_token"]').value
+  //     let xhr = new XMLHttpRequest()
+  //     xhr.open('PUT', '/cart/change_quantity/', true)
+  //     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  //     xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
+  //     xhr.send()
+  //     location.reload()
+  // }))
+
+}

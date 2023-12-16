@@ -15,5 +15,8 @@
         <input type=hidden name="id_produto" value="{{ $product->id }}">
         <button type="submit">Remover</button>
     </form>
+    <input class="changeQuantityButton" type="button" value="Alterar Quantidade">
+    <input class="changeQuantityInput" type="number" name="quantity" value="{{ $quantidade }}" min="1" max="{{ $product->stock }}" product_id="{{ $product->id }}">
+    <input class="changeQuantitySubmit" type="button" value="Alterar">
     </p>
 </li>
