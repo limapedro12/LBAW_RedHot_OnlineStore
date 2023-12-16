@@ -214,9 +214,8 @@ class AdminController extends Controller
         ]);
 
         if ($request->email != $admin->email) {
-            $request->validate([
-                'email' => 'unique:administrador'
-            ]);
+            if (Admin::where('email', '=', $request->email)->first())
+                return back()->withErrors(['email' => 'O endereço de e-mail introduzido já pertence a um outro administrador.']);
         }
 
         $query = User::where('email', '=', $request->email)->first();
@@ -255,16 +254,15 @@ class AdminController extends Controller
         verifyAdmin();
         $admin = Admin::findOrFail(Auth::guard('admin')->id());
 
-        $request->validate([
-            'new_password' => 'required|min:8',
-        ]);
-
         if (!Hash::check($request->old_password, $admin->password))
-            return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+            return back()->withErrors(['old_password' => 'A sua password atual está incorreta']);
 
         if ($request->new_password !== $request->new_password_confirmation)
             return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
 
+        if (strlen($request->new_password) < 8)
+            return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres.']);
+        
         $admin->update(array('password' => Hash::make($request->new_password)));
 
         return redirect('/adminProfile');
