@@ -174,10 +174,15 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProfile()
+    public function adminProfile() : View
     {
         verifyAdmin();
-        return view('pages.adminProfile');
+        $id = Auth::guard('admin')->id();
+        $admin = Admin::findOrFail($id);
+
+        return view('pages.adminProfile', [
+            'admin' => $admin
+        ]);
     }
 
     public function adminShipping()

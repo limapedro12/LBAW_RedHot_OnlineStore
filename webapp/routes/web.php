@@ -119,6 +119,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/adminProductsHighlights/removeHighlight/{id}', 'removeHighlight')->name('removeHighlight');
     Route::get('/adminProductsManage', 'adminProductsManage')->name('adminProductsManage');
     Route::get('/adminProfile', 'adminProfile')->name('adminProfile');
+    Route::get('/adminProfile/edit', 'editProfileForm');
+    Route::post('/adminProfile/edit', 'editProfile');
+    Route::get('/adminProfile/edit_password', 'editPasswordForm');
+    Route::post('/adminProfile/edit_password', 'editPassword');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
 });
