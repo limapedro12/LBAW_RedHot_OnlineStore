@@ -196,8 +196,6 @@ class AdminController extends Controller
             'admin' => $admin
         ]);
     }
-    // Route::get('/adminProfile/edit_password', 'editPasswordForm');
-    // Route::post('/adminProfile/edit_password', 'editPassword');
 
     public function editProfile(Request $request)
     {
@@ -238,6 +236,38 @@ class AdminController extends Controller
         }
 
         $admin->update(array('nome' => $request->nome, 'email' => $request->email));
+
+        return redirect('/adminProfile');
+    }
+    // Route::get('/adminProfile/edit_password', 'editPasswordForm');
+    // Route::post('/adminProfile/edit_password', 'editPassword');
+
+    public function editPasswordForm(Request $request): View
+    {
+        verifyAdmin();
+        $admin = Admin::findOrFail(Auth::guard('admin')->id());
+
+        return view('pages.editAdminPassword', [
+            'admin' => $admin,
+        ]);
+    }
+
+    public function editPassword(Request $request)
+    {
+        verifyAdmin();
+        $admin = Admin::findOrFail(Auth::guard('admin')->id());
+
+        $request->validate([
+            'new_password' => 'required|min:8',
+        ]);
+
+        if (!Hash::check($request->old_password, $admin->password))
+            return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+
+        if ($request->new_password !== $request->new_password_confirmation)
+            return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
+
+        $admin->update(array('password' => Hash::make($request->new_password)));
 
         return redirect('/adminProfile');
     }
