@@ -244,7 +244,7 @@
 
         const ctx = document.getElementById('salesChart');
         salesChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
@@ -257,8 +257,8 @@
                         {{ $sales[11]->count() }}
                     ],
                     borderWidth: 1,
-                    borderColor: '#bb2302',
-                    backgroundColor: '#bb2302',
+                    borderColor: '#aa3c2c',
+                    backgroundColor: '#aa3c2c',
                 }]
             },
             options: {
@@ -381,11 +381,11 @@
 
         const ctx2 = document.getElementById('moneyChart');
         moneyChart = new Chart(ctx2, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Faturação de 2023',
+                    label: 'Faturação de 2023 (€)',
                     data: [
                         {{ $sales[0]->sum('total') }}, {{ $sales[1]->sum('total') }},
                         {{ $sales[2]->sum('total') }},
@@ -396,9 +396,9 @@
                         {{ $sales[9]->sum('total') }}, {{ $sales[10]->sum('total') }},
                         {{ $sales[11]->sum('total') }}
                     ],
-                    borderWidth: 1,
-                    borderColor: '#79cf75',
-                    backgroundColor: '#79cf75',
+                    borderWidth: 3,
+                    borderColor: '#aa3c2c',
+                    backgroundColor: '#aa3c2c',
                 }]
             },
             options: {
