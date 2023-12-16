@@ -41,6 +41,8 @@
     <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
     <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
     <script type="text/javascript" src={{ url('js/tables.js') }} defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src={{ url('js/grafs.js') }} defer></script>
 
 
     <admin admin_id="{{ Auth::guard('admin')->id() }}"></admin>
