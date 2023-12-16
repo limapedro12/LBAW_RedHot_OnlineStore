@@ -13,6 +13,8 @@ use App\Models\Product;
 use App\Models\ProductPurchase;
 use App\Models\User;
 use App\Models\Faqs;
+use App\Models\Visit;
+use App\Models\ProductCart;
 
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
@@ -58,7 +60,10 @@ class AdminController extends Controller
             'janeiroMoney' => $janeiroMoney, 'fevereiroMoney' => $fevereiroMoney, 'marcoMoney' => $marcoMoney, 'abrilMoney' => $abrilMoney, 'maioMoney' => $maioMoney, 'junhoMoney' => $junhoMoney,
             'julhoMoney' => $julhoMoney,'agostoMoney' => $agostoMoney,'setembroMoney' => $setembroMoney,'outubroMoney' => $outubroMoney,'novembroMoney' => $novembroMoney,'dezembroMoney' => $dezembroMoney,
             'yearLabels' => $yearLabels,
-            'monthLabels' => $monthLabels
+            'monthLabels' => $monthLabels,
+            'visitsLast30Days' => $this->getNumberOfVisitsInLast30Days(),
+            'listVisits' => Visit::all(),
+            'activeShoppingCarts' => $this->getActiveShoppingCarts()
         ]);
     }
 
@@ -207,4 +212,19 @@ class AdminController extends Controller
         if (Auth::guard('admin')->user() == null)
             abort(403);
     }
+
+    public function getNumberOfVisitsInLast30Days()
+    {
+
+        $visits = Visit::where('timestamp', '>', now()->subDays(30))->get();
+
+        return $visits->count();
+    }
+
+    public function getActiveShoppingCarts(){
+        
+        return ProductCart::select('id_utilizador')->where('timestamp', '>', now()->subDays(30))->groupBy('id_utilizador')->get()->count();
+
+    }
+
 }

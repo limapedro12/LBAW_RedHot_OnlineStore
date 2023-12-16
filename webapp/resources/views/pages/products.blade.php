@@ -1,4 +1,5 @@
 @section('content')
+
     <div class="productsPage">
         <div class="productsPageFilter">
             <div class="productsPageFilterTitle">

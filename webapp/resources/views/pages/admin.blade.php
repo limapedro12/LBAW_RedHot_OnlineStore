@@ -45,54 +45,78 @@
                 </div>
             </div>
             <div class="adminOptionContent">
-                <h2>Estatísticas de Vendas</h2>
-
-                <div class="salesGraf">
-                    <div>
-                        <canvas id="salesChart"></canvas>
-                    </div>
-
-                    <div class="month-selection-sales">
-                        <label for="month">Vendas de:</label>
-                        <select id="salesMonth" name="month">
-                            <option value="0">Ano</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-                    </div>
+                <div class="adminOptionContentTitle">
+                    <h2>Estatísticas de Vendas</h2>
                 </div>
 
-                <div class="moneyGraf">
-                    <div>
-                        <canvas id="moneyChart"></canvas>
+                <div class="adminOptionRealContent">
+
+                    <div class="generalStatisctics">
+                        <div class="visits">
+                            <p>Total Visits: {{$visitsLast30Days}}</p>
+                        </div>
+
+                        <div class="allIPs">
+                            @foreach ($listVisits as $ip)
+                                <p>{{$ip->ip_address}}</p>
+                            @endforeach
+                        </div>
+
+                        <div class="activeCarts">
+                            <p>Carrinhos Ativos: {{$activeShoppingCarts}}</p>
+                        </div>
                     </div>
-                    <div class="month-selection-money">
-                        <label for="month">Faturação de:</label>
-                        <select id="moneyMonth" name="month">
-                            <option value="0">Ano</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
+
+                    <div class="grafs">
+
+                        <div class="salesGraf">
+                            <div class="month-selection">
+                                <label for="month">Vendas de:</label>
+                                <select id="salesMonth" name="month">
+                                    <option value="0">Todos os Meses</option>
+                                    <option value="1">Janeiro</option>
+                                    <option value="2">Fevereiro</option>
+                                    <option value="3">Março</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Maio</option>
+                                    <option value="6">Junho</option>
+                                    <option value="7">Julho</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="graf">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+
+                        </div>
+
+                        <div class="moneyGraf">
+                            <div class="month-selection">
+                                <label for="month">Faturação de:</label>
+                                <select id="moneyMonth" name="month">
+                                    <option value="0">Todos os Meses</option>
+                                    <option value="1">Janeiro</option>
+                                    <option value="2">Fevereiro</option>
+                                    <option value="3">Março</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Maio</option>
+                                    <option value="6">Junho</option>
+                                    <option value="7">Julho</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="graf">
+                                <canvas id="moneyChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,7 +125,7 @@
 
         </div>
     </div>
-    
+
     <script>
         let selectedMonth = 0;
 
@@ -112,7 +136,8 @@
 
         function updateSalesChart() {
             salesChart.data.labels = labels;
-            salesChart.data.datasets[0].label = (selectedMonth === 0 ? 'Vendas 2023' : 'Vendas ' + months[selectedMonth -
+            salesChart.data.datasets[0].label = (selectedMonth === 0 ? 'Vendas de 2023' : 'Vendas de ' + months[
+                selectedMonth -
                 1] + ' - 2023');
 
 
@@ -275,8 +300,9 @@
         /* Money Chart */
         function updateMoneyChart() {
             moneyChart.data.labels = labels;
-            moneyChart.data.datasets[0].label = (selectedMonth === 0 ? 'Dinheiro 2023' : 'Vendas ' + months[selectedMonth -
-                1] + ' - 2023');
+            moneyChart.data.datasets[0].label = (selectedMonth === 0 ? 'Faturação de 2023 (€)' : 'Faturação de ' + months[
+                selectedMonth -
+                1] + ' - 2023 (€)');
 
 
             switch (selectedMonth) {
@@ -411,5 +437,4 @@
         });
         document.getElementById('moneyMonth').addEventListener('change', handleMoneyMonthSelection);
     </script>
-    
 @endsection
