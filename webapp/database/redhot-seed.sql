@@ -39,11 +39,12 @@ CREATE TABLE Utilizador (
 );
 
 CREATE TABLE Administrador (
-    id SERIAL PRIMARY KEY,
-      nome VARCHAR(256) NOT NULL,
-      email VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    remember_token VARCHAR(256)
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(256) NOT NULL,
+  email VARCHAR(256) UNIQUE NOT NULL,
+  password VARCHAR(256) NOT NULL,
+  remember_token VARCHAR(256),
+  profile_image VARCHAR(1024)
 );
 
 CREATE TABLE Compra (

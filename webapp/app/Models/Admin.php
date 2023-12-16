@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 // Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Http\Controllers\FileController;
+
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -30,7 +32,8 @@ class Admin extends Authenticatable
         'id',
         'nome',
         'email',
-        'password'
+        'password',
+        'profile_image'
     ];
 
     /**
@@ -58,4 +61,13 @@ class Admin extends Authenticatable
         return Notification::where('id_administrador', $this->id)->where('lida', false)->count();
     }
 
+    public function getProfileImage()
+    {
+        return FileController::get('admin_profile', $this->id);
+    }
+
+    public function hasPhoto(): bool
+    {
+        return ($this->profile_image !== null && $this->profile_image !== '');
+    }
 }

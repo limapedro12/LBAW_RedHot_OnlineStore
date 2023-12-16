@@ -65,7 +65,7 @@
                             <span class='number-notifications'>{{ $numberOfUnreadNotifications() }}</span>
                         @endif
                     </a>
-                    <a href="{{ url('/adminProfile') }}">Admin</a>
+                    <a href="{{ url('/adminProfile') }}">Perfil</a>
                     <a href="{{ url('/logout') }}">Logout</a>
                 </nav>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Admin;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -17,6 +18,7 @@ class FileController extends Controller
     static $systemTypes = [
         'profile' => ['png', 'jpg', 'jpeg', 'gif'],
         'product' => ['png', 'jpg', 'jpeg', 'gif'],
+        'admin_profile' => ['png', 'jpg', 'jpeg', 'gif'],
     ];
 
     private static function isValidType(string $type)
@@ -39,6 +41,9 @@ class FileController extends Controller
                 break;
             case 'product':
                 $fileName = Product::find($id)->product_image;
+                break;
+            case 'admin_profile':
+                $fileName = Admin::find($id)->profile_image;
                 break;
         }
 
@@ -75,8 +80,6 @@ class FileController extends Controller
 
     public static function delete(string $hash)
     {
-        error_log('Deleting file: ' . $hash);
         Storage::disk(self::$diskName)->delete($hash);
-        error_log('Deleted file: ' . $hash);
     }
 }

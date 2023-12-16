@@ -88,6 +88,7 @@ class UserController extends Controller
         if ($request->email != $user->email) {
             $request->validate([
                 'email' => 'unique:utilizador',
+                'email' => 'unique:administrador'
             ]);
         }
 
@@ -266,7 +267,4 @@ class UserController extends Controller
 
         return redirect('/adminUsers');
     }
-
-
-
 }
