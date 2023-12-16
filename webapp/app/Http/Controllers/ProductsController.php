@@ -217,4 +217,9 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/adminProductsManage');
     }
+
+    public function getProductById(int $id)
+    {
+        return Product::findorfail($id);
+    }
 }

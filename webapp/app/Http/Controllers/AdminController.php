@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Admin;
 use App\Models\Purchase;
@@ -66,7 +67,13 @@ class AdminController extends Controller
             'monthLabels' => $monthLabels,
             'visitsLast30Days' => $this->getNumberOfVisitsInLast30Days(),
             'listVisits' => Visit::all(),
-            'activeShoppingCarts' => $this->getActiveShoppingCarts()
+            'activeShoppingCarts' => $this->getActiveShoppingCarts(),
+            'averageSaleValueLastMonth' => round($this->getAverageSaleValueLastMonth(), 2),
+            'averageSaleValue' => round($this->getAverageSaleValue(), 2),
+            'top5' => $this->getTop5SoldProductsLast30Days()[0],
+            'top5prices' => $this->getTop5SoldProductsLast30Days()[1],
+            'top5quantities' => $this->getTop5SoldProductsLast30Days()[2],
+            'allProducts' => Product::all()
         ]);
     }
 
@@ -317,6 +324,91 @@ class AdminController extends Controller
         
         return ProductCart::select('id_utilizador')->where('timestamp', '>', now()->subDays(30))->groupBy('id_utilizador')->get()->count();
 
+    }
+
+    public function getAverageSaleValueLastMonth(){
+
+        $purchases = Purchase::where('timestamp', '>', now()->subDays(30))->get();
+
+        $total = 0;
+
+        foreach($purchases as $purchase){
+            $total += $purchase->total;
+        }
+
+        return $total/$purchases->count();
+    }
+
+    public function getAverageSaleValue(){
+
+        $purchases = Purchase::all();
+
+        $total = 0;
+
+        foreach($purchases as $purchase){
+            $total += $purchase->total;
+        }
+
+        return $total/$purchases->count();
+    }
+
+    public function getTop5SoldProductsLast30Days(){
+          
+        
+        $top5products = 
+            DB::select("SELECT produto.id, produto.nome as nome, SUM(produtoCompra.preco) as totalPreco, produto.product_image, produto.categoria, SUM(produtoCompra.quantidade) as totalQuantidade
+            FROM produtoCompra
+            JOIN produto ON produto.id = produtoCompra.id_produto
+            JOIN compra ON compra.id = produtoCompra.id_compra
+            GROUP BY produto.id
+            ORDER BY totalQuantidade DESC
+            LIMIT 5
+            ");
+            
+/*
+            $top5products = ProductPurchase::select(
+                'produto.id',
+                'produto.nome as nome',
+                DB::raw('SUM(produtoCompra.preco) as totalPreco'),
+                'produto.product_image',
+                'produto.categoria',
+                DB::raw('SUM(produtoCompra.quantidade) as totalQuantidade')
+            )
+            ->join('produto', 'produto.id', '=', 'produtoCompra.id_produto')
+            ->join('compra', 'compra.id', '=', 'produtoCompra.id_compra')
+            ->where('compra.timestamp', '>', now()->subDays(30))
+            ->groupBy('produto.id')
+            ->orderByDesc('totalQuantidade')
+            ->limit(5)
+            ->get();
+*/
+
+
+            $top5prices = [];
+            foreach($top5products as $product){
+                $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
+                $total = 0;
+                foreach($purchases as $purchase)
+                    $total += $purchase->preco*$purchase->quantidade;
+                array_push($top5prices, $total);
+            }
+            
+            $top5Quantities = [];
+            foreach($top5products as $product){
+                $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
+                $total = 0;
+                foreach($purchases as $purchase)
+                    $total += $purchase->quantidade;
+                array_push($top5Quantities, $total);
+            }
+
+
+            return [$top5products, $top5prices, $top5Quantities];
+    }
+
+
+    public function getProductById($id){
+        return Product::find($id);
     }
 
 }

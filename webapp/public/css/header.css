@@ -7,6 +7,8 @@
     --white: #ffffff;
     --light-black: #5c5c5c;
     --light-white: #c2c2c2;
+    --green: #00b300;
+    --red: #ff0000;
     --dark-bg: rgba(0, 0, 0, 0.7);
     --light-bg: #eeeeee;
     --border: 1rem solid var(--black);
