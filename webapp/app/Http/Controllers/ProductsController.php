@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\ProductCart;
 use App\Models\Wishlist;
+use App\Models\Visit;
+use App\Models\Review;
 
 use App\Events\ChangeInProductsPrice;
 use App\Events\WishlistProductAvailable;
 use App\Events\WishlistProductNotAvailable;
+
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\FileController;
 
@@ -27,15 +31,17 @@ class ProductsController extends Controller
 {
     public function productsDetails(int $id)
     {
+
         return view('pages.productDetails', [
             'product' => Product::findorfail($id),
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
-            }
+            },
+            
         ]);
     }
 
-    public function listProducts()
+    public function listProducts(Request $request)
     {
         return view('pages.products', [
             'maxPrice' => Product::getMostExpensiveProductPrice(),
@@ -43,7 +49,8 @@ class ProductsController extends Controller
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             },
-            'allCategories' => Product::getAllCategories()
+            'allCategories' => Product::getAllCategories(),
+            'visit' => Visit::create(['ip_address' => strval($request->ip()), 'timestamp' => now()])
         ]);
     }
 
@@ -201,7 +208,7 @@ class ProductsController extends Controller
         $productCarts = ProductCart::where('id_produto', '=', $id)->get();
         foreach($productCarts as $productCart) $productCart->delete();
 
-        $productReviews = ProductReview::where('id_produto', '=', $id)->get();
+        $productReviews = Review::where('id_produto', '=', $id)->get();
         foreach($productReviews as $productReview) $productReview->delete();
 
         //$productOrders = ProductOrder::where('id_produto', '=', $id)->get();

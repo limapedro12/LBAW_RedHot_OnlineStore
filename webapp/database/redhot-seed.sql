@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS ProdutoCompra CASCADE;
 DROP TABLE IF EXISTS ProdutoWishlist CASCADE;
 DROP TABLE IF EXISTS Notificacao_Carrinho CASCADE;
 DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
+DROP TABLE IF EXISTS Faqs CASCADE;
+DROP TABLE IF EXISTS Visits CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
@@ -154,6 +156,7 @@ CREATE TABLE ProdutoCarrinho (
   id_produto INTEGER REFERENCES Produto (id) ON UPDATE CASCADE,
 	id_utilizador INTEGER REFERENCES Utilizador (id) ON UPDATE CASCADE,
   quantidade INTEGER NOT NULL CHECK (quantidade > 0),
+  timestamp TIMESTAMP NOT NULL DEFAULT now() CHECK (timestamp <= now()),
 	id_utilizador_nao_autenticado INTEGER
 );
 
@@ -180,6 +183,12 @@ CREATE TABLE Faqs (
   pergunta TEXT NOT NULL,
   resposta TEXT NOT NULL,
   id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE Visits (
+  id SERIAL PRIMARY KEY,
+  ip_address VARCHAR(256) NOT NULL,
+  timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now())
 );
 
 -- IDX01
@@ -324,7 +333,9 @@ INSERT INTO Utilizador (nome, email, password) VALUES ('Utilizador','user@users.
 
 INSERT INTO Administrador (nome, email, password) VALUES ('admin', 'admin@admin.pt', '$2y$10$R6IeqCxQxMConGFO3OHuq.Um2vxTYB9NKikC6Hky8cmUCln6jl5k6'); -- password: 12345678
 
-
+INSERT INTO Visits (ip_address, timestamp) VALUES 
+('192.168.1.2', '2021-05-01 00:00:00'),
+('192.168.1.3', '2023-12-16 00:00:00');
 
 INSERT INTO Produto (nome, descricao, precoAtual, desconto, stock, id_administrador, product_image, categoria, destaque) VALUES
 ('Sacana Piri-Piri Extra Picante', 'O piri-piri atinge um novo nível de intensidade neste molho extra picante. Apenas para os corajosos que buscam o máximo de calor.', 10.49, 0.08, 45, 1, 'sources/products/molhos/sacana-piri-piri-extra-picante.png', 'Molhos', false),
