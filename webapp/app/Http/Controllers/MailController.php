@@ -108,20 +108,16 @@ class MailController extends Controller
                     Mail::to($request->email)->send(new NotificationMailModel($mailData));
                     $message = $notification->message;
                 } catch (TransportException $e) {
-                    $message = 'SMTP connection error occurred during the email sending process to ' . $request->email;
+                    $message = 'SMTP connection error occurred during the email sending process to ' . $receiver->email;
                 } catch (Exception $e) {
-                    $message = 'An unhandled exception occurred during the email sending process to ' . $request->email;
+                    $message = 'An unhandled exception occurred during the email sending process to ' . $receiver->email;
                     \Log::error($e->getMessage());
                 }
             } else {
                 $message = 'The SMTP server cannot be reached due to missing environment variables:';
             }
-
-            $request->session()->flash('message', $message);
-            $request->session()->flash('details', $missingVariables);
         } else {
             $texto = 'Este email é invalido ou não está associado a nenhuma conta de utilizador na plataforma da RedHot';
-            $request->session()->flash('message', $texto);
         }
     }
 }

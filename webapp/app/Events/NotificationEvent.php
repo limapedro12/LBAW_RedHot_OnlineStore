@@ -11,7 +11,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\Notification;
-use App\Controller\MailController;
+use App\Models\User;
+use App\Models\Admin;
+use App\Http\Controllers\MailController;
 
 abstract class NotificationEvent implements ShouldBroadcast
 {
