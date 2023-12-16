@@ -9,6 +9,9 @@
             <div class="profileInfo">
                 <div class="profileTitle">
                     <h1>Detalhes</h1>
+                    <div class="profileLinks">
+                        <a href="/adminProfile/edit"><i class="fas fa-user-pen"></i></a>
+                    </div>
                 </div>
                 <div class="profileData">
                     <table class="profileTable">

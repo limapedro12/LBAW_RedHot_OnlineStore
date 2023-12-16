@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Admin;
 use App\Models\Purchase;
@@ -13,6 +14,8 @@ use App\Models\Product;
 use App\Models\ProductPurchase;
 use App\Models\User;
 use App\Models\Faqs;
+
+use App\Http\Controllers\FileController;
 
 use App\Policies\UserPolicy;
 use App\Policies\AdminPolicy;
@@ -177,12 +180,66 @@ class AdminController extends Controller
     public function adminProfile() : View
     {
         verifyAdmin();
-        $id = Auth::guard('admin')->id();
-        $admin = Admin::findOrFail($id);
+        $admin = Admin::findOrFail(Auth::guard('admin')->id());
 
         return view('pages.adminProfile', [
             'admin' => $admin
         ]);
+    }
+
+    public function editProfileForm() : View
+    {
+        verifyAdmin();
+        $admin = Admin::findOrFail(Auth::guard('admin')->id());
+
+        return view('pages.editAdmin', [
+            'admin' => $admin
+        ]);
+    }
+    // Route::get('/adminProfile/edit_password', 'editPasswordForm');
+    // Route::post('/adminProfile/edit_password', 'editPassword');
+
+    public function editProfile(Request $request)
+    {
+        verifyAdmin();
+        $admin = Admin::findOrFail(Auth::guard('admin')->id());
+
+        if ($request->password !== $request->password_confirmation)
+            return back()->withErrors(['password' => 'As passwords introduzidas não coincidem']);
+
+        if (!Hash::check($request->password, $admin->password))
+            return back()->withErrors(['password' => 'A password introduzida não corresponde à sua password atual']);
+
+        $request->validate([
+            'nome' => 'required|string|max:256',
+            'email' => 'required|email|max:256',
+        ]);
+
+        if ($request->email != $admin->email) {
+            $request->validate([
+                'email' => 'unique:administrador'
+            ]);
+        }
+
+        $query = User::where('email', '=', $request->email)->first();
+        if ($query) {
+            if (!($query->became_admin)) return back()->withErrors(['email' => 'O endereço de e-mail introduzido já pertence a um utilizador.']);
+        }
+
+        if ($request->file && !($request->deletePhoto)) {
+            $oldPhoto = $admin->profile_image;
+            $fileController = new FileController();
+            $hash = $fileController->upload($request, 'admin_profile', $admin->id);
+            $admin->update(array('profile_image' => $hash));
+            if ($oldPhoto) FileController::delete($oldPhoto);
+        } else if ($request->deletePhoto) {
+            FileController::delete($admin->profile_image);
+            $admin->update(array('profile_image' => null));
+        }
+
+        $admin->update(array('nome' => $request->nome, 'email' => $request->email));
+
+        return redirect('/adminProfile');
     }
 
     public function adminShipping()
