@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class MailModel extends Mailable
+class NotificationMailModel extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class MailModel extends Mailable
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
-            subject: 'Recebeu uma nova notificação na sua conta RedHot.',
+            subject: 'Recebeu uma nova notificação na sua conta RedHot',
         );
     }
 

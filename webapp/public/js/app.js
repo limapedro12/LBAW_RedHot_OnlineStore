@@ -423,7 +423,7 @@ function showNotification(data) {
   changeStateInSpecificPages(data)
   setTimeout(() => {
     document.body.removeChild(notification)
-  }, 8000)
+  }, 16000)
 }
 
 if (document.querySelector('user') != null) {
