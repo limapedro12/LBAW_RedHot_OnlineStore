@@ -29,7 +29,9 @@ class PurchaseController extends Controller
             }
             return view('pages.checkout', ['total' => round($total, 2)]);
         } else {
-            return redirect('/login');
+            return redirect('/login')->withErrors([
+                'password' => 'Por favor, autentique-se na RedHot para prosseguir com a sua encomenda.',
+            ]);
         }
     }
 
@@ -47,8 +49,6 @@ class PurchaseController extends Controller
             'country' => 'required|string',
             'deliveryObs' => 'nullable|string'
         ]);
-
-        error_log('request validated');
 
         $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
         $total = 0;

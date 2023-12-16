@@ -12,6 +12,7 @@ use Illuminate\View\View;
 
 use App\Models\User;
 
+use App\Http\Controllers\ProductCartController;
 
 function verifyNotAutenticated(): void
 {
@@ -38,15 +39,24 @@ class RegisterController extends Controller
         verifyNotAutenticated();
         $credentials = $request->validate([
             'nome' => 'required|string|max:256',
-            'email' => 'required|email|max:256|unique:utilizador',
-            'password' => 'required|min:8|confirmed'
+            'email' => 'required|email|max:256',
+            'password' => 'required|confirmed'
+        ], [
+            'confirmed' => 'As passwords introduzidas não coincidem.'
         ]);
 
-        if (User::where('email', $request->email)->first() != null)
+        if (User::where('email', $request->email)->first() != null) {
             return redirect('/register')
                 ->withInput($request->only('nome', 'email'))
-                ->withErrors(['email' => 'Email já registado!']);
-
+                ->withErrors(['email' => 'O endereço de e-mail que introduziu já se encontra registado.']);
+        }
+        
+        if (strlen($request->password) < 8) {
+            return back()
+                ->withInput($request->only('nome', 'email'))
+                ->withErrors(['password' => 'A password deve ter, pelo menos, 8 caracteres.']);
+        }
+        
         $newUser = User::create([
             'nome' => $request->nome,
             'email' => $request->email,
@@ -67,7 +77,7 @@ class RegisterController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Erro ao criar conta.',
+            'email' => 'Erro ao criar conta. Por favor tente novamente.',
         ])->onlyInput('nome', 'email');
     }
 }

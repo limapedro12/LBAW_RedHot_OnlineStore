@@ -29,7 +29,7 @@ function verifyAdmin(): void
 class AdminController extends Controller
 {
 
-    public function admin()
+    public function admin() : View
     {
         verifyAdmin();
 
@@ -99,7 +99,7 @@ class AdminController extends Controller
         return view('pages.adminNotifications');
     }
 
-    public function adminOrders()
+    public function adminOrders() : View
     {
         verifyAdmin();
 
@@ -110,7 +110,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProducts()
+    public function adminProducts() : View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -121,13 +121,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProductsAdd()
+    public function adminProductsAdd() : View
     {
         verifyAdmin();
         return view('pages.adminProductsAdd');
     }
 
-    public function adminProductsHighlights()
+    public function adminProductsHighlights() : View
     {
         verifyAdmin();
 
@@ -166,7 +166,7 @@ class AdminController extends Controller
         return redirect('/adminProductsHighlights');
     }
 
-    public function adminProductsManage()
+    public function adminProductsManage() : View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -239,8 +239,6 @@ class AdminController extends Controller
 
         return redirect('/adminProfile');
     }
-    // Route::get('/adminProfile/edit_password', 'editPasswordForm');
-    // Route::post('/adminProfile/edit_password', 'editPassword');
 
     public function editPasswordForm(Request $request): View
     {
@@ -272,13 +270,13 @@ class AdminController extends Controller
         return redirect('/adminProfile');
     }
 
-    public function adminShipping()
+    public function adminShipping() : View
     {
         verifyAdmin();
         return view('pages.adminShipping');
     }
 
-    public function adminUsers()
+    public function adminUsers() : View
     {
         verifyAdmin();
         return view('pages.adminUsers', [
@@ -286,7 +284,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminFAQ()
+    public function adminFAQ() : View
     {
         verifyAdmin();
         return view('pages.adminFAQ', [
@@ -294,7 +292,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public static function verifyAdmin2(): void
+    public static function verifyAdmin2() : void
     {
         if (Auth::guard('admin')->user() == null)
             abort(403);

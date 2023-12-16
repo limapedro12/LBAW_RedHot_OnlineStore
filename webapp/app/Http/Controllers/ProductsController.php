@@ -25,7 +25,7 @@ function verifyAdmin(): void
 
 class ProductsController extends Controller
 {
-    public function productsDetails(int $id)
+    public function productsDetails(int $id) : View
     {
         return view('pages.productDetails', [
             'product' => Product::findorfail($id),
@@ -35,7 +35,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function listProducts()
+    public function listProducts() : View
     {
         return view('pages.products', [
             'maxPrice' => Product::getMostExpensiveProductPrice(),
@@ -61,7 +61,7 @@ class ProductsController extends Controller
         return json_encode($products);
     }
 
-    public function addProductForm()
+    public function addProductForm() : View
     {
         verifyAdmin();
         return view('pages.productsAdd');
@@ -99,7 +99,7 @@ class ProductsController extends Controller
         return redirect('/products/' . $newProduct->id);
     }
 
-    public function editProductForm(int $id)
+    public function editProductForm(int $id) : View
     {
         verifyAdmin();
 
@@ -165,7 +165,7 @@ class ProductsController extends Controller
         return redirect('/products/' . $id);
     }
 
-    public function changeStockProductForm(int $id)
+    public function changeStockProductForm(int $id) : View
     {
         verifyAdmin();
 
@@ -189,9 +189,8 @@ class ProductsController extends Controller
 
     public static function deleteProduct(Request $request, int $id)
     {
-        error_log($id);
         verifyAdmin();
-        error_log($id);
+        
         $product = Product::findorfail($id);
         if ($product->product_image) FileController::delete($product->product_image);
         

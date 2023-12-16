@@ -10,7 +10,7 @@ use App\Models\Faqs;
 
 class FaqsController extends Controller
 {
-    public function listFaqs()
+    public function listFaqs() : View
     {
         $faqs = Faqs::all();
 
@@ -52,14 +52,14 @@ class FaqsController extends Controller
         return redirect()->back();
     }
 
-    public function faq($id)
+    public function faq($id) : View
     {
         $faq = Faqs::find($id);
 
         return view('partials.faq', ['faq' => $faq]);
     }
 
-    public function addFaqForm()
+    public function addFaqForm() : View
     {
         return view('pages.adminFAQAdd');
     }
