@@ -7,7 +7,7 @@
         <form method=post action="/cart/checkout">
             @csrf
             <p>Por favor, escolha um método de pagamento:</p>
-            <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash" required>
+            <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash" required checked>
             <label for="method-cash">Pagar em dinheiro no ato de entrega</label>
             <br>
             <input type="radio" id="radio-method-card" name="paymentMethod" value="card" required>
@@ -17,7 +17,7 @@
             <label for="method-mbway">MB WAY</label>
             <div id="method-card" style="display:none">
                 <label for="cardNo">Número do cartão</label>
-                <input type="number" id="cardNo" name="cardNo" required>
+                <input type="number" id="cardNo" name="cardNo">
                 @if ($errors->has('cardNo'))
                     <p class="text-danger">
                         {{ $errors->first('cardNo') }}
@@ -25,19 +25,19 @@
                 @endif
                 <br>
                 <label for="cardHolder">Titular do cartão</label>
-                <input type="text" id="cardHolder" name="cardHolder" required>
+                <input type="text" id="cardHolder" name="cardHolder">
                 <br><br>
                 Validade do cartão
                 <br>
                 <label for="cardExpiryMonth">Mês</label>
-                <input type="number" id="cardExpiryMonth" name="cardExpiryMonth" required>
+                <input type="number" id="cardExpiryMonth" name="cardExpiryMonth">
                 @if ($errors->has('cardExpiryMonth'))
                     <p class="text-danger">
                         {{ $errors->first('cardExpiryMonth') }}
                     </p>
                 @endif
                 <label for="cardExpiryYear">Ano</label>
-                <input type="number" id="cardExpiryYear" name="cardExpiryYear" required>
+                <input type="number" id="cardExpiryYear" name="cardExpiryYear">
                 @if ($errors->has('cardExpiryYear'))
                     <p class="text-danger">
                         {{ $errors->first('cardExpiryYear') }}
@@ -45,7 +45,7 @@
                 @endif
                 <br><br>
                 <label for="cardCVV">CVV</label>
-                <input type="number" id="cardCVV" name="cardCVV" required>
+                <input type="number" id="cardCVV" name="cardCVV">
                 @if ($errors->has('cardCVV'))
                     <p class="text-danger">
                         {{ $errors->first('cardCVV') }}
@@ -54,7 +54,7 @@
             </div>
             <div id="method-mbway" style="display:none">
                 <label for="mbwayNo">Número de telemóvel</label>
-                <input type="number" id="mbwayNo" name="mbwayNo" required min="910000000" max="969999999">
+                <input type="number" id="mbwayNo" name="mbwayNo" min="910000000" max="969999999">
                 @if ($errors->has('mbway'))
                     <p class="text-danger">
                         {{ $errors->first('mbway') }}

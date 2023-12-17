@@ -745,10 +745,23 @@ if(document.getElementsByClassName('changeQuantityButton').length > 0){
 
 // checkout
 try {
-  method_card = document.getElementById('method_card');
-  method_mbway = document.getElementById('method_mbway');
-  radio_method_cash = document.getElementById('radio_method_cash');
-  radio_method_card = document.getElementById('radio_method_card');
-  radio_method_mbway = document.getElementById('radio_method_mbway');
+  method_card = document.getElementById('method-card');
+  method_mbway = document.getElementById('method-mbway');
+  radio = document.getElementsByName('paymentMethod');
+  radio.forEach(element => {
+    element.addEventListener('click', function () {
+      if (element.value == 'cash') {
+        method_card.style.display = 'none';
+        method_mbway.style.display = 'none';
+      }
+      else if (element.value == 'card') {
+        method_card.style.display = 'block';
+        method_mbway.style.display = 'none';
+      } else if (element.value == 'mbway') {
+        method_card.style.display = 'none';
+        method_mbway.style.display = 'block';
+      }
+    });
+  });
 }
 catch (error) {}
