@@ -11,6 +11,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\Notification;
+use App\Models\User;
+use App\Models\Admin;
+use App\Http\Controllers\MailController;
 
 abstract class NotificationEvent implements ShouldBroadcast
 {
@@ -49,6 +52,7 @@ abstract class NotificationEvent implements ShouldBroadcast
             'link' => $linkToRedirect]);
         $this->notificationId = $notification->id;
         $this->channel = 'notification-to-user-' . $this->userId;
+        MailController::sendNotificationEmail(false, $message, User::find($userId));
     }
 
     protected function createAdminNotification(int $adminId, string $message, string $linkToRedirect)
@@ -65,6 +69,7 @@ abstract class NotificationEvent implements ShouldBroadcast
             'link' => $linkToRedirect]);
         $this->notificationId = $notification->id;
         $this->channel = 'notification-to-admin-' . $this->adminId;
+        MailController::sendNotificationEmail(true, $message, Admin::find($adminId));
     }
 
     protected function createNotificationToAllAdmins(string $message, string $linkToRedirect)
@@ -80,5 +85,9 @@ abstract class NotificationEvent implements ShouldBroadcast
             'para_todos_administradores' => true]);
         $this->notificationId = $notification->id;
         $this->channel = 'notification-to-all-admins';
+        $admins = Admin::all();
+        foreach ($admins as $admin) {
+            MailController::sendNotificationEmail(true, $message, $admin);
+        }
     }
 }

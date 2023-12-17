@@ -21,6 +21,7 @@ class ProductCart extends Model
         'id_produto',
         'id_utilizador',
         'quantidade',
+        'timestamp',
         'id_utilizador_nao_autenticado'
     ];
 }
