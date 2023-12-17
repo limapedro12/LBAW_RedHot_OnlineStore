@@ -126,10 +126,11 @@ class UserController extends Controller
         $this->authorize('deleteAccount', $user);
 
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/' . $id . '/delete_account');
+            return back()->withErrors(['password' => 'A password introduzida está incorreta.']);
         }
 
-        FileController::delete($user->profile_image);
+        if ($user->profile_image)
+            FileController::delete($user->profile_image);
 
         User::where('id', '=', $id)->delete();
 

@@ -13,6 +13,11 @@
                         <div class="deleteAccount">
                             <label for="password">Para proceder, digite a sua palavra-passe:</label>
                             <input type="password" id="password" name="password" placeholder="Password" required>
+                            @if ($errors->has('password'))
+                                <p class="error">
+                                    {{ $errors->first('password') }}
+                                </p>
+                            @endif
                         </div>
                     </div>
 
