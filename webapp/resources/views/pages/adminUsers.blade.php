@@ -64,6 +64,16 @@
 
                             <div class="myOrdersTable">
                                 <div class="myOrdersTableBody">
+                                @if ($errors->has('ban'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('ban') }}
+                                    </p>
+                                @endif
+                                @if ($errors->has('promote'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('promote') }}
+                                    </p>
+                                @endif
                                     <table class="tableSortable" id="tableToFilter">
                                         <thead>
                                             <tr>
@@ -138,11 +148,6 @@
                                                                             Promover Utilizador
                                                                         </button>
                                                                     </form>
-                                                                    @if ($errors->has('promote'))
-                                                                        <p class="text-danger">
-                                                                            {{ $errors->first('promote') }}
-                                                                        </p>
-                                                                    @endif
                                                                 </div>
                                                             @endif
                                                         @endunless
@@ -167,11 +172,6 @@
                                                                             Banir Utilizador
                                                                         </button>
                                                                     </form>
-                                                                    @if ($errors->has('ban'))
-                                                                        <p class="text-danger">
-                                                                            {{ $errors->first('ban') }}
-                                                                        </p>
-                                                                    @endif
                                                                 </div>
                                                             @endif
                                                         @endunless
