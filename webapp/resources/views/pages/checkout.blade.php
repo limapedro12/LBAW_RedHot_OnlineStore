@@ -1,3 +1,7 @@
+<head>
+    <title>Checkout | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Checkout</h1>

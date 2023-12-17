@@ -1,3 +1,7 @@
+<head>
+    <title>Encomenda {{ $purchase->id }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Encomenda {{ $purchase->id }}</h1>
@@ -24,7 +28,7 @@
             $purchase->estado != 'Entregue' &&
             $purchase->estado != 'Cancelada' &&
             Auth::check())
-            <form method=post action="/users/{{ $purchase->id_utilizador }}/orders/{{ $purchase->id }}/cancel">
+            <form method=post class="cancelOrder" action="/users/{{ $purchase->id_utilizador }}/orders/{{ $purchase->id }}/cancel">
                 @csrf
                 <button type="submit">Cancelar encomenda</button>
             </form>

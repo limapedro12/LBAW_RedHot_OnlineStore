@@ -53,6 +53,8 @@ class ProductCartController extends Controller
             }
         }
 
+        sleep(1.7);
+
         return redirect('/products/' . $id);
     }
 

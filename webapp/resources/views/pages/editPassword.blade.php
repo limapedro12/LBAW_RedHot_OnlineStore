@@ -1,3 +1,7 @@
+<head>
+    <title>Alterar Password | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="editPassword">

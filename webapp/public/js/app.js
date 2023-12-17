@@ -129,25 +129,185 @@ try {
   }
 
   function deleteAlert() {
-    let text = "Tem a certeza que pretende eliminar a review?\n";
-    if (confirm(text) == true) {
-      text = "Review eliminada com sucesso!";
-      document.querySelector(".alertMessage").innerHTML = text;
-      return true;
-    }
-    else {
-      text = "Operação cancelada!";
-      document.querySelector(".alertMessage").innerHTML = text;
-      return false;
-    }
+    Swal.fire({
+      title: "Sucesso!",
+      text: "O comentario foi apagado com sucesso!",
+      icon: "success"
+    });
+    return true;
   }
 
   function addReviewAlert() {
-    let text = "Review adicionada com sucesso!";
-    document.querySelector(".alertMessage").innerHTML = text;
+    Swal.fire({
+      title: "Sucesso!",
+      text: "O comentario foi adicionado com sucesso!",
+      icon: "success"
+    });
   }
 
   addEventListeners();
+
+} catch (error) { }
+
+// cart
+
+try {
+  function addEventListeners() {
+    let productCartAdder = document.querySelector('form.addToCart');
+    if (productCartAdder != null) {
+      productCartAdder.addEventListener('submit', function () {
+        productCartAlert();
+      });
+    }
+  }
+
+  function productCartAlert() {
+    let timerInterval;
+    Swal.fire({
+      title: "Produto adicionado ao carrinho!",
+      html: "Esta mensagem fecha automaticamente",
+      timer: 1700,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+//wishlist
+
+try {
+  function addEventListeners() {
+    let productWishlistAdder = document.querySelector('form.addToWishlist');
+    if (productWishlistAdder != null) {
+      productWishlistAdder.addEventListener('submit', function () {
+        productWishlistAlert();
+      });
+    }
+  }
+
+  function productWishlistAlert() {
+    Swal.fire({
+      title: "Sucesso!",
+      text: "O produto foi adicionado à wishlist com sucesso!",
+      icon: "success",
+      showConfirmButton: false
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+// cancelar encomenda
+
+try {
+  function addEventListeners() {
+    let orderCanceler = document.querySelector('form.cancelOrder');
+    if (orderCanceler != null) {
+      orderCanceler.addEventListener('submit', function () {
+        orderCancelAlert();
+      });
+    }
+  }
+
+  function orderCancelAlert() {
+    Swal.fire({
+      title: "Sucesso!",
+      text: "A encomenda foi cancelada com sucesso!",
+      icon: "success",
+      showConfirmButton: false
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+// edit review
+
+try {
+  function addEventListeners() {
+    let reviewEditor = document.querySelector('form.editEachReview');
+    if (reviewEditor != null) {
+      reviewEditor.addEventListener('submit', function () {
+        reviewEditAlert();
+      });
+    }
+  }
+
+  function reviewEditAlert() {
+    Swal.fire({
+      title: "Sucesso!",
+      text: "O comentario foi editado com sucesso!",
+      icon: "success",
+      showConfirmButton: false
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+// edit password
+
+try {
+  function addEventListeners() {
+    let passwordEditor = document.querySelector('form.editPassForm');
+    if (passwordEditor != null) {
+      passwordEditor.addEventListener('submit', function () {
+        passwordEditAlert();
+      });
+    }
+  }
+
+  function passwordEditAlert() {
+    Swal.fire({
+      title: "Sucesso!",
+      text: "A password foi alterada com sucesso!",
+      icon: "success",
+      showConfirmButton: false
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+// register
+
+try {
+  function addEventListeners() {
+    let register = document.querySelector('form.signupForm');
+    if (register != null) {
+      register.addEventListener('submit', function () {
+        registerAlert();
+      });
+    }
+  }
+
+  function registerAlert() {
+    Swal.fire({
+      title: "Sucesso!",
+      text: "O registo foi efetuado com sucesso!",
+      icon: "success",
+      showConfirmButton: false
+    });
+  }
+
+  addEventListeners();
+
 } catch (error) { }
 
 // addProduct

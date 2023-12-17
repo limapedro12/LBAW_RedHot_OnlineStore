@@ -1,3 +1,7 @@
+<head>
+    <title>Wishlist | RedHot</title>
+</head>
+
 @section('content')
     <section>
 
