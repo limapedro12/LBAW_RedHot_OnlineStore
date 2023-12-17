@@ -43,7 +43,8 @@ class User extends Authenticatable
         'localidade',
         'profile_image',
         'banned',
-        'became_admin'
+        'became_admin',
+        'deleted'
     ];
 
     /**

@@ -37,7 +37,8 @@ CREATE TABLE Utilizador (
   remember_token VARCHAR(256),
   profile_image VARCHAR(1024),
   banned BOOLEAN DEFAULT FALSE,
-  became_admin BOOLEAN DEFAULT FALSE
+  became_admin BOOLEAN DEFAULT FALSE,
+  deleted BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Administrador (

@@ -132,7 +132,18 @@ class UserController extends Controller
         if ($user->profile_image)
             FileController::delete($user->profile_image);
 
-        User::where('id', '=', $id)->delete();
+        $user->update(array(
+            'nome' => null,
+            'email' => null,
+            'password' => null,
+            'telefone' => null,
+            'morada' => null,
+            'codigo_postal' => null,
+            'localidade' => null,
+            'remember_token' => null,
+            'profile_image' => null,
+            'deleted' => true
+        ));
 
         return redirect('/logout');
     }
