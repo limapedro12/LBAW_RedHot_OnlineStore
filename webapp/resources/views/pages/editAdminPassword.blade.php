@@ -15,7 +15,7 @@
                             <input type="password" id="old_password" name="old_password" placeholder="Password antiga" required>
                         </div>
                         @if ($errors->has('old_password'))
-                        <p class="textDanger">
+                        <p class="text-danger">
                             {{ $errors->first('old_password') }}
                         </p>
                         @endif
@@ -27,7 +27,7 @@
                             <input type="password" id="new_password" name="new_password" placeholder="Nova password" required>
                         </div>
                         @if ($errors->has('new_password'))
-                        <p class="textDanger">
+                        <p class="text-danger">
                             {{ $errors->first('new_password') }}
                         </p>
                         @endif
@@ -39,7 +39,7 @@
                             <input type="password" id="new_password_confirmation" name="new_password_confirmation" placeholder="Confirme a nova password" required>
                         </div>
                         @if ($errors->has('password_confirmation'))
-                        <p class="textDanger">
+                        <p class="text-danger">
                             {{ $errors->first('password_confirmation') }}
                         </p>
                         @endif

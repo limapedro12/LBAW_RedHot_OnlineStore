@@ -14,7 +14,7 @@
                             <label for="password">Para proceder, digite a sua palavra-passe:</label>
                             <input type="password" id="password" name="password" placeholder="Password" required>
                             @if ($errors->has('password'))
-                                <p class="error">
+                                <p class="text-danger">
                                     {{ $errors->first('password') }}
                                 </p>
                             @endif

@@ -153,11 +153,14 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'new_password' => 'required|min:8',
+            'new_password' => 'required',
         ]);
 
         if (!Hash::check($request->old_password, $user->password))
             return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+
+        if (strlen($request->new_password) < 8)
+            return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres']);
 
         if ($request->new_password !== $request->new_password_confirmation)
             return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);

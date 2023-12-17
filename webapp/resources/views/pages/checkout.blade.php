@@ -7,7 +7,7 @@
             <label for="cardNo">Número do cartão</label>
             <input type="number" id="cardNo" name="cardNo" required>
             @if ($errors->has('cardNo'))
-                <p class="textDanger">
+                <p class="text-danger">
                     {{ $errors->first('cardNo') }}
                 </p>
             @endif
@@ -20,14 +20,14 @@
             <label for="cardExpiryMonth">Mês</label>
             <input type="number" id="cardExpiryMonth" name="cardExpiryMonth" required>
             @if ($errors->has('cardExpiryMonth'))
-                <p class="textDanger">
+                <p class="text-danger">
                     {{ $errors->first('cardExpiryMonth') }}
                 </p>
             @endif
             <label for="cardExpiryYear">Ano</label>
             <input type="number" id="cardExpiryYear" name="cardExpiryYear" required>
             @if ($errors->has('cardExpiryYear'))
-                <p class="textDanger">
+                <p class="text-danger">
                     {{ $errors->first('cardExpiryYear') }}
                 </p>
             @endif
@@ -35,7 +35,7 @@
             <label for="cardCVV">CVV</label>
             <input type="number" id="cardCVV" name="cardCVV" required>
             @if ($errors->has('cardCVV'))
-                <p class="textDanger">
+                <p class="text-danger">
                     {{ $errors->first('cardCVV') }}
                 </p>
             @endif
