@@ -742,3 +742,13 @@ if(document.getElementsByClassName('changeQuantityButton').length > 0){
   // }))
 
 }
+
+// checkout
+try {
+  method_card = document.getElementById('method_card');
+  method_mbway = document.getElementById('method_mbway');
+  radio_method_cash = document.getElementById('radio_method_cash');
+  radio_method_card = document.getElementById('radio_method_card');
+  radio_method_mbway = document.getElementById('radio_method_mbway');
+}
+catch (error) {}

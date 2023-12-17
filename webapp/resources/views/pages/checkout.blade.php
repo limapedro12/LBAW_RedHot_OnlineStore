@@ -6,41 +6,61 @@
         <p>Total: {{ $total }} €</p>
         <form method=post action="/cart/checkout">
             @csrf
-            <label for="cardNo">Número do cartão</label>
-            <input type="number" id="cardNo" name="cardNo" required>
-            @if ($errors->has('cardNo'))
-                <p class="text-danger">
-                    {{ $errors->first('cardNo') }}
-                </p>
-            @endif
+            <p>Por favor, escolha um método de pagamento:</p>
+            <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash" required>
+            <label for="method-cash">Pagar em dinheiro no ato de entrega</label>
             <br>
-            <label for="cardHolder">Titular do cartão</label>
-            <input type="text" id="cardHolder" name="cardHolder" required>
-            <br><br>
-            Validade do cartão
+            <input type="radio" id="radio-method-card" name="paymentMethod" value="card" required>
+            <label for="method-card">Cartão bancário</label>
             <br>
-            <label for="cardExpiryMonth">Mês</label>
-            <input type="number" id="cardExpiryMonth" name="cardExpiryMonth" required>
-            @if ($errors->has('cardExpiryMonth'))
-                <p class="text-danger">
-                    {{ $errors->first('cardExpiryMonth') }}
-                </p>
-            @endif
-            <label for="cardExpiryYear">Ano</label>
-            <input type="number" id="cardExpiryYear" name="cardExpiryYear" required>
-            @if ($errors->has('cardExpiryYear'))
-                <p class="text-danger">
-                    {{ $errors->first('cardExpiryYear') }}
-                </p>
-            @endif
-            <br><br>
-            <label for="cardCVV">CVV</label>
-            <input type="number" id="cardCVV" name="cardCVV" required>
-            @if ($errors->has('cardCVV'))
-                <p class="text-danger">
-                    {{ $errors->first('cardCVV') }}
-                </p>
-            @endif
+            <input type="radio" id="radio-method-mbway" name="paymentMethod" value="mbway" required>
+            <label for="method-mbway">MB WAY</label>
+            <div id="method-card" style="display:none">
+                <label for="cardNo">Número do cartão</label>
+                <input type="number" id="cardNo" name="cardNo" required>
+                @if ($errors->has('cardNo'))
+                    <p class="text-danger">
+                        {{ $errors->first('cardNo') }}
+                    </p>
+                @endif
+                <br>
+                <label for="cardHolder">Titular do cartão</label>
+                <input type="text" id="cardHolder" name="cardHolder" required>
+                <br><br>
+                Validade do cartão
+                <br>
+                <label for="cardExpiryMonth">Mês</label>
+                <input type="number" id="cardExpiryMonth" name="cardExpiryMonth" required>
+                @if ($errors->has('cardExpiryMonth'))
+                    <p class="text-danger">
+                        {{ $errors->first('cardExpiryMonth') }}
+                    </p>
+                @endif
+                <label for="cardExpiryYear">Ano</label>
+                <input type="number" id="cardExpiryYear" name="cardExpiryYear" required>
+                @if ($errors->has('cardExpiryYear'))
+                    <p class="text-danger">
+                        {{ $errors->first('cardExpiryYear') }}
+                    </p>
+                @endif
+                <br><br>
+                <label for="cardCVV">CVV</label>
+                <input type="number" id="cardCVV" name="cardCVV" required>
+                @if ($errors->has('cardCVV'))
+                    <p class="text-danger">
+                        {{ $errors->first('cardCVV') }}
+                    </p>
+                @endif
+            </div>
+            <div id="method-mbway" style="display:none">
+                <label for="mbwayNo">Número de telemóvel</label>
+                <input type="number" id="mbwayNo" name="mbwayNo" required min="910000000" max="969999999">
+                @if ($errors->has('mbway'))
+                    <p class="text-danger">
+                        {{ $errors->first('mbway') }}
+                    </p>
+                @endif
+            </div>
             <br><br><br>
             Morada de Entrega
             <br>
