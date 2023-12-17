@@ -88,7 +88,7 @@
                             @if ($productWishlist == null)
                                 <div class="addToWishlist">
                                     @if (Auth::check())
-                                        <form method="POST"
+                                        <form method="POST" class="addToWishlist"
                                             action="{{ route('addToWishlist', ['id' => Auth::user()->id, 'id_product' => $product->id]) }}">
                                             @csrf
                                             <input type="submit" value="Adicionar à Wishlist">

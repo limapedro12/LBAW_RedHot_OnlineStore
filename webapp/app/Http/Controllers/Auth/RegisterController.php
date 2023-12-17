@@ -76,6 +76,8 @@ class RegisterController extends Controller
             return redirect()->intended('/products');
         }
 
+        sleep(1);
+
         return back()->withErrors([
             'email' => 'Erro ao criar conta. Por favor tente novamente.',
         ])->onlyInput('nome', 'email');
