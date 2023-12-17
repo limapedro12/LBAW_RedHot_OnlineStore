@@ -26,8 +26,6 @@ class UserPolicy
 
     public function deleteAccount(User $logged, User $user): bool
     {
-        error_log($logged->id);
-        error_log($user->id);
         return $logged->id === $user->id;
     }
 

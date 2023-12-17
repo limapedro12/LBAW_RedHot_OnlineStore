@@ -52,9 +52,10 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             if (User::where('email', $credentials['email'])->first()->banned) {
-                return back()->withErrors([
-                    'email' => 'A sua conta foi banida.',
-                ])->onlyInput('email');
+                Auth::logout();
+                return redirect('/login')->withErrors([
+                    'password' => 'A sua conta foi banida.',
+                ]);
             }
 
             if ($guestId) {

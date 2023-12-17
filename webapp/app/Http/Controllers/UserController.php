@@ -258,7 +258,7 @@ class UserController extends Controller
         return $user->getNumberOfUreadNotifications();
     }
 
-    public static function banUser(Request $request, int $id)
+    public function banUser(Request $request, int $id)
     {
         AdminController::verifyAdmin2();
 
@@ -270,7 +270,18 @@ class UserController extends Controller
 
         $user->ban();
 
-        return redirect('/users/' . $id);
+        return redirect('/adminUsers');
+    }
+
+    public function unbanUser(Request $request, int $id)
+    {
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        $user->unban();
+
+        return redirect('/adminUsers');
     }
 
     public function becomeAdmin(Request $request, int $id)
@@ -293,5 +304,10 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/adminUsers');
+    }
+
+    public function becomeUser(Request $request, int $id)
+    {
+        // TODO
     }
 }

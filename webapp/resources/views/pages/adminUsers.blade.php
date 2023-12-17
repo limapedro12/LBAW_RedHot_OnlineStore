@@ -69,7 +69,7 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Utilizador</th>
-                                                <th>Email</th>
+                                                <th>E-mail</th>
                                                 <th>Contacto</th>
                                                 <th>Promover / Despromover</th>
                                                 <th>Banir / Perdoar</th>
@@ -120,51 +120,61 @@
                                                     </td>
 
                                                     <td>
-                                                        @if ($user->became_admin)
-                                                            <div class="userAdminButtons">
-                                                                <form action="/users/{{ $user->id }}/demote"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button type="submit" id="demoteUser"
-                                                                        value="Despromover a Utilizador">Despromover
-                                                                        Utilizador</button>
-                                                                </form>
-                                                            </div>
-                                                        @else
-                                                            <div class="userAdminButtons">
-                                                                <form action="/users/{{ $user->id }}/promote"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button type="submit" id="promoteUser"
-                                                                        value="Promover a Administrador">Promover
-                                                                        Utilizador</button>
-                                                                </form>
-                                                            </div>
-                                                        @endif
+                                                        @unless ($user->banned)
+                                                            @if ($user->became_admin)
+                                                                <div class="userAdminButtons">
+                                                                    <form action="/users/{{ $user->id }}/demote" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" id="demoteUser" value="Despromover a Utilizador">
+                                                                            Despromover Utilizador
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            @else
+                                                                <div class="userAdminButtons">
+                                                                    <form action="/users/{{ $user->id }}/promote" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" id="promoteUser" value="Promover a Administrador">
+                                                                            Promover Utilizador
+                                                                        </button>
+                                                                    </form>
+                                                                    @if ($errors->has('promote'))
+                                                                        <p class="text-danger">
+                                                                            {{ $errors->first('promote') }}
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                        @endunless
                                                     </td>
 
                                                     <td>
-                                                        @if ($user->banned)
-                                                            <div class="userAdminButtons">
-                                                                <form action="/users/{{ $user->id }}/forgive"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button type="submit" id="forgiveUser"
-                                                                        value="Perdoar Utilizador">Perdoar
-                                                                        Utilizador</button>
-                                                                </form>
-                                                            </div>
-                                                        @else
-                                                            <div class="userAdminButtons">
-                                                                <form action="/users/{{ $user->id }}/ban"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button type="submit" id="banUser"
-                                                                        value="Banir Utilizador">Banir Utilizador</button>
-                                                                </form>
-                                                            </div>
-                                                        @endif
-
+                                                        @unless ($user->became_admin)
+                                                            @if ($user->banned)
+                                                                <div class="userAdminButtons">
+                                                                    <form action="/users/{{ $user->id }}/forgive" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" id="forgiveUser" value="Perdoar Utilizador">
+                                                                            Perdoar Utilizador
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            @else
+                                                                <div class="userAdminButtons">
+                                                                    <form action="/users/{{ $user->id }}/ban" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" id="banUser" value="Banir Utilizador">
+                                                                            Banir Utilizador
+                                                                        </button>
+                                                                    </form>
+                                                                    @if ($errors->has('ban'))
+                                                                        <p class="text-danger">
+                                                                            {{ $errors->first('ban') }}
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                        @endunless
                                                     </td>
                                                 </tr>
                                             @endforeach

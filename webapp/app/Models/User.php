@@ -103,6 +103,12 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function unban(): void
+    {
+        $this->banned = false;
+        $this->save();
+    }
+
     public function hasPendingOrders(): bool
     {
         $pending = Purchase::where('id_utilizador', $this->id)

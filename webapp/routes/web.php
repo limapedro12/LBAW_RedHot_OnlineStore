@@ -79,7 +79,9 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}/change_password/{token}', 'changePasswordForm');
     Route::post('/users/{id}/change_password/{token}', 'changePassword');
     Route::post('/users/{id}/ban', 'banUser');
+    Route::post('/users/{id}/forgive', 'unbanUser');
     Route::post('/users/{id}/promote', 'becomeAdmin');
+    Route::post('/users/{id}/demote', 'becomeUser');
 });
 
 Route::controller(NotificationController::class)->group(function () {
