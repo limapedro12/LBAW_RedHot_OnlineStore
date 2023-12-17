@@ -171,6 +171,11 @@
                                 </div>
                                 <div class="productAddToCart">
                                     <input type="submit" value="Adicionar ao carrinho">
+                                    @if ($errors->has('quantity'))
+                                        <p class="textDanger">
+                                            {{ $errors->first('quantity') }}
+                                        </p>
+                                    @endif
                                 </div>
                             </form>
                         @endif
