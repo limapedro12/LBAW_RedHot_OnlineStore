@@ -50,32 +50,97 @@
             </div>
             <div class="adminOptionContent">
                 <div class="adminOptionContentTitle">
-                    <h2>Estatísticas de Vendas</h2>
+                    <h1>Estatísticas</h1>
                 </div>
 
                 <div class="adminOptionRealContent">
 
-                    <div class="generalStatisctics">
-                        <div class="visits">
-                            <p>Total Visits: {{$visitsLast30Days}}</p>
+                    <div class="generalStatistics">
+                        <div class="smallTitle">
+                            <h3>Estatísticas Gerais</h3>
+                        </div>
+                        <div class="statisticsContent">
+                            <div class="statsCont">
+                                <div class="statText">
+                                    <h2>Visitas</h2>
+                                    <p>Ultimos 30 dias: </p>
+                                </div>
+                                <div class="statNumber">
+                                    <h2>{{ $visitsLast30Days }}</h2>
+                                </div>
+                            </div>
+
+                            <div class="statsCont">
+                                <div class="statText">
+                                    <h2>Carrinhos Ativos</h2>
+                                    <p>Ultimos 30 dias: </p>
+                                </div>
+                                <div class="statNumber">
+                                    <h2>{{ $activeShoppingCarts }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="averageSalesTable">
+                            <div class="tableTitleAvg">
+                                <h3>Vendas Médias</h3>
+                            </div>
+                            <div class="tableValuesAvg">
+                                <div class="tableValueAvg">
+                                    <p>Este Mês:</p>
+                                    <div class="tableValueAvgNumber">
+                                        <h2>{{ $averageSaleValueLastMonth }}€</h2>
+                                        @if ($averageSaleValueLastMonth > $averageSaleValue)
+                                            <div class="green">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </div>
+                                        @elseif($averageSaleValueLastMonth < $averageSaleValue)
+                                            <div class="red">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </div>
+                                        @else
+                                            <i class="fas fa-minus"></i>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="tableValueAvg">
+                                    <p>De Sempre:</p>
+                                    <h2>{{ $averageSaleValue }}€</h2>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="allIPs">
-                            @foreach ($listVisits as $ip)
-                                <p>{{$ip->ip_address}}</p>
-                            @endforeach
+                        <div class="tableTop5SoldProducts">
+                            <div class="tableTitleTop5">
+                                <h3>Top 5 Produtos Mais Vendidos</h3>
+                            </div>
+                            <div class="top5Products">
+                                @for ($i = 0; $i < 5; $i++)
+                                    @php
+                                        $product = $top5[$i];
+                                        $totalprice = $top5prices[$i];
+                                        $totalQuantity = $top5quantities[$i];
+                                    @endphp
+
+                                    <div class="top5ProductInfo">
+                                        <a href="{{ route('productsdetails', ['id' => $product->id]) }}">{{ $product->nome }}</a>
+                                        <p>{{ $totalQuantity }}</p>
+                                    </div>
+                                @endfor
+                            </div>
                         </div>
 
-                        <div class="activeCarts">
-                            <p>Carrinhos Ativos: {{$activeShoppingCarts}}</p>
-                        </div>
+
+
                     </div>
 
                     <div class="grafs">
-
                         <div class="salesGraf">
+                            <div class="smallTitle">
+                                <h3>Vendas</h3>
+                            </div>
                             <div class="month-selection">
-                                <label for="month">Vendas de:</label>
+                                <label for="month">De:</label>
                                 <select id="salesMonth" name="month">
                                     <option value="0">Todos os Meses</option>
                                     <option value="1">Janeiro</option>
@@ -99,8 +164,11 @@
                         </div>
 
                         <div class="moneyGraf">
+                            <div class="smallTitle">
+                                <h3>Faturação</h3>
+                            </div>
                             <div class="month-selection">
-                                <label for="month">Faturação de:</label>
+                                <label for="month">De:</label>
                                 <select id="moneyMonth" name="month">
                                     <option value="0">Todos os Meses</option>
                                     <option value="1">Janeiro</option>
@@ -122,11 +190,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-
-            <!-- move the js to other file -->
-
         </div>
     </div>
 

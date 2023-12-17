@@ -1,6 +1,3 @@
-<head>
-    <title>Adicionar Produto | RedHot</title>
-</head>
 
 @extends('layouts.adminHeaderFooter')
 
@@ -70,34 +67,79 @@
             </div>
             <div class="adminOptionContent">
 
-                <h1>Adicionar Novo Produto</h1>
+                <div class="adminOptionContentTitle">
+                    <h1>Adicionar Produto</h1>
+                </div>
 
-                <form action="/products/add" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <div class="adminHighlightContent">
+                    <div class="adminAddForm">
+                        <div class="adminHighlightContentTitle">
+                            <h2>Informação</h2>
+                        </div>
+                        <div class="adminAddProductForm">
+                            <form action="/products/add" method="POST" enctype="multipart/form-data">
+                                @csrf
 
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required><br><br>
+                                <div class="inputBox">
+                                    <div class="adminAddProduct">
+                                        <label for="name">Nome:</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                </div>
 
-                    <label for="price">Preço:</label>
-                    <input type="number" step="0.01" id="price" name="price" min="0" required><br><br>
 
-                    <label for="discount">Desconto:</label>
-                    <input type="number" step="0.001" id="discount" name="discount" min="0" max="1"><br><br>
+                                <div class="inputBox">
+                                    <div class="adminAddProduct">
+                                        <label for="category">Categoria:</label>
+                                        <input type="text" id="category" name="category" required>
+                                    </div>
+                                </div>
 
-                    <label for="stock">Stock:</label>
-                    <input type="number" id="stock" name="stock" required min="0"><br><br>
+                                <div class="inputBox">
+                                    <div class="adminAddProduct">
+                                        <label for="description">Descrição:</label>
+                                        <textarea id="description" name="description" required></textarea>
+                                    </div>
+                                </div>
 
-                    <label for="description">Descrição:</label>
-                    <textarea id="description" name="description" required></textarea><br><br>
+                                <div class="inputBoxSpecial">
+                                    <div class="adminAddProduct">
+                                        <label for="price">Preço:</label>
+                                        <input type="number" step="0.01" id="price" name="price" min="0.01" required>
+                                    </div>
+                                    <div class="adminAddProduct">
+                                        <label for="discount">Desconto:</label>
+                                        <input type="number" step="0.01" id="discount" min="0.01" max="1" name="discount">
+                                    </div>
+                                    <div class="adminAddProduct">
+                                        <label for="stock">Stock:</label>
+                                        <input type="number" id="stock" name="stock" min="0" required>
+                                    </div>
+                                </div>
 
-                    <label for="file">Imagem:</label>
-                    <input type="file" id="file" name="file"><br><br>
 
-                    <label for="category">Categoria:</label>
-                    <input type="text" id="category" name="category"><br><br>
 
-                    <input type="submit" value="Adicionar Produto">
-                </form>
+                                <div class="productEditImg">
+                                    <div class="filesBox">
+                                        <div class="fileImgEdit" id="photoUploader">
+                                            <label for="file">
+                                                Adicionar Fotografia de Produto
+                                                <br />
+                                                <i class="fa fa-2x fa-camera"></i>
+                                                <input type="file" name="file" id="file" class="inputfile">
+                                                <br />
+                                                <span class="fileName" id="fileImgName"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="addProductButton">
+                                    <input type="submit" value="Adicionar Produto">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

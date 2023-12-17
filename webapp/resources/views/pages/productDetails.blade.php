@@ -132,7 +132,7 @@
                                     @if ($product->stock > 0)
                                         <p> Produto Disponível </p>
                                     @else
-                                        <p> Produto Indisponível: Sem Stock </p>
+                                        <p> Produto Indisponível</p>
                                     @endif
                                 </div>
                             @endif

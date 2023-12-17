@@ -1,7 +1,3 @@
-<head>
-    <title>Gestão de Produtos | RedHot</title>
-</head>
-
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
@@ -70,78 +66,120 @@
             </div>
             <div class="adminOptionContent">
 
-                <h2>Gestão de Produtos</h2>
+                <div class="adminOptionContentTitle">
+                    <h1>Gestão de Produtos</h1>
+                </div>
 
-                <div class="productsPageProducts" id='listOfProducts'>
-                    @foreach ($products as $product)
-                        <div class="productListItem">
-                            <div class="productListItemImg">
-                                <a href = "/products/{{ $product->id }}">
-                                    <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}"
-                                        width="100px" height="100px">
-                                </a>
-                            </div>
-                            <div class="productListItemTitle">
-                                <a href = "/products/{{ $product->id }}">
-                                    <h3>
-                                        {{ $product->nome }}
-                                    </h3>
-                                </a>
-                            </div>
-                            <div class="productListItemBottom">
-                                <div class="productListItemRating">
-                                    <div class="productListItemNumberOfReviews">
-                                        <p> {{ $product->getProductNumberOfReviews() }} avaliações </p>
-                                    </div>
-                                    <div class="productListItemHearts">
-                                        <p> {{ $product->getProductRating() }}/ 5 <i class="fa-solid fa-heart"></i> </p>
-                                    </div>
-                                </div>
-                                <div class="productListItemPrices">
-                                    @if ($product->desconto > 0)
-                                        <div class="productListItemOldPrice">
-                                            <p class="discount">
-                                                {{ $product->desconto * 100 }}%
-                                            </p>
-                                            <p class="oldPrices">
-                                                {{ $product->precoatual }}
-                                            </p>
-                                            <p class="euro">€ </p>
-                                        </div>
-                                        <div class="productListItemNewPrice">
-                                            <p class="newPrices">
-                                                {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
-                                                €
-                                            </p>
-                                        </div>
-                                    @else
-                                        <div class="productListItemPrice">
-                                            <p class="Price">
-                                                {{ $product->precoatual }}€
-                                            </p>
-                                        </div>
-                                    @endif
+                <div class="adminOrderContent">
+                    <div class="tableOrders">
+                        <div class="profileOrders">
+
+                            <div class="topOfTable">
+                                <div class="filterTable">
+                                    <input type="text" id="filterInput" placeholder="Pesquisar..."
+                                        title="Filtrar Tabela">
                                 </div>
                             </div>
 
-                            <form method="GET" action="{{ route('editProduct', ['id' => $product->id]) }}">
-                                @csrf
-                                <button type="submit">Editar Informações</button>
-                            </form>
+                            <div class="myOrdersTable">
+                                <div class="myOrdersTableBody">
+                                    <table class="tableSortable" id="tableToFilter">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Imagem</th>
+                                                <th>Nome</th>
+                                                <th>Stock</th>
+                                                <th>Desconto</th>
+                                                <th>Preço</th>
+                                                <th>Editar</th>
+                                                <th>Apagar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $product)
+                                                <tr>
+                                                    <td>
+                                                        <div class="myProductID">
+                                                            <p>
+                                                                <a href='/products/{{ $product->id }}'>
+                                                                    {{ $product->getNormalizeOrderId($product->id) }}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myProductImage">
+                                                            <a href='/products/{{ $product->id }}'>
+                                                                <img src="{{ $product->getProductImage() }}"
+                                                                    alt="Imagem de {{ $product->nome }}" width="50px"
+                                                                    height="50px">
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myProductName">
+                                                            <p>
+                                                                <a href='/products/{{ $product->id }}'>
+                                                                    {{ $product->nome }}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myProductStock">
 
-                            <form method="GET" action="{{ route('changeStockProduct', ['id' => $product->id]) }}">
-                                @csrf
-                                <button type="submit">Alterar Stock</button>
-                            </form>
+                                                            <form action="/products/{{ $product->id }}/changeStock"
+                                                                method="POST">
+                                                                @csrf
+                                                                <label for="stock"></label>
+                                                                <input type="number" id="stock" name="stock"
+                                                                    value="{{ $product->stock }}" required>
+                                                                <button type="submit"><i
+                                                                        class="fa-solid fa-check"></i></button>
+                                                            </form>
 
-                            <form method="POST" action="{{ route('deleteProduct', ['id' => $product->id]) }}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit">Apagar Produto</button>
-                            </form>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myProductDiscount">
+                                                            <p>
+                                                                {{ $product->desconto * 100 }}%
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myProductPrice">
+                                                            <p>
+                                                                {{ $product->precoatual }}€
+                                                            </p>
+                                                        </div>
+                                                    </td>
 
+                                                    <td>
+                                                        <div class="myProductEdit">
+                                                            <a href="{{ route('editProduct', ['id' => $product->id]) }}">
+                                                                <i class="fa-solid fa-file-pen"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="myProductDelete">
+                                                            <a href='/products/{{ $product->id }}/delete'
+                                                                id='eliminarProduto'>
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
 
             </div>

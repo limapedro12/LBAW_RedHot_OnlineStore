@@ -224,4 +224,13 @@ class Product extends Model
         return sizeof(Review::where('id_produto', $this->id)->get());
     }
 
+    public function getNormalizeOrderId(int $id)
+    {
+        $highestId = Product::max('id');
+        $highestIdLength = strlen((string) $highestId);
+        $id = (string) $id;
+        $id = str_pad($id, ($highestIdLength + 1), '0', STR_PAD_LEFT);
+        return $id;
+    }
+
 }

@@ -31,8 +31,6 @@
     background-color: var(--white);
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .adminPage .adminSideBar .adminSearchBarOnSideBar {
@@ -174,4 +172,874 @@
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+/*Admin Option Content*/
+.adminPage .adminOptionContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--light-white);
+    min-height: 100vh;
+}
+
+.adminPage .adminOptionContent .adminOptionContentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionContentTitle h1{
+    font-size: 4rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics{
+    width: 30%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .smallTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--light-black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .smallTitle h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    padding-left: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText p{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statText h2{
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .statisticsContent .statsCont .statNumber{
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableTitleAvg{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 1rem;
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableTitleAvg h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .separator{
+    width: 3px;
+    height: 100%;
+    background-color: var(--main-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg p{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg h2{
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg .tableValueAvg .tableValueAvgNumber{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .tableValuesAvg i{
+    font-size: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .green{
+    color: var(--green);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .averageSalesTable .red{
+    color: var(--red);
+}
+
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .tableTitleTop5{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 1rem;
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .tableTitleTop5 h3{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo:last-child{
+    border-bottom: none;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo a{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo a:hover{
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .generalStatistics .tableTop5SoldProducts .top5Products .top5ProductInfo p{
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs{
+    width: 68.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .salesGraf,
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .moneyGraf{
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    margin: 0.5rem;
+    background-color: var(--white);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection label{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .month-selection select{
+    width: 15rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--black);
+    border-bottom: 2px solid var(--main-color);
+    outline: none;
+}
+
+.adminPage .adminOptionContent .adminOptionRealContent .grafs .graf{
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+
+
+.adminPage .adminOrderContent{
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--white);
+    min-height: 100vh;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.adminPage .adminOrderContent .tableSortable a{
+    font-size: 1.7rem;
+    color: var(--black);
+}
+
+.adminPage .adminOrderContent .tableSortable a:hover{
+    color: var(--main-color);
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductImage img{
+    border-radius: 15%;
+    border: 1px solid var(--black);
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductImage img:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductStock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductStock form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductStock form input{
+    width: 7rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--main-color);
+    outline: none;
+    margin-right: 1rem;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductStock form button{
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductStock form button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductEdit,
+.adminPage .adminOrderContent .tableSortable .myProductDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductEdit a,
+.adminPage .adminOrderContent .tableSortable .myProductDelete a{
+    font-size: 1.7rem;
+    color: var(--main-color);
+}
+
+.adminPage .adminOrderContent .tableSortable .myProductEdit a:hover,
+.adminPage .adminOrderContent .tableSortable .myProductDelete a:hover{
+    opacity: 0.8;
+}
+
+
+.adminPage .adminOptionContent .adminHighlightContent{
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--white);
+    min-height: 50vh;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .adminHighlightContentTitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .adminHighlightContentTitle h2 {
+    font-size: 3rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .productsPageProducts{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .highlightProductListItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+    height: 37rem;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .removeHighlight{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .removeHighlight button{
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .removeHighlight button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .maxHighlights{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .maxHighlights p{
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .highlightsEmpty{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .highlightsEmpty img{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .highlightsEmpty h3{
+    font-size: 2rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductImage img{
+    border-radius: 15%;
+    border: 1px solid var(--black);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductImage img:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable a{
+    font-size: 1.7rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable a:hover{
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductAddToHighlights{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductAddToHighlights form{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductAddToHighlights form button{
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductAddToHighlights form button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.adminPage .adminOptionContent .adminHighlightContent .tableSortable .myProductAddToHighlights form i{
+    font-size: 1.5rem;
+}
+
+.adminPage .adminAddForm{
+    min-height: 81vh;
+}
+
+.adminAddForm .adminAddProductForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.adminAddForm .adminAddProductForm .productEditImg{
+    margin: 0;
+}
+
+.adminAddForm .adminAddProductForm form{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.adminAddForm .adminAddProductForm form label{
+    font-size: 2rem;
+    color: var(--black);
+    padding-bottom: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct input{
+    height: 3rem;
+    border-bottom: 2px solid var(--main-color);
+    padding-left: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--black);
+    width: 100%;
+    outline: none;
+    background: transparent;
+    margin-bottom: 1rem;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct input:focus{
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct textarea{
+    height: 9.5rem;
+    border-bottom: 2px solid var(--main-color);
+    padding-left: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--black);
+    width: 100%;
+    outline: none;
+    background: transparent;
+    margin-bottom: 1rem;
+    resize: none;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct textarea:focus{
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct textarea::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.adminAddForm .adminAddProductForm .inputBox .adminAddProduct textarea::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}
+
+.adminAddForm .adminAddProductForm .inputBoxSpecial{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adminAddForm .adminAddProductForm .inputBoxSpecial .adminAddProduct{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.adminAddForm .adminAddProductForm .inputBoxSpecial input{
+    height: 3rem;
+    border-bottom: 2px solid var(--main-color);
+    padding-left: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--black);
+    width: 48%;
+    outline: none;
+    background: transparent;
+    margin-bottom: 1rem;
+}
+
+.adminAddForm .adminAddProductForm .addProductButton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.adminAddForm .adminAddProductForm .addProductButton input{
+    width: 20rem;
+    height: 3rem;
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.adminAddForm .adminAddProductForm .addProductButton input:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+.adminPage .adminOptionContent .tableSortable .userFotoName{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName img{
+    border-radius: 50%;
+    border: 1px solid var(--black);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName img:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName .userNameInAdminTable p{
+    font-size: 1.7rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName .userNameInAdminTable p:hover{
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form button{
+    
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+.adminPage .adminOptionContent .topOfTable .faqTopTable{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.adminPage .adminOptionContent .topOfTable .faqTopTable .adminFAQButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20rem;
+}
+
+.adminPage .adminOptionContent .topOfTable .faqTopTable .adminFAQButtons form{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .topOfTable .faqTopTable .adminFAQButtons form button{
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.adminPage .adminOptionContent .topOfTable .faqTopTable .adminFAQButtons form button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+
+.adminPage .adminOptionContent .tableSortable .faqButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .faqButtons form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .faqButtons form button{
+    color: var(--black);
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
+.adminPage .adminOptionContent .tableSortable .faqButtons form button:hover{
+    cursor: pointer;
+    color: var(--main-color);
 }
