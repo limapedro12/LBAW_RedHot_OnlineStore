@@ -308,6 +308,16 @@ class UserController extends Controller
 
     public function becomeUser(Request $request, int $id)
     {
-        // TODO
+        AdminController::verifyAdmin2();
+
+        $user = User::findOrFail($id);
+
+        $admin = Admin::where('email', '=', $user->email);
+        $admin->delete();
+
+        $user->became_admin = false;
+        $user->save();
+
+        return redirect('/adminUsers');
     }
 }
