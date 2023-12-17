@@ -1,8 +1,6 @@
-<head>
-    <title>Gestão de Encomendas | RedHot</title>
-</head>
-
 @extends('layouts.adminHeaderFooter')
+
+@section('title', 'Gestão de Encomendas |')
 
 @section('content')
     <div class="adminContent">

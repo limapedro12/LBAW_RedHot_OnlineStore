@@ -1,6 +1,4 @@
-<head>
-    <title>Editar Comentário | RedHot</title>
-</head>
+@section('title', 'Editar Comentário |')
 
 @section('content')
     <section>

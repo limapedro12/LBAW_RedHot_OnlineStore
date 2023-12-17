@@ -1,6 +1,4 @@
-<head>
-    <title>Editar informações de {{ $product->nome }} | RedHot</title>
-</head>
+@section('title', 'Editar Informação de Produto ' . $product->nome . ' |')
 
 @section('content')
     <section>

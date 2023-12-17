@@ -1,6 +1,4 @@
-<head>
-    <title>Wishlist | RedHot</title>
-</head>
+@section('title', 'Wishlist |')
 
 @section('content')
     <section>

@@ -1,8 +1,6 @@
-<head>
-    <title>Produtos em Destaque | RedHot</title>
-</head>
-
 @extends('layouts.adminHeaderFooter')
+
+@section('title', 'Gestão de Destaques |')
 
 @section('content')
     <div class="adminContent">

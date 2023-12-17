@@ -1,6 +1,4 @@
-<head>
-    <title>Encomenda {{ $purchase->id }} | RedHot</title>
-</head>
+@section('title', 'Encomenda ' . $purchase->id . ' |')
 
 @section('content')
     <section>

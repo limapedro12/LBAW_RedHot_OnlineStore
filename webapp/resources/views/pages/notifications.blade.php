@@ -1,6 +1,4 @@
-<head>
-    <title>Notificações | RedHot</title>
-</head>
+@section('title', 'Notificações |')
 
 @section('content')
     <section>

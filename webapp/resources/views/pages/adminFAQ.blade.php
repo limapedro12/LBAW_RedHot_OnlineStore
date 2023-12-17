@@ -1,8 +1,6 @@
-<head>
-    <title>Gestão de FAQ's | RedHot</title>
-</head>
-
 @extends('layouts.adminHeaderFooter')
+
+@section('title', "Gestão de FAQ's |")
 
 @section('content')
     <div class="adminContent">

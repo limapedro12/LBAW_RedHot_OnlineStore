@@ -1,6 +1,4 @@
-<head>
-    <title>Alteração de Password | RedHot</title>
-</head>
+@section('title', 'Alteração de Password |')
 
 @section('content')
 

@@ -1,6 +1,8 @@
 
 @extends('layouts.adminHeaderFooter')
 
+@section('title', 'Adicionar Produto |')
+
 @section('content')
     <div class="adminContent">
         <div class="adminPage">

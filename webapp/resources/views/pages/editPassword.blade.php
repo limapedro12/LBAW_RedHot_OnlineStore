@@ -1,6 +1,4 @@
-<head>
-    <title>Alterar Password | RedHot</title>
-</head>
+@section('title', 'Alterar password |')
 
 @section('content')
     <section>

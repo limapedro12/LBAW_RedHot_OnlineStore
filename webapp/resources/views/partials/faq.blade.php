@@ -1,6 +1,4 @@
-<head>
-    <title>Editar FAQ | RedHot</title>
-</head>
+@section('title', 'Editar FAQ |')
 
 @extends('layouts.adminHeaderFooter')
 

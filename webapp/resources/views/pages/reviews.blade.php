@@ -1,6 +1,4 @@
-<head>
-    <title>Comentários de {{ $product->nome }} | RedHot</title>
-</head>
+@section('title', 'Comentários de' . $product->nome . ' |')
 
 @section('content')
     <section>

@@ -1,6 +1,4 @@
-<head>
-    <title>Editar Perfil | RedHot</title>
-</head>
+@section('title', 'Editar Perfil |')
 
 @section('content')
     <section>

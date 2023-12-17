@@ -1,8 +1,6 @@
-<head>
-    <title>Recuperação de Password | RedHot</title>
-</head>
-
 @extends('layouts.userNotLoggedHeaderFooter')
+
+@section('title', 'Recuperação de Password |')
 
 @section('content')
     <section class="signup">

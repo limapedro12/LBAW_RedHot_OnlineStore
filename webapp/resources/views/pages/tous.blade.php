@@ -1,7 +1,4 @@
-<head>
-    <title>Termos de Uso | RedHot</title>
-</head>
-
+@section('title', 'Termos de Uso |')
 @section('content')
     <section>
         <div class="ppTous">

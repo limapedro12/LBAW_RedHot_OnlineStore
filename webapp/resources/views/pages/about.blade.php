@@ -1,6 +1,4 @@
-<head>
-    <title>Sobre Nós | RedHot</title>
-</head>
+@section('title', 'Sobre Nós |')
 
 @section('content')
     <div class="aboutContent">

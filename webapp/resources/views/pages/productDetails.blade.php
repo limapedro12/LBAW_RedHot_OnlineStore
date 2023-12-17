@@ -1,6 +1,4 @@
-<head>
-    <title>{{ $product->nome }} | RedHot</title>
-</head>
+@section('title', $product->nome . ' |')
 
 @section('content')
 

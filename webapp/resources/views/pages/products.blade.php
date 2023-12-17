@@ -1,6 +1,4 @@
-<head>
-    <title>Produtos | RedHot</title>
-</head>
+@section('title', 'Produtos |')
 
 @section('content')
 

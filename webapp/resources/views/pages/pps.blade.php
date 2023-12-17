@@ -1,6 +1,4 @@
-<head>
-    <title>Politicas de Privacidade | RedHot</title>
-</head>
+@section('title', 'Politicas de Privacidade |')
 
 @section('content')
     <section>

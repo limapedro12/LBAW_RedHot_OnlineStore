@@ -1,8 +1,6 @@
-<head>
-    <title>Login | RedHot</title>
-</head>
-
 @extends('layouts.userNotLoggedHeaderFooter')
+
+@section('title', 'Login |')
 
 @section('content')
     <section class ="login">
