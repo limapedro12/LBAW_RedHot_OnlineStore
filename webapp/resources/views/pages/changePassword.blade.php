@@ -1,3 +1,7 @@
+<head>
+    <title>Alteração de Password | RedHot</title>
+</head>
+
 @section('content')
 
     <h1>Formulário para resetar a password de {{$user->nome}}</h1>

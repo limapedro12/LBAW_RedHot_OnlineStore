@@ -42,6 +42,7 @@
     <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
     <script type="text/javascript" src={{ url('js/tables.js') }} defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src={{ url('js/grafs.js') }} defer></script>
 
 

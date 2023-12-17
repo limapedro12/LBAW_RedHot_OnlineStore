@@ -1,3 +1,7 @@
+<head>
+    <title>Produtos | RedHot</title>
+</head>
+
 @section('content')
 
     <div class="productsPage">

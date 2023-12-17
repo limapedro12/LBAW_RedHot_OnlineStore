@@ -155,6 +155,8 @@ class PurchaseController extends Controller
 
         event(new CancelOrder($purchase->id, Auth::user()->nome, $purchase->id_utilizador));
 
+        sleep(1);
+
         return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Encomenda cancelada com sucesso.');
     }
 

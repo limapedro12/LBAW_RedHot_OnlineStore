@@ -1,3 +1,7 @@
+<head>
+    <title>FAQ's | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="faqs">

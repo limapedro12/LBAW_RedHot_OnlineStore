@@ -34,6 +34,8 @@ class WishlistController extends Controller
 
         $wishlistProduct->save();
 
+        sleep(1);
+
         return redirect()->back();
 
     }

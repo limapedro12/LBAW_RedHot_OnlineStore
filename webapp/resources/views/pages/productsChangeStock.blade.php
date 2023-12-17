@@ -1,3 +1,7 @@
+<head>
+    <title>Gestão de Stock de {{ $product->nome }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Alterar o Stock de {{ $product->nome }}</h1>

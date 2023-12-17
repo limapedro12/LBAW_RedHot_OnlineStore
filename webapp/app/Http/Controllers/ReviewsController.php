@@ -86,6 +86,8 @@ class ReviewsController extends Controller
         // Save the review and redirect to the reviews page.
         Review::where('id', '=', $id_review)->update(array('texto' => $request->comment, 'avaliacao' => $request->rating, 'timestamp' => $request->timestamp));
 
+        sleep(1);
+
         return redirect()->back();
     }
 

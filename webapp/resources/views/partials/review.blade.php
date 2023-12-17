@@ -1,3 +1,7 @@
+<head>
+    <title>Editar Comentário | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <article class="review" reviewId="{{ $review->id }}">
@@ -8,7 +12,7 @@
         </article>
 
         @if (Auth::check() && $review->id_utilizador == Auth::user()->id)
-            <form method="POST"
+            <form method="POST" class="editEachReview"
                 action="{{ route('editReview', ['id_review' => $review->id, 'id_product' => $id_product]) }}">
                 @csrf
 

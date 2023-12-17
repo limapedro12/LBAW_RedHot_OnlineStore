@@ -1,3 +1,7 @@
+<head>
+    <title>Editar Perfil | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="profileEdit">

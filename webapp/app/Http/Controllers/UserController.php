@@ -167,6 +167,8 @@ class UserController extends Controller
 
         User::where('id', '=', $id)->update(array('password' => Hash::make($request->new_password)));
 
+        sleep(1);
+
         return redirect('/users/' . $id);
     }
 

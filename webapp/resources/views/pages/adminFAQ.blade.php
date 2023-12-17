@@ -1,3 +1,7 @@
+<head>
+    <title>Gestão de FAQ's | RedHot</title>
+</head>
+
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
