@@ -1,3 +1,7 @@
+<head>
+    <title>Recuperação de Password | RedHot</title>
+</head>
+
 @extends('layouts.userNotLoggedHeaderFooter')
 
 @section('content')
@@ -33,7 +37,7 @@
 
             </form>
 
-            <p class="textDanger">{{ session('message') }}</p>
+            <p class="text-danger">{{ session('message') }}</p>
 
             @if (session('details'))
                 <ul>

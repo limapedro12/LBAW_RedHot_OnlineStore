@@ -1,3 +1,7 @@
+<head>
+    <title>Gestão de FAQ's | RedHot</title>
+</head>
+
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
@@ -46,48 +50,88 @@
             </div>
 
             <div class="adminOptionContent">
+                <div class="adminOptionContentTitle">
+                    <h1>Perguntas Frequentes</h1>
+                </div>
 
-                <section>
-                    <div class="faqs">
-                        <h1>Perguntas Frequentes</h1>
+                <div class="adminOrderContent">
+                    <div class="tableOrders">
+                        <div class="profileOrders">
 
-                        <div class="adminFAQButtons">
-                            <form method="GET" action="{{ route('addFaqForm') }}">
-                                @csrf
-                                <button type="submit" class="adminFAQButton">Adicionar FAQ</button>
-                            </form>
-                        </div>
+                            <div class="topOfTable">
+                                <div class="faqTopTable">
+                                    <div class="filterTable">
+                                        <input type="text" id="filterInput" placeholder="Pesquisar..."
+                                            title="Filtrar Tabela">
+                                    </div>
+                                    <div class="adminFAQButtons">
+                                        <form method="GET" action="{{ route('addFaqForm') }}">
+                                            @csrf
+                                            <button type="submit" class="adminFAQButton">Adicionar FAQ</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div>
-                            <table class="faqs">
-                                @foreach ($faqs as $faq)
-                                    <tr>
-                                        <th>{{ $faq->pergunta }}</th>
-                                        <td>
-                                            <form method="POST" action="{{ route('deleteFaqs', ['id' => $faq->id]) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="adminFAQButton"><i
-                                                        class="fas fa-trash-alt"></i></button>
-                                            </form>
-                                        </td>
-
-                                        <td>
-                                            <form method="GET" action="{{ route('faq', ['id' => $faq->id]) }}">
-                                                @csrf
-                                                <button type="submit" class="adminFAQButton"><i
-                                                        class="fas fa-edit"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                            <div class="myOrdersTable">
+                                <div class="myOrdersTableBody">
+                                    <table class="tableSortable" id="tableToFilter">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Pergunta</th>
+                                                <th>Editar</th>
+                                                <th>Apagar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($faqs as $faq)
+                                                <tr>
+                                                    <td>
+                                                        <div class="myOrderID">
+                                                            <p>
+                                                                {{ $faq->getNormalizeFaqId($faq->id) }}
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myOrderDate">
+                                                            <p>
+                                                                {{ $faq->pergunta }}
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="faqButtons">
+                                                            <form method="GET"
+                                                                action="{{ route('faq', ['id' => $faq->id]) }}">
+                                                                @csrf
+                                                                <button type="submit" class="adminFAQButton"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="faqButtons">
+                                                            <form method="POST"
+                                                                action="{{ route('deleteFaqs', ['id' => $faq->id]) }}">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="adminFAQButton"><i
+                                                                        class="fas fa-trash-alt"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </section>
-
+                </div>
             </div>
-
         </div>
     </div>
 @endsection

@@ -1,3 +1,7 @@
+<head>
+    <title>Termos de Uso | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="ppTous">

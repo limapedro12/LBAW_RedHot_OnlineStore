@@ -1,3 +1,7 @@
+<head>
+    <title>Encomenda {{ $purchase->id }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Encomenda {{ $purchase->id }}</h1>
@@ -11,7 +15,11 @@
         <ul>
             @foreach ($quantPriceProducts as $quantPriceProduct)
                 <li>
-                    <a href="/products/{{ $quantPriceProduct[2]->id }}">{{ $quantPriceProduct[2]->nome }}</a>
+                    @if ($quantPriceProduct[2]->deleted)
+                        {{ $quantPriceProduct[2]->nome }} (Eliminado do catálogo)
+                    @else
+                        <a href="/products/{{ $quantPriceProduct[2]->id }}">{{ $quantPriceProduct[2]->nome }}</a>
+                    @endif
                     <p>
                         <span>Quantidade: {{ $quantPriceProduct[0] }}</span><br>
                         <span>Preço unitário: {{ $quantPriceProduct[1] }}€</span><br>
@@ -24,7 +32,7 @@
             $purchase->estado != 'Entregue' &&
             $purchase->estado != 'Cancelada' &&
             Auth::check())
-            <form method=post action="/users/{{ $purchase->id_utilizador }}/orders/{{ $purchase->id }}/cancel">
+            <form method=post class="cancelOrder" action="/users/{{ $purchase->id_utilizador }}/orders/{{ $purchase->id }}/cancel">
                 @csrf
                 <button type="submit">Cancelar encomenda</button>
             </form>

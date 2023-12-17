@@ -1,3 +1,7 @@
+<head>
+    <title>Editar Perfil | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="profileEdit">
@@ -70,7 +74,7 @@
                                     <input type="text" id="nome" name="nome" value="{{ $user->nome }}"
                                         placeholder="Nome">
                                     @if ($errors->has('nome'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('nome') }}
                                         </p>
                                     @endif
@@ -81,7 +85,7 @@
                                     <input type="text" id="email" name="email" value="{{ $user->email }}"
                                         placeholder="Email">
                                     @if ($errors->has('email'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('email') }}
                                         </p>
                                     @endif
@@ -92,7 +96,7 @@
                                     <input type="text" id="telefone" name="telefone" value="{{ $user->telefone }}"
                                         placeholder="Telefone">
                                     @if ($errors->has('telefone'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('telefone') }}
                                         </p>
                                     @endif
@@ -103,7 +107,7 @@
                                     <input type="text" id="morada" name="morada" value="{{ $user->morada }}"
                                         placeholder="Morada">
                                     @if ($errors->has('morada'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('morada') }}
                                         </p>
                                     @endif
@@ -114,7 +118,7 @@
                                     <input type="text" id="codigo_postal" name="codigo_postal"
                                         value="{{ $user->codigo_postal }}" placeholder="Código Postal">
                                     @if ($errors->has('codigo_postal'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('codigo_postal') }}
                                         </p>
                                     @endif
@@ -125,7 +129,7 @@
                                     <input type="text" id="localidade" name="localidade" value="{{ $user->localidade }}"
                                         placeholder="Localidade">
                                     @if ($errors->has('localidade'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('localidade') }}
                                         </p>
                                     @endif
@@ -142,7 +146,7 @@
                                 <input type="password" id="password" name="password" required placeholder="Password"
                                     required>
                                 @if ($errors->has('password'))
-                                    <p class="textDanger">
+                                    <p class="text-danger">
                                         {{ $errors->first('password') }}
                                     </p>
                                 @endif
@@ -153,7 +157,7 @@
                                 <input id="password-confirm" type="password" name="password_confirmation"
                                     placeholder="Confirmar Password" required>
                                 @if ($errors->has('password_confirmation'))
-                                    <p class="textDanger">
+                                    <p class="text-danger">
                                         {{ $errors->first('password_confirmation') }}
                                     </p>
                                 @endif

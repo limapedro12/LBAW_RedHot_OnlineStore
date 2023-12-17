@@ -1,3 +1,7 @@
+<head>
+    <title>Encomendas | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>As Minhas Encomendas</h1>

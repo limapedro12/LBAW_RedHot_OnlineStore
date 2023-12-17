@@ -1,3 +1,7 @@
+<head>
+    <title>Perfil | RedHot</title>
+</head>
+
 @section('content')
     <section>
         @if (Auth::check() && Auth::user()->id == $user->id)
@@ -92,7 +96,7 @@
                     <input type="submit" id="banUser" value="Banir Utilizador">
                 </form>
                 @if ($errors->has('ban'))
-                    <p class="textDanger">
+                    <p class="text-danger">
                         {{ $errors->first('ban') }}
                     </p>
                 @endif
@@ -101,7 +105,7 @@
                     <input type="submit" id="promoteUser" value="Promover a Administrador">
                 </form>
                 @if ($errors->has('promote'))
-                    <p class="textDanger">
+                    <p class="text-danger">
                         {{ $errors->first('promote') }}
                     </p>
                 @endif

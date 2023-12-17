@@ -1,3 +1,7 @@
+<head>
+    <title>Editar informações de {{ $product->nome }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="productEditMainTitle">

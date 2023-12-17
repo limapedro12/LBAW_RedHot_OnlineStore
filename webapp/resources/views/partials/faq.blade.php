@@ -1,21 +1,50 @@
+<head>
+    <title>Editar FAQ | RedHot</title>
+</head>
+
 @extends('layouts.adminHeaderFooter')
 
 @section('content')
-    <section>
-        <h3>Pergunta: {{ $faq->pergunta }}</h3>
-        <h3>Resposta: {{ $faq->resposta }}</h3>
+    <div class="editFaqTitle">
+        <h1>Editar FAQ</h1>
+    </div>
+    <section class="editFaq">
+        <div class="topEditFaq">
 
-        <form method="POST" action="{{ route('editFaqs', ['id' => $faq->id]) }}">
-            @csrf
+            <div class="previousQuestion">
+                <h2>{{ $faq->pergunta }}</h2>
+            </div>
+            <div class="previousAnswer">
+                <h3>{{ $faq->resposta }}</h3>
+            </div>
+        </div>
 
-            <label for="name">Pergunta:</label>
-            <input type="text" id="pergunta" name="pergunta" value="{{ $faq->pergunta }}" required><br><br>
+        <div class="bottomEditFaq">
+            <div class="editFaqForm">
+                <form method="POST" action="{{ route('editFaqs', ['id' => $faq->id]) }}">
+                    @csrf
 
-            <label for="name">Resposta:</label>
-            <input type="text" id="resposta" name="resposta" value="{{ $faq->resposta }}" required><br><br>
+                    <div class="productEditTitle">
+                        <label for="name">Pergunta:</label>
+                        <input type="text" id="pergunta" name="pergunta" value="{{ $faq->pergunta }}" required>
+                    </div>
 
-            <button type="submit" class="adminFAQButton">Editar FAQ</button>
-        </form>
+                    <div class="productEditDescription">
+                        <label for="description">Descrição:</label>
+                        <textarea id="resposta" name="resposta" required>{{ $faq->resposta }}</textarea>
+                    </div>
+
+                    <div class="productFaqButtons">
+                        <div class="productFaqSave">
+                            <input type="submit" value="Guardar">
+                        </div>
+                        <div class="productFaqCancel">
+                            <a href="/adminFAQ">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     </section>
 @endsection

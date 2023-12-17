@@ -1,3 +1,7 @@
+<head>
+    <title>{{ $product->nome }} | RedHot</title>
+</head>
+
 @section('content')
 
     <section>
@@ -88,7 +92,7 @@
                             @if ($productWishlist == null)
                                 <div class="addToWishlist">
                                     @if (Auth::check())
-                                        <form method="POST"
+                                        <form method="POST" class="addToWishlist"
                                             action="{{ route('addToWishlist', ['id' => Auth::user()->id, 'id_product' => $product->id]) }}">
                                             @csrf
                                             <input type="submit" value="Adicionar à Wishlist">
@@ -171,6 +175,11 @@
                                 </div>
                                 <div class="productAddToCart">
                                     <input type="submit" value="Adicionar ao carrinho">
+                                    @if ($errors->has('quantity'))
+                                        <p class="text-danger">
+                                            {{ $errors->first('quantity') }}
+                                        </p>
+                                    @endif
                                 </div>
                             </form>
                         @endif

@@ -64,6 +64,7 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::get('/users/{userId}/orders/{orderId}', 'showOrderDetails');
     Route::post('/users/{userId}/orders/{orderId}/cancel', 'cancelOrder');
     Route::post('/users/{userId}/orders/{orderId}/change_state', 'changeState');
+    Route::put('/cart/change_quantity/', 'changeQuantity');
 });
 
 // User

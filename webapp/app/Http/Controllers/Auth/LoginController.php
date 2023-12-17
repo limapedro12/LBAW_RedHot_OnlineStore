@@ -22,10 +22,6 @@ function verifyNotAutenticated(): void
 
 class LoginController extends Controller
 {
-
-    /**
-     * Display a login form.
-     */
     public function showLoginForm()
     {
         verifyNotAutenticated();
@@ -36,15 +32,12 @@ class LoginController extends Controller
         }
     }
 
-    /**
-     * Handle an authentication attempt.
-     */
     public function authenticate(Request $request): RedirectResponse
     {
         verifyNotAutenticated();
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
@@ -77,17 +70,11 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Log out the user from application.
-     */
     public function logout(Request $request)
     {
-        //verifyNotAutenticated();
         Auth::logout();
-        //Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')
-            ->withSuccess('Logout efetuado com sucesso!');
+        return redirect('/');
     }
 }

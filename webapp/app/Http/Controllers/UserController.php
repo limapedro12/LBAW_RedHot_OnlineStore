@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Order;
+use App\Models\Wishlist;
+use App\Models\ProductCart;
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
@@ -43,6 +45,8 @@ class UserController extends Controller
     public function showProfileDetails(int $id): View
     {
         $user = User::findOrFail($id);
+
+        if ($user->deleted) abort(404);
 
         verifyUser($user);
 
@@ -126,12 +130,30 @@ class UserController extends Controller
         $this->authorize('deleteAccount', $user);
 
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/' . $id . '/delete_account');
+            return back()->withErrors(['password' => 'A password introduzida está incorreta.']);
         }
 
-        FileController::delete($user->profile_image);
+        if ($user->profile_image)
+            FileController::delete($user->profile_image);
 
-        User::where('id', '=', $id)->delete();
+        $wishlistProducts = Wishlist::where('id_utilizador', '=', $id)->get();
+        foreach($wishlistProducts as $wishlistProduct) $wishlistProduct->delete();
+
+        $productCarts = ProductCart::where('id_utilizador', '=', $id)->get();
+        foreach($productCarts as $productCart) $productCart->delete();
+
+        $user->update(array(
+            'nome' => null,
+            'email' => null,
+            'password' => null,
+            'telefone' => null,
+            'morada' => null,
+            'codigo_postal' => null,
+            'localidade' => null,
+            'remember_token' => null,
+            'profile_image' => null,
+            'deleted' => true
+        ));
 
         return redirect('/logout');
     }
@@ -152,16 +174,21 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'new_password' => 'required|min:8',
+            'new_password' => 'required',
         ]);
 
         if (!Hash::check($request->old_password, $user->password))
             return back()->withErrors(['password' => 'A sua password atual está incorreta']);
 
+        if (strlen($request->new_password) < 8)
+            return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres']);
+
         if ($request->new_password !== $request->new_password_confirmation)
             return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
 
         User::where('id', '=', $id)->update(array('password' => Hash::make($request->new_password)));
+
+        sleep(1);
 
         return redirect('/users/' . $id);
     }

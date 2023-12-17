@@ -37,4 +37,13 @@ class Faqs extends Model
     {
         return $this->all();
     }
+
+    public function getNormalizeFaqId(int $id)
+    {
+        $highestId = Faqs::max('id');
+        $highestIdLength = strlen((string) $highestId);
+        $id = (string) $id;
+        $id = str_pad($id, ($highestIdLength + 1), '0', STR_PAD_LEFT);
+        return $id;
+    }
 }

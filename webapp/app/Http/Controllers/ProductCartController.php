@@ -20,7 +20,7 @@ class ProductCartController extends Controller
         ]);
 
         if ($request->quantidade > $product->stock) {
-            return redirect('/products/' . $id);
+            return back()->withErrors(['quantity' => 'A quantidade escolhida super o stock disponível.']);
         }
 
         if (Auth::check()) {
@@ -52,6 +52,8 @@ class ProductCartController extends Controller
                 ]);
             }
         }
+
+        sleep(1.7);
 
         return redirect('/products/' . $id);
     }

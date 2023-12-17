@@ -13,16 +13,8 @@ use App\Models\Admin;
 use App\Models\Order;
 
 
-
-
 class OrderController extends Controller
 {
-
-    public function index()
-    {
-        //
-    }
-
     public function showProfileDetails(int $id): View
     {
         $user = User::findOrFail($id);
@@ -51,6 +43,4 @@ class OrderController extends Controller
         return $id;
 
     }
-
-
 }

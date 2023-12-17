@@ -1,3 +1,7 @@
+<head>
+    <title>Sobre Nós | RedHot</title>
+</head>
+
 @section('content')
     <div class="aboutContent">
         <div class="aboutRowOne">
