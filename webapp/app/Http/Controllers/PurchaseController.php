@@ -45,17 +45,25 @@ class PurchaseController extends Controller
             'deliveryObs' => 'nullable|string'
         ]);
 
-        if ($request->cardNo < 3000000000000000 || $request->cardNo > 9999999999999999)
-            return back()->withErrors(['cardNo' => 'Número de cartão inválido.']);
+        switch ($request->paymentMethod) {
+            case 'card':
+                if ($request->cardNo < 3000000000000000 || $request->cardNo > 9999999999999999)
+                    return back()->withErrors(['cardNo' => 'Número de cartão inválido.']);
 
-        if ($request->cardExpiryMonth < 1 || $request->cardExpiryMonth > 12)
-            return back()->withErrors(['cardExpiryMonth' => 'Por favor introduza um mês entre 1 e 12.']);
+                if ($request->cardExpiryMonth < 1 || $request->cardExpiryMonth > 12)
+                    return back()->withErrors(['cardExpiryMonth' => 'Por favor introduza um mês entre 1 e 12.']);
 
-        if ($request->cardExpiryYear < 23)
-            return back()->withErrors(['cardExpirtyMonth' => 'Ano de expiração inválido.']);
+                if ($request->cardExpiryYear < 23)
+                    return back()->withErrors(['cardExpirtyMonth' => 'Ano de expiração inválido.']);
 
-        if ($request->cardCVV < 100 || $request->cardCVV > 999)
-            return back()->withErrors(['cardCVV' => 'CVV inválido. O CVV é um código de três dígitos que se encontra nas traseiras do seu cartão bancário.']);
+                if ($request->cardCVV < 100 || $request->cardCVV > 999)
+                    return back()->withErrors(['cardCVV' => 'CVV inválido. O CVV é um código de três dígitos que se encontra nas traseiras do seu cartão bancário.']);
+            break;
+            case 'mbway':
+                if ($request->mbwayNo < 910000000 || $request->mbwayNo > 969999999)
+                    return back()->withErrors(['mbwayNo' => 'Número de telemóvel inválido.']);
+            break;
+        }
 
         $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
         $total = 0;
@@ -79,8 +87,15 @@ class PurchaseController extends Controller
         $purchase->timestamp = date('Y-m-d H:i:s');
         $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
-        $purchase->estado = 'Pagamento Por Aprovar';
-        $purchase->id_administrador = null; // para alterar no futuro
+        switch ($request->paymentMethod) {
+            case 'card': case 'mbway':
+                $purchase->estado = 'Pagamento por Aprovar';
+            break;
+            case 'cash':
+                $purchase->estado = 'Em processamento';
+            break;
+        }
+        $purchase->id_administrador = null;
         $purchase->total = $total;
         $purchase->save();
 
