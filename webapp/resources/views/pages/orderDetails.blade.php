@@ -11,7 +11,11 @@
         <ul>
             @foreach ($quantPriceProducts as $quantPriceProduct)
                 <li>
-                    <a href="/products/{{ $quantPriceProduct[2]->id }}">{{ $quantPriceProduct[2]->nome }}</a>
+                    @if ($quantPriceProduct[2]->deleted)
+                        {{ $quantPriceProduct[2]->nome }} (Eliminado do catálogo)
+                    @else
+                        <a href="/products/{{ $quantPriceProduct[2]->id }}">{{ $quantPriceProduct[2]->nome }}</a>
+                    @endif
                     <p>
                         <span>Quantidade: {{ $quantPriceProduct[0] }}</span><br>
                         <span>Preço unitário: {{ $quantPriceProduct[1] }}€</span><br>

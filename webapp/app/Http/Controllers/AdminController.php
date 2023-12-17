@@ -175,7 +175,7 @@ class AdminController extends Controller
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
-            'products' => Product::orderBy('id')->get(),
+            'products' => Product::where('deleted', '=', false)->orderBy('id')->get(),
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             }

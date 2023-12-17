@@ -29,8 +29,10 @@ function verifyAdmin(): void
 
 class ProductsController extends Controller
 {
-    public function productsDetails(int $id) : View
+    public function productsDetails(int $id)
     {
+        $product = Product::findorfail($id);
+        if ($product->deleted) abort(404);
 
         return view('pages.productDetails', [
             'product' => Product::findorfail($id),
@@ -45,7 +47,7 @@ class ProductsController extends Controller
     {
         return view('pages.products', [
             'maxPrice' => Product::getMostExpensiveProductPrice(),
-            'products' => Product::orderBy('id')->get(),
+            'products' => Product::where('deleted', '=', false)->orderBy('id')->get(),
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             },
@@ -210,10 +212,10 @@ class ProductsController extends Controller
         $productReviews = Review::where('id_produto', '=', $id)->get();
         foreach($productReviews as $productReview) $productReview->delete();
 
-        //$productOrders = ProductOrder::where('id_produto', '=', $id)->get();
-        //foreach($productOrders as $productOrder) $productOrder->delete();
+        $product->deleted = true;
+        $product->precoatual = 0;
+        $product->save();
 
-        $product->delete();
         return redirect('/adminProductsManage');
     }
 }

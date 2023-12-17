@@ -27,9 +27,9 @@ DROP TABLE IF EXISTS Visits CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
-  nome VARCHAR(256) NOT NULL,
-  email VARCHAR(256) UNIQUE NOT NULL,
-	password VARCHAR(256) NOT NULL,
+  nome VARCHAR(256),
+  email VARCHAR(256) UNIQUE,
+	password VARCHAR(256),
   telefone VARCHAR(256),
   morada VARCHAR(256),
   codigo_postal VARCHAR(256),
@@ -100,7 +100,8 @@ CREATE TABLE Produto (
   id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE,
   product_image VARCHAR(1024),
   categoria VARCHAR(256),
-  destaque BOOLEAN DEFAULT FALSE
+  destaque BOOLEAN DEFAULT FALSE,
+  deleted BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Comentario (

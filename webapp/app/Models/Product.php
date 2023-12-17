@@ -31,7 +31,8 @@ class Product extends Model
         'id_administrador',
         'product_image',
         'categoria',
-        'destaque'
+        'destaque',
+        'deleted'
     ];
 
     public static function searchProducts(string $stringToSearch)
