@@ -75,13 +75,13 @@
                     <input type="text" id="name" name="name" required><br><br>
 
                     <label for="price">Preço:</label>
-                    <input type="number" step="0.01" id="price" name="price" required><br><br>
+                    <input type="number" step="0.01" id="price" name="price" min="0" required><br><br>
 
                     <label for="discount">Desconto:</label>
-                    <input type="number" step="0.001" id="discount" name="discount"><br><br>
+                    <input type="number" step="0.001" id="discount" name="discount" min="0" max="1"><br><br>
 
                     <label for="stock">Stock:</label>
-                    <input type="number" id="stock" name="stock" required><br><br>
+                    <input type="number" id="stock" name="stock" required min="0"><br><br>
 
                     <label for="description">Descrição:</label>
                     <textarea id="description" name="description" required></textarea><br><br>
