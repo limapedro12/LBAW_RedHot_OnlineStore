@@ -283,7 +283,7 @@ class AdminController extends Controller
     {
         verifyAdmin();
         return view('pages.adminUsers', [
-            'users' => User::all()
+            'users' => User::where('deleted', '=', false)->orderBy('id')->get(),
         ]);
     }
 

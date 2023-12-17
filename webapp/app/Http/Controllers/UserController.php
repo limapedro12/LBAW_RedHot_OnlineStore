@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Order;
+use App\Models\Wishlist;
+use App\Models\ProductCart;
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AdminController;
@@ -43,6 +45,8 @@ class UserController extends Controller
     public function showProfileDetails(int $id): View
     {
         $user = User::findOrFail($id);
+
+        if ($user->deleted) abort(404);
 
         verifyUser($user);
 
@@ -131,6 +135,12 @@ class UserController extends Controller
 
         if ($user->profile_image)
             FileController::delete($user->profile_image);
+
+        $wishlistProducts = Wishlist::where('id_utilizador', '=', $id)->get();
+        foreach($wishlistProducts as $wishlistProduct) $wishlistProduct->delete();
+
+        $productCarts = ProductCart::where('id_utilizador', '=', $id)->get();
+        foreach($productCarts as $productCart) $productCart->delete();
 
         $user->update(array(
             'nome' => null,
