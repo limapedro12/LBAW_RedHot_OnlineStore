@@ -1,3 +1,7 @@
+<head>
+    <title>Produtos em Destaque | RedHot</title>
+</head>
+
 @extends('layouts.adminHeaderFooter')
 
 @section('content')

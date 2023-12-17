@@ -1,3 +1,7 @@
+<head>
+    <title>Editar Comentário | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <article class="review" reviewId="{{ $review->id }}">

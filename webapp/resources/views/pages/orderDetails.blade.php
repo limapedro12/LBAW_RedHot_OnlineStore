@@ -1,3 +1,7 @@
+<head>
+    <title>Encomenda {{ $purchase->id }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Encomenda {{ $purchase->id }}</h1>

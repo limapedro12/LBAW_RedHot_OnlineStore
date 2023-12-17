@@ -1,3 +1,7 @@
+<head>
+    <title>{{ $product->nome }} | RedHot</title>
+</head>
+
 @section('content')
 
     <section>

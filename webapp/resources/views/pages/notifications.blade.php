@@ -1,3 +1,7 @@
+<head>
+    <title>Notificações | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="ppTous-container">

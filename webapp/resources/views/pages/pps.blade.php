@@ -1,3 +1,7 @@
+<head>
+    <title>Politicas de Privacidade | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <div class="ppTous">

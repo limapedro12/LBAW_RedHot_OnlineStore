@@ -1,3 +1,7 @@
+<head>
+    <title>Comentários de {{ $product->nome }} | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Comentários do produto {{ $product->nome }} </h1>

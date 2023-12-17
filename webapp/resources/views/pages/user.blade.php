@@ -1,3 +1,7 @@
+<head>
+    <title>Perfil | RedHot</title>
+</head>
+
 @section('content')
     <section>
         @if (Auth::check() && Auth::user()->id == $user->id)

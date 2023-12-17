@@ -1,3 +1,7 @@
+<head>
+    <title>Adicionar Produto | RedHot</title>
+</head>
+
 @extends('layouts.adminHeaderFooter')
 
 @section('content')

@@ -1,3 +1,7 @@
+<head>
+    <title>Carrinho | RedHot</title>
+</head>
+
 @section('content')
     <section>
         <h1>Carrinho</h1>
