@@ -15,7 +15,7 @@
                     <input id="email" type="email" name="email" placeholder="Email" value="{{ old('email') }}"
                         required autofocus>
                     @if ($errors->has('email'))
-                        <p class="textDanger">
+                        <p class="text-danger">
                             {{ $errors->first('email') }}
                         </p>
                     @endif
@@ -24,7 +24,7 @@
                 <div class="inputBox">
                     <input id="password" type="password" name="password" placeholder="Password" required>
                     @if ($errors->has('password'))
-                        <p class="textDanger">
+                        <p class="text-danger">
                             {{ $errors->first('password') }}
                         </p>
                     @endif

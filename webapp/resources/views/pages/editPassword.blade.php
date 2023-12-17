@@ -12,24 +12,36 @@
                     <div class="inputBox">
                         <div class="editPassword">
                             <label for="old_password">Password antiga:</label>
-                            <input type="password" id="old_password" name="old_password" placeholder="Password antiga"
-                                required>
+                            <input type="password" id="old_password" name="old_password" placeholder="Password antiga" required>
+                            @if ($errors->has('password'))
+                                <p class="text-danger">
+                                    {{ $errors->first('password') }}
+                                </p>
+                            @endif
                         </div>
                     </div>
 
                     <div class="inputBox">
                         <div class="editPassword">
                             <label for="new_password">Nova password:</label>
-                            <input type="password" id="new_password" name="new_password" placeholder="Nova password"
-                                required>
+                            <input type="password" id="new_password" name="new_password" placeholder="Nova password" required>
+                            @if ($errors->has('new_password'))
+                                <p class="text-danger">
+                                    {{ $errors->first('new_password') }}
+                                </p>
+                            @endif
                         </div>
                     </div>
 
                     <div class="inputBox">
                         <div class="editPassword">
                             <label for="new_password_confirmation">Confirme a nova password:</label>
-                            <input type="password" id="new_password_confirmation" name="new_password_confirmation"
-                                placeholder="Confirme a nova password" required>
+                            <input type="password" id="new_password_confirmation" name="new_password_confirmation" placeholder="Confirme a nova password" required>
+                            @if ($errors->has('password_confirmation'))
+                                <p class="text-danger">
+                                    {{ $errors->first('password_confirmation') }}
+                                </p>
+                            @endif
                         </div>
                     </div>
 

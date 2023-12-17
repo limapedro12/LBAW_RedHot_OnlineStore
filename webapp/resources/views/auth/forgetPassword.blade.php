@@ -33,7 +33,7 @@
 
             </form>
 
-            <p class="textDanger">{{ session('message') }}</p>
+            <p class="text-danger">{{ session('message') }}</p>
 
             @if (session('details'))
                 <ul>

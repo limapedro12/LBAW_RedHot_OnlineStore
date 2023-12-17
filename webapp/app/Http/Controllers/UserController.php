@@ -126,10 +126,11 @@ class UserController extends Controller
         $this->authorize('deleteAccount', $user);
 
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/users/' . $id . '/delete_account');
+            return back()->withErrors(['password' => 'A password introduzida está incorreta.']);
         }
 
-        FileController::delete($user->profile_image);
+        if ($user->profile_image)
+            FileController::delete($user->profile_image);
 
         User::where('id', '=', $id)->delete();
 
@@ -152,11 +153,14 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'new_password' => 'required|min:8',
+            'new_password' => 'required',
         ]);
 
         if (!Hash::check($request->old_password, $user->password))
             return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+
+        if (strlen($request->new_password) < 8)
+            return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres']);
 
         if ($request->new_password !== $request->new_password_confirmation)
             return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);

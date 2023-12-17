@@ -56,7 +56,7 @@
     border: 1px solid var(--main-color);
 }
 
-.signup .signupInput .signupForm .inputBox .textDanger {
+.signup .signupInput .signupForm .inputBox .text-danger {
     color: var(--main-color);
     font-size: 1.5rem;
     margin-bottom: 0.5rem;

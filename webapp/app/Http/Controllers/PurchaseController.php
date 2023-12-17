@@ -29,18 +29,15 @@ class PurchaseController extends Controller
             }
             return view('pages.checkout', ['total' => round($total, 2)]);
         } else {
-            return redirect('/login');
+            return redirect('/login')->withErrors([
+                'password' => 'Por favor, autentique-se na RedHot para prosseguir com a sua encomenda.',
+            ]);
         }
     }
 
     public function checkout(Request $request)
     {
         $request->validate([
-            'cardNo' => 'required|integer|min:3000000000000000|max:9999999999999999',
-            'cardHolder' => 'required|string',
-            'cardExpiryMonth' => 'required|integer|min:1|max:12',
-            'cardExpiryYear' => 'required|integer|min:23|max:99',
-            'cardCVV' => 'required|integer|min:100|max:999',
             'street' => 'required|string',
             'doorNo' => 'required|string',
             'city' => 'required|string',
@@ -48,7 +45,17 @@ class PurchaseController extends Controller
             'deliveryObs' => 'nullable|string'
         ]);
 
-        error_log('request validated');
+        if ($request->cardNo < 3000000000000000 || $request->cardNo > 9999999999999999)
+            return back()->withErrors(['cardNo' => 'Número de cartão inválido.']);
+
+        if ($request->cardExpiryMonth < 1 || $request->cardExpiryMonth > 12)
+            return back()->withErrors(['cardExpiryMonth' => 'Por favor introduza um mês entre 1 e 12.']);
+
+        if ($request->cardExpiryYear < 23)
+            return back()->withErrors(['cardExpirtyMonth' => 'Ano de expiração inválido.']);
+
+        if ($request->cardCVV < 100 || $request->cardCVV > 999)
+            return back()->withErrors(['cardCVV' => 'CVV inválido. O CVV é um código de três dígitos que se encontra nas traseiras do seu cartão bancário.']);
 
         $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
         $total = 0;

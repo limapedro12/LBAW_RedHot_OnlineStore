@@ -69,7 +69,7 @@
                                     <input type="text" id="nome" name="nome" value="{{ $admin->nome }}"
                                         placeholder="Nome">
                                     @if ($errors->has('nome'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('nome') }}
                                         </p>
                                     @endif
@@ -80,7 +80,7 @@
                                     <input type="text" id="email" name="email" value="{{ $admin->email }}"
                                         placeholder="Email">
                                     @if ($errors->has('email'))
-                                        <p class="textDanger">
+                                        <p class="text-danger">
                                             {{ $errors->first('email') }}
                                         </p>
                                     @endif
@@ -97,7 +97,7 @@
                                 <input type="password" id="password" name="password" required placeholder="Password"
                                     required>
                                 @if ($errors->has('password'))
-                                    <p class="textDanger">
+                                    <p class="text-danger">
                                         {{ $errors->first('password') }}
                                     </p>
                                 @endif
@@ -108,7 +108,7 @@
                                 <input id="password-confirm" type="password" name="password_confirmation"
                                     placeholder="Confirmar Password" required>
                                 @if ($errors->has('password_confirmation'))
-                                    <p class="textDanger">
+                                    <p class="text-danger">
                                         {{ $errors->first('password_confirmation') }}
                                     </p>
                                 @endif

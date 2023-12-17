@@ -31,7 +31,7 @@ function verifyAdmin(): void
 class AdminController extends Controller
 {
 
-    public function admin()
+    public function admin() : View
     {
         verifyAdmin();
 
@@ -104,7 +104,7 @@ class AdminController extends Controller
         return view('pages.adminNotifications');
     }
 
-    public function adminOrders()
+    public function adminOrders() : View
     {
         verifyAdmin();
 
@@ -115,7 +115,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProducts()
+    public function adminProducts() : View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -126,13 +126,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProductsAdd()
+    public function adminProductsAdd() : View
     {
         verifyAdmin();
         return view('pages.adminProductsAdd');
     }
 
-    public function adminProductsHighlights()
+    public function adminProductsHighlights() : View
     {
         verifyAdmin();
 
@@ -171,7 +171,7 @@ class AdminController extends Controller
         return redirect('/adminProductsHighlights');
     }
 
-    public function adminProductsManage()
+    public function adminProductsManage() : View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -219,9 +219,8 @@ class AdminController extends Controller
         ]);
 
         if ($request->email != $admin->email) {
-            $request->validate([
-                'email' => 'unique:administrador'
-            ]);
+            if (Admin::where('email', '=', $request->email)->first())
+                return back()->withErrors(['email' => 'O endereço de e-mail introduzido já pertence a um outro administrador.']);
         }
 
         $query = User::where('email', '=', $request->email)->first();
@@ -244,8 +243,6 @@ class AdminController extends Controller
 
         return redirect('/adminProfile');
     }
-    // Route::get('/adminProfile/edit_password', 'editPasswordForm');
-    // Route::post('/adminProfile/edit_password', 'editPassword');
 
     public function editPasswordForm(Request $request): View
     {
@@ -262,28 +259,27 @@ class AdminController extends Controller
         verifyAdmin();
         $admin = Admin::findOrFail(Auth::guard('admin')->id());
 
-        $request->validate([
-            'new_password' => 'required|min:8',
-        ]);
-
         if (!Hash::check($request->old_password, $admin->password))
-            return back()->withErrors(['password' => 'A sua password atual está incorreta']);
+            return back()->withErrors(['old_password' => 'A sua password atual está incorreta']);
 
         if ($request->new_password !== $request->new_password_confirmation)
             return back()->withErrors(['password_confirmation' => 'As passwords introduzidas não coincidem']);
 
+        if (strlen($request->new_password) < 8)
+            return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres.']);
+        
         $admin->update(array('password' => Hash::make($request->new_password)));
 
         return redirect('/adminProfile');
     }
 
-    public function adminShipping()
+    public function adminShipping() : View
     {
         verifyAdmin();
         return view('pages.adminShipping');
     }
 
-    public function adminUsers()
+    public function adminUsers() : View
     {
         verifyAdmin();
         return view('pages.adminUsers', [
@@ -291,7 +287,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminFAQ()
+    public function adminFAQ() : View
     {
         verifyAdmin();
         return view('pages.adminFAQ', [
@@ -299,7 +295,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public static function verifyAdmin2(): void
+    public static function verifyAdmin2() : void
     {
         if (Auth::guard('admin')->user() == null)
             abort(403);
