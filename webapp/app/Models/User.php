@@ -123,4 +123,15 @@ class User extends Authenticatable
         return $id;
 
     }
+
+    public function getNormalizeUserId(int $id)
+    {
+
+        $highestId = User::max('id');
+        $highestIdLength = strlen((string) $highestId);
+        $id = (string) $id;
+        $id = str_pad($id, ($highestIdLength + 1), '0', STR_PAD_LEFT);
+        return $id;
+
+    } 
 }

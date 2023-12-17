@@ -906,3 +906,65 @@
 }
 
 
+.adminPage .adminOptionContent .tableSortable .userFotoName{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName img{
+    border-radius: 50%;
+    border: 1px solid var(--black);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName img:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName .userNameInAdminTable p{
+    font-size: 1.7rem;
+    color: var(--black);
+}
+
+.adminPage .adminOptionContent .tableSortable .userFotoName .userNameInAdminTable p:hover{
+    color: var(--main-color);
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form button{
+    
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.adminPage .adminOptionContent .tableSortable .userAdminButtons form button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
