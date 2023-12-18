@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS Notificacao_Carrinho CASCADE;
 DROP TABLE IF EXISTS Notificacao_Wishlist CASCADE;
 DROP TABLE IF EXISTS Faqs CASCADE;
 DROP TABLE IF EXISTS Visits CASCADE;
+DROP TABLE IF EXISTS Promo_Codes CASCADE;
 
 CREATE TABLE Utilizador (
 	id SERIAL PRIMARY KEY,
@@ -192,6 +193,16 @@ CREATE TABLE Visits (
   ip_address VARCHAR(256) NOT NULL,
   timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now())
 );
+
+CREATE TABLE Promo_Codes (
+  id SERIAL PRIMARY KEY,
+  codigo VARCHAR(256) NOT NULL,
+  desconto FLOAT NOT NULL CHECK (desconto >= 0 AND desconto <= 100),
+  data_inicio TIMESTAMP NOT NULL,
+  data_fim TIMESTAMP NOT NULL,
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+);
+
 
 -- IDX01
 CREATE INDEX notificacao_tempo ON Notificacao USING btree (timestamp);
@@ -588,3 +599,11 @@ INSERT INTO ProdutoCompra (id_produto, id_compra, quantidade, preco) VALUES
   (37, 14, 1, 8.99),
   (44, 14, 2, 17.98),
   (39, 15, 3, 32.97);
+
+INSERT INTO Promo_Codes (codigo, desconto, data_inicio, data_fim, id_administrador) VALUES
+  ('VSKI', 0.1, '2021-01-01 00:00:00', '2022-12-31 00:00:00', 1),
+  ('LBAW23', 0.23, '2023-01-01 00:00:00', '2023-12-31 00:00:00', 1),
+  ('MINHOCA10', 0.1, '2021-01-01 00:00:00', '2024-12-31 00:00:00', 1),
+  ('RICFAZERS', 0.5, '2023-01-01 00:00:00', '2027-12-31 00:00:00', 1),
+  ('REDHOT', 0.25, '1996-07-24 00:00:00', '2096-07-24 00:00:00', 1),
+  ('NATAL', 0.15, '2023-12-23 23:59:59', '2023-12-26 00:00:00', 1);

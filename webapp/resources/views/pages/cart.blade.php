@@ -2,18 +2,90 @@
 
 @section('content')
     <section>
-        <h1>Carrinho</h1>
-        <ul>
-            @forelse ($list as $elem)
-                @include ('partials.productOnCart', ['quantidade' => $elem[0], 'product' => $elem[1]])
-            @empty
-                <p>Ainda não tem produtos no carrinho</p>
-            @endforelse
-        </ul>
-        <p>Total: {{ $total }} €</p>
-        @if (count($list) > 0)
-            <a href="/cart/checkout"><button>Checkout</button></a>
-        @endif
+
+        <div class="cartTitle">
+            <h1>O Teu Carrinho</h1>
+        </div>
+
+        <div class="cartContent">
+            <div class="tableWithCartProducts">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Produto</th>
+                            <th>Desconto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Total</th>
+                            <th>Remover</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($list as $elem)
+                            @include ('partials.productOnCart', [
+                                'quantidade' => $elem[0],
+                                'product' => $elem[1],
+                            ])
+                        @empty
+                            <p>Ainda não tem produtos no carrinho</p>
+                        @endforelse
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="orderSummary">
+                <div class="orderSummaryContent">
+                    <div class="orderSummaryTitle">
+                        <h2>Resumo da Encomenda</h2>
+                    </div>
+                    <div class="orderSummaryInfo">
+                        <div class="orderSummarySubtotal">
+                            <p>Subtotal</p>
+                            <p>{{ $subTotal }} €</p>
+                        </div>
+                        <div class="orderSummaryShipping">
+                            <p>Envio</p>
+                            <p>Grátis</p>
+                        </div>
+                        <div class="orderSummaryPromotionCode">
+                            <form id="promoCodeForm" action="{{ route('promo_codes.check') }}" method="post">
+                                @csrf
+                                <p>Código de Promoção</p>
+                                <input type="text" name="promotionCode" id="promotionCode">
+                                <button type="submit" id="applyPromotionButton">Aplicar</button>
+                            </form>
+                            <div id="promoCodeActive"></div>
+                            <div id="promoCodeDiscount"></div>
+                            <div id="promoCodeRemove" class="d-none"><button id="removePromoCode"> <i class="fas fa-xmark"></i> </button> </div>
+                        </div>
+                    </div>
+                    <div class="orderSummaryTotal">
+                        <p>Total</p>
+                        <p id="totalPriceWithOutPromoCode" class="d-none">{{ $subTotal }}</p>
+                        <p id="totalPrice">{{ $subTotal }}</p>
+                    </div>
+                </div>
+                <div class="cartCheckoutButton">
+                    @if (count($list) > 0)
+                        <a href="/cart/checkout"><button>Checkout</button></a>
+                    @endif
+                </div>
+                <div id="promoCodeResult"></div>
+            </div>
+        </div>
+
+        <div class="cartSimilarProducts">
+
+        </div>
+
+
+
+
+
+
+
     </section>
 @endsection
 

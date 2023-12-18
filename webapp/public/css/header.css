@@ -89,6 +89,10 @@ main {
     display: none;
 }
 
+.text-danger{
+    color: var(--red);
+    font-size: 1.5rem;
+}
 
 
 
