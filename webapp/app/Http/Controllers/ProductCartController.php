@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\ProductsController;
 
 use App\Models\Product;
 use App\Models\ProductCart;
+use App\Models\PromoCode;
 
 class ProductCartController extends Controller
 {
@@ -86,18 +91,36 @@ class ProductCartController extends Controller
         }
 
         $quantityProductList = [];
-        $total = 0;
+        $allProducts= [];
+        $subTotal = 0;
         foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
+            $allProducts[] = $product;
             $quantityProductList[] = [$productCart->quantidade, $product];
-            $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
+            $subTotal += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
         }
 
-        return view('pages.cart', ['list' => $quantityProductList,
+        $userEnteredPromoCode = request()->input('promotionCode');
+
+        // Get the promo code information based on the user input
+        $promotionCode = PromoCode::where('codigo', $userEnteredPromoCode)
+        ->where('data_inicio', '<=', now())
+        ->where('data_fim', '>', now())
+        ->first();
+
+        session(['promotionCode' => $promotionCode]);
+    
+
+        return view('pages.cart', [
+            'list' => $quantityProductList,
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             },
-            'total' => round($total, 2)]);
+            'subTotal' => round($subTotal, 2),
+            'promotionCode' => $promotionCode,
+            'similarProducts' => $this->getSimilarProducts($allProducts)
+        ]);
+
     }
 
     public static function transferGuestCart(int $guestId)
@@ -112,4 +135,40 @@ class ProductCartController extends Controller
             $productCart->save();
         }
     }
+
+    public function getSimilarProducts(array $allProducts)
+    {
+        $arrSimilarProducts = [];
+        foreach ($allProducts as $product) {
+            $arrSimilarProducts[] = Product::where('categoria', '=', $product->categoria)->get();
+        }
+
+        $similarProducts = [];
+
+        foreach( $arrSimilarProducts as $arrProducts) {
+            foreach ($arrProducts as $product) {
+                if (!in_array($product, $similarProducts) && !in_array($product, $allProducts)) {
+                    $similarProducts[] = $product;
+                }
+            }            
+        }
+
+        /* Clean the duplicated products */
+        $similarProducts = array_unique($similarProducts);
+
+        
+        if (count($similarProducts) < 5){ 
+            return $similarProducts;
+        }
+        else {
+            /* Select random 5 */
+            $randomKeys = array_rand($similarProducts, 5);
+            $randomProducts = [];
+            foreach ($randomKeys as $key) {
+                $randomProducts[] = $similarProducts[$key];
+            }
+            return $randomProducts;
+        }
+    }
+
 }

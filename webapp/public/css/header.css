@@ -3,6 +3,8 @@
 /* Standardize Pages */
 :root {
     --main-color: #aa3c2c;
+    --main-color-opacity: rgba(170, 61, 44, 0.2);
+    --main-color-opacity-dark: rgba(170, 61, 44, 0.5);
     --black: #333333;
     --white: #ffffff;
     --light-black: #5c5c5c;
@@ -89,6 +91,10 @@ main {
     display: none;
 }
 
+.text-danger{
+    color: var(--red);
+    font-size: 1.5rem;
+}
 
 
 

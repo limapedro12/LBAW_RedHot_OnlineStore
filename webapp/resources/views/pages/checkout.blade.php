@@ -3,8 +3,17 @@
 @section('content')
     <section>
         <h1>Checkout</h1>
+        <h2>Resumo da Encomenda</h2>
+        <p>Subtotal: {{ $subTotal }} €</p>
         <p>Total: {{ $total }} €</p>
-        <form method=post action="/cart/checkout">
+        <p>Envio: Grátis</p>
+        @if ($promotionCode != null)
+        <p>Código de Promoção: {{ $promotionCode->codigo }}</p>
+        <p>Desconto: {{ $promotionCode->desconto * 100 }}%</p>
+        @endif
+
+
+        <form method=post action="/cart/checkout{{ $promotionCode ? '?promocode=' . $promotionCode->codigo : '' }}">
             @csrf
             <p>Por favor, escolha um método de pagamento:</p>
             <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash" required checked>
@@ -80,6 +89,7 @@
             <input type="textarea" id="deliveryObs" name="deliveryObs">
             <br><br>
             <button type="submit">Confirmar encomenda</button>
+
         </form>
     </section>
 @endsection

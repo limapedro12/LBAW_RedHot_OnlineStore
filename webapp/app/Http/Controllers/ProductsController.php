@@ -223,4 +223,14 @@ class ProductsController extends Controller
     {
         return Product::findorfail($id);
     }
+
+    public function getSimilarProducts(array $productIds)
+    {
+        $similarProducts = [];
+        foreach ($productIds as $productId) {
+            $product = Product::findorfail($productId);
+            $similarProducts[] = Product::where('categoria', '=', $product->categoria)->where('id', '!=', $productId)->get();
+        }
+        return $similarProducts;
+    }
 }
