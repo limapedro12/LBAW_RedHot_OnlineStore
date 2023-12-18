@@ -3,6 +3,15 @@
 @section('content')
     <section>
         <h1>Encomenda {{ $purchase->id }}</h1>
+
+
+        <h2>Resumo da Encomenda</h2>
+        <p>Subtotal: {{ $purchase->sub_total}}€</p>
+        <p>Envio: {{ $purchase->envio }}€</p>
+        <p>Total: {{ $purchase->total }}€</p>
+        <p>PromoCode: {{ $purchase->id_promo_code }}</p>
+
+
         <p>
             <span class="order{{ $purchase->id }}State">Estado: {{ $purchase->estado }}</span><br>
             <span>{{ $purchase->total }}€</span><br>

@@ -187,7 +187,7 @@ Route::controller(PromoCodeController::class)->group(function () {
     Route::get('/promo_codes/{id}/edit', 'edit')->name('promo_codes.edit');
     Route::post('/promo_codes/{id}/update', 'update')->name('promo_codes.update');
     Route::delete('/promo_codes/{id}/delete', 'delete')->name('promo_codes.delete');
+    Route::post('/promo_codes/check', 'checkPromoCode')->name('promo_codes.check');
+    Route::post('/promo_codes/remove', 'removePromoCode')->name('promo_codes.remove');
 });
 
-Route::post('/promo_codes/check', [PromoCodeController::class, 'checkPromoCode'])->name('promo_codes.check');
-Route::post('/promo_codes/remove', [PromoCodeController::class, 'removePromoCode'])->name('promo_codes.remove');

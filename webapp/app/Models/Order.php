@@ -15,10 +15,12 @@ class Order extends Model
         'id',
         'timestamp',
         'total',
+        'sub_total',
         'descricao',
         'id_utilizador',
         'estado',
-        'id_administrador'
+        'id_administrador',
+        'promo_code'
     ];
 
 

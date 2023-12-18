@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductsController;
 use App\Models\Product;
 use App\Models\ProductCart;
 use App\Models\ProductPurchase;
+use App\Models\PromoCode;
 
 use App\Models\Purchase;
 use App\Events\ChangePurchaseState;
@@ -18,16 +19,36 @@ use App\Events\CancelOrder;
 
 class PurchaseController extends Controller
 {
-    public function showCheckoutForm()
+    public function showCheckoutForm(Request $request)
     {
         if (Auth::check()) {
             $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
+            $subTotal = 0;
             $total = 0;
             foreach ($productsCart as $productCart) {
                 $product = Product::findOrFail($productCart->id_produto);
-                $total += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
+                $subTotal += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
             }
-            return view('pages.checkout', ['total' => round($total, 2)]);
+
+            if ($request->input('promocode')) {
+                $promoCode = PromoCode::where('codigo', $request->input('promocode'))
+                    ->where('data_inicio', '<=', now())
+                    ->where('data_fim', '>', now())
+                    ->first();
+    
+                if ($promoCode) {
+                    $total = $subTotal * (1 - $promoCode->desconto);
+                }
+            }
+
+            
+
+            return view('pages.checkout', [
+                'subTotal' => round($subTotal, 2),
+                'total' => round($total, 2),
+                'productsCart' => $productsCart,
+                'promotionCode' => $promoCode
+            ]);
         } else {
             return redirect('/login')->withErrors([
                 'password' => 'Por favor, autentique-se na RedHot para prosseguir com a sua encomenda.',
@@ -58,15 +79,16 @@ class PurchaseController extends Controller
 
                 if ($request->cardCVV < 100 || $request->cardCVV > 999)
                     return back()->withErrors(['cardCVV' => 'CVV inválido. O CVV é um código de três dígitos que se encontra nas traseiras do seu cartão bancário.']);
-            break;
+                break;
             case 'mbway':
                 if ($request->mbwayNo < 910000000 || $request->mbwayNo > 969999999)
                     return back()->withErrors(['mbwayNo' => 'Número de telemóvel inválido.']);
-            break;
+                break;
         }
 
         $productsCart = ProductCart::where('id_utilizador', '=', Auth::id())->get();
         $total = 0;
+        $subTotal = 0;
 
         $address = $request->street . ', ' . $request->doorNo . ', ' . $request->city . ', ' . $request->country;
 
@@ -80,6 +102,22 @@ class PurchaseController extends Controller
             $product->decrementStock($productCart->quantidade);
         }
 
+        $subTotal = $total;
+        $subTotal = round($subTotal, 2);
+
+        // apply promo code
+        if ($request->input('promocode')) {
+            $promoCode = PromoCode::where('codigo', $request->input('promocode'))
+                ->where('data_inicio', '<=', now())
+                ->where('data_fim', '>', now())
+                ->first();
+
+            if ($promoCode) {
+                $total *= (1 - $promoCode->desconto);
+            }
+        }
+
+
         $total = round($total, 2);
 
         // create and register purchase
@@ -87,13 +125,17 @@ class PurchaseController extends Controller
         $purchase->timestamp = date('Y-m-d H:i:s');
         $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
+        $purchase->sub_total = $subTotal;
+        if ($request->input('promocode'))
+            $purchase->id_promo_code = $promoCode->id;
         switch ($request->paymentMethod) {
-            case 'card': case 'mbway':
+            case 'card':
+            case 'mbway':
                 $purchase->estado = 'Pagamento por Aprovar';
-            break;
+                break;
             case 'cash':
                 $purchase->estado = 'Em processamento';
-            break;
+                break;
         }
         $purchase->id_administrador = null;
         $purchase->total = $total;
@@ -123,6 +165,7 @@ class PurchaseController extends Controller
             $purchases = Purchase::where('id_utilizador', '=', $id)->get();
             return view('pages.orders', ['purchases' => $purchases, 'userId' => $id]);
         }
+        abort(403);
     }
 
     public function showOrderDetails(int $userId, int $orderId): View
@@ -151,10 +194,12 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::findOrFail($orderId);
 
-        if ($purchase->estado == 'Enviada' ||
+        if (
+            $purchase->estado == 'Enviada' ||
             $purchase->estado == 'Entregue' ||
             $purchase->estado == 'Cancelada' ||
-            Auth::user()->id != $userId)
+            Auth::user()->id != $userId
+        )
             abort(403);
 
         $productIDs = ProductPurchase::where('id_compra', '=', $orderId)->get('id_produto');
@@ -192,14 +237,15 @@ class PurchaseController extends Controller
         return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
 
-    public function changeQuantity(Request $request){
+    public function changeQuantity(Request $request)
+    {
         $request->validate([
             'quantity' => 'required|integer|min:1',
             'id' => 'required|integer|min:1'
         ]);
 
         $product = Product::findOrFail($request->id);
-        if($request->quantity > $product->stock)
+        if ($request->quantity > $product->stock)
             return redirect('/cart')->with('error', 'Quantidade indisponível em stock.');
         $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=', $request->id)->first();
         $productCart->quantidade = $request->quantity;

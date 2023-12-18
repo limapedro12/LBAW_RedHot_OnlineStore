@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\ProductsController;
 
 use App\Models\Product;
 use App\Models\ProductCart;
@@ -90,9 +91,11 @@ class ProductCartController extends Controller
         }
 
         $quantityProductList = [];
+        $allProducts= [];
         $subTotal = 0;
         foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
+            $allProducts[] = $product;
             $quantityProductList[] = [$productCart->quantidade, $product];
             $subTotal += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
         }
@@ -104,6 +107,8 @@ class ProductCartController extends Controller
         ->where('data_inicio', '<=', now())
         ->where('data_fim', '>', now())
         ->first();
+
+        session(['promotionCode' => $promotionCode]);
     
 
         return view('pages.cart', [
@@ -112,7 +117,8 @@ class ProductCartController extends Controller
                 return $price * (1 - $discount);
             },
             'subTotal' => round($subTotal, 2),
-            'promotionCode' => $promotionCode
+            'promotionCode' => $promotionCode,
+            'similarProducts' => $this->getSimilarProducts($allProducts)
         ]);
 
     }
@@ -130,6 +136,39 @@ class ProductCartController extends Controller
         }
     }
 
+    public function getSimilarProducts(array $allProducts)
+    {
+        $arrSimilarProducts = [];
+        foreach ($allProducts as $product) {
+            $arrSimilarProducts[] = Product::where('categoria', '=', $product->categoria)->get();
+        }
 
+        $similarProducts = [];
+
+        foreach( $arrSimilarProducts as $arrProducts) {
+            foreach ($arrProducts as $product) {
+                if (!in_array($product, $similarProducts) && !in_array($product, $allProducts)) {
+                    $similarProducts[] = $product;
+                }
+            }            
+        }
+
+        /* Clean the duplicated products */
+        $similarProducts = array_unique($similarProducts);
+
+        
+        if (count($similarProducts) < 5){ 
+            return $similarProducts;
+        }
+        else {
+            /* Select random 5 */
+            $randomKeys = array_rand($similarProducts, 5);
+            $randomProducts = [];
+            foreach ($randomKeys as $key) {
+                $randomProducts[] = $similarProducts[$key];
+            }
+            return $randomProducts;
+        }
+    }
 
 }

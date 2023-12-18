@@ -17,10 +17,12 @@ class Purchase extends Model
     protected $fillable = [
         'timestamp',
         'total',
+        'sub_total',
         'descricao',
         'id_utilizador',
         'estado',
-        'id_administrador'
+        'id_administrador',
+        'promo_code'
     ];
 
     public function getProducts()

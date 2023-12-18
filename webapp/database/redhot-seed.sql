@@ -51,6 +51,15 @@ CREATE TABLE Administrador (
   profile_image VARCHAR(1024)
 );
 
+CREATE TABLE Promo_Codes (
+  id SERIAL PRIMARY KEY,
+  codigo VARCHAR(256) NOT NULL,
+  desconto FLOAT NOT NULL CHECK (desconto >= 0 AND desconto <= 100),
+  data_inicio TIMESTAMP NOT NULL,
+  data_fim TIMESTAMP NOT NULL,
+  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
+);
+
 CREATE TABLE Compra (
 	id SERIAL PRIMARY KEY,
   timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now()),
@@ -58,7 +67,9 @@ CREATE TABLE Compra (
   descricao TEXT,
   id_utilizador INTEGER NOT NULL REFERENCES Utilizador (id) ON UPDATE CASCADE,
   estado VARCHAR(256) NOT NULL,
-	id_administrador INTEGER REFERENCES Administrador (id)
+	id_administrador INTEGER REFERENCES Administrador (id),
+  id_promo_code INTEGER REFERENCES Promo_Codes (id),
+  sub_total FLOAT CHECK (sub_total >= 0)
 );
 
 CREATE TABLE Transporte (
@@ -194,14 +205,7 @@ CREATE TABLE Visits (
   timestamp TIMESTAMP NOT NULL CHECK (timestamp <= now())
 );
 
-CREATE TABLE Promo_Codes (
-  id SERIAL PRIMARY KEY,
-  codigo VARCHAR(256) NOT NULL,
-  desconto FLOAT NOT NULL CHECK (desconto >= 0 AND desconto <= 100),
-  data_inicio TIMESTAMP NOT NULL,
-  data_fim TIMESTAMP NOT NULL,
-  id_administrador INTEGER REFERENCES Administrador (id) ON UPDATE CASCADE
-);
+
 
 
 -- IDX01

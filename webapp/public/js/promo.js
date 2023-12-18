@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const total = document.getElementById('totalPrice');
                 total.textContent = Math.round(((parseFloat(total.textContent) - (parseFloat(total.textContent) * parseFloat(data.data.desconto))) + Number.EPSILON) * 100) / 100;
 
-            
+                const checkoutLink = document.getElementById('checkoutLink');
+
+                checkoutLink.href = 'cart/checkout?promocode=' + data.data.codigo;
 
 
                 promoCodeForm.classList.add('d-none');
@@ -93,6 +95,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 promoCodeInput.value = '';
 
+                const checkoutLink = document.getElementById('checkoutLink');
+
+                checkoutLink.href = 'cart/checkout';
+
                 const originalPrice = document.getElementById('totalPriceWithOutPromoCode');
 
                 const total = document.getElementById('totalPrice');
@@ -125,5 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
 
 
