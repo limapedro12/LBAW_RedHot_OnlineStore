@@ -42,13 +42,22 @@ class PurchaseController extends Controller
             }
 
             
-
-            return view('pages.checkout', [
-                'subTotal' => round($subTotal, 2),
-                'total' => round($total, 2),
-                'productsCart' => $productsCart,
-                'promotionCode' => $promoCode
-            ]);
+            if($request->input('promocode')){
+                return view('pages.checkout', [
+                    'subTotal' => round($subTotal, 2),
+                    'total' => round($total, 2),
+                    'productsCart' => $productsCart,
+                    'promotionCode' => $promoCode
+                ]);
+            }
+            else{
+                return view('pages.checkout', [
+                    'subTotal' => round($subTotal, 2),
+                    'total' => round($subTotal, 2),
+                    'productsCart' => $productsCart,
+                    'promotionCode' => null
+                ]);
+            }
         } else {
             return redirect('/login')->withErrors([
                 'password' => 'Por favor, autentique-se na RedHot para prosseguir com a sua encomenda.',

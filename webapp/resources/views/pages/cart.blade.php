@@ -4,7 +4,7 @@
     <section>
 
         <div class="cartTitle">
-            <h1>O Teu Carrinho</h1>
+            <h1>CARRINHO</h1>
         </div>
 
         <div class="cartContent">
@@ -38,35 +38,57 @@
             <div class="orderSummary">
                 <div class="orderSummaryContent">
                     <div class="orderSummaryTitle">
-                        <h2>Resumo da Encomenda</h2>
+                        <h2>Resumo</h2>
                     </div>
                     <div class="orderSummaryInfo">
-                        <div class="orderSummarySubtotal">
+                        <div class="orderSummaryInfoRow">
                             <p>Subtotal</p>
                             <p>{{ $subTotal }} €</p>
                         </div>
-                        <div class="orderSummaryShipping">
+                        <div class="orderSummaryInfoRow">
                             <p>Envio</p>
                             <p>Grátis</p>
                         </div>
                         <div class="orderSummaryPromotionCode">
-                            <form id="promoCodeForm" action="{{ route('promo_codes.check') }}" method="post">
-                                @csrf
-                                <p>Código de Promoção</p>
-                                <input type="text" name="promotionCode" id="promotionCode">
-                                <button type="submit" id="applyPromotionButton">Aplicar</button>
-                            </form>
-                            <div id="promoCodeActive"></div>
-                            <div id="promoCodeDiscount"></div>
-                            <div id="promoCodeRemove" class="d-none"><button id="removePromoCode"> <i
-                                        class="fas fa-xmark"></i> </button> </div>
+                            <div id ="promoCodeFormDiv">
+                                <form id="promoCodeForm" action="{{ route('promo_codes.check') }}" method="post">
+                                    @csrf
+                                    <div class="promoCodeFormTitle">
+                                        <label for="promotionCode">Código de Promoção</label>
+                                    </div>
+                                    <div class="promoCodeFormInput">
+                                        <input type="text" name="promotionCode" id="promotionCode">
+                                        <button type="submit" id="applyPromotionButton"><i class="fas fa-check"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="promoCodeApplied" class="d-none">
+                                <div class="promoCodeApplied">
+                                    <div class="promoCodeAppliedTitle">
+                                        <p>Código de Promoção</p>
+                                    </div>
+                                    <div class="promoCodeAccepted">
+                                        <div class="promoCodeDisplay">
+                                            <div id="promoCodeActive"></div>
+                                            <p>  <i class="fas fa-arrow-right"></i>  </p>
+                                            <div id="promoCodeDiscount"></div>
+                                        </div>
+                                        <div class="promoCodeRemove" id="promoCodeRemove">
+                                            <button id="removePromoCode">
+                                                <i class="fas fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="orderSummaryTotal">
-                        <p>Total</p>
-                        <p id="totalPriceWithOutPromoCode" class="d-none">{{ $subTotal }}</p>
-                        <p id="totalPrice">{{ $subTotal }}</p>
-                    </div>
+                </div>
+                <div class="orderSummaryTotal">
+                    <p>Total</p>
+                    <p id="totalPriceWithOutPromoCode" class="d-none">{{ $subTotal }}</p>
+                    <p id="totalPrice">{{ $subTotal }}</p>
                 </div>
                 <div class="cartCheckoutButton">
                     @if (count($list) > 0)
@@ -78,6 +100,9 @@
         </div>
 
         <div class="cartSimilarProducts">
+            <div class="cartSimilarProductsTitle">
+                <h2>Produtos Semelhantes</h2>
+            </div>
             <div class="productsPageProducts" id='listOfProducts'>
                 @foreach ($similarProducts as $product)
                     <div class="productListItem">

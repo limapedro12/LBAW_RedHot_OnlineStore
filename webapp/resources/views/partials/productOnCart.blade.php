@@ -2,7 +2,7 @@
     <td>
         <div class="cartProductImage">
             <a href="/products/{{ $product->id }}">
-                <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}">
+                <img src="{{ $product->getProductImage() }}" alt="Imagem de {{ $product->nome }}" width="100px">
             </a>
         </div>
     </td>
@@ -28,7 +28,7 @@
             @if ($product->desconto > 0)
                 <p class="cartOldPrice"> {{ $product->precoatual }} €</p>
             @endif
-            <p>{{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €</p>
+            <p class="nowPrice">{{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €</p>
         </div>
     </td>
     <td>

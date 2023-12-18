@@ -85,7 +85,7 @@ class PromoCodeController extends Controller
         if ($promoCodeModel) {
             return response()->json(['valid' => true, 'data' => $promoCodeModel]);
         } else {
-            return response()->json(['valid' => false, 'message' => 'Invalid or expired promo code.']);
+            return response()->json(['valid' => false, 'message' => 'Promo Code inválido ou expirado.']);
         }
     }
 

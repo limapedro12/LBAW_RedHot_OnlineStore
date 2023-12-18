@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.valid) {
                 // Update the page content based on the response
                 // For example, update a total value or show a success message
-                promoCodeResult.textContent = 'Promo code applied successfully!';
+                promoCodeResult.textContent = 'Promo code aplicado com successo!';
                 const total = document.getElementById('totalPrice');
                 total.textContent = Math.round(((parseFloat(total.textContent) - (parseFloat(total.textContent) * parseFloat(data.data.desconto))) + Number.EPSILON) * 100) / 100;
 
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 checkoutLink.href = 'cart/checkout?promocode=' + data.data.codigo;
 
-
-                promoCodeForm.classList.add('d-none');
+                const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
+                divPromoCodeForm.classList.add('d-none');
 
                 const promoCodeActive = document.getElementById('promoCodeActive');
                 promoCodeActive.textContent = data.data.codigo;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const promoCodeDiscount = document.getElementById('promoCodeDiscount');
                 promoCodeDiscount.textContent = data.data.desconto * 100 + '%';
 
-                const promoCodeRemove = document.getElementById('promoCodeRemove');
+                const promoCodeRemove = document.getElementById('promoCodeApplied');
                 promoCodeRemove.classList.remove('d-none');
 
 
@@ -89,9 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.valid) {
                 // Update the page content based on the response
                 // For example, update a total value or show a success message
-                promoCodeResult.textContent = 'Promo code removed successfully!';
+                promoCodeResult.textContent = 'Promo code removido com sucesso!';
 
-                promoCodeForm.classList.remove('d-none');
+                const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
+                divPromoCodeForm.classList.remove('d-none');
 
                 promoCodeInput.value = '';
 
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const promoCodeDiscount = document.getElementById('promoCodeDiscount');
                 promoCodeDiscount.textContent = '';
 
-                const promoCodeRemove = document.getElementById('promoCodeRemove');
+                const promoCodeRemove = document.getElementById('promoCodeApplied');
                 promoCodeRemove.classList.add('d-none');
 
 

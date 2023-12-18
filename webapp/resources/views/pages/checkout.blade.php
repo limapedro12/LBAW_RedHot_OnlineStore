@@ -7,8 +7,10 @@
         <p>Subtotal: {{ $subTotal }} €</p>
         <p>Total: {{ $total }} €</p>
         <p>Envio: Grátis</p>
+        @if ($promotionCode != null)
         <p>Código de Promoção: {{ $promotionCode->codigo }}</p>
         <p>Desconto: {{ $promotionCode->desconto * 100 }}%</p>
+        @endif
 
 
         <form method=post action="/cart/checkout{{ $promotionCode ? '?promocode=' . $promotionCode->codigo : '' }}">
