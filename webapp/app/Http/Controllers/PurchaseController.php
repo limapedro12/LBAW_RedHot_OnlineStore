@@ -108,8 +108,6 @@ class PurchaseController extends Controller
         $total = 0;
         $subTotal = 0;
 
-        $address = $request->street . ', ' . $request->doorNo . ', ' . $request->city . ', ' . $request->country;
-
         foreach ($productsCart as $productCart) {
             $product = Product::findOrFail($productCart->id_produto);
 
@@ -195,7 +193,7 @@ class PurchaseController extends Controller
             $purchases = Purchase::where('id_utilizador', '=', $id)->get();
             return view('pages.orders', ['purchases' => $purchases, 'userId' => $id]);
         }
-        abort(403);
+        return abort(403);
     }
 
     public function showOrderDetails(int $userId, int $orderId): View

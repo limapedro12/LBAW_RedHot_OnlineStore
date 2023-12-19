@@ -91,7 +91,7 @@
                                     <div class="userData">
                                         <label for="phone">Telefone:</label>
                                         <p>
-                                            {{ $purchase->phone }}
+                                            {{ $purchase->telefone }}
                                         </p>
                                     </div>
                                     <div class="userData">

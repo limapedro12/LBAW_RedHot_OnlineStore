@@ -227,6 +227,7 @@
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--black);
+    text-align: justify;
 }
 
 .orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought{
@@ -299,10 +300,13 @@
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr{
     border-bottom: 1px solid var(--main-color);
 }
 
-.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td:last-child{
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr:last-child{
     border-bottom: none;
 }
 

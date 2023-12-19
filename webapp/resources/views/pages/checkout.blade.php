@@ -48,11 +48,11 @@
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <label for="phoneNo">Número de telemóvel:</label>
-                                <input type="number" id="phoneNo" name="phoneNo" min="910000000" max="969999999">
-                                @if ($errors->has('phoneNo'))
+                                <label for="phone">Número de telemóvel:</label>
+                                <input type="number" id="phone" name="phone" min="910000000" max="969999999">
+                                @if ($errors->has('phone'))
                                     <p class="text-danger">
-                                        {{ $errors->first('phoneNo') }}
+                                        {{ $errors->first('phone') }}
                                     </p>
                                 @endif
                             </div>
@@ -148,7 +148,7 @@
                                 <div class="checkoutFields">
                                     <div class="inputBox">
                                         <label for="cardNo">Número do cartão:</label>
-                                        <input type="number" id="cardNo" name="cardNo">
+                                        <input type="number" id="cardNo" name="cardNo" min="3000000000000000" max="9999999999999999">
                                         @if ($errors->has('cardNo'))
                                             <p class="text-danger">
                                                 {{ $errors->first('cardNo') }}
@@ -169,7 +169,7 @@
                                 <div class="checkoutFields">
                                     <div class="inputBox">
                                         <label for="cardExpiryMonth">Mês:</label>
-                                        <input type="number" id="cardExpiryMonth" name="cardExpiryMonth">
+                                        <input type="number" id="cardExpiryMonth" name="cardExpiryMonth" min="1" max="12">
                                         @if ($errors->has('cardExpiryMonth'))
                                             <p class="text-danger">
                                                 {{ $errors->first('cardExpiryMonth') }}
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="inputBox">
                                         <label for="cardExpiryYear">Ano:</label>
-                                        <input type="number" id="cardExpiryYear" name="cardExpiryYear">
+                                        <input type="number" id="cardExpiryYear" name="cardExpiryYear" min="23">
                                         @if ($errors->has('cardExpiryYear'))
                                             <p class="text-danger">
                                                 {{ $errors->first('cardExpiryYear') }}
@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="inputBox">
                                         <label for="cardCVV">CVV:</label>
-                                        <input type="number" id="cardCVV" name="cardCVV">
+                                        <input type="number" id="cardCVV" name="cardCVV" min="100" max="999">
                                         @if ($errors->has('cardCVV'))
                                             <p class="text-danger">
                                                 {{ $errors->first('cardCVV') }}
