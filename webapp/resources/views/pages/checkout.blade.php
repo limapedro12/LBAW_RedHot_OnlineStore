@@ -7,7 +7,7 @@
             <h1>CHECKOUT</h1>
         </div>
 
-        <form method=post action="/cart/checkout{{ $promotionCode ? '?promocode=' . $promotionCode->codigo : '' }}">
+        <form method=post action="/cart/checkout{{ $promotionCode ? '?promocode=' . $promotionCode->codigo : '' }}" class="checkoutForm">
             @csrf
             <div class="cartContent">
                 <div class="tableWithCartProducts">
@@ -85,6 +85,18 @@
                             <div class="inputBox">
                                 <label for="country">País:</label>
                                 <input type="text" id="country" name="country" value="Portugal" required>
+                            </div>
+                        </div>
+
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="nif">NIF:</label>
+                                <input type="number" id="nif" name="nif" min="100000000" max="999999999" required>
+                                @if ($errors->has('nif'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('nif') }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
 

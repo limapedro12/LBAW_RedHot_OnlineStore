@@ -186,7 +186,7 @@ class PurchaseController extends Controller
         // clear cart
         ProductCart::where('id_utilizador', '=', Auth::id())->delete();
 
-        return redirect('/')->with('success', 'Encomenda efetuada com sucesso!');
+        return redirect('/users/' . Auth::id())->with('success', 'Encomenda efetuada com sucesso!');
     }
 
     public function showOrders(int $id): View

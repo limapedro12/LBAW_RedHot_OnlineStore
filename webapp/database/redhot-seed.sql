@@ -81,7 +81,7 @@ CREATE TABLE Compra (
   localidade VARCHAR(256),
   pais VARCHAR(256),
   nif VARCHAR(256),
-  metedo_pagamento VARCHAR(256)
+  metodo_pagamento VARCHAR(256)
 );
 
 CREATE TABLE Transporte (

@@ -185,6 +185,42 @@ try {
 
 } catch (error) { }
 
+// checkout
+try {
+  function addEventListeners() {
+    let productCartAdder = document.querySelector('form.checkoutForm');
+    if (productCartAdder != null) {
+      productCartAdder.addEventListener('submit', function () {
+        productCartAlert();
+      });
+    }
+  }
+
+  function productCartAlert() {
+    let timerInterval;
+    Swal.fire({
+      title: "A Compra está a ser processada!",
+      html: "Esta mensagem fecha automaticamente",
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
+
 //wishlist
 
 try {
