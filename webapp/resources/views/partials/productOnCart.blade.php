@@ -31,7 +31,7 @@
             <p class="nowPrice">{{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €</p>
         </div>
     </td>
-    <td>
+    <td class="quantityCell">
         <div class="cartQuantityChange">
             <button class="removeQuantity"> <i class="fas fa-minus"></i> </button>
             <input class="cartProductQuantity" type="number" name="quantity" value="{{ $quantidade }}" min="1"

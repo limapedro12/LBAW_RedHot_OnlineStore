@@ -201,6 +201,14 @@
     opacity: 0.8;
 }
 
+.quantityCell {
+    text-align: center;
+}
+
+.quantityError {
+    font-size: 1.5rem;
+}
+
 .cartContent .tableWithCartProducts .cartQuantityChange .addQuantity {
     display: flex;
     justify-content: center;

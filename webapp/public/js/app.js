@@ -809,13 +809,17 @@ function addEventsToQuantityButtons(product){
       }
     }
   })
+
+  var last_valid_quantity = quantity_input.value;
   quantity_input.addEventListener('input', function(event){
     if(!isNaN(parseInt(quantity_input.value)) && parseInt(quantity_input.value) > 0){
       if(parseInt(quantity_input.value) <= parseInt(quantity_input.max)){
         sendPutRequestTo('/cart/setQuantity/' + id + '/' + quantity_input.value)
         product.querySelector("small.quantityError").innerHTML = ""
+        last_valid_quantity = quantity_input.value;
       } else {
-        product.querySelector("small.quantityError").innerHTML = "Quantidade máxima: " + quantity_input.max
+        quantity_input.value = last_valid_quantity
+        product.querySelector("small.quantityError").innerHTML = "Max: " + quantity_input.max
       }
     }
     if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
