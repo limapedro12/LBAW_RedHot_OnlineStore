@@ -225,9 +225,9 @@ class PurchaseController extends Controller
         $purchase = Purchase::findOrFail($orderId);
 
         if (
-            $purchase->estado == 'Enviada' ||
-            $purchase->estado == 'Entregue' ||
-            $purchase->estado == 'Cancelada' ||
+            ($purchase->estado != 'Em processamento' &&
+             $purchase->estado != 'Pagamento por Aprovar' &&
+             $purchase->estado != 'Pagamento Aprovado') ||
             Auth::user()->id != $userId
         )
             abort(403);
