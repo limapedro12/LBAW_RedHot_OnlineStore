@@ -2,94 +2,270 @@
 
 @section('content')
     <section>
-        <h1>Checkout</h1>
-        <h2>Resumo da Encomenda</h2>
-        <p>Subtotal: {{ $subTotal }} €</p>
-        <p>Total: {{ $total }} €</p>
-        <p>Envio: Grátis</p>
-        @if ($promotionCode != null)
-        <p>Código de Promoção: {{ $promotionCode->codigo }}</p>
-        <p>Desconto: {{ $promotionCode->desconto * 100 }}%</p>
-        @endif
 
+        <div class="cartTitle">
+            <h1>CHECKOUT</h1>
+        </div>
 
         <form method=post action="/cart/checkout{{ $promotionCode ? '?promocode=' . $promotionCode->codigo : '' }}">
             @csrf
-            <p>Por favor, escolha um método de pagamento:</p>
-            <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash" required checked>
-            <label for="method-cash">Pagar em dinheiro no ato de entrega</label>
-            <br>
-            <input type="radio" id="radio-method-card" name="paymentMethod" value="card" required>
-            <label for="method-card">Cartão bancário</label>
-            <br>
-            <input type="radio" id="radio-method-mbway" name="paymentMethod" value="mbway" required>
-            <label for="method-mbway">MB WAY</label>
-            <div id="method-card" style="display:none">
-                <label for="cardNo">Número do cartão</label>
-                <input type="number" id="cardNo" name="cardNo">
-                @if ($errors->has('cardNo'))
-                    <p class="text-danger">
-                        {{ $errors->first('cardNo') }}
-                    </p>
-                @endif
-                <br>
-                <label for="cardHolder">Titular do cartão</label>
-                <input type="text" id="cardHolder" name="cardHolder">
-                <br><br>
-                Validade do cartão
-                <br>
-                <label for="cardExpiryMonth">Mês</label>
-                <input type="number" id="cardExpiryMonth" name="cardExpiryMonth">
-                @if ($errors->has('cardExpiryMonth'))
-                    <p class="text-danger">
-                        {{ $errors->first('cardExpiryMonth') }}
-                    </p>
-                @endif
-                <label for="cardExpiryYear">Ano</label>
-                <input type="number" id="cardExpiryYear" name="cardExpiryYear">
-                @if ($errors->has('cardExpiryYear'))
-                    <p class="text-danger">
-                        {{ $errors->first('cardExpiryYear') }}
-                    </p>
-                @endif
-                <br><br>
-                <label for="cardCVV">CVV</label>
-                <input type="number" id="cardCVV" name="cardCVV">
-                @if ($errors->has('cardCVV'))
-                    <p class="text-danger">
-                        {{ $errors->first('cardCVV') }}
-                    </p>
-                @endif
-            </div>
-            <div id="method-mbway" style="display:none">
-                <label for="mbwayNo">Número de telemóvel</label>
-                <input type="number" id="mbwayNo" name="mbwayNo" min="910000000" max="969999999">
-                @if ($errors->has('mbway'))
-                    <p class="text-danger">
-                        {{ $errors->first('mbway') }}
-                    </p>
-                @endif
-            </div>
-            <br><br><br>
-            Morada de Entrega
-            <br>
-            <label for="street">Arruamento</label>
-            <input type="text" id="street" name="street" required>
-            <br>
-            <label for="doorNo">Nº (e andar, se aplicável)</label>
-            <input type="text" id="doorNo" name="doorNo" required>
-            <br>
-            <label for="cardNo">Cidade/Município</label>
-            <input type="text" id="city" name="city" required>
-            <br>
-            <label for="country">País</label>
-            <input type="text" id="country" name="country" value="Portugal" required>
-            <br>
-            <label for="deliveryObs">Observações para a entrega (facultativo)</label>
-            <input type="textarea" id="deliveryObs" name="deliveryObs">
-            <br><br>
-            <button type="submit">Confirmar encomenda</button>
+            <div class="cartContent">
+                <div class="tableWithCartProducts">
+                    <div class="checkoutFormContent">
 
+                        <div class="checkoutFieldsTitle">
+                            <h2>Dados de entrega</h2>
+                        </div>
+
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="firstName">Primeiro Nome:</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                                @if ($errors->has('firstName'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('firstName') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="inputBox">
+                                <label for="lastName">Último Nome:</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                                @if ($errors->has('lastName'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('lastName') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                                @if ($errors->has('email'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('email') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="inputBox">
+                                <label for="phoneNo">Número de telemóvel:</label>
+                                <input type="number" id="phoneNo" name="phoneNo" min="910000000" max="969999999">
+                                @if ($errors->has('phoneNo'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('phoneNo') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="street">Arruamento:</label>
+                                <input type="text" id="street" name="street" required>
+                            </div>
+                        </div>
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="doorNo">Nº Porta:</label>
+                                <input type="text" id="doorNo" name="doorNo" required>
+                            </div>
+                            <div class="inputBox">
+                                <label for="floor">Andar (Caso exista):</label>
+                                <input type="text" id="floor" name="floor">
+                            </div>
+                            <div class="inputBox">
+                                <label for="postalCode">Código Postal:</label>
+                                <input type="text" id="postalCode" name="postalCode" required>
+                            </div>
+                        </div>
+                        <div class="checkoutFields">
+                            <div class="inputBox">
+                                <label for="city">Cidade:</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="inputBox">
+                                <label for="country">País:</label>
+                                <input type="text" id="country" name="country" value="Portugal" required>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <div class="paymentMethod">
+                            <div class="paymentMethodTitle">
+                                <h2>Método de Pagamento</h2>
+                            </div>
+
+                            <div class="paymentMethodSelect">
+                                <div class="paymentMethodLabels">
+                                    <input type="radio" id="radio-method-cash" name="paymentMethod" value="cash"
+                                        required checked>
+                                    <label for="radio-method-cash">
+                                        <i class="fa-solid fa-money-bill-wave"></i> Dinheiro no ato de entrega
+                                    </label>
+                                </div>
+
+                                <div class="paymentMethodLabels">
+                                    <input type="radio" id="radio-method-card" name="paymentMethod" value="card"
+                                        required>
+                                    <label for="radio-method-card">
+                                        <i class="fa-regular fa-credit-card"></i> Cartão bancário
+                                    </label>
+                                </div>
+
+                                <div class="paymentMethodMbway">
+                                    <input type="radio" id="radio-method-mbway" name="paymentMethod" value="mbway"
+                                        required>
+                                    <label for="radio-method-mbway">
+                                        <img src="{{ asset('sources/payment/logoMbway.png') }}" alt="mbway"
+                                            width="70px">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="method-card" style="display:none">
+
+                                <div class="cardData">
+                                    <h3>Dados do cartão</h3>
+                                </div>
+
+
+                                <div class="checkoutFields">
+                                    <div class="inputBox">
+                                        <label for="cardNo">Número do cartão:</label>
+                                        <input type="number" id="cardNo" name="cardNo">
+                                        @if ($errors->has('cardNo'))
+                                            <p class="text-danger">
+                                                {{ $errors->first('cardNo') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    <div class="inputBox">
+                                        <label for="cardHolder">Titular do cartão:</label>
+                                        <input type="text" id="cardHolder" name="cardHolder">
+                                    </div>
+                                </div>
+
+
+                                <div class="cardData">
+                                    <h3>Validade do cartão</h3>
+                                </div>
+
+                                <div class="checkoutFields">
+                                    <div class="inputBox">
+                                        <label for="cardExpiryMonth">Mês:</label>
+                                        <input type="number" id="cardExpiryMonth" name="cardExpiryMonth">
+                                        @if ($errors->has('cardExpiryMonth'))
+                                            <p class="text-danger">
+                                                {{ $errors->first('cardExpiryMonth') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    <div class="inputBox">
+                                        <label for="cardExpiryYear">Ano:</label>
+                                        <input type="number" id="cardExpiryYear" name="cardExpiryYear">
+                                        @if ($errors->has('cardExpiryYear'))
+                                            <p class="text-danger">
+                                                {{ $errors->first('cardExpiryYear') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    <div class="inputBox">
+                                        <label for="cardCVV">CVV:</label>
+                                        <input type="number" id="cardCVV" name="cardCVV">
+                                        @if ($errors->has('cardCVV'))
+                                            <p class="text-danger">
+                                                {{ $errors->first('cardCVV') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="method-mbway" style="display:none">
+                                <div class="checkoutFields">
+                                    <div class="inputBox">
+                                        <label for="mbwayNo">Número de telemóvel:</label>
+                                        <input type="number" id="mbwayNo" name="mbwayNo" min="910000000"
+                                            max="969999999">
+                                        @if ($errors->has('mbway'))
+                                            <p class="text-danger">
+                                                {{ $errors->first('mbway') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="extraInfo">
+                                <div class="checkoutFields">
+                                    <div class="inputBox">
+                                        <label for="deliveryObs">Observações para a entrega (facultativo):</label>
+                                        <textarea id="deliveryObs" name="deliveryObs"> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="orderSummary">
+                    <div class="orderSummaryContent">
+                        <div class="orderSummaryTitle">
+                            <h2>Resumo</h2>
+                        </div>
+                        <div class="orderSummaryInfo">
+                            <div class="orderSummaryInfoRow">
+                                <p>Subtotal</p>
+                                <p>{{ $subTotal }} €</p>
+                            </div>
+                            <div class="orderSummaryInfoRow">
+                                <p>Envio</p>
+                                <p>Grátis</p>
+                            </div>
+                            <div class="orderSummaryPromotionCode">
+                                <div class="promoCodeApplied">
+                                    <div class="promoCodeAppliedTitle">
+                                        <p>Código de Promoção</p>
+                                    </div>
+                                    @if ($promotionCode != null)
+                                        <div class="promoCodeAccepted">
+                                            <div class="promoCodeDisplay">
+                                                <div id="promoCodeActive">{{ $promotionCode->codigo }}</div>
+                                                <p> <i class="fas fa-arrow-right"></i> </p>
+                                                <div id="promoCodeDiscount">{{ $promotionCode->desconto * 100 }}%</div>
+                                            </div>
+                                            <div class="totalSaved">
+                                                <p> - {{ $subTotal - $total }} €</p>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="promoCodeNotGiven">
+                                            <p>Não tem código de promoção</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orderSummaryTotal">
+                        <p>Total</p>
+                        <div class="orderSummaryTotalPrice">
+                            <p> {{ $total }} €</p>
+                        </div>
+                    </div>
+                    <div class="cartCheckoutButton">
+
+                        <button type="submit">Confirmar encomenda</button>
+
+                    </div>
+                </div>
+            </div>
         </form>
     </section>
 @endsection

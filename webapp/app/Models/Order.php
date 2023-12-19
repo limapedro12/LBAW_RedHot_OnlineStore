@@ -20,7 +20,19 @@ class Order extends Model
         'id_utilizador',
         'estado',
         'id_administrador',
-        'promo_code'
+        'promo_code',
+        'first_name',
+        'last_name',
+        'email',
+        'morada',
+        'porta',
+        'andar',
+        'codigo_postal',
+        'localidade',
+        'telefone',
+        'nif',
+        'pais',
+        'metodo_pagamento'
     ];
 
 

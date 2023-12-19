@@ -1,0 +1,153 @@
+.promoCodeNotGiven {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.totalSaved {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.checkoutFieldsTitle{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.checkoutFormContent{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkoutFormContent .checkoutFields{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.checkoutFormContent .checkoutFields .inputBox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkoutFormContent .checkoutFields .inputBox label{
+    display: block;
+    font-size: 2rem;
+    padding-top: 1rem;
+    color: var(--black);
+}
+
+.checkoutFormContent .checkoutFields .inputBox input{
+    width: 90%;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border-bottom: var(--main-color) 2px solid;
+    outline: none;
+    background: transparent;
+    color: var(--black);
+}
+
+.checkoutFormContent .checkoutFields .inputBox input:focus{
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.paymentMethod{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.paymentMethod .paymentMethodTitle{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.paymentMethod .paymentMethodSelect{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paymentMethod .paymentMethodSelect .paymentMethodLabels,
+.paymentMethod .paymentMethodSelect .paymentMethodMbway{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.paymentMethod .paymentMethodSelect .paymentMethodLabels input,
+.paymentMethod .paymentMethodSelect .paymentMethodMbway input{
+    margin-right: 1rem;
+}
+
+.paymentMethod .paymentMethodSelect .paymentMethodLabels label{
+    font-size: 1.77rem;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.paymentMethod .paymentMethodSelect .paymentMethodLabels label:hover{
+    color: var(--main-color);
+}
+
+.paymentMethod .paymentMethodSelect .paymentMethodLabels label i{
+    font-size: 2rem;
+}
+
+.cardData{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardData h3{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.extraInfo{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.extraInfo textarea{
+    width: 97%;
+    height: 15rem;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    border: var(--main-color) 2px solid;
+    outline: none;
+    background: transparent;
+    resize: none;
+    color: var(--black);
+}
+
+.extraInfo textarea:focus{
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.extraInfo textarea::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+.extraInfo textarea::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+.extraInfo textarea::-webkit-scrollbar-thumb{
+    background: var(--main-color);
+}
+

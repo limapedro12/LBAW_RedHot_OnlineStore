@@ -69,7 +69,19 @@ CREATE TABLE Compra (
   estado VARCHAR(256) NOT NULL,
 	id_administrador INTEGER REFERENCES Administrador (id),
   id_promo_code INTEGER REFERENCES Promo_Codes (id),
-  sub_total FLOAT CHECK (sub_total >= 0)
+  sub_total FLOAT CHECK (sub_total >= 0),
+  first_name VARCHAR(256),
+  last_name VARCHAR(256),
+  email VARCHAR(256),
+  telefone VARCHAR(256),
+  morada VARCHAR(256),
+  porta VARCHAR(256),
+  andar VARCHAR(256),
+  codigo_postal VARCHAR(256),
+  localidade VARCHAR(256),
+  pais VARCHAR(256),
+  nif VARCHAR(256),
+  metedo_pagamento VARCHAR(256)
 );
 
 CREATE TABLE Transporte (

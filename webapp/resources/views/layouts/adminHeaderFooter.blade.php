@@ -36,6 +36,7 @@
     <link href="{{ url('css/productEdit.css') }}" rel="stylesheet">
     <link href="{{ url('css/wishlist.css') }}" rel="stylesheet">
     <link href="{{ url('css/cart.css') }}" rel="stylesheet">
+    <link href="{{ url('css/checkout.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>

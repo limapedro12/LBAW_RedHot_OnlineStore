@@ -1,21 +1,59 @@
-.d-none{
+.d-none {
     display: none;
 }
 
-.cartTitle{
+.cartEmpty {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.cartEmpty .cartEmptyTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.cartEmpty .cartEmptyButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.cartEmpty .cartEmptyButton button {
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    background-color: var(--main-color);
+    cursor: pointer;
+}
+
+.cartEmpty .cartEmptyButton button:hover {
+    opacity: 0.8;
+}
+
+.cartTitle {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 5rem;
 }
 
-.cartTitle h1{
+.cartTitle h1 {
     font-size: 7rem;
     font-weight: 900;
     color: var(--black);
 }
 
-.cartContent{
+.cartContent {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -23,17 +61,17 @@
     margin-bottom: 5rem;
 }
 
-.cartContent .tableWithCartProducts{
+.cartContent .tableWithCartProducts {
     width: 75%;
     margin-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts table{
+.cartContent .tableWithCartProducts table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.cartContent .tableWithCartProducts table thead tr th{
+.cartContent .tableWithCartProducts table thead tr th {
     font-size: 2rem;
     font-weight: 900;
     color: var(--black);
@@ -41,28 +79,28 @@
     border-bottom: 2px solid var(--main-color);
 }
 
-.cartContent .tableWithCartProducts table tbody tr td{
+.cartContent .tableWithCartProducts table tbody tr td {
     padding-top: 2rem;
     padding-bottom: 2rem;
     font-size: 1.5rem;
     font-weight: 400;
-    color: var(--black); 
+    color: var(--black);
     border-bottom: 1.5px solid rgb(0, 0, 0, 0.2);
 }
 
-.cartContent .tableWithCartProducts table tbody tr td .cartProductImage{
+.cartContent .tableWithCartProducts table tbody tr td .cartProductImage {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a{
+.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a img{
+.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a img {
     height: 10rem;
     width: 10rem;
     border: 1.5px solid var(--black);
@@ -70,12 +108,12 @@
     margin-bottom: 1rem;
 }
 
-.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a img:hover{
+.cartContent .tableWithCartProducts table tbody tr td .cartProductImage a img:hover {
     border: 2px solid var(--main-color);
     box-shadow: 1px 1px 5px 1px var(--main-color);
 }
 
-.cartContent .tableWithCartProducts .cartProductNameCategory{
+.cartContent .tableWithCartProducts .cartProductNameCategory {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -84,24 +122,24 @@
     padding-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts .cartProductNameCategory a{
+.cartContent .tableWithCartProducts .cartProductNameCategory a {
     font-size: 1.7rem;
     font-weight: 900;
     color: var(--black);
     text-decoration: none;
-} 
+}
 
-.cartContent .tableWithCartProducts .cartProductNameCategory a:hover{
+.cartContent .tableWithCartProducts .cartProductNameCategory a:hover {
     color: var(--main-color);
 }
 
-.cartContent .tableWithCartProducts .cartProductNameCategory p{
+.cartContent .tableWithCartProducts .cartProductNameCategory p {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--black);
 }
 
-.cartContent .tableWithCartProducts .cartProductDiscount{
+.cartContent .tableWithCartProducts .cartProductDiscount {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,13 +147,13 @@
     padding-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts .cartProductDiscount p{
+.cartContent .tableWithCartProducts .cartProductDiscount p {
     font-size: 1.7rem;
     font-weight: 400;
     color: var(--black);
 }
 
-.cartContent .tableWithCartProducts .cartProductPrices{
+.cartContent .tableWithCartProducts .cartProductPrices {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,20 +162,20 @@
     padding-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts .cartProductPrices .nowPrice{
+.cartContent .tableWithCartProducts .cartProductPrices .nowPrice {
     font-size: 2rem;
     font-weight: 600;
     color: var(--main-color);
 }
 
-.cartContent .tableWithCartProducts .cartProductPrices .cartOldPrice{
+.cartContent .tableWithCartProducts .cartProductPrices .cartOldPrice {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--black);
     text-decoration: line-through;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange{
+.cartContent .tableWithCartProducts .cartQuantityChange {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,7 +184,7 @@
     padding-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange .removeQuantity{
+.cartContent .tableWithCartProducts .cartQuantityChange .removeQuantity {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -159,11 +197,11 @@
     cursor: pointer;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange .removeQuantity:hover{
+.cartContent .tableWithCartProducts .cartQuantityChange .removeQuantity:hover {
     opacity: 0.8;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange .addQuantity{
+.cartContent .tableWithCartProducts .cartQuantityChange .addQuantity {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,11 +214,11 @@
     cursor: pointer;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange .addQuantity:hover{
+.cartContent .tableWithCartProducts .cartQuantityChange .addQuantity:hover {
     opacity: 0.8;
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange input{
+.cartContent .tableWithCartProducts .cartQuantityChange input {
     width: 5rem;
     display: flex;
     justify-content: center;
@@ -194,17 +232,17 @@
     background-color: var(--main-color);
 }
 
-.cartContent .tableWithCartProducts .cartQuantityChange input:focus{
+.cartContent .tableWithCartProducts .cartQuantityChange input:focus {
     outline: none;
 }
 
 .cartContent .tableWithCartProducts .cartQuantityChange input::-webkit-outer-spin-button,
-.cartContent .tableWithCartProducts .cartQuantityChange input::-webkit-inner-spin-button{
+.cartContent .tableWithCartProducts .cartQuantityChange input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.cartContent .tableWithCartProducts .cartProductTotal{
+.cartContent .tableWithCartProducts .cartProductTotal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,22 +250,22 @@
     padding-right: 1rem;
 }
 
-.cartContent .tableWithCartProducts .cartProductTotal p{
+.cartContent .tableWithCartProducts .cartProductTotal p {
     font-size: 1.7rem;
     font-weight: 500;
     color: var(--black);
 }
 
-.cartContent .tableWithCartProducts .cartRemoveProduct{
+.cartContent .tableWithCartProducts .cartRemoveProduct {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    
+
 }
 
-.cartContent .tableWithCartProducts .cartRemoveProduct button{
+.cartContent .tableWithCartProducts .cartRemoveProduct button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -240,11 +278,11 @@
     font-size: 1.5rem;
 }
 
-.cartContent .tableWithCartProducts .cartRemoveProduct button:hover{
+.cartContent .tableWithCartProducts .cartRemoveProduct button:hover {
     opacity: 0.8;
 }
 
-.orderSummary{
+.orderSummary {
     width: 25%;
     display: flex;
     justify-content: flex-start;
@@ -253,7 +291,7 @@
     padding: 1rem;
 }
 
-.orderSummary .orderSummaryContent{
+.orderSummary .orderSummaryContent {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -263,7 +301,7 @@
     background-color: var(--main-color-opacity);
 }
 
-.orderSummary .orderSummaryContent .orderSummaryTitle{
+.orderSummary .orderSummaryContent .orderSummaryTitle {
     width: 100%;
     font-size: 2rem;
     font-weight: 900;
@@ -272,7 +310,7 @@
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo{
+.orderSummary .orderSummaryContent .orderSummaryInfo {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -281,7 +319,7 @@
     padding: 1rem;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryInfoRow{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryInfoRow {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -290,13 +328,13 @@
     margin-bottom: 1rem;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryInfoRow p{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryInfoRow p {
     font-size: 1.7rem;
     font-weight: 400;
     color: var(--black);
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -304,7 +342,7 @@
     flex-direction: row;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -312,14 +350,14 @@
     flex-direction: column;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form label{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form label {
     font-size: 1.5rem;
     font-weight: 900;
     color: var(--black);
     margin-bottom: 0.5rem;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeFormInput{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeFormInput {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -327,7 +365,7 @@
     flex-direction: row;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form input{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form input {
     width: 100%;
     padding: 0.5rem;
     font-size: 1.5rem;
@@ -337,7 +375,7 @@
     border-radius: 5px;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form button{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form button {
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -348,19 +386,19 @@
     cursor: pointer;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form button:hover{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode form button:hover {
     opacity: 0.8;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo #promoCodeFormDiv{
+.orderSummary .orderSummaryContent .orderSummaryInfo #promoCodeFormDiv {
     width: 100%;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode #promoCodeApplied{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode #promoCodeApplied {
     width: 100%;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -368,14 +406,14 @@
     flex-direction: column;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAppliedTitle{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAppliedTitle {
     font-size: 1.5rem;
     font-weight: 900;
     color: var(--black);
     margin-bottom: 0.5rem;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -383,7 +421,7 @@
     flex-direction: row;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeDisplay{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeDisplay {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -393,12 +431,12 @@
     color: var(--black);
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeDisplay p{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeDisplay p {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeRemove button{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeRemove button {
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -409,11 +447,11 @@
     cursor: pointer;
 }
 
-.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeRemove button:hover{
+.orderSummary .orderSummaryContent .orderSummaryInfo .orderSummaryPromotionCode .promoCodeApplied .promoCodeAccepted .promoCodeRemove button:hover {
     opacity: 0.8;
 }
 
-.orderSummary .orderSummaryTotal{
+.orderSummary .orderSummaryTotal {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -424,13 +462,18 @@
     background-color: var(--main-color-opacity-dark);
 }
 
-.orderSummary .orderSummaryTotal p{
+.orderSummary .orderSummaryTotal .orderSummaryTotalPrice {
+    display: flex;
+    flex-direction: row;
+}
+
+.orderSummary .orderSummaryTotal p {
     font-size: 2rem;
     font-weight: 900;
     color: var(--black);
 }
 
-.orderSummary .cartCheckoutButton{
+.orderSummary .cartCheckoutButton {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -438,7 +481,7 @@
     padding: 1rem;
 }
 
-.orderSummary .cartCheckoutButton button{
+.orderSummary .cartCheckoutButton button {
     width: 100%;
     padding: 1rem;
     font-size: 2rem;
@@ -450,11 +493,11 @@
     cursor: pointer;
 }
 
-.orderSummary .cartCheckoutButton button:hover{
+.orderSummary .cartCheckoutButton button:hover {
     opacity: 0.8;
 }
 
-.orderSummary #promoCodeResult{
+.orderSummary #promoCodeResult {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -466,7 +509,7 @@
     color: var(--black);
 }
 
-.cartSimilarProducts{
+.cartSimilarProducts {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -475,7 +518,7 @@
     padding: 1rem;
 }
 
-.cartSimilarProducts .cartSimilarProductsTitle{
+.cartSimilarProducts .cartSimilarProductsTitle {
     width: 100%;
     font-size: 2rem;
     font-weight: 900;

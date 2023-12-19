@@ -35,6 +35,7 @@
     <link href="{{ url('css/productDetail.css') }}" rel="stylesheet">
     <link href="{{ url('css/wishlist.css') }}" rel="stylesheet">
     <link href="{{ url('css/cart.css') }}" rel="stylesheet">
+    <link href="{{ url('css/checkout.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script type="text/javascript" src={{ url('js/app.js') }} defer></script>
