@@ -184,7 +184,7 @@ Route::controller(FaqsController::class)->group(function () {
 // Promo Codes
 Route::controller(PromoCodeController::class)->group(function () {
     Route::get('/adminPromoCodes', 'index')->name('promo_codes.index');
-    Route::get('/promo_codes/create', 'create')->name('promo_codes.create');
+    Route::post('/promo_codes/create', 'create')->name('promo_codes.create');
     Route::post('/promo_codes/store', 'store')->name('promo_codes.store');
     Route::get('/promo_codes/{id}/edit', 'edit')->name('promo_codes.edit');
     Route::post('/promo_codes/{id}/update', 'update')->name('promo_codes.update');

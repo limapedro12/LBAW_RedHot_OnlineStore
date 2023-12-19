@@ -249,7 +249,7 @@ try {
 
   function reviewEditAlert() {
     Swal.fire({
-      title: "Sucesso!",
+      title: "A ser Processado!",
       text: "O comentario foi editado com sucesso!",
       icon: "success",
       showConfirmButton: false
@@ -309,6 +309,44 @@ try {
   addEventListeners();
 
 } catch (error) { }
+
+
+// addPromoCode
+
+try {
+  function addEventListeners() {
+    let promoCode = document.querySelector('form.addPromoCodeForm');
+    if (promoCode != null) {
+      promoCode.addEventListener('submit', function () {
+        promoCodeAlert();
+      });
+    }
+  }
+
+  function promoCodeAlert() {
+    let timerInterval;
+    Swal.fire({
+      title: "A tentar adicionar o novo Promo Code!",
+      html: "Esta mensagem fecha automaticamente",
+      timer: 700,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
+  }
+
+  addEventListeners();
+
+} catch (error) { }
+
 
 // addProduct
 
