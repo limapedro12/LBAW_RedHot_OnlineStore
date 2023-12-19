@@ -1,6 +1,6 @@
 @extends('layouts.adminHeaderFooter')
 
-@section('title', "Gestão de FAQ's |")
+@section('title', "Gestão de Códigos Promocionais |")
 
 @section('content')
     <div class="adminContent">
@@ -39,15 +39,28 @@
                     </a>
 
                     <a href="{{ url('/adminPromoCode')}}">
-                        <div class="adminSideBarOption" id="optionNotSelected">
-                            <p>Códigos Promocionais</p>
-                            <i class="fas fa-angle-down"></i>
-                        </div>
-                    </a>
-
-                    <a href="{{ url('/adminFAQ') }}">
                         <div class="adminSideBarOption" id="optionSelected">
                             <div id="rectangle"></div>
+                            <p>Códigos Promocionais</p>
+                            <i class="fas fa-angle-up"></i>
+                        </div>
+                    </a>
+                    <div class="adminSideBarOptionSubOptions">
+                        <a href="{{ url('/adminPromoCode') }}">
+                            <div class="adminSideBarOptionSubOption" id="optionSelected">
+                                <p>Gerir</p>
+                            </div>
+                        </a>
+
+                        <a href="{{ url('/adminPromoCodeAdd') }}">
+                            <div class="adminSideBarOptionSubOption" id="optionNotSelected">
+                                <p>Adicionar</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <a href="{{ url('/adminFAQ') }}">
+                        <div class="adminSideBarOption" id="optionNotSelected">
                             <p>FAQ's</p>
                         </div>
                     </a>
@@ -56,7 +69,7 @@
 
             <div class="adminOptionContent">
                 <div class="adminOptionContentTitle">
-                    <h1>Perguntas Frequentes</h1>
+                    <h1>Códigos Promocionais</h1>
                 </div>
 
                 <div class="adminOrderContent">
@@ -70,7 +83,7 @@
                                             title="Filtrar Tabela">
                                     </div>
                                     <div class="adminFAQButtons">
-                                        <form method="GET" action="{{ route('addFaqForm') }}">
+                                        <form method="GET" action="{{ route('promo_codes.create') }}">
                                             @csrf
                                             <button type="submit" class="adminFAQButton">Adicionar FAQ</button>
                                         </form>
@@ -80,50 +93,78 @@
 
                             <div class="myOrdersTable">
                                 <div class="myOrdersTableBody">
+                                @if ($errors->has('ban'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('ban') }}
+                                    </p>
+                                @endif
+                                @if ($errors->has('promote'))
+                                    <p class="text-danger">
+                                        {{ $errors->first('promote') }}
+                                    </p>
+                                @endif
                                     <table class="tableSortable" id="tableToFilter">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Pergunta</th>
+                                                <th>Código</th>
+                                                <th>Desconto</th>
+                                                <th>Data de Inicio</th>
+                                                <th>Data de Fim</th>
                                                 <th>Editar</th>
-                                                <th>Apagar</th>
+                                                <th>Remover</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($faqs as $faq)
+                                            @foreach ($promoCodes as $promoCode)
                                                 <tr>
                                                     <td>
                                                         <div class="myOrderID">
                                                             <p>
-                                                                {{ $faq->getNormalizeFaqId($faq->id) }}
+                                                                {{ $promoCode->getNormalizePromoCodeId($promoCode->id) }}
                                                             </p>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="myOrderDate">
-                                                            <p>
-                                                                {{ $faq->pergunta }}
-                                                            </p>
+                                                            <p>{{ $promoCode->codigo }}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myOrderDate">
+                                                            <p>{{ $promoCode->desconto * 100 }}%</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myOrderDate">
+                                                            <p>{{ $promoCode->data_inicio }}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="myOrderDate">
+                                                            <p>{{ $promoCode->data_fim }}</p>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="faqButtons">
                                                             <form method="GET"
-                                                                action="{{ route('faq', ['id' => $faq->id]) }}">
+                                                                action="{{ route('promo_codes.edit', ['id' => $promoCode->id]) }}">
                                                                 @csrf
-                                                                <button type="submit" class="adminFAQButton"><i
-                                                                        class="fas fa-edit"></i></button>
+                                                                <button type="submit" class="adminFAQButton">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="faqButtons">
                                                             <form method="POST"
-                                                                action="{{ route('deleteFaqs', ['id' => $faq->id]) }}">
+                                                                action="{{ route('promo_codes.delete', ['id' => $promoCode->id]) }}">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <button type="submit" class="adminFAQButton"><i
-                                                                        class="fas fa-trash-alt"></i></button>
+                                                                <button type="submit" class="adminFAQButton">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </td>

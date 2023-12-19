@@ -99,6 +99,6 @@ class PromoCodeController extends Controller
             ->first();
 
         $request->session()->forget('promoCode');
-        return response()->json(['valid' => true, 'message' => 'Promo code removed.', 'data' => $promoCodeModel]);
+        return response()->json(['valid' => true, 'message' => 'Promo Code removido.', 'data' => $promoCodeModel]);
     }
 }
