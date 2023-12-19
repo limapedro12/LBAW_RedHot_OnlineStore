@@ -58,4 +58,14 @@ class Purchase extends Model
         $user = User::find($id);
         return $user->email;
     }
+
+    public function getPromotionCodeById(int $id){
+        $promotion = PromoCode::find($id);
+        return $promotion->codigo;
+    }
+
+    public function getPromotionCodeDiscountById(int $id){
+        $promotion = PromoCode::find($id);
+        return $promotion->desconto;
+    }
 }
