@@ -448,6 +448,7 @@ function createProductHTML(product) {
   let productTemplate = productTemplateOriginal.cloneNode(true)
   productTemplate.getElementsByClassName('productImage')[0].src = product.url_imagem
   productTemplate.getElementsByClassName('productImage')[0].alt = product.nome
+  console.log(`/products/${product.id}`)
   productTemplate.getElementsByClassName('productListItemTitleLink')[0].href = `/products/${product.id}`
   productTemplate.getElementsByClassName('productListItemTitleText')[0].innerHTML = product.nome
   productTemplate.getElementsByClassName('productListItemNumberOfReviews')[0].querySelector('p').innerHTML = `${product.numero_reviews} avaliações`
@@ -583,6 +584,7 @@ if (document.getElementsByClassName('productsPageFilter').length > 0) {
     xhr.send();
   }
 
+  filterProducts()
   document.getElementById('searchedString').addEventListener('keypress', filterProducts)
   Array.from(document.querySelectorAll('input')).map(e => e.addEventListener('change', filterProducts))
   document.querySelector('select.productsPageSortSelector').addEventListener('change', filterProducts)
