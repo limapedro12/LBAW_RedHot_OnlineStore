@@ -28,8 +28,9 @@
                                 'quantidade' => $elem[0],
                                 'product' => $elem[1],
                             ])
+                            <?php $flag= true; ?>
                         @empty
-                            <p>Ainda não tem produtos no carrinho</p>
+                            <?php $flag= false; ?>    
                         @endforelse
                     </tbody>
                 </table>
@@ -87,8 +88,11 @@
                 </div>
                 <div class="orderSummaryTotal">
                     <p>Total</p>
-                    <p id="totalPriceWithOutPromoCode" class="d-none">{{ $subTotal }}</p>
-                    <p id="totalPrice">{{ $subTotal }}</p>
+                    <div class="orderSummaryTotalPrice">
+                        <p id="totalPriceWithOutPromoCode" class="d-none">{{ $subTotal }}</p>
+                        <p id="totalPrice">{{ $subTotal }}</p>
+                        <p>€</p>
+                    </div>
                 </div>
                 <div class="cartCheckoutButton">
                     @if (count($list) > 0)
@@ -98,6 +102,17 @@
                 <div id="promoCodeResult"></div>
             </div>
         </div>
+
+        <?php if($flag == false) { ?>
+            <div class="cartEmpty">
+                <div class="cartEmptyTitle">
+                    <h2>O seu carrinho está vazio</h2>
+                </div>
+                <div class="cartEmptyButton">
+                    <a href="/products"><button>Ir para a loja</button></a>
+                </div>
+            </div>
+        <?php } else{ ?>
 
         <div class="cartSimilarProducts">
             <div class="cartSimilarProductsTitle">
@@ -159,6 +174,8 @@
                 @endforeach
             </div>
         </div>
+
+        <?php } ?>
 
 
 

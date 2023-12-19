@@ -68,12 +68,21 @@ class PurchaseController extends Controller
     public function checkout(Request $request)
     {
         $request->validate([
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'nullable|integer',
+            'nif' => 'nullable|integer',
             'street' => 'required|string',
             'doorNo' => 'required|string',
+            'floor' => 'nullable|string',
+            'postalCode' => 'required|string',
             'city' => 'required|string',
             'country' => 'required|string',
             'deliveryObs' => 'nullable|string'
         ]);
+
+        $metodoPagamento = $request->paymentMethod;
 
         switch ($request->paymentMethod) {
             case 'card':
@@ -132,7 +141,7 @@ class PurchaseController extends Controller
         // create and register purchase
         $purchase = new Purchase();
         $purchase->timestamp = date('Y-m-d H:i:s');
-        $purchase->descricao = $address . ' --- ' . $request->deliveryObs;
+        $purchase->descricao = $request->deliveryObs;
         $purchase->id_utilizador = Auth::id();
         $purchase->sub_total = $subTotal;
         if ($request->input('promocode'))
@@ -148,6 +157,18 @@ class PurchaseController extends Controller
         }
         $purchase->id_administrador = null;
         $purchase->total = $total;
+        $purchase->first_name = $request->firstName;
+        $purchase->last_name = $request->lastName;
+        $purchase->email = $request->email;
+        $purchase->morada = $request->street;
+        $purchase->porta = $request->doorNo;
+        $purchase->andar = $request->floor;
+        $purchase->codigo_postal = $request->postalCode;
+        $purchase->localidade = $request->city;
+        $purchase->telefone = $request->phone;
+        $purchase->nif = $request->nif;
+        $purchase->pais = $request->country;
+        $purchase->metodo_pagamento = $metodoPagamento;
         $purchase->save();
 
         foreach ($productsCart as $productCart) {
