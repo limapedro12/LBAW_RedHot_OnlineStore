@@ -12,7 +12,7 @@ class PromoCodeController extends Controller
     public function index()
     {
         $promoCodes = PromoCode::all();
-        return view('promo_codes.index', ['promoCodes' => $promoCodes]);
+        return view('pages.adminPromoCode', ['promoCodes' => $promoCodes]);
     }
 
     public function create()
