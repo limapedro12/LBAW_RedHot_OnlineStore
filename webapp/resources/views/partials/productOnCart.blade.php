@@ -1,4 +1,4 @@
-<tr>
+<tr class="productRow" product_id="{{ $product->id }}">
     <td>
         <div class="cartProductImage">
             <a href="/products/{{ $product->id }}">

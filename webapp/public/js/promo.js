@@ -1,137 +1,141 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const promoCodeForm = document.getElementById('promoCodeForm');
+const promoCodeForm = document.getElementById('promoCodeForm');
+if(promoCodeForm != null){
+    document.addEventListener('DOMContentLoaded', function () {
 
-    promoCodeForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        console.log('Form submitted!');
+        promoCodeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            console.log('Form submitted!');
 
-        const promoCodeInput = document.getElementById('promotionCode');
-        const promoCode = promoCodeInput.value;
+            const promoCodeInput = document.getElementById('promotionCode');
+            const promoCode = promoCodeInput.value;
 
-        console.log('Promo code:', promoCode);
+            console.log('Promo code:', promoCode);
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-        fetch('/promo_codes/check', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({ promotionCode: promoCode })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const promoCodeResult = document.getElementById('promoCodeResult');
-        
-            if (data.valid) {
-                // Update the page content based on the response
-                // For example, update a total value or show a success message
-                promoCodeResult.textContent = 'Promo code aplicado com successo!';
-                const total = document.getElementById('totalPrice');
-                total.textContent = Math.round(((parseFloat(total.textContent) - (parseFloat(total.textContent) * parseFloat(data.data.desconto))) + Number.EPSILON) * 100) / 100;
+            fetch('/promo_codes/check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ promotionCode: promoCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const promoCodeResult = document.getElementById('promoCodeResult');
+            
+                if (data.valid) {
+                    // Update the page content based on the response
+                    // For example, update a total value or show a success message
+                    promoCodeResult.textContent = 'Promo code aplicado com successo!';
+                    const total = document.getElementById('totalPrice');
+                    total.textContent = Math.round(((parseFloat(total.textContent) - (parseFloat(total.textContent) * parseFloat(data.data.desconto))) + Number.EPSILON) * 100) / 100;
 
-                const checkoutLink = document.getElementById('checkoutLink');
+                    const checkoutLink = document.getElementById('checkoutLink');
 
-                checkoutLink.href = 'cart/checkout?promocode=' + data.data.codigo;
+                    checkoutLink.href = 'cart/checkout?promocode=' + data.data.codigo;
 
-                const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
-                divPromoCodeForm.classList.add('d-none');
+                    const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
+                    divPromoCodeForm.classList.add('d-none');
 
-                const promoCodeActive = document.getElementById('promoCodeActive');
-                promoCodeActive.textContent = data.data.codigo;
+                    const promoCodeActive = document.getElementById('promoCodeActive');
+                    promoCodeActive.textContent = data.data.codigo;
 
-                const promoCodeDiscount = document.getElementById('promoCodeDiscount');
-                promoCodeDiscount.textContent = data.data.desconto * 100 + '%';
+                    const promoCodeDiscount = document.getElementById('promoCodeDiscount');
+                    promoCodeDiscount.textContent = data.data.desconto * 100 + '%';
 
-                const promoCodeRemove = document.getElementById('promoCodeApplied');
-                promoCodeRemove.classList.remove('d-none');
+                    const promoCodeRemove = document.getElementById('promoCodeApplied');
+                    promoCodeRemove.classList.remove('d-none');
 
 
-            } else {
-                // Handle invalid or expired promo code
-                promoCodeResult.textContent = data.message;
-            }
-        })
-        
-        .catch(error => {
-            console.error('Error:', error);
+                } else {
+                    // Handle invalid or expired promo code
+                    promoCodeResult.textContent = data.message;
+                }
+            })
+            
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     });
-});
+}
 
-document.addEventListener('DOMContentLoaded', function () {
-    const promoCodeRemove = document.getElementById('promoCodeRemove');
+const promoCodeRemove = document.getElementById('promoCodeRemove');
 
-    promoCodeRemove.addEventListener('click', function (event) {
-        event.preventDefault();
-        console.log('Form submitted!');
+if(promoCodeRemove != null){
+    document.addEventListener('DOMContentLoaded', function () {
 
-        const promoCodeInput = document.getElementById('promotionCode');
-        const promoCode = promoCodeInput.value;
+        promoCodeRemove.addEventListener('click', function (event) {
+            event.preventDefault();
+            console.log('Form submitted!');
 
-        console.log('Promo code:', promoCode);
+            const promoCodeInput = document.getElementById('promotionCode');
+            const promoCode = promoCodeInput.value;
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            console.log('Promo code:', promoCode);
 
-        fetch('/promo_codes/remove', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({ promotionCode: promoCode })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const promoCodeResult = document.getElementById('promoCodeResult');
-        
-            if (data.valid) {
-                // Update the page content based on the response
-                // For example, update a total value or show a success message
-                promoCodeResult.textContent = 'Promo code removido com sucesso!';
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-                const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
-                divPromoCodeForm.classList.remove('d-none');
+            fetch('/promo_codes/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ promotionCode: promoCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const promoCodeResult = document.getElementById('promoCodeResult');
+            
+                if (data.valid) {
+                    // Update the page content based on the response
+                    // For example, update a total value or show a success message
+                    promoCodeResult.textContent = 'Promo code removido com sucesso!';
 
-                promoCodeInput.value = '';
+                    const divPromoCodeForm = document.getElementById('promoCodeFormDiv');
+                    divPromoCodeForm.classList.remove('d-none');
 
-                const checkoutLink = document.getElementById('checkoutLink');
+                    promoCodeInput.value = '';
 
-                checkoutLink.href = 'cart/checkout';
+                    const checkoutLink = document.getElementById('checkoutLink');
 
-                const originalPrice = document.getElementById('totalPriceWithOutPromoCode');
+                    checkoutLink.href = 'cart/checkout';
 
-                const total = document.getElementById('totalPrice');
-                total.textContent = originalPrice.textContent;
+                    const originalPrice = document.getElementById('totalPriceWithOutPromoCode');
 
-
-                const promoCodeActive = document.getElementById('promoCodeActive');
-                promoCodeActive.textContent = '';
-
-                const promoCodeDiscount = document.getElementById('promoCodeDiscount');
-                promoCodeDiscount.textContent = '';
-
-                const promoCodeRemove = document.getElementById('promoCodeApplied');
-                promoCodeRemove.classList.add('d-none');
+                    const total = document.getElementById('totalPrice');
+                    total.textContent = originalPrice.textContent;
 
 
-            } else {
-                // Handle invalid or expired promo code
-                promoCodeResult.textContent = data.message;
+                    const promoCodeActive = document.getElementById('promoCodeActive');
+                    promoCodeActive.textContent = '';
+
+                    const promoCodeDiscount = document.getElementById('promoCodeDiscount');
+                    promoCodeDiscount.textContent = '';
+
+                    const promoCodeRemove = document.getElementById('promoCodeApplied');
+                    promoCodeRemove.classList.add('d-none');
+
+
+                } else {
+                    // Handle invalid or expired promo code
+                    promoCodeResult.textContent = data.message;
+                }
+
             }
 
-        }
+            )
 
-        )
+            .catch(error => {
+                console.error('Error:', error);
+            });
 
-        .catch(error => {
-            console.error('Error:', error);
         });
 
     });
-
-});
-
+}
 
 

@@ -770,52 +770,31 @@ if (faqs != null) {
   });
 }
 
-// if(document.getElementsByClassName('changeQuantityButton').length > 0){
-//   Array.from(document.getElementsByClassName('changeQuantityInput'))
-//     .map(e => e.style.display = 'none')
-//   Array.from(document.getElementsByClassName('changeQuantitySubmit'))
-//     .map(e => e.style.display = 'none')  
-//   Array.from(document.getElementsByClassName('changeQuantityButton'))
-//     .map(e => e.addEventListener('click', function(event){
-//       this.style.display = 'none'
-//       event.preventDefault()
-//       let input = this.parentElement.querySelector('.changeQuantityInput')
-//       let submit = this.parentElement.querySelector('.changeQuantitySubmit')
-//       if(input.style.display == 'none'){
-//         input.style.display = 'block'
-//         submit.style.display = 'block'
-//       }else{
-//         input.style.display = 'none'
-//         submit.style.display = 'none'
-//       }
-//       submit.addEventListener('click', function(event){
-//         input.style.display = 'none'
-//         submit.style.display = 'none'
-//         this.parentElement.querySelector('.changeQuantityButton').style.display = 'block'
-//         event.preventDefault()
-//         let csrf_token = document.querySelector('input[name="_token"]').value
-//         let xhr = new XMLHttpRequest()
-//         xhr.open('PUT', '/cart/change_quantity/', true)
-//         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-//         xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
-//         xhr.send('id=' + this.parentElement.querySelector('input').getAttribute('product_id') + '&quantity=' + this.parentElement.querySelector('input').value)
-//         // location.reload()
-//       })
-//     }))
-    
-    
-//   //   function(event){
-//   //     event.preventDefault()
-//   //     let csrf_token = document.querySelector('input[name="_token"]').value
-//   //     let xhr = new XMLHttpRequest()
-//   //     xhr.open('PUT', '/cart/change_quantity/', true)
-//   //     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-//   //     xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token)
-//   //     xhr.send()
-//   //     location.reload()
-//   // }))
+function sendPutRequestTo(url, arguments){
+  return function(event){
+    event.preventDefault()
+    xhr.open('PUT', url, true)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content)
+    xhr.send(arguments)
+  }
+}
 
-// }
+function addEventsToQuantityButtons(product){
+  id = product.getAttribute('product_id');
+  console.log(product)
+  minus_button = product.querySelector('button.removeQuantity')
+  plus_button = product.querySelector('button.addQuantity')
+  console.log(minus_button, /decreaseQuantity/, 'id=' + id)
+  console.log(plus_button, /increaseQuantity/, 'id=' + id)
+  minus_button.addEventListener('click', sendPutRequestTo(/decreaseQuantity/, 'id=' + id))
+  plus_button.addEventListener('click', sendPutRequestTo(/increaseQuantity/, 'id=' + id))
+}
+
+if(document.getElementsByClassName('cartTitle').length > 0){
+  productList = document.querySelectorAll('tr.productRow')
+  Array.from(productList).map(addEventsToQuantityButtons)
+}
 
 // checkout
 try {
