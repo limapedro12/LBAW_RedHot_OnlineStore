@@ -1,4 +1,4 @@
-if(document.getElementById('promoCodeForm') != null) {
+try{
 document.addEventListener('DOMContentLoaded', function () {
     const promoCodeForm = document.getElementById('promoCodeForm');
 
@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-}
+} catch (e) {}
 
-if(document.getElementById('promoCodeRemove') != null) {
+try{
 document.addEventListener('DOMContentLoaded', function () {
     const promoCodeRemove = document.getElementById('promoCodeRemove');
 
@@ -135,6 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
-} 
+}  catch (e) {}
 
 
