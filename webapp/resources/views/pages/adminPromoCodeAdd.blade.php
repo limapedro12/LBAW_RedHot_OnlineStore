@@ -1,6 +1,6 @@
 @extends('layouts.adminHeaderFooter')
 
-@section('title', "Gestão de Códigos Promocionais |")
+@section('title', 'Gestão de Códigos Promocionais |')
 
 @section('content')
     <div class="adminContent">
@@ -38,7 +38,7 @@
                         </div>
                     </a>
 
-                    <a href="{{ url('/adminPromoCode')}}">
+                    <a href="{{ url('/adminPromoCode') }}">
                         <div class="adminSideBarOption" id="optionSelected">
                             <div id="rectangle"></div>
                             <p>Códigos Promocionais</p>
@@ -78,7 +78,7 @@
                             <h2>Informação</h2>
                         </div>
                         <div class="adminAddProductForm">
-                            <form action="/promo_code/add" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('promo_codes.create') }}" method="POST" class="addPromoCodeForm">
                                 @csrf
 
                                 <div class="inputBox">
@@ -86,26 +86,36 @@
                                         <label for="codigo">Código:</label>
                                         <input type="text" id="codigo" name="codigo" required>
                                     </div>
+                                    @if ($errors->has('codigo'))
+                                        <p class="text-danger">
+                                            {{ $errors->first('codigo') }}
+                                        </p>
+                                    @endif
                                 </div>
 
 
                                 <div class="inputBoxSpecial">
                                     <div class="adminAddProduct">
                                         <label for="data_inicio">Data de Inicio:</label>
-                                        <input type="date" id="data_inicio" name="data_inicio" value="2023-07-22" min="2022-01-01" max="2025-12-31" required>
-                                        <input type="time" id="tempo_inicio" name="tempo_inicio" min="00:00" max="23:59" required>
+                                        <input type="date" id="data_inicio" name="data_inicio" value="2023-07-22"
+                                            min="2022-01-01" max="2025-12-31" required>
+                                        <input type="time" id="tempo_inicio" name="tempo_inicio" min="00:00"
+                                            max="23:59" required>
                                     </div>
                                     <div class="adminAddProduct">
                                         <label for="data_fim">Data de Fim:</label>
-                                        <input type="date" id="data_fim" name="data_fim" value="2023-07-22" min="2022-01-01" max="2025-12-31" required>
-                                        <input type="time" id="tempo_fim" name="tempo_fim" min="00:00" max="23:59" required>
+                                        <input type="date" id="data_fim" name="data_fim" value="2023-07-22"
+                                            min="2022-01-01" max="2025-12-31" required>
+                                        <input type="time" id="tempo_fim" name="tempo_fim" min="00:00" max="23:59"
+                                            required>
                                     </div>
-                                </div>                                
+                                </div>
 
                                 <div class="inputBoxSpecial">
                                     <div class="adminAddProduct">
                                         <label for="discount">Desconto:</label>
-                                        <input type="number" step="0.01" id="discount" min="0.01" max="1" name="discount" required>
+                                        <input type="number" step="1" id="discount" min="1" max="100"
+                                            name="discount" required>
                                     </div>
                                 </div>
 
