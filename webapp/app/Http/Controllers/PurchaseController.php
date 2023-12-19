@@ -267,20 +267,32 @@ class PurchaseController extends Controller
         return redirect('/users/' . $userId . '/orders/' . $orderId)->with('success', 'Estado da encomenda alterado com sucesso.');
     }
 
-    public function changeQuantity(Request $request)
-    {
-        $request->validate([
-            'quantity' => 'required|integer|min:1',
-            'id' => 'required|integer|min:1'
-        ]);
+    public function setQuantity(int $productId, int $newQuantity){
+        $product = Product::findOrFail($productId);
+        if ($newQuantity <= $product->stock){
+            $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=', $productId)->first();
+            $productCart->quantidade = $newQuantity;
+            $productCart->save();
+        }
+    }
 
-        $product = Product::findOrFail($request->id);
-        if ($request->quantity > $product->stock)
-            return redirect('/cart')->with('error', 'Quantidade indisponível em stock.');
-        $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=', $request->id)->first();
-        $productCart->quantidade = $request->quantity;
-        $productCart->save();
+    public function decreaseQuantity(int  $productId){
+        $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=',  $productId)->first();
+        if ($productCart->quantidade > 1) {
+            $productCart->quantidade -= 1;
+            $productCart->save();
+        } else {
+            $productCart->delete();
+        }
+    }
 
-        return redirect('/cart')->with('success', 'Quantidade alterada com sucesso.');
+    public function increaseQuantity(int  $productId){
+        $productCart = ProductCart::where('id_utilizador', '=', Auth::id())->where('id_produto', '=',  $productId)->first();
+        $product = Product::findOrFail( $productId);
+        if ($productCart->quantidade < $product->stock) {
+            $productCart->quantidade += 1;
+            $productCart->save();
+        }
     }
 }
+

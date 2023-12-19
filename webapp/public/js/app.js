@@ -770,25 +770,58 @@ if (faqs != null) {
   });
 }
 
-function sendPutRequestTo(url, arguments){
-  return function(event){
-    event.preventDefault()
-    xhr.open('PUT', url, true)
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content)
-    xhr.send(arguments)
-  }
+function sendPutRequestTo(url){
+  let xhr = new XMLHttpRequest()
+  xhr.open('PUT', url, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content)
+  xhr.send()
 }
 
 function addEventsToQuantityButtons(product){
-  id = product.getAttribute('product_id');
-  console.log(product)
-  minus_button = product.querySelector('button.removeQuantity')
-  plus_button = product.querySelector('button.addQuantity')
-  console.log(minus_button, /decreaseQuantity/, 'id=' + id)
-  console.log(plus_button, /increaseQuantity/, 'id=' + id)
-  minus_button.addEventListener('click', sendPutRequestTo(/decreaseQuantity/, 'id=' + id))
-  plus_button.addEventListener('click', sendPutRequestTo(/increaseQuantity/, 'id=' + id))
+  let id = product.getAttribute('product_id');
+  let minus_button = product.querySelector('button.removeQuantity')
+  let plus_button = product.querySelector('button.addQuantity')
+  let quantity_input = product.querySelector('input.cartProductQuantity')
+  if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
+    plus_button.style.opacity = '0.5'
+  }
+  console.log(quantity_input)
+  minus_button.addEventListener('click', function(event){
+    event.preventDefault()
+    sendPutRequestTo('/cart/decreaseQuantity/' + id)
+    if(quantity_input.value == 1){
+      product.remove()
+    } else {
+      quantity_input.value = parseInt(quantity_input.value) - 1
+      if(parseInt(quantity_input.value) < parseInt(quantity_input.max)){
+        plus_button.style.opacity = '1'
+      }
+    }
+  })
+  plus_button.addEventListener('click', function(event){
+    event.preventDefault()
+    if(parseInt(quantity_input.value) < parseInt(quantity_input.max)){
+      sendPutRequestTo('/cart/increaseQuantity/' + id)
+      quantity_input.value = parseInt(quantity_input.value) + 1
+      if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
+        plus_button.style.opacity = '0.5'
+      }
+    }
+  })
+  quantity_input.addEventListener('input', function(event){
+    if(!isNaN(parseInt(quantity_input.value)) && parseInt(quantity_input.value) > 0){
+      if(parseInt(quantity_input.value) <= parseInt(quantity_input.max)){
+        sendPutRequestTo('/cart/setQuantity/' + id + '/' + quantity_input.value)
+        product.querySelector("small.quantityError").innerHTML = ""
+      } else {
+        product.querySelector("small.quantityError").innerHTML = "Quantidade máxima: " + quantity_input.max
+      }
+    }
+    if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
+      plus_button.style.opacity = '0.5'
+    }
+  })
 }
 
 if(document.getElementsByClassName('cartTitle').length > 0){

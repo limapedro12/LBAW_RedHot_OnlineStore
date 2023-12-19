@@ -9,7 +9,6 @@
 
         <div class="cartContent">
             <div class="tableWithCartProducts">
-
                 <table>
                     <thead>
                         <tr>
@@ -95,6 +94,7 @@
                     </div>
                 </div>
                 <div class="cartCheckoutButton">
+                    @csrf
                     @if (count($list) > 0)
                         <a href="/cart/checkout" id="checkoutLink"><button>Checkout</button></a>
                     @endif

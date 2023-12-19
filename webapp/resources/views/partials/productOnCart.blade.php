@@ -38,6 +38,7 @@
                 max="{{ $product->stock }}" product_id="{{ $product->id }}">
             <button class="addQuantity"> <i class="fas fa-plus"></i> </button>
         </div>
+        <small class="quantityError"></small>
     </td>
     <td>
         <div class="cartProductTotal">
