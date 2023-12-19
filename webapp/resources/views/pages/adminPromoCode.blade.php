@@ -82,12 +82,6 @@
                                         <input type="text" id="filterInput" placeholder="Pesquisar..."
                                             title="Filtrar Tabela">
                                     </div>
-                                    <div class="adminFAQButtons">
-                                        <form method="GET" action="{{ route('promo_codes.create') }}">
-                                            @csrf
-                                            <button type="submit" class="adminFAQButton">Adicionar FAQ</button>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
 
