@@ -1,4 +1,4 @@
-extends('layouts.adminHeaderFooter')
+@extends('layouts.adminHeaderFooter')
 
 @section('title', 'Adicionar FAQ |')
 

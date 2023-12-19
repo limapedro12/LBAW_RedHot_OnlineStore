@@ -129,6 +129,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/adminProfile/edit_password', 'editPassword');
     Route::get('/adminFAQ', 'adminFAQ')->name('adminFAQ');
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
+    Route::get('/adminPromoCode', 'adminPromoCode')->name('adminPromoCode');
+    Route::get('/adminPromoCodeAdd', 'adminPromoCodeAdd')->name('adminPromoCodeAdd');
 });
 
 // PPs
@@ -181,7 +183,7 @@ Route::controller(FaqsController::class)->group(function () {
 
 // Promo Codes
 Route::controller(PromoCodeController::class)->group(function () {
-    Route::get('/promo_codes', 'index')->name('promo_codes.index');
+    Route::get('/adminPromoCodes', 'index')->name('promo_codes.index');
     Route::get('/promo_codes/create', 'create')->name('promo_codes.create');
     Route::post('/promo_codes/store', 'store')->name('promo_codes.store');
     Route::get('/promo_codes/{id}/edit', 'edit')->name('promo_codes.edit');

@@ -39,6 +39,13 @@
                         </div>
                     </a>
 
+                    <a href="{{ url('/adminPromoCode')}}">
+                        <div class="adminSideBarOption" id="optionNotSelected">
+                            <p>Códigos Promocionais</p>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </a>
+
                     <a href="{{ url('/adminFAQ') }}">
                         <div class="adminSideBarOption" id="optionNotSelected">
                             <p>FAQ's</p>

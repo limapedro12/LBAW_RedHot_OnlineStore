@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Faqs;
 use App\Models\Visit;
 use App\Models\ProductCart;
+use App\Models\PromoCode;
 
 use App\Http\Controllers\FileController;
 
@@ -300,6 +301,20 @@ class AdminController extends Controller
         return view('pages.adminFAQ', [
             'faqs' => Faqs::all()
         ]);
+    }
+
+    public function adminPromoCode() : View
+    {
+        verifyAdmin();
+        return view('pages.adminPromoCode', [
+            'promoCodes' => PromoCode::all()
+        ]);
+    }
+
+    public function adminPromoCodeAdd() : View
+    {
+        verifyAdmin();
+        return view('pages.adminPromoCodeAdd');
     }
 
     public static function verifyAdmin2() : void
