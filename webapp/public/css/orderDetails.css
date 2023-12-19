@@ -1,0 +1,363 @@
+.goBackButton{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.lineSeparator{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lineSeparator .line{
+    width: 90%;
+    height: 2px;
+    background-color: var(--black);
+    opacity: 0.5;
+}
+
+.orderDetailTitle{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+}
+
+.orderDetailTitle h1{
+    font-size: 5rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+
+.orderDetailInfoContent{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 5rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft{
+    width: 75%;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-top: 3px solid var(--black);
+    border-bottom: 3px solid var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle h2{
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle h2 i{
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState{
+    padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderChangeState{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderChangeState label{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderChangeState select{
+    width: 20rem;
+    height: 3rem;
+    border-bottom: 1px solid var(--main-color);
+    outline: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderChangeState select option{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderChangeState button{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderState{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--main-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+    color: var(--white);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftTitle .orderDetailInfoContentLeftTitleState .orderState span{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsTitle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsTitle h3{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsTitle p{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    padding-left: 3.5rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userData{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userObservations{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userData label,
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userObservations label{
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userData p,
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderDetailInfoContentLeftInfo .orderUserDetails .orderUserDetailsContent .userDataRow .userObservations p{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtTitle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtTitle h3{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--main-color);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table thead {
+    background-color: var(--main-color);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table thead tr th{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--white);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--black);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom: 1px solid var(--main-color);
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td:last-child{
+    border-bottom: none;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td .orderProductImg a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td .orderProductImg a img{
+    height: 10rem;
+    width: 10rem;
+    border: 1.5px solid var(--black);
+    border-radius: 15%;
+    margin-bottom: 1rem;
+}
+
+.orderDetailInfoContent .orderDetailInfoContentLeft .orderProductBought .orderProductBoughtContent .orderProductBoughtContentTable table tbody tr td .orderProductImg a img:hover{
+    border: 2px solid var(--main-color);
+    box-shadow: 1px 1px 5px 1px var(--main-color);
+}
+
+.orderProductInfoName{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.orderProductInfoName .orderProductNameTable{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.orderProductInfoName p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.orderProductInfoName a{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--black);
+    text-decoration: none;
+
+}
+
+.orderProductInfoName a:hover{
+    color: var(--main-color);
+}
+
+.orderProductInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
