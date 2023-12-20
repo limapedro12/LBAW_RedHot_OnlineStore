@@ -47,9 +47,12 @@ class ReviewsController extends Controller
         $review->id_utilizador = Auth::user()->id;
         $review->id_produto = $id_product;
 
-        // Save the review and return it as JSON.
+        // Save the review
         $review->save();
-        return response()->json($review);
+
+        sleep(1);
+
+        return redirect()->back();
     }
 
 
@@ -100,9 +103,12 @@ class ReviewsController extends Controller
         // Find the review.
         $review = Review::findorfail($id_review);
 
-        // Delete the review and return it as JSON.
+        // Delete the review
         $review->delete();
-        return response()->json($review);
+
+        sleep(1);
+        
+        return redirect()->back();
     }
 
     /**

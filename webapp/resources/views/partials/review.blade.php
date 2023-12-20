@@ -31,7 +31,7 @@
 
                 <input type="hidden" id="timestamp" name="timestamp" value="{{ $review->timestamp }}">
 
-                <input type="submit" value="Edit Review">
+                <input type="submit" value="Editar Comentário">
             </form>
         @endif
 
