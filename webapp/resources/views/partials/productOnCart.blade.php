@@ -28,7 +28,10 @@
             @if ($product->desconto > 0)
                 <p class="cartOldPrice"> {{ $product->precoatual }} €</p>
             @endif
-            <p class="nowPrice">{{ round($discountFunction($product->precoatual, $product->desconto), 2) }} €</p>
+            <p class="nowPrice">
+                <span class="priceWithDiscount">
+                    {{ round($discountFunction($product->precoatual, $product->desconto), 2) }}
+                </span> €</p>
         </div>
     </td>
     <td class="quantityCell">
@@ -42,7 +45,10 @@
     </td>
     <td>
         <div class="cartProductTotal">
-            <p>{{ round($discountFunction($product->precoatual, $product->desconto) * $quantidade, 2) }} €</p>
+            <p>
+                <span class="productTotal"> 
+                    {{ number_format(round($discountFunction($product->precoatual, $product->desconto), 2) * $quantidade, 2, '.', '') }}
+                </span> €</p>
         </div>
     </td>
     <td>

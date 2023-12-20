@@ -43,7 +43,7 @@
                     <div class="orderSummaryInfo">
                         <div class="orderSummaryInfoRow">
                             <p>Subtotal</p>
-                            <p>{{ $subTotal }} €</p>
+                            <p><span id="subTotalPrice">{{ $subTotal }}<span> €</p>
                         </div>
                         <div class="orderSummaryInfoRow">
                             <p>Envio</p>

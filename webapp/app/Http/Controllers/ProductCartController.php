@@ -97,7 +97,7 @@ class ProductCartController extends Controller
             $product = Product::findOrFail($productCart->id_produto);
             $allProducts[] = $product;
             $quantityProductList[] = [$productCart->quantidade, $product];
-            $subTotal += $productCart->quantidade * ($product->precoatual * (1 - $product->desconto));
+            $subTotal += $productCart->quantidade * round(($product->precoatual * (1 - $product->desconto)), 2);
         }
 
         $userEnteredPromoCode = request()->input('promotionCode');
@@ -116,7 +116,7 @@ class ProductCartController extends Controller
             'discountFunction' => function ($price, $discount) {
                 return $price * (1 - $discount);
             },
-            'subTotal' => round($subTotal, 2),
+            'subTotal' => number_format($subTotal, 2, '.', ''),
             'promotionCode' => $promotionCode,
             'similarProducts' => $this->getSimilarProducts($allProducts)
         ]);

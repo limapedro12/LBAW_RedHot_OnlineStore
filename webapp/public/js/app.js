@@ -584,7 +584,6 @@ if (document.getElementsByClassName('productsPageFilter').length > 0) {
     xhr.send();
   }
 
-  filterProducts()
   document.getElementById('searchedString').addEventListener('keypress', filterProducts)
   Array.from(document.querySelectorAll('input')).map(e => e.addEventListener('change', filterProducts))
   document.querySelector('select.productsPageSortSelector').addEventListener('change', filterProducts)
@@ -772,12 +771,11 @@ if (faqs != null) {
   });
 }
 
-function sendPutRequestTo(url){
-  let xhr = new XMLHttpRequest()
-  xhr.open('PUT', url, true)
-  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-  xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content)
-  xhr.send()
+// change quantity in cart
+
+if(document.getElementsByClassName('cartTitle').length > 0){
+  productList = document.querySelectorAll('tr.productRow')
+  Array.from(productList).map(addEventsToQuantityButtons)
 }
 
 function addEventsToQuantityButtons(product){
@@ -799,6 +797,8 @@ function addEventsToQuantityButtons(product){
         plus_button.style.opacity = '1'
       }
     }
+    updateRow(product)
+    updateTotal()
   })
   plus_button.addEventListener('click', function(event){
     event.preventDefault()
@@ -809,6 +809,8 @@ function addEventsToQuantityButtons(product){
         plus_button.style.opacity = '0.5'
       }
     }
+    updateRow(product)
+    updateTotal()
   })
 
   var last_valid_quantity = quantity_input.value;
@@ -826,12 +828,47 @@ function addEventsToQuantityButtons(product){
     if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
       plus_button.style.opacity = '0.5'
     }
+    if(parseInt(quantity_input.value) < parseInt(quantity_input.max)){
+      plus_button.style.opacity = '1'
+    }
+    updateRow(product)
+    updateTotal()
   })
 }
 
-if(document.getElementsByClassName('cartTitle').length > 0){
-  productList = document.querySelectorAll('tr.productRow')
-  Array.from(productList).map(addEventsToQuantityButtons)
+function sendPutRequestTo(url){
+  let xhr = new XMLHttpRequest()
+  xhr.open('PUT', url, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content)
+  xhr.send()
+}
+
+function updateRow(product){
+  let unit = parseFloat(product.getElementsByClassName('priceWithDiscount')[0].innerHTML)
+  let quantity = parseInt(product.querySelector('input.cartProductQuantity').value)
+  let total = product.getElementsByClassName('productTotal')[0]
+  total.innerHTML = addZeros(unit * quantity)
+}
+
+function updateTotal(){
+  subTotal = document.getElementById('subTotalPrice')
+  total = document.getElementById('totalPrice')
+  rows = Array.from(document.querySelectorAll('tr.productRow'))
+  let subTotalNumber = addZeros(
+                          rows.map((product) => parseFloat(product.getElementsByClassName('productTotal')[0].innerHTML))
+                              .reduce((accumulator, currentValue) => accumulator + currentValue, 0))
+  subTotal.innerHTML = subTotalNumber
+  let discount = document.getElementById('promoCodeDiscount').innerHTML
+  if(discount != ""){
+    let discountNumber = parseFloat(discount.substring(0, discount.length-1))/100
+    total.innerHTML = addZeros(discountFunction(subTotalNumber, discountNumber))
+  } else
+    total.innerHTML = subTotalNumber
+}
+
+function addZeros(num){
+  return num.toLocaleString("en",{useGrouping: false,minimumFractionDigits: 2})
 }
 
 // checkout
