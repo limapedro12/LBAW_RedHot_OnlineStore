@@ -448,7 +448,7 @@ function createProductHTML(product) {
   let productTemplate = productTemplateOriginal.cloneNode(true)
   productTemplate.getElementsByClassName('productImage')[0].src = product.url_imagem
   productTemplate.getElementsByClassName('productImage')[0].alt = product.nome
-  console.log(`/products/${product.id}`)
+  productTemplate.getElementsByClassName('productListItemImageLink')[0].href = `/products/${product.id}`
   productTemplate.getElementsByClassName('productListItemTitleLink')[0].href = `/products/${product.id}`
   productTemplate.getElementsByClassName('productListItemTitleText')[0].innerHTML = product.nome
   productTemplate.getElementsByClassName('productListItemNumberOfReviews')[0].querySelector('p').innerHTML = `${product.numero_reviews} avaliações`
@@ -788,7 +788,6 @@ function addEventsToQuantityButtons(product){
   if(parseInt(quantity_input.value) == parseInt(quantity_input.max)){
     plus_button.style.opacity = '0.5'
   }
-  console.log(quantity_input)
   minus_button.addEventListener('click', function(event){
     event.preventDefault()
     sendPutRequestTo('/cart/decreaseQuantity/' + id)

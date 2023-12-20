@@ -186,7 +186,7 @@
             @foreach ($products as $product)
                 <div class="productListItem">
                     <div class="productListItemImg">
-                        <a href = "/products/{{ $product->id }}">
+                        <a href = "/products/{{ $product->id }}" class="productListItemImageLink">
                             <img class="productImage" src="{{ $product->getProductImage() }}"
                                 alt="Imagem de {{ $product->nome }}" width="100px" height="100px">
                         </a>
