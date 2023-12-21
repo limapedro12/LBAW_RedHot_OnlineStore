@@ -133,7 +133,6 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
     Route::get('/adminPromoCode', 'adminPromoCode')->name('adminPromoCode');
     Route::get('/adminPromoCodeAdd', 'adminPromoCodeAdd')->name('adminPromoCodeAdd');
-    Route::get('/searchProductById', 'searchProductById')->name('searchProductById');
     Route::post('/searchProductById', 'searchProductById')->name('searchProductById');
 });
 
