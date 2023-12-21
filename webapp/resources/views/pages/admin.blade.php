@@ -7,9 +7,9 @@
         <div class="adminPage">
             <div class="adminSideBar">
                 <div class="adminSearchBarOnSideBar">
-                    <form action="{{ route('searchProductById') }}" method="post">
+                    <form action="{{ route('searchProductById') }}" method="POST">
                         @csrf
-                        <input type="text" id="id" placeholder="Produto..">
+                        <input type="text" id="id" name="id" placeholder="Produto..">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>

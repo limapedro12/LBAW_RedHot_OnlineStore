@@ -9,7 +9,7 @@
                 <div class="adminSearchBarOnSideBar">
                     <form action="{{ route('searchProductById') }}" method="post">
                         @csrf
-                        <input type="text" id="id" placeholder="Produto..">
+                        <input type="text" id="id" name="id" placeholder="Produto..">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -90,8 +90,8 @@
                                         title="Filtrar Tabela">
                                 </div>
                                 <div class="text-danger">
-                                    @if (session()->has('message'))
-                                        {{ session('message') }}
+                                    @if ($errors->has('id'))
+                                        {{ $errors->first('id') }}
                                     @endif
                                 </div>
                             </div>
