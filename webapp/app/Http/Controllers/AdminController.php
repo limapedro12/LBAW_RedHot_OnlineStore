@@ -447,21 +447,24 @@ class AdminController extends Controller
     // I will create a function for a search bar in the admin page to search for products id that returns the view with the product
     public function searchProductById(Request $request)
     {
-        $idString = $request->input('id');
+        $idString = $request->id;
+
+        $idString = ltrim($idString, '0' );
+
 
         // Attempt to convert the string to an integer
-        $id = intval($idString);
+        $id = intval($idString, 10);
 
         // Check if the conversion was successful
         if ($id == 0 && $idString !== '0') {
-            // Redirect with an error message if the conversion fails
-            return redirect('/adminProductsManage');
+            return redirect('/adminProductsManage')->withErrors(['id' => 'O ID introduzido não é válido.']);
         }
 
         $product = Product::find($id);
 
         if (!$product) {
-            return redirect('/adminProductsManage');
+
+            return redirect('/adminProductsManage')->withErrors(['id' => 'O ID do Produto não existe.']);
         }
 
         return redirect('/products/' . $product->id);
