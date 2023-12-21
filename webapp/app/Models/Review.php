@@ -58,4 +58,9 @@ class Review extends Model
         }
     }
 
+    public function getProductNameById(int $id){
+        $product = Product::find($id);
+        return $product->nome;
+    }
+
 }
