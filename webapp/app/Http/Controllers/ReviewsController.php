@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Review;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class ReviewsController extends Controller
 {
@@ -76,22 +77,23 @@ class ReviewsController extends Controller
      */
     public function editReview(Request $request, int $id_product, int $id_review)
     {
-        // Find the review.
-        $review = Review::findorfail($id_review);
 
-        // Set review details.
-        $review->timestamp = $request->input('timestamp');
+        $review = Review::findOrFail($id_review);
+
+
         $review->texto = $request->input('comment');
         $review->avaliacao = $request->input('rating');
         $review->id_utilizador = Auth::user()->id;
         $review->id_produto = $id_product;
+        $review->editado = true;
+        $review->timestamp = now()->format('Y-m-d H:i:s');
 
-        // Save the review and redirect to the reviews page.
-        Review::where('id', '=', $id_review)->update(array('texto' => $request->comment, 'avaliacao' => $request->rating, 'timestamp' => $request->timestamp));
+        
+        $review->save();
 
         sleep(1);
 
-        return redirect()->back();
+        return redirect('/products/' . $id_product . '/reviews');
     }
 
 
