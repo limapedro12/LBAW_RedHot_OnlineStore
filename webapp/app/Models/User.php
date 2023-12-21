@@ -112,7 +112,7 @@ class User extends Authenticatable
     public function hasPendingOrders(): bool
     {
         $pending = Purchase::where('id_utilizador', $this->id)
-            ->where('estado', '!=', 'Concluído')
+            ->where('estado', '!=', 'Entregue')
             ->where('estado', '!=', 'Cancelada')
             ->count();
 
