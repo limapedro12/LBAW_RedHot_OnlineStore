@@ -133,6 +133,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminUsers', 'adminUsers')->name('adminUsers');
     Route::get('/adminPromoCode', 'adminPromoCode')->name('adminPromoCode');
     Route::get('/adminPromoCodeAdd', 'adminPromoCodeAdd')->name('adminPromoCodeAdd');
+    Route::get('/searchProductById', 'searchProductById')->name('searchProductById');
+    Route::post('/searchProductById', 'searchProductById')->name('searchProductById');
 });
 
 // PPs
@@ -194,4 +196,7 @@ Route::controller(PromoCodeController::class)->group(function () {
     Route::post('/promo_codes/check', 'checkPromoCode')->name('promo_codes.check');
     Route::post('/promo_codes/remove', 'removePromoCode')->name('promo_codes.remove');
 });
+
+
+
 

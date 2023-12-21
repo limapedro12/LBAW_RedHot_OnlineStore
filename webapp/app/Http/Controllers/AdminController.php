@@ -33,7 +33,7 @@ function verifyAdmin(): void
 class AdminController extends Controller
 {
 
-    public function admin() : View
+    public function admin(): View
     {
         verifyAdmin();
 
@@ -44,26 +44,42 @@ class AdminController extends Controller
             Purchase::whereMonth('timestamp', '09')->get(), Purchase::whereMonth('timestamp', '10')->get(),
             Purchase::whereMonth('timestamp', '11')->get(), Purchase::whereMonth('timestamp', '12')->get()];
 
-        $janeiro = $this->getSalesFromMonth(1); $fevereiro = $this->getSalesFromMonth(2); $marco = $this->getSalesFromMonth(3);
-        $abril = $this->getSalesFromMonth(4); $maio = $this->getSalesFromMonth(5); $junho = $this->getSalesFromMonth(6);
-        $julho = $this->getSalesFromMonth(7); $agosto = $this->getSalesFromMonth(8); $setembro = $this->getSalesFromMonth(9);
-        $outubro = $this->getSalesFromMonth(10); $novembro = $this->getSalesFromMonth(11); $dezembro = $this->getSalesFromMonth(12);
+        $janeiro = $this->getSalesFromMonth(1);
+        $fevereiro = $this->getSalesFromMonth(2);
+        $marco = $this->getSalesFromMonth(3);
+        $abril = $this->getSalesFromMonth(4);
+        $maio = $this->getSalesFromMonth(5);
+        $junho = $this->getSalesFromMonth(6);
+        $julho = $this->getSalesFromMonth(7);
+        $agosto = $this->getSalesFromMonth(8);
+        $setembro = $this->getSalesFromMonth(9);
+        $outubro = $this->getSalesFromMonth(10);
+        $novembro = $this->getSalesFromMonth(11);
+        $dezembro = $this->getSalesFromMonth(12);
 
-        $janeiroMoney = $this->getMoneyFromMonth(1); $fevereiroMoney = $this->getMoneyFromMonth(2); $marcoMoney = $this->getMoneyFromMonth(3);
-        $abrilMoney = $this->getMoneyFromMonth(4); $maioMoney = $this->getMoneyFromMonth(5); $junhoMoney = $this->getMoneyFromMonth(6);
-        $julhoMoney = $this->getMoneyFromMonth(7); $agostoMoney = $this->getMoneyFromMonth(8); $setembroMoney = $this->getMoneyFromMonth(9);
-        $outubroMoney = $this->getMoneyFromMonth(10); $novembroMoney = $this->getMoneyFromMonth(11); $dezembroMoney = $this->getMoneyFromMonth(12);
+        $janeiroMoney = $this->getMoneyFromMonth(1);
+        $fevereiroMoney = $this->getMoneyFromMonth(2);
+        $marcoMoney = $this->getMoneyFromMonth(3);
+        $abrilMoney = $this->getMoneyFromMonth(4);
+        $maioMoney = $this->getMoneyFromMonth(5);
+        $junhoMoney = $this->getMoneyFromMonth(6);
+        $julhoMoney = $this->getMoneyFromMonth(7);
+        $agostoMoney = $this->getMoneyFromMonth(8);
+        $setembroMoney = $this->getMoneyFromMonth(9);
+        $outubroMoney = $this->getMoneyFromMonth(10);
+        $novembroMoney = $this->getMoneyFromMonth(11);
+        $dezembroMoney = $this->getMoneyFromMonth(12);
 
         $yearLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-        $monthLabels = ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30','31'];
+        $monthLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
 
         return view('pages.admin', [
             'sales' => $sales,
             'janeiro' => $janeiro, 'fevereiro' => $fevereiro, 'marco' => $marco, 'abril' => $abril, 'maio' => $maio, 'junho' => $junho,
-            'julho' => $julho,'agosto' => $agosto,'setembro' => $setembro,'outubro' => $outubro,'novembro' => $novembro,'dezembro' => $dezembro,
+            'julho' => $julho, 'agosto' => $agosto, 'setembro' => $setembro, 'outubro' => $outubro, 'novembro' => $novembro, 'dezembro' => $dezembro,
             'janeiroMoney' => $janeiroMoney, 'fevereiroMoney' => $fevereiroMoney, 'marcoMoney' => $marcoMoney, 'abrilMoney' => $abrilMoney, 'maioMoney' => $maioMoney, 'junhoMoney' => $junhoMoney,
-            'julhoMoney' => $julhoMoney,'agostoMoney' => $agostoMoney,'setembroMoney' => $setembroMoney,'outubroMoney' => $outubroMoney,'novembroMoney' => $novembroMoney,'dezembroMoney' => $dezembroMoney,
+            'julhoMoney' => $julhoMoney, 'agostoMoney' => $agostoMoney, 'setembroMoney' => $setembroMoney, 'outubroMoney' => $outubroMoney, 'novembroMoney' => $novembroMoney, 'dezembroMoney' => $dezembroMoney,
             'yearLabels' => $yearLabels,
             'monthLabels' => $monthLabels,
             'visitsLast30Days' => $this->getNumberOfVisitsInLast30Days(),
@@ -112,7 +128,7 @@ class AdminController extends Controller
         return view('pages.adminNotifications');
     }
 
-    public function adminOrders() : View
+    public function adminOrders(): View
     {
         verifyAdmin();
 
@@ -123,7 +139,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProducts() : View
+    public function adminProducts(): View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -134,13 +150,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProductsAdd() : View
+    public function adminProductsAdd(): View
     {
         verifyAdmin();
         return view('pages.adminProductsAdd');
     }
 
-    public function adminProductsHighlights() : View
+    public function adminProductsHighlights(): View
     {
         verifyAdmin();
 
@@ -179,7 +195,7 @@ class AdminController extends Controller
         return redirect('/adminProductsHighlights');
     }
 
-    public function adminProductsManage() : View
+    public function adminProductsManage(): View
     {
         verifyAdmin();
         return view('pages.adminProductsManage', [
@@ -190,7 +206,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminProfile() : View
+    public function adminProfile(): View
     {
         verifyAdmin();
         $admin = Admin::findOrFail(Auth::guard('admin')->id());
@@ -200,7 +216,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function editProfileForm() : View
+    public function editProfileForm(): View
     {
         verifyAdmin();
         $admin = Admin::findOrFail(Auth::guard('admin')->id());
@@ -233,7 +249,8 @@ class AdminController extends Controller
 
         $query = User::where('email', '=', $request->email)->first();
         if ($query) {
-            if (!($query->became_admin)) return back()->withErrors(['email' => 'O endereço de e-mail introduzido já pertence a um utilizador.']);
+            if (!($query->became_admin))
+                return back()->withErrors(['email' => 'O endereço de e-mail introduzido já pertence a um utilizador.']);
         }
 
         if ($request->file && !($request->deletePhoto)) {
@@ -241,7 +258,8 @@ class AdminController extends Controller
             $fileController = new FileController();
             $hash = $fileController->upload($request, 'admin_profile', $admin->id);
             $admin->update(array('profile_image' => $hash));
-            if ($oldPhoto) FileController::delete($oldPhoto);
+            if ($oldPhoto)
+                FileController::delete($oldPhoto);
         } else if ($request->deletePhoto) {
             FileController::delete($admin->profile_image);
             $admin->update(array('profile_image' => null));
@@ -275,19 +293,19 @@ class AdminController extends Controller
 
         if (strlen($request->new_password) < 8)
             return back()->withErrors(['new_password' => 'A nova password deve ter, pelo menos, 8 caracteres.']);
-        
+
         $admin->update(array('password' => Hash::make($request->new_password)));
 
         return redirect('/adminProfile');
     }
 
-    public function adminShipping() : View
+    public function adminShipping(): View
     {
         verifyAdmin();
         return view('pages.adminShipping');
     }
 
-    public function adminUsers() : View
+    public function adminUsers(): View
     {
         verifyAdmin();
         return view('pages.adminUsers', [
@@ -295,7 +313,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminFAQ() : View
+    public function adminFAQ(): View
     {
         verifyAdmin();
         return view('pages.adminFAQ', [
@@ -303,7 +321,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminPromoCode() : View
+    public function adminPromoCode(): View
     {
         verifyAdmin();
         return view('pages.adminPromoCode', [
@@ -311,13 +329,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function adminPromoCodeAdd() : View
+    public function adminPromoCodeAdd(): View
     {
         verifyAdmin();
         return view('pages.adminPromoCodeAdd');
     }
 
-    public static function verifyAdmin2() : void
+    public static function verifyAdmin2(): void
     {
         if (Auth::guard('admin')->user() == null)
             abort(403);
@@ -331,42 +349,46 @@ class AdminController extends Controller
         return $visits->count();
     }
 
-    public function getActiveShoppingCarts(){
-        
+    public function getActiveShoppingCarts()
+    {
+
         return ProductCart::select('id_utilizador')->where('timestamp', '>', now()->subDays(30))->groupBy('id_utilizador')->get()->count();
 
     }
 
-    public function getAverageSaleValueLastMonth(){
+    public function getAverageSaleValueLastMonth()
+    {
 
         $purchases = Purchase::where('timestamp', '>', now()->subDays(30))->get();
 
         $total = 0;
 
-        foreach($purchases as $purchase){
+        foreach ($purchases as $purchase) {
             $total += $purchase->total;
         }
 
-        return $total/$purchases->count();
+        return $total / $purchases->count();
     }
 
-    public function getAverageSaleValue(){
+    public function getAverageSaleValue()
+    {
 
         $purchases = Purchase::all();
 
         $total = 0;
 
-        foreach($purchases as $purchase){
+        foreach ($purchases as $purchase) {
             $total += $purchase->total;
         }
 
-        return $total/$purchases->count();
+        return $total / $purchases->count();
     }
 
-    public function getTop5SoldProductsLast30Days(){
-          
-        
-        $top5products = 
+    public function getTop5SoldProductsLast30Days()
+    {
+
+
+        $top5products =
             DB::select("SELECT produto.id, produto.nome as nome, SUM(produtoCompra.preco) as totalPreco, produto.product_image, produto.categoria, SUM(produtoCompra.quantidade) as totalQuantidade
             FROM produtoCompra
             JOIN produto ON produto.id = produtoCompra.id_produto
@@ -375,51 +397,74 @@ class AdminController extends Controller
             ORDER BY totalQuantidade DESC
             LIMIT 5
             ");
-            
-/*
-            $top5products = ProductPurchase::select(
-                'produto.id',
-                'produto.nome as nome',
-                DB::raw('SUM(produtoCompra.preco) as totalPreco'),
-                'produto.product_image',
-                'produto.categoria',
-                DB::raw('SUM(produtoCompra.quantidade) as totalQuantidade')
-            )
-            ->join('produto', 'produto.id', '=', 'produtoCompra.id_produto')
-            ->join('compra', 'compra.id', '=', 'produtoCompra.id_compra')
-            ->where('compra.timestamp', '>', now()->subDays(30))
-            ->groupBy('produto.id')
-            ->orderByDesc('totalQuantidade')
-            ->limit(5)
-            ->get();
-*/
+
+        /*
+                    $top5products = ProductPurchase::select(
+                        'produto.id',
+                        'produto.nome as nome',
+                        DB::raw('SUM(produtoCompra.preco) as totalPreco'),
+                        'produto.product_image',
+                        'produto.categoria',
+                        DB::raw('SUM(produtoCompra.quantidade) as totalQuantidade')
+                    )
+                    ->join('produto', 'produto.id', '=', 'produtoCompra.id_produto')
+                    ->join('compra', 'compra.id', '=', 'produtoCompra.id_compra')
+                    ->where('compra.timestamp', '>', now()->subDays(30))
+                    ->groupBy('produto.id')
+                    ->orderByDesc('totalQuantidade')
+                    ->limit(5)
+                    ->get();
+        */
 
 
-            $top5prices = [];
-            foreach($top5products as $product){
-                $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
-                $total = 0;
-                foreach($purchases as $purchase)
-                    $total += $purchase->preco*$purchase->quantidade;
-                array_push($top5prices, $total);
-            }
-            
-            $top5Quantities = [];
-            foreach($top5products as $product){
-                $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
-                $total = 0;
-                foreach($purchases as $purchase)
-                    $total += $purchase->quantidade;
-                array_push($top5Quantities, $total);
-            }
+        $top5prices = [];
+        foreach ($top5products as $product) {
+            $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
+            $total = 0;
+            foreach ($purchases as $purchase)
+                $total += $purchase->preco * $purchase->quantidade;
+            array_push($top5prices, $total);
+        }
+
+        $top5Quantities = []; foreach ($top5products as $product) {
+            $purchases = ProductPurchase::where('id_produto', '=', $product->id)->get();
+            $total = 0;
+            foreach ($purchases as $purchase)
+                $total += $purchase->quantidade;
+            array_push($top5Quantities, $total);
+        }
 
 
-            return [$top5products, $top5prices, $top5Quantities];
+        return [$top5products, $top5prices, $top5Quantities];
     }
 
 
-    public function getProductById($id){
+    public function getProductById($id)
+    {
         return Product::find($id);
+    }
+
+    // I will create a function for a search bar in the admin page to search for products id that returns the view with the product
+    public function searchProductById(Request $request)
+    {
+        $idString = $request->input('id');
+
+        // Attempt to convert the string to an integer
+        $id = intval($idString);
+
+        // Check if the conversion was successful
+        if ($id == 0 && $idString !== '0') {
+            // Redirect with an error message if the conversion fails
+            return redirect('/adminProductsManage');
+        }
+
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect('/adminProductsManage');
+        }
+
+        return redirect('/products/' . $product->id);
     }
 
 }

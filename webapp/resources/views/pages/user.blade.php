@@ -87,28 +87,30 @@
             </div>
         @endunless
 
-        @unless ($user->became_admin)
-            @if (Auth::guard('admin')->check() && !$user->banned)
-                <form action="/users/{{ $user->id }}/ban" method="POST">
-                    @csrf
-                    <input type="submit" id="banUser" value="Banir Utilizador">
-                </form>
-                @if ($errors->has('ban'))
-                    <p class="text-danger">
-                        {{ $errors->first('ban') }}
-                    </p>
+        <div class="userPromoteBan">
+            @unless ($user->became_admin)
+                @if (Auth::guard('admin')->check() && !$user->banned)
+                    <form action="/users/{{ $user->id }}/ban" method="POST">
+                        @csrf
+                        <input type="submit" id="banUser" value="Banir Utilizador">
+                    </form>
+                    @if ($errors->has('ban'))
+                        <p class="text-danger">
+                            {{ $errors->first('ban') }}
+                        </p>
+                    @endif
+                    <form action="/users/{{ $user->id }}/promote" method="POST">
+                        @csrf
+                        <input type="submit" id="promoteUser" value="Promover a Administrador">
+                    </form>
+                    @if ($errors->has('promote'))
+                        <p class="text-danger">
+                            {{ $errors->first('promote') }}
+                        </p>
+                    @endif
                 @endif
-                <form action="/users/{{ $user->id }}/promote" method="POST">
-                    @csrf
-                    <input type="submit" id="promoteUser" value="Promover a Administrador">
-                </form>
-                @if ($errors->has('promote'))
-                    <p class="text-danger">
-                        {{ $errors->first('promote') }}
-                    </p>
-                @endif
-            @endif
-        @endunless
+            @endunless
+        </div>
 
         @if ((Auth::check() && Auth::user()->id == $user->id) || Auth::guard('admin')->check())
             <div class="profileOrders">

@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Notification;
+use App\Models\Purchase;
 
 class ChangePurchaseState extends NotificationEvent
 {
@@ -15,7 +16,14 @@ class ChangePurchaseState extends NotificationEvent
         $this->purchaseId = $purchaseId;
         $this->newState = $newState;
 
-        $message = 'A sua compra REF ' . $purchaseId . ' mudou para o estado "' . $newState . '"';
+
+        $order = Purchase::find($purchaseId);
+
+        $order = $order->getNormalizeOrderId($purchaseId);
+
+
+
+        $message = 'A sua compra REF ' . $order . ' mudou para o estado "' . $newState . '"';
         $link = '/users/' . $userId . '/orders/' . $purchaseId;
 
         $this->createUserNotification($userId, $message, $link);
