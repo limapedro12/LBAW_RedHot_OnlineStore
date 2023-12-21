@@ -1657,7 +1657,7 @@ INSERT INTO Faqs (pergunta, resposta, id_administrador) VALUES
    'Para devolver um produto, por favor, entre em contacto com o nosso serviço de apoio ao cliente dentro de 30 dias após a compra. Iremos fornecer-lhe as instruções necessárias e, após a verificação do estado do produto, procederemos ao reembolso ou ofereceremos uma alternativa adequada.', 
    1),
   ('Posso cancelar uma encomenda após a compra?', 
-   'Infelizmente, não podemos cancelar uma encomenda após a compra, uma vez que processamos os pedidos rapidamente para garantir a entrega o mais breve possível. Certifique-se de revisar cuidadosamente os itens no seu carrinho antes de finalizar a compra.', 
+   'Após uma compra, pode cancelá-la se a mesma ainda não tiver sido enviada.', 
    1),
   ('Como faço para registar uma conta?', 
    'Para registar uma conta, visite o nosso site e clique no botão "Registar" no canto superior direito. Preencha os campos necessários com as suas informações pessoais e siga as instruções para criar a sua conta. Uma vez registado, poderá desfrutar de benefícios exclusivos e acompanhar o histórico das suas compras.', 
