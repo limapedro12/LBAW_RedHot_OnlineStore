@@ -1,7 +1,7 @@
 try{
 document.addEventListener('DOMContentLoaded', function () {
     const promoCodeForm = document.getElementById('promoCodeForm');
-
+    if(promoCodeForm == null) return
     promoCodeForm.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log('Form submitted!');
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 try{
 document.addEventListener('DOMContentLoaded', function () {
     const promoCodeRemove = document.getElementById('promoCodeRemove');
-
+    if(promoCodeRemove == null) return
     promoCodeRemove.addEventListener('click', function (event) {
         event.preventDefault();
         console.log('Form submitted!');

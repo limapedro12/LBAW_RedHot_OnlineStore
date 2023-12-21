@@ -44,8 +44,7 @@
     <script type="text/javascript" src={{ url('js/slider.js') }} defer></script>
     <script type="text/javascript" src={{ url('js/tables.js') }} defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/promo.js') }}"></script>
-    <script src="{{ asset('js/rating.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/promo.js') }}" defer></script>
 
     <!-- User Identifier -->
     <user user_id="{{ Auth::id() }}"></user>
