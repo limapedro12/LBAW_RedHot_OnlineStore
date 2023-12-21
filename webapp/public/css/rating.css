@@ -1,0 +1,372 @@
+/* Reviews Titles */
+
+.productReviewTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+}
+
+.productReviewTitle h1{
+    font-weight: bolder;
+    color: var(--black);
+}
+
+.productReviewTitle h1 i{
+    color: var(--main-color);
+}
+
+/* Add Review */
+
+.addReview{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.addReview form{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+}
+
+.addReview .addReviewTitle{
+    font-size: 2rem;
+    font-weight: bolder;
+    color: var(--black);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    padding-left: 0.5rem;
+}
+
+.addReview .addReviewTitle i{
+    font-weight: bolder;
+    color: var(--main-color);
+    margin-right: 1rem;
+    font-size: 2.5rem;
+}
+
+.addReview .addReviewTitle h2{
+    margin-right: 1rem;
+}
+
+.addReview .addReviewInputs{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 4px solid var(--black);
+    flex-direction: row;
+    margin-bottom: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 5rem;
+}
+
+.addReview .addReviewInputs .addReviewComment{
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+.addReview .addReviewInputs .addReviewComment label{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.addReview .addReviewInputs .addReviewComment textarea{
+    width: 100%;
+    height: 22rem;
+    border: none;
+    border: 2px solid var(--main-color);
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--black);
+    resize: none;
+    padding: 0.5rem;
+    text-align: justify;
+
+
+}
+
+.addReview .addReviewInputs .addReviewComment textarea::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.addReview .addReviewInputs .addReviewComment textarea::-webkit-scrollbar-track {
+    background: none;
+}
+
+.addReview .addReviewInputs .addReviewComment textarea::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}
+
+.addReview .addReviewInputs .addReviewRating{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.addReview .addReviewInputs .addReviewRating .addReviewRatingTitle{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions .addRatingOption{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 0.4rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions .addRatingOption label{
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--main-color);
+    margin-left: 1rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions .addRatingOption label:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions .addRatingOption label i{
+    margin-right: 0.5rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addRatingOptions .addRatingOption input{
+    width: 1.7rem;
+    height: 1.7rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.addReview .addReviewInputs .addReviewRating .addReviewSubmit{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.addReview .addReviewInputs .addReviewRating .addReviewSubmit input{
+    width: 15rem;
+    height: 4rem;
+    border: none;
+    background-color: var(--main-color);
+    color: var(--white);
+    border-radius: 5px;
+    font-size: 1.7rem;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.addReview .addReviewInputs .addReviewRating .addReviewSubmit input:hover{
+    opacity: 0.8;
+}
+
+
+/* All Reviews Display */
+#reviews{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+#reviews .reviewsTitle{
+    font-size: 2rem;
+    font-weight: bolder;
+    color: var(--black);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-direction: row;
+    padding-left: 0.5rem;
+}
+
+#reviews .reviewsTitle i{
+    font-weight: bolder;
+    color: var(--main-color);
+    margin-right: 1rem;
+    font-size: 2.5rem;    
+}
+
+#reviews .reviewsTitle h2{
+    margin-right: 1rem;
+}
+
+.review{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.review .reviewBar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: var(--main-color);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;    
+}
+
+.review .reviewBar .reviewUser{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding-left: 1rem;
+}
+
+.review .reviewBar .reviewUser .reviewUserImg img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.review .reviewBar .reviewUser .reviewUserName{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    color: var(--white);
+}
+
+.review .reviewBar .reviewRating{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding-right: 1rem;
+}
+
+.review .reviewBar .reviewRating .reviewRatingTitle{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: var(--white);
+    margin-right: 1rem;
+}
+
+.review .reviewBar .reviewRating .reviewRatingOptions{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+.review .reviewBar .reviewRating .reviewRatingOptions i{
+    font-size: 2rem;
+    color: var(--white);
+    margin-right: 0.5rem;
+}
+
+.review .reviewBar .reviewRating form{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.review .reviewBar .reviewRating form button{
+    border: none;
+    cursor: pointer;
+    background: none;
+    padding-left: 1rem;
+}
+
+.review .reviewBar .reviewRating form button i{
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.review .reviewBar .reviewRating form button:hover{
+    opacity: 0.8;
+}
+
+.reviewButtonsEditDelete{
+    padding-left: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.review .reviewComment{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 2px solid var(--main-color);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.review .reviewComment .reviewCommentTimestamp{
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: var(--black);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.review .reviewComment .reviewCommentText{
+    width: 100%;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--black);
+    text-align: justify;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+

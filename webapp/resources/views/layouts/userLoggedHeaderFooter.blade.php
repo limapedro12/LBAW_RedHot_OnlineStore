@@ -36,6 +36,7 @@
     <link href="{{ url('css/cart.css') }}" rel="stylesheet">
     <link href="{{ url('css/checkout.css') }}" rel="stylesheet">
     <link href="{{ url('css/orderDetails.css') }}" rel="stylesheet">
+    <link href="{{ url('css/rating.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
@@ -44,6 +45,7 @@
     <script type="text/javascript" src={{ url('js/tables.js') }} defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/promo.js') }}"></script>
+    <script src="{{ asset('js/rating.js') }}"></script>
 
     <!-- User Identifier -->
     <user user_id="{{ Auth::id() }}"></user>
